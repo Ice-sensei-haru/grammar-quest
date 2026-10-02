@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="ja" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammar Quest - 英文法発見RPG</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Yuji+Syuku&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            rpg: {
+              bg: '#0f172a',
+              card: '#1e293b',
+              accent: '#8b5cf6',
+              gold: '#f59e0b',
+              boss: '#ef4444',
+              success: '#10b981',
+              neon: '#06b6d4'
+            }
+          },
+          fontFamily: {
+            pixel: ['"Press Start 2P"', 'cursive'],
+            sans: ['"Noto Sans JP"', '"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          animation: {
+            'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'bounce-short': 'bounceShort 0.5s ease-in-out infinite alternate',
+            'shake': 'shake 0.4s cubic-bezier(.36,.07,.19,.97) both',
+            'glow': 'glow 2s ease-in-out infinite alternate',
+          },
+          keyframes: {
+            bounceShort: {
+              '0%': { transform: 'translateY(0)' },
+              '100%': { transform: 'translateY(-6px)' }
+            },
+            shake: {
+              '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' },
+              '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
+              '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
+              '40%, 60%': { transform: 'translate3d(4px, 0, 0)' }
+            },
+            glow: {
+              '0%': { boxShadow: '0 0 5px rgba(139, 92, 246, 0.5), 0 0 10px rgba(139, 92, 246, 0.3)' },
+              '100%': { boxShadow: '0 0 20px rgba(139, 92, 246, 0.8), 0 0 30px rgba(6, 182, 212, 0.6)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #090d16;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.15) 0px, transparent 50%);
+      background-attachment: fixed;
+      user-select: none;
+    }
+    .pixel-border {
+      box-shadow: 
+        0 0 0 4px #1e293b,
+        0 0 0 8px #334155;
+    }
+    .pixel-box {
+      border: 4px solid #334155;
+      box-shadow: inset -4px -4px 0px 0px rgba(0,0,0,0.4), inset 4px 4px 0px 0px rgba(255,255,255,0.05);
+    }
+    .boss-border {
+      border: 4px solid #ef4444;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.5), inset 0 0 15px rgba(239, 68, 68, 0.2);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+  </style>
+</head>
+<body class="text-slate-100 font-sans min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+  <header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40 px-4 py-3">
+    <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <!-- Game Logo -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="app.showStageSelect()">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-violet-500/30 text-2xl font-black">
+          ⚔️
+        </div>
+        <div>
+          <h1 class="font-pixel text-xs sm:text-sm tracking-wider text-amber-400">GRAMMAR QUEST</h1>
+          <p class="text-[10px] text-slate-400 font-semibold">本質的思考で覚える英文法RPG</p>
+        </div>
+      </div>
+
+      <!-- Player Level & EXP Summary -->
+      <div class="flex items-center gap-4 bg-slate-800/80 px-4 py-2 rounded-2xl border border-slate-700/60 shadow-inner">
+        <!-- Level Badge -->
+        <div class="flex items-center gap-1.5">
+          <span class="text-xs font-bold text-slate-400">LV</span>
+          <span id="player-level" class="font-pixel text-amber-400 text-base">1</span>
+        </div>
+
+        <!-- EXP Bar Container -->
+        <div class="w-28 sm:w-36 flex flex-col gap-1">
+          <div class="flex justify-between text-[10px] font-bold">
+            <span class="text-slate-400">EXP</span>
+            <span id="exp-text" class="text-cyan-400">0 / 30</span>
+          </div>
+          <div class="w-full h-2.5 bg-slate-900 rounded-full overflow-hidden p-0.5 border border-slate-700">
+            <div id="exp-bar" class="h-full bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Audio Toggle -->
+        <button id="sound-btn" onclick="soundManager.toggleSound()" class="p-2 rounded-lg bg-slate-700 hover:bg-slate-600 transition text-sm text-slate-200" title="Sound Toggle">
+          🔊
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl w-full mx-auto p-4 my-4 flex-grow">
+
+    <!-- STAGE SELECTION VIEW -->
+    <div id="view-stage-select" class="space-y-6">
+      <!-- Player Profile Card -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-6 border border-slate-700 shadow-xl relative overflow-hidden">
+        <div class="absolute -right-8 -bottom-8 w-40 h-40 bg-violet-600/10 rounded-full blur-2xl"></div>
+        <div class="flex flex-col md:flex-row items-center gap-6 relative z-10">
+          <div class="relative">
+            <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-4xl shadow-xl shadow-purple-500/20">
+              🧙‍♂️
+            </div>
+            <span class="absolute -bottom-2 -right-2 bg-amber-500 text-slate-950 font-black text-xs px-2 py-0.5 rounded-full border border-amber-300">
+              RANK C
+            </span>
+          </div>
+
+          <div class="flex-grow text-center md:text-left space-y-2">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+              <h2 class="text-xl font-bold text-slate-100">英文法クエスト挑戦者</h2>
+              <button onclick="app.showRuleGuideModal()" class="text-xs bg-slate-700/80 hover:bg-slate-700 text-cyan-300 px-3 py-1.5 rounded-lg border border-cyan-500/30 transition flex items-center gap-1.5 justify-center">
+                <span>💡</span> 「正解の判断基準」とは？
+              </button>
+            </div>
+            <p class="text-xs text-slate-400">「丸暗記の誤答ロジック」を破却し、「正しい文法判断基準」を手に入れよ！</p>
+            
+            <!-- Skill Inventory Badges -->
+            <div class="pt-2">
+              <div class="text-[11px] font-bold text-slate-400 mb-2 uppercase tracking-wider">獲得スキルインベントリ</div>
+              <div class="flex flex-wrap gap-2 justify-center md:justify-start" id="skills-badge-list">
+                <!-- Badges dynamically generated -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage Map List -->
+      <div class="space-y-4">
+        <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
+          <span>🗺️</span> クエストステージ選択
+        </h3>
+
+        <!-- Stage Card 0 -->
+        <div id="stage-card-0" class="pixel-box bg-slate-800/90 rounded-2xl p-5 transition-all hover:border-violet-500 cursor-pointer group relative overflow-hidden" onclick="app.startStage(0)">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-md bg-violet-500/20 text-violet-300 text-xs font-bold border border-violet-500/30">STAGE 0</span>
+                <span class="text-xs text-amber-400 font-bold">獲得可能: 発見系Lv1 (★☆☆☆☆)</span>
+              </div>
+              <h4 class="text-lg font-bold text-slate-100 group-hover:text-violet-300 transition">基礎認識の試練</h4>
+              <p class="text-xs text-slate-400">主語と動詞の範囲、疑問文（三単現/can/過去形）の正確な判断ロジックを習得せよ。</p>
+            </div>
+            <div class="flex items-center justify-between sm:justify-end gap-3 border-t sm:border-0 border-slate-700/60 pt-3 sm:pt-0">
+              <span id="stage-0-status-tag" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">挑戦可能</span>
+              <button class="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-xl font-bold text-xs text-white shadow-lg shadow-violet-600/30 group-hover:scale-105 transition">
+                出撃 ▶
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage Card 1 -->
+        <div id="stage-card-1" class="pixel-box bg-slate-800/50 rounded-2xl p-5 transition-all opacity-60 border-slate-700 relative overflow-hidden">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-md bg-slate-700 text-slate-400 text-xs font-bold">STAGE 1</span>
+                <span class="text-xs text-slate-400 font-bold">獲得可能: 発見系Lv2 (★★☆☆☆)</span>
+              </div>
+              <h4 class="text-lg font-bold text-slate-300">S-V発見の連動領域</h4>
+              <p class="text-xs text-slate-400">主語と動詞の組み合わせ（主語変更による動詞の変化、be動詞と代名詞の一致）を見抜く。</p>
+            </div>
+            <div class="flex items-center justify-between sm:justify-end gap-3 border-t sm:border-0 border-slate-700/60 pt-3 sm:pt-0">
+              <span id="stage-1-status-tag" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-slate-700 text-slate-400 flex items-center gap-1">
+                <span>🔒</span> STAGE 0 クリアで解放
+              </span>
+              <button id="stage-1-btn" disabled class="px-4 py-2 bg-slate-700 text-slate-400 rounded-xl font-bold text-xs cursor-not-allowed">
+                ロック中
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BATTLE / QUIZ ARENA VIEW -->
+    <div id="view-battle" class="hidden space-y-6">
+      
+      <!-- Stage Progress Bar & Back button -->
+      <div class="flex items-center justify-between bg-slate-800/60 p-3 rounded-xl border border-slate-700">
+        <button onclick="app.showStageSelect()" class="text-xs text-slate-400 hover:text-white flex items-center gap-1">
+          ◀ ステージ選択へ戻る
+        </button>
+        <div class="flex items-center gap-2">
+          <span id="quiz-stage-title" class="text-xs font-bold text-violet-400">STAGE 0</span>
+          <span id="quiz-progress-text" class="text-xs text-slate-400 font-bold">Q1 / 3</span>
+        </div>
+      </div>
+
+      <!-- Boss Banner (Shown during Boss Question) -->
+      <div id="boss-header" class="hidden boss-border bg-slate-900/90 rounded-2xl p-4 text-center space-y-2 animate-pulse-fast relative overflow-hidden">
+        <div class="absolute inset-0 bg-red-600/10 pointer-events-none"></div>
+        <div class="flex justify-center items-center gap-2 text-red-500 font-pixel text-xs sm:text-sm">
+          <span>⚠️</span> BOSS BATTLE <span>⚠️</span>
+        </div>
+        <div id="boss-title" class="text-lg font-black text-red-400 tracking-wide">誤解の支配者・文脈の幻影</div>
+        <!-- Boss HP Bar -->
+        <div class="w-full max-w-md mx-auto space-y-1">
+          <div class="flex justify-between text-[10px] text-red-300 font-bold">
+            <span>BOSS HP</span>
+            <span id="boss-hp-text">100 / 100</span>
+          </div>
+          <div class="h-3 bg-slate-950 rounded-full border border-red-800 overflow-hidden p-0.5">
+            <div id="boss-hp-bar" class="h-full bg-gradient-to-r from-red-600 to-amber-500 rounded-full transition-all duration-300" style="width: 100%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 1: Main Question Card -->
+      <div id="card-step1" class="pixel-box bg-slate-800/90 rounded-3xl p-6 space-y-6 shadow-2xl relative">
+        <!-- Step indicator badge -->
+        <div class="flex justify-between items-center border-b border-slate-700 pb-3">
+          <div class="flex items-center gap-2">
+            <span id="step1-badge" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 text-xs font-bold border border-cyan-500/30">
+              STEP 1: 英文問題選択
+            </span>
+            <span class="text-xs text-amber-400 font-bold">+10 EXP</span>
+          </div>
+          <span class="text-xs text-slate-400 font-semibold">正解を1つ選ぼう</span>
+        </div>
+
+        <!-- Question English Context Display -->
+        <div class="bg-slate-900/80 rounded-2xl p-5 border border-slate-700/80 text-center space-y-2">
+          <div class="text-xs text-violet-400 font-bold">【対象となる英文・設問】</div>
+          <div id="question-text" class="text-lg sm:text-xl font-black text-amber-300 tracking-wide leading-relaxed font-sans">
+            --
+          </div>
+        </div>
+
+        <!-- Question Choice Buttons -->
+        <div id="step1-options" class="grid grid-cols-1 gap-3">
+          <!-- Dynamically inserted -->
+        </div>
+
+        <!-- Wrong Answer Alert Box -->
+        <div id="wrong-feedback-box" class="hidden bg-rose-950/80 border border-rose-500/50 rounded-xl p-4 text-rose-200 text-xs space-y-2 animate-shake">
+          <div class="font-bold flex items-center gap-1.5 text-rose-400 text-sm">
+            <span>❌</span> 惜しい！ミスを発見しよう
+          </div>
+          <p id="wrong-comment-text" class="leading-relaxed">--</p>
+          <div class="text-[11px] text-rose-300/80">正しい文法ルールを意識して、もう一度正解を選び直してください。</div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Criteria Judgement Selection Card (Initially Hidden) -->
+      <div id="card-step2" class="hidden pixel-box bg-slate-800/90 border-amber-500/50 rounded-3xl p-6 space-y-6 shadow-2xl animate-glow relative">
+        <!-- Step indicator badge -->
+        <div class="flex justify-between items-center border-b border-slate-700 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 text-xs font-bold border border-amber-500/30">
+              STEP 2: 正解の判断基準（思考ロジック）選択
+            </span>
+            <span class="text-xs text-amber-400 font-bold">+20 EXP</span>
+          </div>
+          <span class="text-xs text-emerald-400 font-bold">✨ STEP 1 クリア！</span>
+        </div>
+
+        <!-- Explanation Message -->
+        <div class="bg-amber-950/30 border border-amber-500/30 rounded-2xl p-4 space-y-1">
+          <h5 class="text-xs font-bold text-amber-300 flex items-center gap-1">
+            <span>🧠</span> なぜこの答えになる？（本質的な判断基準を選ぼう）
+          </h5>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            単なる答え合わせではなく、<strong class="text-amber-400">「なぜその答えになるのか」の正しい理由</strong>を選択してスキルを完全習得しましょう！
+          </p>
+        </div>
+
+        <!-- Criteria Choice Buttons -->
+        <div id="step2-options" class="grid grid-cols-1 gap-3">
+          <!-- Dynamically inserted -->
+        </div>
+
+        <!-- Misconception Retry Feedback -->
+        <div id="criteria-wrong-box" class="hidden bg-amber-900/60 border border-amber-500/50 rounded-xl p-4 text-amber-100 text-xs space-y-1 animate-shake">
+          <div class="font-bold flex items-center gap-1.5 text-amber-300">
+            <span>⚠️</span> 丸暗記・思い込みの罠！
+          </div>
+          <p class="text-xs leading-relaxed">それは「よくある誤解（表面的な丸暗記）」の判断基準です。より本質的な英文法の原則を選び直そう！</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- STAGE CLEAR / BOSS DEFEATED MODAL VIEW -->
+    <div id="view-clear" class="hidden space-y-6 text-center">
+      <div class="pixel-box bg-slate-800/95 rounded-3xl p-8 space-y-6 max-w-lg mx-auto shadow-2xl relative border-amber-500/50">
+        <div class="text-5xl animate-bounce-short">🏆</div>
+        <div class="space-y-2">
+          <h2 class="text-2xl font-black text-amber-400 tracking-wider">STAGE CLEAR!!</h2>
+          <p class="text-xs text-slate-300">見事に全ての英文問題と正しい判断基準を見抜いた！</p>
+        </div>
+
+        <!-- Acquired Skill Badge Display -->
+        <div id="cleared-skill-card" class="bg-gradient-to-br from-violet-900/60 to-indigo-900/60 border border-violet-500/50 rounded-2xl p-5 space-y-2">
+          <span class="text-[10px] font-bold text-violet-300 uppercase tracking-widest">獲得スキル</span>
+          <div id="cleared-skill-name" class="text-lg font-bold text-amber-300">
+            発見系Lv1スキル：基礎認識（★☆☆☆☆）
+          </div>
+          <p id="cleared-skill-desc" class="text-xs text-slate-300">
+            主語と動詞のまとまりを正確に識別する文法眼を獲得した！
+          </p>
+        </div>
+
+        <div class="pt-2">
+          <button onclick="app.showStageSelect()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm shadow-xl transition transform active:scale-95">
+            ステージ選択へ戻る
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- RULE EXPLANATION MODAL -->
+  <div id="modal-guide" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-800 border border-slate-700 rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-700 pb-3">
+        <h3 class="font-bold text-amber-400 text-base flex items-center gap-2">
+          <span>💡</span> 2ステップ学習と判断基準について
+        </h3>
+        <button onclick="app.hideRuleGuideModal()" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
+      </div>
+      <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
+        <p>
+          Grammar Questでは、単に「問題の正解を選ぶ（Step 1）」だけではありません。
+        </p>
+        <div class="bg-slate-900 p-3 rounded-xl border border-slate-700 space-y-1">
+          <div class="font-bold text-cyan-400">Step 1: 問題正解 (+10 EXP)</div>
+          <p class="text-slate-400">選択肢の中から正しい英文や表現を選びます。</p>
+        </div>
+        <div class="bg-slate-900 p-3 rounded-xl border border-slate-700 space-y-1">
+          <div class="font-bold text-amber-400">Step 2: 正解の判断基準 (+20 EXP)</div>
+          <p class="text-slate-400">「なぜその答えになるのか」の本質的な理由を選びます。「なんとなく」や「表面的な丸暗記（誤解）」を排除し、応用が効く文法スキルを覚えます。</p>
+        </div>
+      </div>
+      <button onclick="app.hideRuleGuideModal()" class="w-full py-2.5 bg-slate-700 hover:bg-slate-600 rounded-xl text-white text-xs font-bold transition">
+        理解した！
+      </button>
+    </div>
+  </div>
+
+  <footer class="bg-slate-900 border-t border-slate-800 py-4 px-4 text-center text-xs text-slate-500">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div>Grammar Quest - 英文法発見RPG</div>
+      <div>© 2026 Grammar Quest Project</div>
+    </div>
+  </footer>
+
+  <script>
+    // --- WEB AUDIO API SOUND SYSTEM ---
+    class SoundFX {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+      }
+
+      initCtx() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            this.ctx = new AudioContext();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      toggleSound() {
+        this.enabled = !this.enabled;
+        const btn = document.getElementById('sound-btn');
+        if (btn) {
+          btn.innerText = this.enabled ? '🔊' : '🔇';
+        }
+      }
+
+      playSelect() {
+        if (!this.enabled) return;
+        this.initCtx();
+        if (!this.ctx) return;
+        
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(800, this.ctx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.08);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.08);
+      }
+
+      playCorrect() {
+        if (!this.enabled) return;
+        this.initCtx();
+        if (!this.ctx) return;
+
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, now); // C5
+        osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+        osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+        osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
+        
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.5);
+        
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.5);
+      }
+
+      playWrong() {
+        if (!this.enabled) return;
+        this.initCtx();
+        if (!this.ctx) return;
+
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(220, now);
+        osc.frequency.setValueAtTime(180, now + 0.12);
+        
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+        
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.3);
+      }
+
+      playFanfare() {
+        if (!this.enabled) return;
+        this.initCtx();
+        if (!this.ctx) return;
+
+        const now = this.ctx.currentTime;
+        const notes = [523.25, 659.25, 783.99, 1046.50, 880, 1046.50];
+        const times = [0, 0.12, 0.24, 0.36, 0.52, 0.68];
+        const durations = [0.1, 0.1, 0.1, 0.14, 0.14, 0.4];
+
+        notes.forEach((freq, idx) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(freq, now + times[idx]);
+          
+          gain.gain.setValueAtTime(0.15, now + times[idx]);
+          gain.gain.linearRampToValueAtTime(0.01, now + times[idx] + durations[idx]);
+          
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now + times[idx]);
+          osc.stop(now + times[idx] + durations[idx]);
+        });
+      }
+    }
+
+    const soundManager = new SoundFX();
+  </script>
+
+  <script>
+    // --- GAME DATA STRUCTURE ---
+    const STAGE_DATA = [
+      {
+        stageId: 0,
+        title: "STAGE 0: 基礎認識の試練",
+        skillTitle: "発見系Lv1スキル：基礎認識（★☆☆☆☆）",
+        skillDesc: "主語と動詞の範囲を正しく見抜き、一般動詞・助動詞の疑問文ルールの文法根拠を把握した証。",
+        questions: [
+          {
+            id: "s0q1",
+            text: "① Tom and Ken play tennis. の主語と動詞はどれ？",
+            options: [
+              { letter: "A", text: "主語 Tom / 動詞 play", isCorrect: false },
+              { letter: "B", text: "主語 Tom and Ken / 動詞 play", isCorrect: true },
+              { letter: "C", text: "主語 Ken / 動詞 play", isCorrect: false }
+            ],
+            wrongComment: "主語は「だれが」にあたる名詞のまとまりで見る",
+            criteriaQuestion: "【判断基準】なぜこの答えになる？（正しい考え方を選ぼう）",
+            criteriaOptions: [
+              { text: "主語は文頭の名詞のまとまり", isCorrect: true },
+              { text: "主語は文頭の単語", isCorrect: false }
+            ]
+          },
+          {
+            id: "s0q2",
+            text: "② Tom likes dogs. の疑問文とその答え方は？",
+            options: [
+              { letter: "A", text: "Is Tom like dogs? – Yes, he is.", isCorrect: false },
+              { letter: "B", text: "Do Tom likes dogs? – Yes, he do.", isCorrect: false },
+              { letter: "C", text: "Does Tom like dogs? – Yes, he does.", isCorrect: true }
+            ],
+            wrongComment: "動詞の形を区別して、主語の前に置く１語を決める",
+            criteriaQuestion: "【判断基準】正しい判断基準は？",
+            criteriaOptions: [
+              { text: "動詞が一般動詞（三単現）→ Doesを使って動詞を原形に戻す", isCorrect: true },
+              { text: "主語が三人称単数→ Doesを使って動詞を原形に戻す", isCorrect: false }
+            ]
+          },
+          {
+            id: "s0q3",
+            text: "③ Tom can play the guitar. の ( the guitar ) をたずねる疑問文は？",
+            options: [
+              { letter: "A", text: "What can Tom play?", isCorrect: true },
+              { letter: "B", text: "What Tom can play?", isCorrect: false },
+              { letter: "C", text: "What does Tom play?", isCorrect: false }
+            ],
+            wrongComment: "助動詞canがある疑問文の作り方",
+            criteriaQuestion: "【判断基準】正しい判断基準は？",
+            criteriaOptions: [
+              { text: "疑問詞を文頭に、canがあるので主語の前に出す", isCorrect: true },
+              { text: "疑問詞の後にcanを置く", isCorrect: false }
+            ]
+          },
+          {
+            id: "s0boss",
+            isBoss: true,
+            bossName: "誤解の守護者・単語丸暗記デーモン",
+            text: "Tom went fishing last Sunday. の ( last Sunday ) をたずねる疑問文にしなさい。",
+            options: [
+              { letter: "A", text: "When was Tom go fishing?", isCorrect: false },
+              { letter: "B", text: "When did Tom go fishing?", isCorrect: true },
+              { letter: "C", text: "When does Tom went fishing?", isCorrect: false }
+            ],
+            wrongComment: "動詞の形を区別して、主語の前に置く１語を決める",
+            criteriaQuestion: "【BOSS判断基準】ボスを打破する正しい判断基準は？",
+            criteriaOptions: [
+              { text: "一般動詞が過去形なのでdidを使う", isCorrect: true },
+              { text: "lastが過去を表すのでdidを使う", isCorrect: false }
+            ]
+          }
+        ]
+      },
+      {
+        stageId: 1,
+        title: "STAGE 1: S-V発見の連動領域",
+        skillTitle: "発見系スキルLv2：S-V発見（★★☆☆☆）",
+        skillDesc: "主語の変化に伴う動詞の変化や代名詞の連動を完璧に掌握した証。",
+        questions: [
+          {
+            id: "s1q1",
+            text: "① Your brother is a soccer fan. の疑問文とその答え方は？",
+            options: [
+              { letter: "A", text: "Are your brother a soccer fan? – Yes, I am.", isCorrect: false },
+              { letter: "B", text: "Is your brother a soccer fan? – Yes, it is.", isCorrect: false },
+              { letter: "C", text: "Is your brother a soccer fan? – Yes, he is.", isCorrect: true }
+            ],
+            wrongComment: "疑問文の主語と答える文の主語は一致する",
+            criteriaQuestion: "【判断基準】正しい判断基準は？",
+            criteriaOptions: [
+              { text: "be動詞を主語の前に出す。答える文の主語は疑問文に合わせる", isCorrect: true },
+              { text: "主語が単数だからisを主語の前に出す。答える文は人ならheを使う", isCorrect: false }
+            ]
+          },
+          {
+            id: "s1q2",
+            text: "② Tom and Ken play soccer. の主語をTomだけにすると？",
+            options: [
+              { letter: "A", text: "Tom play soccer.", isCorrect: false },
+              { letter: "B", text: "Tom plays soccer.", isCorrect: true },
+              { letter: "C", text: "Tom is play soccer.", isCorrect: false }
+            ],
+            wrongComment: "主語が三人称単数になると動詞の形も変わる",
+            criteriaQuestion: "【判断基準】正しい判断基準は？",
+            criteriaOptions: [
+              { text: "主語が三人称単数だから一般動詞は三単現になる", isCorrect: true },
+              { text: "主語が１語になると一般動詞は三単現になる", isCorrect: false }
+            ]
+          },
+          {
+            id: "s1q3",
+            text: "③ I am a tennis fan. のIをWeに変えると？",
+            options: [
+              { letter: "A", text: "We are tennis fans.", isCorrect: true },
+              { letter: "B", text: "We are a tennis fan.", isCorrect: false },
+              { letter: "C", text: "We are a tennis fans.", isCorrect: false }
+            ],
+            wrongComment: "be動詞の文の主語が複数になると、be動詞の直後の名詞も複数形になる",
+            criteriaQuestion: "【判断基準】正しい判断基準は？",
+            criteriaOptions: [
+              { text: "be動詞の名詞の単数・複数は主語に合わす", isCorrect: true },
+              { text: "主語が複数になれば、複数形を使う", isCorrect: false }
+            ]
+          },
+          {
+            id: "s1boss",
+            isBoss: true,
+            bossName: "主語動詞分離の邪竜・SVドラゴン",
+            text: "They always watch soccer games. のTheyをHeに変えると？",
+            options: [
+              { letter: "A", text: "He always watch a soccer game.", isCorrect: false },
+              { letter: "B", text: "He always watches soccer games.", isCorrect: true },
+              { letter: "C", text: "He always watches a soccer game.", isCorrect: false }
+            ],
+            wrongComment: "主語と動詞が連動する",
+            criteriaQuestion: "【BOSS判断基準】ボスを撃破する最終判断基準は？",
+            criteriaOptions: [
+              { text: "主語が三人称単数になったので、一般動詞は三単現になる", isCorrect: true },
+              { text: "主語が１語になると一般動詞は三単現になる", isCorrect: false }
+            ]
+          }
+        ]
+      }
+    ];
+
+    // --- APPLICATION MAIN ENGINE ---
+    class App {
+      constructor() {
+        this.exp = 0;
+        this.level = 1;
+        this.unlockedStage = 0;
+        this.acquiredSkills = [];
+
+        this.currentStageIdx = 0;
+        this.currentQuestionIdx = 0;
+        this.bossHp = 100;
+
+        this.init();
+      }
+
+      init() {
+        this.renderStats();
+        this.renderSkillBadges();
+        this.updateStageLockState();
+      }
+
+      // Add EXP and Level Up system logic
+      addExp(amount) {
+        this.exp += amount;
+        // Level up formula: Level N requires N * 30 EXP
+        const requiredExp = this.level * 30;
+        if (this.exp >= requiredExp) {
+          this.exp -= requiredExp;
+          this.level += 1;
+          soundManager.playFanfare();
+        }
+        this.renderStats();
+      }
+
+      renderStats() {
+        const levelEl = document.getElementById('player-level');
+        const expTextEl = document.getElementById('exp-text');
+        const expBarEl = document.getElementById('exp-bar');
+        
+        const reqExp = this.level * 30;
+        if (levelEl) levelEl.innerText = this.level;
+        if (expTextEl) expTextEl.innerText = `${this.exp} / ${reqExp}`;
+        if (expBarEl) {
+          const pct = Math.min(100, Math.floor((this.exp / reqExp) * 100));
+          expBarEl.style.width = `${pct}%`;
+        }
+      }
+
+      renderSkillBadges() {
+        const list = document.getElementById('skills-badge-list');
+        if (!list) return;
+
+        if (this.acquiredSkills.length === 0) {
+          list.innerHTML = `<span class="text-xs text-slate-500 italic">まだスキルを獲得していません。STAGE 0に挑もう！</span>`;
+          return;
+        }
+
+        list.innerHTML = this.acquiredSkills.map(skill => `
+          <div class="px-3 py-1.5 rounded-xl bg-violet-950/80 border border-violet-500/50 text-violet-200 text-xs font-bold flex items-center gap-1.5 shadow-md animate-glow">
+            <span>✨</span> ${skill.title}
+          </div>
+        `).join('');
+      }
+
+      updateStageLockState() {
+        const stage1Card = document.getElementById('stage-card-1');
+        const stage1Tag = document.getElementById('stage-1-status-tag');
+        const stage1Btn = document.getElementById('stage-1-btn');
+
+        if (this.unlockedStage >= 1) {
+          if (stage1Card) {
+            stage1Card.classList.remove('opacity-60');
+            stage1Card.classList.add('hover:border-violet-500', 'cursor-pointer');
+            stage1Card.onclick = () => this.startStage(1);
+          }
+          if (stage1Tag) {
+            stage1Tag.className = "text-xs font-bold px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+            stage1Tag.innerHTML = "挑戦可能";
+          }
+          if (stage1Btn) {
+            stage1Btn.removeAttribute('disabled');
+            stage1Btn.className = "px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-xl font-bold text-xs text-white shadow-lg shadow-violet-600/30 group-hover:scale-105 transition";
+            stage1Btn.innerText = "出撃 ▶";
+          }
+        }
+      }
+
+      showStageSelect() {
+        soundManager.playSelect();
+        document.getElementById('view-stage-select').classList.remove('hidden');
+        document.getElementById('view-battle').classList.add('hidden');
+        document.getElementById('view-clear').classList.add('hidden');
+      }
+
+      startStage(stageIdx) {
+        if (stageIdx > this.unlockedStage) return;
+
+        soundManager.playSelect();
+        this.currentStageIdx = stageIdx;
+        this.currentQuestionIdx = 0;
+
+        document.getElementById('view-stage-select').classList.add('hidden');
+        document.getElementById('view-clear').classList.add('hidden');
+        document.getElementById('view-battle').classList.remove('hidden');
+
+        this.loadQuestion();
+      }
+
+      loadQuestion() {
+        const stage = STAGE_DATA[this.currentStageIdx];
+        const q = stage.questions[this.currentQuestionIdx];
+
+        // Header info
+        document.getElementById('quiz-stage-title').innerText = `STAGE ${stage.stageId}`;
+        document.getElementById('quiz-progress-text').innerText = `Q${this.currentQuestionIdx + 1} / ${stage.questions.length}`;
+
+        // Boss mode handling
+        const bossHeader = document.getElementById('boss-header');
+        if (q.isBoss) {
+          bossHeader.classList.remove('hidden');
+          document.getElementById('boss-title').innerText = q.bossName;
+          this.bossHp = 100;
+          this.updateBossHpBar();
+        } else {
+          bossHeader.classList.add('hidden');
+        }
+
+        // Hide Step 2 & Feedback
+        document.getElementById('card-step2').classList.add('hidden');
+        document.getElementById('wrong-feedback-box').classList.add('hidden');
+        document.getElementById('criteria-wrong-box').classList.add('hidden');
+
+        // Render Step 1
+        document.getElementById('question-text').innerText = q.text;
+        
+        const optionsContainer = document.getElementById('step1-options');
+        optionsContainer.innerHTML = q.options.map((opt, idx) => `
+          <button onclick="app.checkStep1Answer(${idx})" class="w-full text-left p-4 rounded-2xl bg-slate-700/60 hover:bg-slate-700 border border-slate-600/80 hover:border-cyan-400 transition flex items-center justify-between group">
+            <span class="text-sm font-bold text-slate-100 group-hover:text-cyan-300">
+              <span class="inline-block w-6 text-cyan-400 font-pixel">${opt.letter}.</span> ${opt.text}
+            </span>
+            <span class="text-xs text-slate-400 opacity-0 group-hover:opacity-100 transition">選択 ➔</span>
+          </button>
+        `).join('');
+      }
+
+      checkStep1Answer(optionIdx) {
+        const q = STAGE_DATA[this.currentStageIdx].questions[this.currentQuestionIdx];
+        const selected = q.options[optionIdx];
+
+        if (selected.isCorrect) {
+          soundManager.playCorrect();
+          this.addExp(10);
+
+          // If boss, decrease boss HP partially
+          if (q.isBoss) {
+            this.bossHp = 50;
+            this.updateBossHpBar();
+          }
+
+          document.getElementById('wrong-feedback-box').classList.add('hidden');
+          this.showStep2();
+        } else {
+          soundManager.playWrong();
+          const feedbackBox = document.getElementById('wrong-feedback-box');
+          const feedbackText = document.getElementById('wrong-comment-text');
+          feedbackText.innerText = q.wrongComment;
+          feedbackBox.classList.remove('hidden');
+        }
+      }
+
+      showStep2() {
+        const q = STAGE_DATA[this.currentStageIdx].questions[this.currentQuestionIdx];
+        const step2Card = document.getElementById('card-step2');
+        step2Card.classList.remove('hidden');
+
+        // Render Step 2 criteria options
+        const criteriaContainer = document.getElementById('step2-options');
+        
+        // Render options in shuffled array or standard
+        criteriaContainer.innerHTML = q.criteriaOptions.map((opt, idx) => `
+          <button onclick="app.checkStep2Answer(${idx})" class="w-full text-left p-4 rounded-2xl bg-slate-900/90 hover:bg-slate-900 border border-slate-700 hover:border-amber-400 transition flex items-center justify-between group">
+            <span class="text-xs sm:text-sm font-semibold text-slate-200 group-hover:text-amber-300 leading-relaxed">
+              ${opt.text}
+            </span>
+            <span class="text-xs text-amber-400 font-bold opacity-0 group-hover:opacity-100 transition">決定 ➔</span>
+          </button>
+        `).join('');
+
+        // Scroll smooth to step 2
+        step2Card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      checkStep2Answer(criteriaIdx) {
+        const q = STAGE_DATA[this.currentStageIdx].questions[this.currentQuestionIdx];
+        const selected = q.criteriaOptions[criteriaIdx];
+
+        if (selected.isCorrect) {
+          soundManager.playCorrect();
+          this.addExp(20);
+
+          if (q.isBoss) {
+            this.bossHp = 0;
+            this.updateBossHpBar();
+          }
+
+          document.getElementById('criteria-wrong-box').classList.add('hidden');
+
+          // Proceed to next question or Stage clear
+          setTimeout(() => {
+            this.currentQuestionIdx++;
+            const stage = STAGE_DATA[this.currentStageIdx];
+            if (this.currentQuestionIdx < stage.questions.length) {
+              this.loadQuestion();
+            } else {
+              this.completeStage();
+            }
+          }, 600);
+
+        } else {
+          soundManager.playWrong();
+          document.getElementById('criteria-wrong-box').classList.remove('hidden');
+        }
+      }
+
+      updateBossHpBar() {
+        const bar = document.getElementById('boss-hp-bar');
+        const text = document.getElementById('boss-hp-text');
+        if (bar) bar.style.width = `${this.bossHp}%`;
+        if (text) text.innerText = `${this.bossHp} / 100`;
+      }
+
+      completeStage() {
+        soundManager.playFanfare();
+        const stage = STAGE_DATA[this.currentStageIdx];
+
+        // Unlock next stage
+        if (this.currentStageIdx === this.unlockedStage) {
+          this.unlockedStage = Math.min(STAGE_DATA.length - 1, this.unlockedStage + 1);
+        }
+
+        // Grant Skill if not already acquired
+        const existingSkill = this.acquiredSkills.find(s => s.stageId === stage.stageId);
+        if (!existingSkill) {
+          this.acquiredSkills.push({
+            stageId: stage.stageId,
+            title: stage.skillTitle,
+            desc: stage.skillDesc
+          });
+        }
+
+        this.renderSkillBadges();
+        this.updateStageLockState();
+
+        // Display Clear Screen
+        document.getElementById('view-battle').classList.add('hidden');
+        document.getElementById('view-clear').classList.remove('hidden');
+
+        document.getElementById('cleared-skill-name').innerText = stage.skillTitle;
+        document.getElementById('cleared-skill-desc').innerText = stage.skillDesc;
+      }
+
+      showRuleGuideModal() {
+        soundManager.playSelect();
+        document.getElementById('modal-guide').classList.remove('hidden');
+      }
+
+      hideRuleGuideModal() {
+        soundManager.playSelect();
+        document.getElementById('modal-guide').classList.add('hidden');
+      }
+    }
+
+    let app;
+    window.addEventListener('DOMContentLoaded', () => {
+      app = new App();
+    });
+  </script>
+</body>
+</html>

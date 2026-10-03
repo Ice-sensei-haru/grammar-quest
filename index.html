@@ -244,6 +244,38 @@
       opacity: 0.4;
       cursor: not-allowed;
     }
+
+    .battle-scene {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: #090d12;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .pixel-char {
+      font-size: 2.5rem;
+      animation: floatChar 2s ease-in-out infinite;
+    }
+
+    @keyframes floatChar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .monster-char {
+      font-size: 2.5rem;
+      animation: pulseMonster 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulseMonster {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
   </style>
 </head>
 <body>
@@ -252,17 +284,18 @@
   <div class="header">
     <div class="title">⚔️ 英語処理OS RPG</div>
     <div class="player-stats">
-      <div style="font-size: 0.85rem;">累計EXP: <span id="exp-display" style="color:var(--gold-color); font-weight:bold;">0</span></div>
+      <div style="font-size: 0.85rem;">ランク: <span id="rank-display" style="color:var(--gold-color); font-weight:bold;">1</span> (EXP: <span id="exp-display">0</span>)</div>
       <div class="exp-bar-container">
         <div id="exp-bar" class="exp-bar"></div>
       </div>
+      <div style="font-size:0.7rem; color:#8b949e; margin-top:2px;">💾 進捗は自動保存されます</div>
     </div>
   </div>
 
   <div class="skills-container">
     <div style="font-size: 0.75rem; color: #8b949e; margin-bottom: 4px; display:flex; justify-content:space-between; align-items:center;">
-      <span>獲得済みスキル</span>
-      <button class="reset-btn" onclick="confirmResetData()">データ削除(最初から)</button>
+      <span>獲得スキル (<span id="skill-count">0</span>個)</span>
+      <button class="reset-btn" onclick="confirmResetData()">データ削除</button>
     </div>
     <div id="skills-list">
       <span style="color: #484f58; font-size: 0.8rem;">まだスキルを獲得していません</span>
@@ -277,8 +310,10 @@ const STAGES = [
   {
     id: 1,
     title: "STAGE 1",
-    skillName: "基礎認識（★☆☆☆☆）",
+    skillName: "基礎認識",
     rewardSkill: "基礎認識スキル",
+    monsterEmoji: "👾",
+    monsterName: "エラー・スライム",
     questions: [
       {
         text: "① Tom and Ken play tennis. の主語と動詞はどれ？",
@@ -287,8 +322,8 @@ const STAGES = [
           { label: "B : 主語 Tom and Ken 動詞 play", correct: true },
           { label: "C : 主語 Ken 動詞 play", correct: false }
         ],
-        wrongComment: "誤答のコメント：主語は「だれが」にあたる名詞のまとまりで見る",
-        logicText: "【判断基準】正解すれば +20EXP",
+        wrongComment: "主語は「だれが」にあたる名詞のまとまり全体で見ます。",
+        logicText: "【判断基準】",
         logicOptions: [
           { label: "主語は文頭の名詞のまとまり", correct: true },
           { label: "主語は文頭の単語", correct: false }
@@ -301,8 +336,8 @@ const STAGES = [
           { label: "B : Do Tom likes dogs? – Yes, he do.", correct: false },
           { label: "C : Does Tom like dogs? – Yes, he does.", correct: true }
         ],
-        wrongComment: "誤答のコメント：動詞の形を区別して、主語の前に置く１語を決める",
-        logicText: "【判断基準】正解すれば +20EXP",
+        wrongComment: "一般動詞の文で主語が三人称単数のときはDoesを使い、動詞は原形に戻します。",
+        logicText: "【判断基準】",
         logicOptions: [
           { label: "動詞が一般動詞（三単現）→ Doesを使って動詞を原形に戻す", correct: true },
           { label: "主語が三人称単数 → Doesを使って動詞を原形に戻す", correct: false }
@@ -315,8 +350,8 @@ const STAGES = [
           { label: "B : What Tom can play?", correct: false },
           { label: "C : What does Tom play?", correct: false }
         ],
-        wrongComment: "誤答のコメント：助動詞canがある疑問文の作り方",
-        logicText: "【判断基準】正解すれば +20EXP",
+        wrongComment: "助動詞canがある文の疑問文は、canを主語の前に出します。",
+        logicText: "【判断基準】",
         logicOptions: [
           { label: "疑問詞の後にcanを置く", correct: false },
           { label: "疑問詞を文頭に、canがあるので主語の前に出す", correct: true }
@@ -330,7 +365,7 @@ const STAGES = [
         { label: "B : When did Tom go fishing?", correct: true },
         { label: "C : When does Tom went fishing?", correct: false }
       ],
-      wrongComment: "誤答のコメント：動詞の形を区別して、主語の前に置く１語を決める",
+      wrongComment: "一般動詞の過去形なのでdidを使い、動詞は原形に戻します。",
       logicText: "【判断基準】",
       logicOptions: [
         { label: "lastが過去を表すのでdidを使う", correct: false },
@@ -341,8 +376,10 @@ const STAGES = [
   {
     id: 2,
     title: "STAGE 2",
-    skillName: "S-V発見（★★☆☆☆）",
+    skillName: "S-V発見",
     rewardSkill: "S-V発見スキル",
+    monsterEmoji: "🐉",
+    monsterName: "バグ・ドラゴン",
     questions: [
       {
         text: "① Your brother is a soccer fan. の疑問文とその答え方は？",
@@ -351,8 +388,8 @@ const STAGES = [
           { label: "B : Is your brother a soccer fan? – Yes, it is.", correct: false },
           { label: "C : Is your brother a soccer fan? – Yes, he is.", correct: true }
         ],
-        wrongComment: "誤答のコメント：疑問文の主語と答える文の主語は一致する",
-        logicText: "【判断基準】正解すれば +20EXP",
+        wrongComment: "be動詞を前に出し、答えの文の代名詞は主語に合わせます。",
+        logicText: "【判断基準】",
         logicOptions: [
           { label: "be動詞を主語の前に出す。答える文の主語は疑問文に合わせる", correct: true },
           { label: "主語が単数だからisを主語の前に出す。答える文は人ならheを使う", correct: false }
@@ -365,8 +402,8 @@ const STAGES = [
           { label: "B : Tom plays soccer.", correct: true },
           { label: "C : Tom is play soccer.", correct: false }
         ],
-        wrongComment: "誤答のコメント：主語が三人称単数になると動詞の形も変わる",
-        logicText: "【判断基準】正解すれば +20EXP",
+        wrongComment: "主語が三人称単数になると、一般動詞にs/esが付きます。",
+        logicText: "【判断基準】",
         logicOptions: [
           { label: "主語が三人称単数だから一般動詞は三単現になる", correct: true },
           { label: "主語が１語になると一般動詞は三単現になる", correct: false }
@@ -379,8 +416,8 @@ const STAGES = [
           { label: "B : We are a tennis fan.", correct: false },
           { label: "C : We are a tennis fans.", correct: false }
         ],
-        wrongComment: "誤答のコメント：be動詞の文の主語が複数になると、be動詞の直後の名詞も複数形になる",
-        logicText: "【判断基準】正解すれば +20EXP",
+        wrongComment: "主語が複数になるとbe動詞はareになり、後ろの名詞も複数形になります。",
+        logicText: "【判断基準】",
         logicOptions: [
           { label: "主語が複数になれば、複数形を使う", correct: false },
           { label: "be動詞の名詞の単数・複数は主語に合わす", correct: true }
@@ -394,7 +431,7 @@ const STAGES = [
         { label: "B : He always watches soccer games.", correct: true },
         { label: "C : He always watches a soccer game.", correct: false }
       ],
-      wrongComment: "誤答のコメント：主語と動詞が連動する",
+      wrongComment: "主語がHe（三人称単数）に変わるため、動詞も三単現のsが必要です。",
       logicText: "【判断基準】",
       logicOptions: [
         { label: "主語が１語になると一般動詞は三単現になる", correct: false },
@@ -405,8 +442,10 @@ const STAGES = [
   {
     id: 3,
     title: "STAGE 3",
-    skillName: "主語変換（★★☆☆☆☆☆☆☆☆☆）",
+    skillName: "主語変換",
     rewardSkill: "主語変換スキル",
+    monsterEmoji: "🤖",
+    monsterName: "シンタックス・ゴーレム",
     questions: [
       {
         text: "① Those are old bikes. のThoseをThatに変えると？",
@@ -415,8 +454,8 @@ const STAGES = [
           { label: "B : That is an old bike.", correct: true },
           { label: "C : That is old bike.", correct: false }
         ],
-        wrongComment: "誤答のコメント：主語が三人称単数のときのbe動詞とその後ろの名詞の形は？",
-        logicText: "【判断基準】正解すれば +20EXP",
+        wrongComment: "Thatは単数なのでisになり、後ろの名詞も単数形（an old bike）になります。",
+        logicText: "【判断基準】",
         logicOptions: [
           { label: "主語が三人称単数のbe動詞はis。後ろはa(an)＋どんな＋単数形。", correct: true },
           { label: "後ろの名詞が単数なのでbe動詞はis。", correct: false }
@@ -429,8 +468,8 @@ const STAGES = [
           { label: "B : Tom doesn’t swim.", correct: true },
           { label: "C : Tom is not swim.", correct: false }
         ],
-        wrongComment: "誤答のコメント：主語が三人称単数になるとdoの形も変わる",
-        logicText: "【判断基準】正解すれば +20EXP",
+        wrongComment: "主語が三人称単数の否定文では doesn't を使い、動詞は原形にします。",
+        logicText: "【判断基準】",
         logicOptions: [
           { label: "主語が１語になると一般動詞の否定文にはdoesを使う", correct: false },
           { label: "主語が三人称単数だから一般動詞の否定文にはdoesを使う", correct: true }
@@ -443,8 +482,8 @@ const STAGES = [
           { label: "B : Can the man from India speak English?", correct: false },
           { label: "C : Does the man from India speak English?", correct: true }
         ],
-        wrongComment: "誤答のコメント：一般動詞の形が三単現のときはdoesを使う",
-        logicText: "【判断基準】正解すれば +20EXP",
+        wrongComment: "主語は the man（三人称単数）、動詞が speaks なので Does を使います。",
+        logicText: "【判断基準】",
         logicOptions: [
           { label: "主語がIndia、動詞がspeakなのでdoesを使う", correct: false },
           { label: "主語がthe man、動詞がspeakなのでdoesを使う", correct: true }
@@ -458,7 +497,7 @@ const STAGES = [
         { label: "B : It are interesting stories.", correct: false },
         { label: "C : It is an interesting story.", correct: true }
       ],
-      wrongComment: "誤答のコメント：主語が三人称単数のときのbe動詞とその後ろの名詞の形は？",
+      wrongComment: "Itは単数なので is になり、storyの前には an が必要です。",
       logicText: "【判断基準】",
       logicOptions: [
         { label: "名詞が単数形なのでisを使う", correct: false },
@@ -469,8 +508,10 @@ const STAGES = [
   {
     id: 4,
     title: "STAGE 4",
-    skillName: "動詞形選択（★★★☆☆☆☆☆☆☆☆）",
+    skillName: "動詞形選択",
     rewardSkill: "動詞形選択スキル",
+    monsterEmoji: "👑",
+    monsterName: "マスター・デーモン",
     questions: [
       {
         text: "① Where are they (  ) soccer now? の(  )に適する語は？",
@@ -479,8 +520,8 @@ const STAGES = [
           { label: "B : plays", correct: false },
           { label: "C : playing", correct: true }
         ],
-        wrongComment: "誤答のコメント：be動詞に着眼して、一般動詞の形を判断する",
-        logicText: "【判断基準】正解すれば +20EXP",
+        wrongComment: "nowとbe動詞（are）があるため、現在進行形（-ing）にします。",
+        logicText: "【判断基準】",
         logicOptions: [
           { label: "文末にnowがあるので一般動詞をingの形にする。", correct: false },
           { label: "be動詞のareがあるので一般動詞をingの形にする。", correct: true }
@@ -493,8 +534,8 @@ const STAGES = [
           { label: "B : does", correct: false },
           { label: "C : was", correct: false }
         ],
-        wrongComment: "誤答のコメント：一般動詞のing形と、nowに注目する",
-        logicText: "【判断基準】正解すれば +20EXP",
+        wrongComment: "swimming（-ing）とnowがあるので、be動詞（is）を選びます。",
+        logicText: "【判断基準】",
         logicOptions: [
           { label: "swimmingとnowがあるので、be動詞を使う", correct: true },
           { label: "主語がHeなのでisを使う", correct: false }
@@ -507,8 +548,8 @@ const STAGES = [
           { label: "B : Tom is having a cat.", correct: false },
           { label: "C : Tom has a cat.", correct: true }
         ],
-        wrongComment: "誤答のコメント：「飼っている」は動作が途中（未完了）を表す表現ではない",
-        logicText: "【判断基準】正解すれば +20EXP",
+        wrongComment: "「飼っている（状態）」は進行形にできません。",
+        logicText: "【判断基準】",
         logicOptions: [
           { label: "「飼っている」は状態を表す表現なので進行形にしない。", correct: true },
           { label: "一般動詞haveは進行形にできない。", correct: false }
@@ -522,7 +563,7 @@ const STAGES = [
         { label: "B : Are they cutting the trees?", correct: true },
         { label: "C : Do they cutting the trees?", correct: false }
       ],
-      wrongComment: "誤答のコメント：現在進行形はbe動詞と一般動詞のing形で表現する",
+      wrongComment: "現在進行形の疑問文は Are を文頭に出し、動詞を -ing にします。",
       logicText: "【判断基準】",
       logicOptions: [
         { label: "Doを使わないので一般動詞をingの形にする", correct: false },
@@ -571,7 +612,7 @@ function playSound(type) {
   }
 }
 
-const STORAGE_KEY = 'grammar_quest_save_data_v1';
+const STORAGE_KEY = 'grammar_quest_save_data_v2';
 let gameState = {
   exp: 0,
   unlockedStage: 1,
@@ -603,12 +644,21 @@ function confirmResetData() {
   }
 }
 
+function getRank(exp) {
+  return Math.floor(exp / 100) + 1;
+}
+
 function updateHeader() {
+  const rank = getRank(gameState.exp);
+  document.getElementById('rank-display').textContent = rank;
   document.getElementById('exp-display').textContent = gameState.exp;
-  const percent = Math.min(100, Math.floor((gameState.exp / 500) * 100));
-  document.getElementById('exp-bar').style.width = percent + '%';
+  
+  const currentLevelExp = gameState.exp % 100;
+  document.getElementById('exp-bar').style.width = currentLevelExp + '%';
 
   const skillContainer = document.getElementById('skills-list');
+  document.getElementById('skill-count').textContent = gameState.unlockedSkills.length;
+  
   if (gameState.unlockedSkills.length === 0) {
     skillContainer.innerHTML = '<span style="color: #484f58; font-size: 0.8rem;">まだスキルを獲得していません</span>';
   } else {
@@ -626,7 +676,7 @@ function render() {
 
 function renderStageSelect() {
   const container = document.getElementById('main-content');
-  let html = '<div class="card"><div class="card-header">ステージを選択して挑戦</div>';
+  let html = '<div class="card"><div class="card-header">🗺️ ステージを選択して挑戦</div>';
 
   STAGES.forEach(stg => {
     const isUnlocked = stg.id <= gameState.unlockedStage;
@@ -634,8 +684,9 @@ function renderStageSelect() {
     html += `
       <button class="stage-select-btn" ${isUnlocked ? '' : 'disabled'} onclick="startStage(${stg.id})">
         <div>
-          <strong>【${stg.title}】</strong> ${stg.skillName}
-          ${isCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR]</span>' : ''}
+          <strong>【${stg.title}】</strong> ${stg.skillName} 
+          <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">出現ボス: ${stg.monsterEmoji} ${stg.monsterName}</div>
+          ${isCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>' : ''}
         </div>
         <div>${isUnlocked ? '▶ 挑戦' : '🔒 鍵'}</div>
       </button>
@@ -661,10 +712,26 @@ function renderQuestion() {
   const qData = isBoss ? stage.boss : stage.questions[gameState.currentStep];
 
   let html = '';
+  
+  // バトルアニメーション演出
+  html += `
+    <div class="battle-scene">
+      <div>
+        <div class="pixel-char">🧙‍♂️</div>
+        <div style="font-size:0.75rem; color:var(--accent-color); margin-top:4px;">プレイヤー</div>
+      </div>
+      <div style="font-size:1.2rem; color:#8b949e;">VS</div>
+      <div>
+        <div class="monster-char">${stage.monsterEmoji}</div>
+        <div style="font-size:0.75rem; color:var(--danger-color); margin-top:4px;">${stage.monsterName}</div>
+      </div>
+    </div>
+  `;
+
   if (isBoss) {
     html += `<div class="card boss-card"><div class="boss-header">⚠️ BOSS BATTLE ⚠️</div>`;
   } else {
-    html += `<div class="card"><div class="card-header"><span>${stage.title} - Q${gameState.currentStep + 1}/${stage.questions.length}</span><span style="font-size:0.8rem; color:#8b949e; cursor:pointer;" onclick="exitStage()">✕ 中断して戻る</span></div>`;
+    html += `<div class="card"><div class="card-header"><span>${stage.title} - Q${gameState.currentStep + 1}/${stage.questions.length}</span><span style="font-size:0.8rem; color:#8b949e; cursor:pointer;" onclick="exitStage()">✕ 中断</span></div>`;
   }
 
   html += `<div class="question-text">${qData.text.replace(/\n/g, '<br>')}</div>`;
@@ -706,7 +773,7 @@ function checkAnswer(selectedIndex, isLogicStep) {
     if (!isLogicStep) {
       gameState.exp += 10;
       fbEl.className = "feedback active correct-fb";
-      fbEl.innerHTML = "<strong>正解！ (+10 EXP)</strong><br>次に判断基準を選んでください。";
+      fbEl.innerHTML = "<strong>正解！ (+10 EXP)</strong><br>続いて「判断基準」を選んでください。";
       setTimeout(() => {
         gameState.subStep = 1;
         saveData();
@@ -750,7 +817,7 @@ function checkAnswer(selectedIndex, isLogicStep) {
 }
 
 function exitStage() {
-  if (confirm("ステージの選択画面に戻りますか？（進行状況は自動保存されます）")) {
+  if (confirm("ステージ選択画面に戻りますか？（進行状況は自動保存されます）")) {
     gameState.currentStageId = null;
     saveData();
     render();

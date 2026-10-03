@@ -1,829 +1,845 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>英語処理OS RPG - Grammar Quest</title>
-  <style>
-    :root {
-      --bg-color: #0d1117;
-      --card-bg: #161b22;
-      --border-color: #30363d;
-      --text-color: #c9d1d9;
-      --accent-color: #58a6ff;
-      --success-color: #2ea043;
-      --danger-color: #da3633;
-      --gold-color: #d29922;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英語処理OS RPG - Grammar Quest</title>
+<style>
+:root {
+--bg-color: #0d1117;
+--card-bg: #161b22;
+--border-color: #30363d;
+--text-color: #c9d1d9;
+--accent-color: #58a6ff;
+--success-color: #2ea043;
+--danger-color: #da3633;
+--gold-color: #d29922;
+}
 
-    * {
-      box-sizing: border-box;
-      user-select: none;
-    }
+* {
+box-sizing: border-box;
+user-select: none;
+}
 
-    body {
-      margin: 0;
-      padding: 15px;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-    }
+body {
+margin: 0;
+padding: 15px;
+background-color: var(--bg-color);
+color: var(--text-color);
+font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+display: flex;
+justify-content: center;
+min-height: 100vh;
+}
 
-    #app {
-      width: 100%;
-      max-width: 650px;
-      background: var(--card-bg);
-      border: 3px solid var(--border-color);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-    }
+#app {
+width: 100%;
+max-width: 650px;
+background: var(--card-bg);
+border: 3px solid var(--border-color);
+border-radius: 12px;
+padding: 20px;
+box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid var(--border-color);
-      padding-bottom: 12px;
-      margin-bottom: 15px;
-    }
+.header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 2px solid var(--border-color);
+padding-bottom: 12px;
+margin-bottom: 15px;
+}
 
-    .title {
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: var(--accent-color);
-    }
+.title {
+font-size: 1.1rem;
+font-weight: bold;
+color: var(--accent-color);
+}
 
-    .player-stats {
-      text-align: right;
-    }
+.player-stats {
+text-align: right;
+}
 
-    .exp-bar-container {
-      width: 140px;
-      height: 12px;
-      background: #21262d;
-      border-radius: 6px;
-      overflow: hidden;
-      border: 1px solid var(--border-color);
-      margin-top: 4px;
-    }
+.exp-bar-container {
+width: 140px;
+height: 12px;
+background: #21262d;
+border-radius: 6px;
+overflow: hidden;
+border: 1px solid var(--border-color);
+margin-top: 4px;
+}
 
-    .exp-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #238636, #2ea043);
-      transition: width 0.3s ease;
-    }
+.exp-bar {
+height: 100%;
+width: 0%;
+background: linear-gradient(90deg, #238636, #2ea043);
+transition: width 0.3s ease;
+}
 
-    .skills-container {
-      background: #0d1117;
-      border: 1px dashed var(--border-color);
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      font-size: 0.85rem;
-    }
+.skills-container {
+background: #0d1117;
+border: 1px dashed var(--border-color);
+padding: 10px;
+border-radius: 8px;
+margin-bottom: 15px;
+font-size: 0.85rem;
+}
 
-    .skill-badge {
-      display: inline-block;
-      background: #232830;
-      color: var(--gold-color);
-      border: 1px solid var(--gold-color);
-      padding: 2px 8px;
-      border-radius: 4px;
-      margin: 2px;
-      font-weight: bold;
-    }
+.skill-badge {
+display: inline-block;
+background: #232830;
+color: var(--gold-color);
+border: 1px solid var(--gold-color);
+padding: 2px 8px;
+border-radius: 4px;
+margin: 2px;
+font-weight: bold;
+}
 
-    .card {
-      background: #0d1117;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 15px;
-    }
+.card {
+background: #0d1117;
+border: 1px solid var(--border-color);
+border-radius: 8px;
+padding: 15px;
+margin-bottom: 15px;
+}
 
-    .card-header {
-      font-weight: bold;
-      color: var(--accent-color);
-      margin-bottom: 10px;
-      font-size: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.card-header {
+font-weight: bold;
+color: var(--accent-color);
+margin-bottom: 10px;
+font-size: 1rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
 
-    .question-text {
-      font-size: 1.1rem;
-      margin-bottom: 15px;
-      line-height: 1.5;
-      color: #ffffff;
-      background: #161b22;
-      padding: 12px;
-      border-radius: 6px;
-      border-left: 4px solid var(--accent-color);
-    }
+.question-text {
+font-size: 1.1rem;
+margin-bottom: 15px;
+line-height: 1.5;
+color: #ffffff;
+background: #161b22;
+padding: 12px;
+border-radius: 6px;
+border-left: 4px solid var(--accent-color);
+}
 
-    .options {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+.options {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
 
-    .btn {
-      background: #21262d;
-      color: var(--text-color);
-      border: 1px solid var(--border-color);
-      padding: 12px 15px;
-      border-radius: 6px;
-      font-size: 0.95rem;
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.2s;
-      line-height: 1.4;
-    }
+.btn {
+background: #21262d;
+color: var(--text-color);
+border: 1px solid var(--border-color);
+padding: 12px 15px;
+border-radius: 6px;
+font-size: 0.95rem;
+cursor: pointer;
+text-align: left;
+transition: all 0.2s;
+line-height: 1.4;
+}
 
-    .btn:hover:not(:disabled) {
-      background: #30363d;
-      border-color: var(--accent-color);
-    }
+.btn:hover:not(:disabled) {
+background: #30363d;
+border-color: var(--accent-color);
+}
 
-    .btn:disabled {
-      cursor: not-allowed;
-      opacity: 0.7;
-    }
+.btn:disabled {
+cursor: not-allowed;
+opacity: 0.7;
+}
 
-    .btn.correct {
-      background: #1b4721 !important;
-      border-color: var(--success-color) !important;
-      color: #ffffff;
-    }
+.btn.correct {
+background: #1b4721 !important;
+border-color: var(--success-color) !important;
+color: #ffffff;
+}
 
-    .btn.wrong {
-      background: #671618 !important;
-      border-color: var(--danger-color) !important;
-      color: #ffffff;
-    }
+.btn.wrong {
+background: #671618 !important;
+border-color: var(--danger-color) !important;
+color: #ffffff;
+}
 
-    .feedback {
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      line-height: 1.4;
-      display: none;
-    }
+.feedback {
+margin-top: 15px;
+padding: 12px;
+border-radius: 6px;
+font-size: 0.9rem;
+line-height: 1.4;
+display: none;
+}
 
-    .feedback.active {
-      display: block;
-    }
+.feedback.active {
+display: block;
+}
 
-    .feedback.wrong-fb {
-      background: rgba(218, 54, 51, 0.15);
-      border: 1px solid var(--danger-color);
-      color: #ff7b72;
-    }
+.feedback.wrong-fb {
+background: rgba(218, 54, 51, 0.15);
+border: 1px solid var(--danger-color);
+color: #ff7b72;
+}
 
-    .feedback.correct-fb {
-      background: rgba(46, 160, 67, 0.15);
-      border: 1px solid var(--success-color);
-      color: #56d364;
-    }
+.feedback.correct-fb {
+background: rgba(46, 160, 67, 0.15);
+border: 1px solid var(--success-color);
+color: #56d364;
+}
 
-    .boss-card {
-      border: 2px solid var(--danger-color);
-      background: linear-gradient(180deg, #200a0a 0%, #0d1117 100%);
-    }
+.boss-card {
+border: 2px solid var(--danger-color);
+background: linear-gradient(180deg, #200a0a 0%, #0d1117 100%);
+}
 
-    .boss-header {
-      color: var(--danger-color);
-      font-weight: bold;
-      text-align: center;
-      font-size: 1.2rem;
-      letter-spacing: 2px;
-    }
+.boss-header {
+color: var(--danger-color);
+font-weight: bold;
+text-align: center;
+font-size: 1.2rem;
+letter-spacing: 2px;
+}
 
-    .reset-btn {
-      background: transparent;
-      color: #8b949e;
-      border: 1px solid #30363d;
-      font-size: 0.75rem;
-      padding: 4px 8px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+.reset-btn {
+background: transparent;
+color: #8b949e;
+border: 1px solid #30363d;
+font-size: 0.75rem;
+padding: 4px 8px;
+border-radius: 4px;
+cursor: pointer;
+}
 
-    .reset-btn:hover {
-      color: var(--danger-color);
-      border-color: var(--danger-color);
-    }
+.reset-btn:hover {
+color: var(--danger-color);
+border-color: var(--danger-color);
+}
 
-    .stage-select-btn {
-      background: #21262d;
-      border: 1px solid var(--border-color);
-      color: var(--text-color);
-      padding: 12px;
-      border-radius: 6px;
-      margin-bottom: 8px;
-      width: 100%;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.stage-select-btn {
+background: #21262d;
+border: 1px solid var(--border-color);
+color: var(--text-color);
+padding: 12px;
+border-radius: 6px;
+margin-bottom: 8px;
+width: 100%;
+text-align: left;
+cursor: pointer;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
 
-    .stage-select-btn:hover:not(:disabled) {
-      border-color: var(--accent-color);
-    }
+.stage-select-btn:hover:not(:disabled) {
+border-color: var(--accent-color);
+}
 
-    .stage-select-btn:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
+.stage-select-btn:disabled {
+opacity: 0.4;
+cursor: not-allowed;
+}
 
-    .battle-scene {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      background: #090d12;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 15px;
-      text-align: center;
-    }
+.battle-scene {
+display: flex;
+justify-content: space-around;
+align-items: center;
+background: #090d12;
+border: 1px solid var(--border-color);
+border-radius: 8px;
+padding: 15px;
+margin-bottom: 15px;
+text-align: center;
+}
 
-    .pixel-char {
-      font-size: 2.5rem;
-      animation: floatChar 2s ease-in-out infinite;
-    }
+.pixel-char {
+font-size: 2.5rem;
+animation: floatChar 2s ease-in-out infinite;
+}
 
-    @keyframes floatChar {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
+@keyframes floatChar {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-5px); }
+}
 
-    .monster-char {
-      font-size: 2.5rem;
-      animation: pulseMonster 1.5s ease-in-out infinite;
-    }
+.monster-char {
+font-size: 2.5rem;
+animation: pulseMonster 1.5s ease-in-out infinite;
+}
 
-    @keyframes pulseMonster {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-    }
-  </style>
+@keyframes pulseMonster {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.08); }
+}
+</style>
 </head>
 <body>
 
 <div id="app">
-  <div class="header">
-    <div class="title">⚔️ 英語処理OS RPG</div>
-    <div class="player-stats">
-      <div style="font-size: 0.85rem;">ランク: <span id="rank-display" style="color:var(--gold-color); font-weight:bold;">1</span> (EXP: <span id="exp-display">0</span>)</div>
-      <div class="exp-bar-container">
-        <div id="exp-bar" class="exp-bar"></div>
-      </div>
-      <div style="font-size:0.7rem; color:#8b949e; margin-top:2px;">💾 進捗は自動保存されます</div>
-    </div>
-  </div>
+<div class="header">
+<div class="title">⚔️ 英語処理OS RPG</div>
+<div class="player-stats">
+<div style="font-size: 0.85rem;">ランク: <span id="rank-display" style="color:var(--gold-color); font-weight:bold;">1</span> (EXP: <span id="exp-display">0</span>)</div>
+<div class="exp-bar-container">
+<div id="exp-bar" class="exp-bar"></div>
+</div>
+<div style="font-size:0.7rem; color:#8b949e; margin-top:2px;">💾 進捗は自動保存されます</div>
+</div>
+</div>
 
-  <div class="skills-container">
-    <div style="font-size: 0.75rem; color: #8b949e; margin-bottom: 4px; display:flex; justify-content:space-between; align-items:center;">
-      <span>獲得スキル (<span id="skill-count">0</span>個)</span>
-      <button class="reset-btn" onclick="confirmResetData()">データ削除</button>
-    </div>
-    <div id="skills-list">
-      <span style="color: #484f58; font-size: 0.8rem;">まだスキルを獲得していません</span>
-    </div>
-  </div>
+<div class="skills-container">
+<div style="font-size: 0.75rem; color: #8b949e; margin-bottom: 4px; display:flex; justify-content:space-between; align-items:center;">
+<span>獲得スキル (<span id="skill-count">0</span>個)</span>
+<button class="reset-btn" onclick="confirmResetData()">データ削除</button>
+</div>
+<div id="skills-list">
+<span style="color: #484f58; font-size: 0.8rem;">まだスキルを獲得していません</span>
+</div>
+</div>
 
-  <div id="main-content"></div>
+<div id="main-content"></div>
 </div>
 
 <script>
 const STAGES = [
-  {
-    id: 1,
-    title: "STAGE 1",
-    skillName: "基礎認識",
-    rewardSkill: "基礎認識スキル",
-    monsterEmoji: "👾",
-    monsterName: "エラー・スライム",
-    questions: [
-      {
-        text: "① Tom and Ken play tennis. の主語と動詞はどれ？",
-        options: [
-          { label: "A : 主語 Tom 動詞 play", correct: false },
-          { label: "B : 主語 Tom and Ken 動詞 play", correct: true },
-          { label: "C : 主語 Ken 動詞 play", correct: false }
-        ],
-        wrongComment: "主語は「だれが」にあたる名詞のまとまり全体で見ます。",
-        logicText: "【判断基準】",
-        logicOptions: [
-          { label: "主語は文頭の名詞のまとまり", correct: true },
-          { label: "主語は文頭の単語", correct: false }
-        ]
-      },
-      {
-        text: "② Tom likes dogs. の疑問文とその答え方は？",
-        options: [
-          { label: "A : Is Tom like dogs? – Yes, he is.", correct: false },
-          { label: "B : Do Tom likes dogs? – Yes, he do.", correct: false },
-          { label: "C : Does Tom like dogs? – Yes, he does.", correct: true }
-        ],
-        wrongComment: "一般動詞の文で主語が三人称単数のときはDoesを使い、動詞は原形に戻します。",
-        logicText: "【判断基準】",
-        logicOptions: [
-          { label: "動詞が一般動詞（三単現）→ Doesを使って動詞を原形に戻す", correct: true },
-          { label: "主語が三人称単数 → Doesを使って動詞を原形に戻す", correct: false }
-        ]
-      },
-      {
-        text: "③ Tom can play the guitar. の( the guitar )をたずねる疑問文は？",
-        options: [
-          { label: "A : What can Tom play?", correct: true },
-          { label: "B : What Tom can play?", correct: false },
-          { label: "C : What does Tom play?", correct: false }
-        ],
-        wrongComment: "助動詞canがある文の疑問文は、canを主語の前に出します。",
-        logicText: "【判断基準】",
-        logicOptions: [
-          { label: "疑問詞の後にcanを置く", correct: false },
-          { label: "疑問詞を文頭に、canがあるので主語の前に出す", correct: true }
-        ]
-      }
-    ],
-    boss: {
-      text: "【BOSS BATTLE】\nTom went fishing last Sunday. の( last Sunday )をたずねる疑問文にしなさい。",
-      options: [
-        { label: "A : When was Tom go fishing?", correct: false },
-        { label: "B : When did Tom go fishing?", correct: true },
-        { label: "C : When does Tom went fishing?", correct: false }
-      ],
-      wrongComment: "一般動詞の過去形なのでdidを使い、動詞は原形に戻します。",
-      logicText: "【判断基準】",
-      logicOptions: [
-        { label: "lastが過去を表すのでdidを使う", correct: false },
-        { label: "一般動詞が過去形なのでdidを使う", correct: true }
-      ]
-    }
-  },
-  {
-    id: 2,
-    title: "STAGE 2",
-    skillName: "S-V発見",
-    rewardSkill: "S-V発見スキル",
-    monsterEmoji: "🐉",
-    monsterName: "バグ・ドラゴン",
-    questions: [
-      {
-        text: "① Your brother is a soccer fan. の疑問文とその答え方は？",
-        options: [
-          { label: "A : Are your brother a soccer fan? – Yes, I am.", correct: false },
-          { label: "B : Is your brother a soccer fan? – Yes, it is.", correct: false },
-          { label: "C : Is your brother a soccer fan? – Yes, he is.", correct: true }
-        ],
-        wrongComment: "be動詞を前に出し、答えの文の代名詞は主語に合わせます。",
-        logicText: "【判断基準】",
-        logicOptions: [
-          { label: "be動詞を主語の前に出す。答える文の主語は疑問文に合わせる", correct: true },
-          { label: "主語が単数だからisを主語の前に出す。答える文は人ならheを使う", correct: false }
-        ]
-      },
-      {
-        text: "② Tom and Ken play soccer. の主語をTomだけにすると？",
-        options: [
-          { label: "A : Tom play soccer.", correct: false },
-          { label: "B : Tom plays soccer.", correct: true },
-          { label: "C : Tom is play soccer.", correct: false }
-        ],
-        wrongComment: "主語が三人称単数になると、一般動詞にs/esが付きます。",
-        logicText: "【判断基準】",
-        logicOptions: [
-          { label: "主語が三人称単数だから一般動詞は三単現になる", correct: true },
-          { label: "主語が１語になると一般動詞は三単現になる", correct: false }
-        ]
-      },
-      {
-        text: "③ I am a tennis fan. のIをWeに変えると？",
-        options: [
-          { label: "A : We are tennis fans.", correct: true },
-          { label: "B : We are a tennis fan.", correct: false },
-          { label: "C : We are a tennis fans.", correct: false }
-        ],
-        wrongComment: "主語が複数になるとbe動詞はareになり、後ろの名詞も複数形になります。",
-        logicText: "【判断基準】",
-        logicOptions: [
-          { label: "主語が複数になれば、複数形を使う", correct: false },
-          { label: "be動詞の名詞の単数・複数は主語に合わす", correct: true }
-        ]
-      }
-    ],
-    boss: {
-      text: "【BOSS BATTLE】\nThey always watch soccer games. のTheyをHeに変えると？",
-      options: [
-        { label: "A : He always watch a soccer game.", correct: false },
-        { label: "B : He always watches soccer games.", correct: true },
-        { label: "C : He always watches a soccer game.", correct: false }
-      ],
-      wrongComment: "主語がHe（三人称単数）に変わるため、動詞も三単現のsが必要です。",
-      logicText: "【判断基準】",
-      logicOptions: [
-        { label: "主語が１語になると一般動詞は三単現になる", correct: false },
-        { label: "主語が三人称単数になったので、一般動詞は三単現になる", correct: true }
-      ]
-    }
-  },
-  {
-    id: 3,
-    title: "STAGE 3",
-    skillName: "主語変換",
-    rewardSkill: "主語変換スキル",
-    monsterEmoji: "🤖",
-    monsterName: "シンタックス・ゴーレム",
-    questions: [
-      {
-        text: "① Those are old bikes. のThoseをThatに変えると？",
-        options: [
-          { label: "A : That are old bikes.", correct: false },
-          { label: "B : That is an old bike.", correct: true },
-          { label: "C : That is old bike.", correct: false }
-        ],
-        wrongComment: "Thatは単数なのでisになり、後ろの名詞も単数形（an old bike）になります。",
-        logicText: "【判断基準】",
-        logicOptions: [
-          { label: "主語が三人称単数のbe動詞はis。後ろはa(an)＋どんな＋単数形。", correct: true },
-          { label: "後ろの名詞が単数なのでbe動詞はis。", correct: false }
-        ]
-      },
-      {
-        text: "② Tom and Lisa don’t swim. の主語をTomだけにすると？",
-        options: [
-          { label: "A : Tom don’t swims.", correct: false },
-          { label: "B : Tom doesn’t swim.", correct: true },
-          { label: "C : Tom is not swim.", correct: false }
-        ],
-        wrongComment: "主語が三人称単数の否定文では doesn't を使い、動詞は原形にします。",
-        logicText: "【判断基準】",
-        logicOptions: [
-          { label: "主語が１語になると一般動詞の否定文にはdoesを使う", correct: false },
-          { label: "主語が三人称単数だから一般動詞の否定文にはdoesを使う", correct: true }
-        ]
-      },
-      {
-        text: "③ The man from India speaks English. を疑問文に変えると？",
-        options: [
-          { label: "A : Do the man from India speak English?", correct: false },
-          { label: "B : Can the man from India speak English?", correct: false },
-          { label: "C : Does the man from India speak English?", correct: true }
-        ],
-        wrongComment: "主語は the man（三人称単数）、動詞が speaks なので Does を使います。",
-        logicText: "【判断基準】",
-        logicOptions: [
-          { label: "主語がIndia、動詞がspeakなのでdoesを使う", correct: false },
-          { label: "主語がthe man、動詞がspeakなのでdoesを使う", correct: true }
-        ]
-      }
-    ],
-    boss: {
-      text: "【BOSS BATTLE】\nThey are interesting stories. のTheyをItに変えると？",
-      options: [
-        { label: "A : It is interesting story.", correct: false },
-        { label: "B : It are interesting stories.", correct: false },
-        { label: "C : It is an interesting story.", correct: true }
-      ],
-      wrongComment: "Itは単数なので is になり、storyの前には an が必要です。",
-      logicText: "【判断基準】",
-      logicOptions: [
-        { label: "名詞が単数形なのでisを使う", correct: false },
-        { label: "主語が三人称単数なのでisを使って、後ろの名詞も単数形にする", correct: true }
-      ]
-    }
-  },
-  {
-    id: 4,
-    title: "STAGE 4",
-    skillName: "動詞形選択",
-    rewardSkill: "動詞形選択スキル",
-    monsterEmoji: "👑",
-    monsterName: "マスター・デーモン",
-    questions: [
-      {
-        text: "① Where are they (  ) soccer now? の(  )に適する語は？",
-        options: [
-          { label: "A : play", correct: false },
-          { label: "B : plays", correct: false },
-          { label: "C : playing", correct: true }
-        ],
-        wrongComment: "nowとbe動詞（are）があるため、現在進行形（-ing）にします。",
-        logicText: "【判断基準】",
-        logicOptions: [
-          { label: "文末にnowがあるので一般動詞をingの形にする。", correct: false },
-          { label: "be動詞のareがあるので一般動詞をingの形にする。", correct: true }
-        ]
-      },
-      {
-        text: "② He (  ) not swimming now . の(  )に適する語は？",
-        options: [
-          { label: "A : is", correct: true },
-          { label: "B : does", correct: false },
-          { label: "C : was", correct: false }
-        ],
-        wrongComment: "swimming（-ing）とnowがあるので、be動詞（is）を選びます。",
-        logicText: "【判断基準】",
-        logicOptions: [
-          { label: "swimmingとnowがあるので、be動詞を使う", correct: true },
-          { label: "主語がHeなのでisを使う", correct: false }
-        ]
-      },
-      {
-        text: "③ 「トムはネコを飼っています。」 の正しい英語表現は？",
-        options: [
-          { label: "A : Tom having a cat.", correct: false },
-          { label: "B : Tom is having a cat.", correct: false },
-          { label: "C : Tom has a cat.", correct: true }
-        ],
-        wrongComment: "「飼っている（状態）」は進行形にできません。",
-        logicText: "【判断基準】",
-        logicOptions: [
-          { label: "「飼っている」は状態を表す表現なので進行形にしない。", correct: true },
-          { label: "一般動詞haveは進行形にできない。", correct: false }
-        ]
-      }
-    ],
-    boss: {
-      text: "【BOSS BATTLE】\nDo they cut the trees? を現在進行形の文にすると？",
-      options: [
-        { label: "A : Are they cut the trees?", correct: false },
-        { label: "B : Are they cutting the trees?", correct: true },
-        { label: "C : Do they cutting the trees?", correct: false }
-      ],
-      wrongComment: "現在進行形の疑問文は Are を文頭に出し、動詞を -ing にします。",
-      logicText: "【判断基準】",
-      logicOptions: [
-        { label: "Doを使わないので一般動詞をingの形にする", correct: false },
-        { label: "現在進行形はbe動詞を主語で決め、一般動詞をingの形にする", correct: true }
-      ]
-    }
-  }
+{
+id: 1,
+title: "STAGE 1",
+skillName: "基礎認識",
+rewardSkill: "基礎認識スキル",
+monsterEmoji: "👾",
+monsterName: "エラー・スライム",
+questions: [
+{
+text: "① Tom and Ken play tennis. の主語と動詞はどれ？",
+options: [
+{ label: "A : 主語 Tom　動詞 play", correct: false },
+{ label: "B : 主語 Tom and Ken　動詞 play", correct: true },
+{ label: "C : 主語 Ken　動詞 play", correct: false }
+],
+wrongComment: "主語は「だれが」にあたる名詞のまとまり全体で見ます。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "主語は文頭の名詞のまとまり", correct: true },
+{ label: "主語は文頭の単語", correct: false }
+]
+},
+{
+text: "② Tom likes dogs. の疑問文とその答え方は？",
+options: [
+{ label: "A : Is Tom like dogs? – Yes, he is.", correct: false },
+{ label: "B : Do Tom likes dogs? – Yes, he do.", correct: false },
+{ label: "C : Does Tom like dogs? – Yes, he does.", correct: true }
+],
+wrongComment: "一般動詞の文で主語が三人称単数のときはDoesを使い、動詞は原形に戻します。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "動詞が一般動詞（三単現）→ Doesを使って動詞を原形に戻す", correct: true },
+{ label: "主語が三人称単数 → Doesを使って動詞を原形に戻す", correct: false }
+]
+},
+{
+text: "③ Tom can play the guitar. の( the guitar )をたずねる疑問文は？",
+options: [
+{ label: "A : What can Tom play?", correct: true },
+{ label: "B : What Tom can play?", correct: false },
+{ label: "C : What does Tom play?", correct: false }
+],
+wrongComment: "助動詞canがある文の疑問文は、canを主語の前に出します。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "疑問詞の後にcanを置く", correct: false },
+{ label: "疑問詞を文頭に、canがあるので主語の前に出す", correct: true }
+]
+}
+],
+boss: {
+text: "【BOSS BATTLE】\nTom went fishing last Sunday. の( last Sunday )をたずねる疑問文にしなさい。",
+options: [
+{ label: "A : When was Tom go fishing?", correct: false },
+{ label: "B : When did Tom go fishing?", correct: true },
+{ label: "C : When does Tom went fishing?", correct: false }
+],
+wrongComment: "一般動詞の過去形なのでdidを使い、動詞は原形に戻します。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "lastが過去を表すのでdidを使う", correct: false },
+{ label: "一般動詞が過去形なのでdidを使う", correct: true }
+]
+}
+},
+{
+id: 2,
+title: "STAGE 2",
+skillName: "S-V発見",
+rewardSkill: "S-V発見スキル",
+monsterEmoji: "🐉",
+monsterName: "バグ・ドラゴン",
+questions: [
+{
+text: "① Your brother is a soccer fan. の疑問文とその答え方は？",
+options: [
+{ label: "A : Are your brother a soccer fan? – Yes, I am.", correct: false },
+{ label: "B : Is your brother a soccer fan? – Yes, it is.", correct: false },
+{ label: "C : Is your brother a soccer fan? – Yes, he is.", correct: true }
+],
+wrongComment: "be動詞を前に出し、答えの文の代名詞は主語に合わせます。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "be動詞を主語の前に出す。答える文の主語は疑問文に合わせる", correct: true },
+{ label: "主語が単数だからisを主語の前に出す。答える文は人ならheを使う", correct: false }
+]
+},
+{
+text: "② Tom and Ken play soccer. の主語をTomだけにすると？",
+options: [
+{ label: "A : Tom play soccer.", correct: false },
+{ label: "B : Tom plays soccer.", correct: true },
+{ label: "C : Tom is play soccer.", correct: false }
+],
+wrongComment: "主語が三人称単数になると、一般動詞にs/esが付きます。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "主語が三人称単数だから一般動詞は三単現になる", correct: true },
+{ label: "主語が１語になると一般動詞は三単現になる", correct: false }
+]
+},
+{
+text: "③ I am a tennis fan. のIをWeに変えると？",
+options: [
+{ label: "A : We are tennis fans.", correct: true },
+{ label: "B : We are a tennis fan.", correct: false },
+{ label: "C : We are a tennis fans.", correct: false }
+],
+wrongComment: "主語が複数になるとbe動詞はareになり、後ろの名詞も複数形になります。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "主語が複数になれば、複数形を使う", correct: false },
+{ label: "be動詞の名詞の単数・複数は主語に合わす", correct: true }
+]
+}
+],
+boss: {
+text: "【BOSS BATTLE】\nThey always watch soccer games. のTheyをHeに変えると？",
+options: [
+{ label: "A : He always watch a soccer game.", correct: false },
+{ label: "B : He always watches soccer games.", correct: true },
+{ label: "C : He always watches a soccer game.", correct: false }
+],
+wrongComment: "主語がHe（三人称単数）に変わるため、動詞も三単現のsが必要です。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "主語が１語になると一般動詞は三単現になる", correct: false },
+{ label: "主語が三人称単数になったので、一般動詞は三単現になる", correct: true }
+]
+}
+},
+{
+id: 3,
+title: "STAGE 3",
+skillName: "主語変換",
+rewardSkill: "主語変換スキル",
+monsterEmoji: "🤖",
+monsterName: "シンタックス・ゴーレム",
+questions: [
+{
+text: "① Those are old bikes. のThoseをThatに変えると？",
+options: [
+{ label: "A : That are old bikes.", correct: false },
+{ label: "B : That is an old bike.", correct: true },
+{ label: "C : That is old bike.", correct: false }
+],
+wrongComment: "Thatは単数なのでisになり、後ろの名詞も単数形（an old bike）になります。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "主語が三人称単数のbe動詞はis。後ろはa(an)＋どんな＋単数形。", correct: true },
+{ label: "後ろの名詞が単数なのでbe動詞はis。", correct: false }
+]
+},
+{
+text: "② Tom and Lisa don’t swim. の主語をTomだけにすると？",
+options: [
+{ label: "A : Tom don’t swims.", correct: false },
+{ label: "B : Tom doesn’t swim.", correct: true },
+{ label: "C : Tom is not swim.", correct: false }
+],
+wrongComment: "主語が三人称単数の否定文では doesn't を使い、動詞は原形にします。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "主語が１語になると一般動詞の否定文にはdoesを使う", correct: false },
+{ label: "主語が三人称単数だから一般動詞の否定文にはdoesを使う", correct: true }
+]
+},
+{
+text: "③ The man from India speaks English. を疑問文に変えると？",
+options: [
+{ label: "A : Do the man from India speak English?", correct: false },
+{ label: "B : Can the man from India speak English?", correct: false },
+{ label: "C : Does the man from India speak English?", correct: true }
+],
+wrongComment: "主語は the man（三人称単数）、動詞が speaks なので Does を使います。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "主語がIndia、動詞がspeakなのでdoesを使う", correct: false },
+{ label: "主語がthe man、動詞がspeakなのでdoesを使う", correct: true }
+]
+}
+],
+boss: {
+text: "【BOSS BATTLE】\nThey are interesting stories. のTheyをItに変えると？",
+options: [
+{ label: "A : It is interesting story.", correct: false },
+{ label: "B : It are interesting stories.", correct: false },
+{ label: "C : It is an interesting story.", correct: true }
+],
+wrongComment: "Itは単数なので is になり、storyの前には an が必要です。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "名詞が単数形なのでisを使う", correct: false },
+{ label: "主語が三人称単数なのでisを使って、後ろの名詞も単数形にする", correct: true }
+]
+}
+},
+{
+id: 4,
+title: "STAGE 4",
+skillName: "動詞形選択",
+rewardSkill: "動詞形選択スキル",
+monsterEmoji: "👑",
+monsterName: "マスター・デーモン",
+questions: [
+{
+text: "① Where are they ( ) soccer now? の( )に適する語は？",
+options: [
+{ label: "A : play", correct: false },
+{ label: "B : plays", correct: false },
+{ label: "C : playing", correct: true }
+],
+wrongComment: "nowとbe動詞（are）があるため、現在進行形（-ing）にします。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "文末にnowがあるので一般動詞をingの形にする。", correct: false },
+{ label: "be動詞のareがあるので一般動詞をingの形にする。", correct: true }
+]
+},
+{
+text: "② He ( ) not swimming now . の( )に適する語は？",
+options: [
+{ label: "A : is", correct: true },
+{ label: "B : does", correct: false },
+{ label: "C : was", correct: false }
+],
+wrongComment: "swimming（-ing）とnowがあるので、be動詞（is）を選びます。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "swimmingとnowがあるので、be動詞を使う", correct: true },
+{ label: "主語がHeなのでisを使う", correct: false }
+]
+},
+{
+text: "③ 「トムはネコを飼っています。」 の正しい英語表現は？",
+options: [
+{ label: "A : Tom having a cat.", correct: false },
+{ label: "B : Tom is having a cat.", correct: false },
+{ label: "C : Tom has a cat.", correct: true }
+],
+wrongComment: "「飼っている（状態）」は進行形にできません。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "「飼っている」は状態を表す表現なので進行形にしない。", correct: true },
+{ label: "一般動詞haveは進行形にできない。", correct: false }
+]
+}
+],
+boss: {
+text: "【BOSS BATTLE】\nDo they cut the trees? を現在進行形の文にすると？",
+options: [
+{ label: "A : Are they cut the trees?", correct: false },
+{ label: "B : Are they cutting the trees?", correct: true },
+{ label: "C : Do they cutting the trees?", correct: false }
+],
+wrongComment: "現在進行形の疑問文は Are を文頭に出し、動詞を -ing にします。",
+logicText: "【判断基準】",
+logicOptions: [
+{ label: "Doを使わないので一般動詞をingの形にする", correct: false },
+{ label: "現在進行形はbe動詞を主語で決め、一般動詞をingの形にする", correct: true }
+]
+}
+}
 ];
 
-const AudioContext = window.AudioContext || window.webkitAudioContext;
 let audioCtx = null;
 
-function playSound(type) {
-  if (!audioCtx) audioCtx = new AudioContext();
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-  const now = audioCtx.currentTime;
+function initAudio() {
+if (!audioCtx) {
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+if (AudioContext) {
+audioCtx = new AudioContext();
+}
+}
+if (audioCtx && audioCtx.state === 'suspended') {
+audioCtx.resume();
+}
+}
 
-  if (type === 'correct') {
-    osc.frequency.setValueAtTime(523.25, now);
-    osc.frequency.setValueAtTime(659.25, now + 0.1);
-    gain.gain.setValueAtTime(0.1, now);
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
-    osc.start(now);
-    osc.stop(now + 0.3);
-  } else if (type === 'wrong') {
-    osc.type = 'sawtooth';
-    osc.frequency.setValueAtTime(196.00, now);
-    osc.frequency.setValueAtTime(146.83, now + 0.15);
-    gain.gain.setValueAtTime(0.1, now);
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
-    osc.start(now);
-    osc.stop(now + 0.35);
-  } else if (type === 'clear') {
-    osc.type = 'triangle';
-    osc.frequency.setValueAtTime(523.25, now);
-    osc.frequency.setValueAtTime(659.25, now + 0.1);
-    osc.frequency.setValueAtTime(783.99, now + 0.2);
-    osc.frequency.setValueAtTime(1046.50, now + 0.3);
-    gain.gain.setValueAtTime(0.1, now);
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
-    osc.start(now);
-    osc.stop(now + 0.6);
-  }
+function playSound(type) {
+initAudio();
+if (!audioCtx) return;
+
+const osc = audioCtx.createOscillator();
+const gain = audioCtx.createGain();
+osc.connect(gain);
+gain.connect(audioCtx.destination);
+const now = audioCtx.currentTime;
+
+if (type === 'correct') {
+osc.type = 'sine';
+osc.frequency.setValueAtTime(523.25, now);
+osc.frequency.setValueAtTime(659.25, now + 0.1);
+gain.gain.setValueAtTime(0.1, now);
+gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+osc.start(now);
+osc.stop(now + 0.3);
+} else if (type === 'wrong') {
+osc.type = 'sawtooth';
+osc.frequency.setValueAtTime(196.00, now);
+osc.frequency.setValueAtTime(146.83, now + 0.15);
+gain.gain.setValueAtTime(0.1, now);
+gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+osc.start(now);
+osc.stop(now + 0.35);
+} else if (type === 'clear') {
+osc.type = 'triangle';
+osc.frequency.setValueAtTime(523.25, now);
+osc.frequency.setValueAtTime(659.25, now + 0.1);
+osc.frequency.setValueAtTime(783.99, now + 0.2);
+osc.frequency.setValueAtTime(1046.50, now + 0.3);
+gain.gain.setValueAtTime(0.1, now);
+gain.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
+osc.start(now);
+osc.stop(now + 0.6);
+}
 }
 
 const STORAGE_KEY = 'grammar_quest_save_data_v2';
 let gameState = {
-  exp: 0,
-  unlockedStage: 1,
-  currentStageId: null,
-  currentStep: 0,
-  subStep: 0,
-  unlockedSkills: []
+exp: 0,
+unlockedStage: 1,
+currentStageId: null,
+currentStep: 0,
+subStep: 0,
+unlockedSkills: []
 };
 
 function loadSaveData() {
-  const data = localStorage.getItem(STORAGE_KEY);
-  if (data) {
-    try { gameState = JSON.parse(data); } catch(e) {}
-  }
-  updateHeader();
+const data = localStorage.getItem(STORAGE_KEY);
+if (data) {
+try { gameState = JSON.parse(data); } catch(e) {}
+}
+updateHeader();
 }
 
 function saveData() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(gameState));
-  updateHeader();
+localStorage.setItem(STORAGE_KEY, JSON.stringify(gameState));
+updateHeader();
 }
 
 function confirmResetData() {
-  if (confirm("ゲームデータを初期化して最初から始めますか？")) {
-    localStorage.removeItem(STORAGE_KEY);
-    gameState = { exp: 0, unlockedStage: 1, currentStageId: null, currentStep: 0, subStep: 0, unlockedSkills: [] };
-    saveData();
-    render();
-  }
+if (confirm("ゲームデータを初期化して最初から始めますか？")) {
+localStorage.removeItem(STORAGE_KEY);
+gameState = { exp: 0, unlockedStage: 1, currentStageId: null, currentStep: 0, subStep: 0, unlockedSkills: [] };
+saveData();
+render();
+}
 }
 
 function getRank(exp) {
-  return Math.floor(exp / 100) + 1;
+return Math.floor(exp / 100) + 1;
 }
 
 function updateHeader() {
-  const rank = getRank(gameState.exp);
-  document.getElementById('rank-display').textContent = rank;
-  document.getElementById('exp-display').textContent = gameState.exp;
-  
-  const currentLevelExp = gameState.exp % 100;
-  document.getElementById('exp-bar').style.width = currentLevelExp + '%';
+const rank = getRank(gameState.exp);
+document.getElementById('rank-display').textContent = rank;
+document.getElementById('exp-display').textContent = gameState.exp;
 
-  const skillContainer = document.getElementById('skills-list');
-  document.getElementById('skill-count').textContent = gameState.unlockedSkills.length;
-  
-  if (gameState.unlockedSkills.length === 0) {
-    skillContainer.innerHTML = '<span style="color: #484f58; font-size: 0.8rem;">まだスキルを獲得していません</span>';
-  } else {
-    skillContainer.innerHTML = gameState.unlockedSkills.map(s => `<span class="skill-badge">🛡️ ${s}</span>`).join('');
-  }
+const currentLevelExp = gameState.exp % 100;
+document.getElementById('exp-bar').style.width = currentLevelExp + '%';
+
+const skillContainer = document.getElementById('skills-list');
+document.getElementById('skill-count').textContent = gameState.unlockedSkills.length;
+
+if (gameState.unlockedSkills.length === 0) {
+skillContainer.innerHTML = '<span style="color: #484f58; font-size: 0.8rem;">まだスキルを獲得していません</span>';
+} else {
+skillContainer.innerHTML = gameState.unlockedSkills.map(s => `<span class="skill-badge">🛡️ ${s}</span>`).join('');
+}
 }
 
 function render() {
-  if (gameState.currentStageId === null) {
-    renderStageSelect();
-  } else {
-    renderQuestion();
-  }
+if (gameState.currentStageId === null) {
+renderStageSelect();
+} else {
+renderQuestion();
+}
 }
 
 function renderStageSelect() {
-  const container = document.getElementById('main-content');
-  let html = '<div class="card"><div class="card-header">🗺️ ステージを選択して挑戦</div>';
+const container = document.getElementById('main-content');
+let html = '<div class="card"><div class="card-header">🗺️ ステージを選択して挑戦</div>';
 
-  STAGES.forEach(stg => {
-    const isUnlocked = stg.id <= gameState.unlockedStage;
-    const isCleared = stg.id < gameState.unlockedStage;
-    html += `
-      <button class="stage-select-btn" ${isUnlocked ? '' : 'disabled'} onclick="startStage(${stg.id})">
-        <div>
-          <strong>【${stg.title}】</strong> ${stg.skillName} 
-          <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">出現ボス: ${stg.monsterEmoji} ${stg.monsterName}</div>
-          ${isCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>' : ''}
-        </div>
-        <div>${isUnlocked ? '▶ 挑戦' : '🔒 鍵'}</div>
-      </button>
-    `;
-  });
+STAGES.forEach(stg => {
+const isUnlocked = stg.id <= gameState.unlockedStage;
+const isCleared = stg.id < gameState.unlockedStage;
+html += `
+<button class="stage-select-btn" ${isUnlocked ? '' : 'disabled'} onclick="startStage(${stg.id})">
+<div>
+<strong>【${stg.title}】</strong> ${stg.skillName} 
+<div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">出現ボス: ${stg.monsterEmoji} ${stg.monsterName}</div>
+${isCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>' : ''}
+</div>
+<div>${isUnlocked ? '▶ 挑戦' : '🔒 鍵'}</div>
+</button>
+`;
+});
 
-  html += '</div>';
-  container.innerHTML = html;
+html += '</div>';
+container.innerHTML = html;
 }
 
 function startStage(stageId) {
-  gameState.currentStageId = stageId;
-  gameState.currentStep = 0;
-  gameState.subStep = 0;
-  saveData();
-  render();
+initAudio();
+gameState.currentStageId = stageId;
+gameState.currentStep = 0;
+gameState.subStep = 0;
+saveData();
+render();
 }
 
 function renderQuestion() {
-  const container = document.getElementById('main-content');
-  const stage = STAGES.find(s => s.id === gameState.currentStageId);
-  const isBoss = gameState.currentStep === stage.questions.length;
-  const qData = isBoss ? stage.boss : stage.questions[gameState.currentStep];
+const container = document.getElementById('main-content');
+const stage = STAGES.find(s => s.id === gameState.currentStageId);
+const isBoss = gameState.currentStep === stage.questions.length;
+const qData = isBoss ? stage.boss : stage.questions[gameState.currentStep];
 
-  let html = '';
-  
-  // バトルアニメーション演出
-  html += `
-    <div class="battle-scene">
-      <div>
-        <div class="pixel-char">🧙‍♂️</div>
-        <div style="font-size:0.75rem; color:var(--accent-color); margin-top:4px;">プレイヤー</div>
-      </div>
-      <div style="font-size:1.2rem; color:#8b949e;">VS</div>
-      <div>
-        <div class="monster-char">${stage.monsterEmoji}</div>
-        <div style="font-size:0.75rem; color:var(--danger-color); margin-top:4px;">${stage.monsterName}</div>
-      </div>
-    </div>
-  `;
+let html = '';
 
-  if (isBoss) {
-    html += `<div class="card boss-card"><div class="boss-header">⚠️ BOSS BATTLE ⚠️</div>`;
-  } else {
-    html += `<div class="card"><div class="card-header"><span>${stage.title} - Q${gameState.currentStep + 1}/${stage.questions.length}</span><span style="font-size:0.8rem; color:#8b949e; cursor:pointer;" onclick="exitStage()">✕ 中断</span></div>`;
-  }
+html += `
+<div class="battle-scene">
+<div>
+<div class="pixel-char">🧙‍♂️</div>
+<div style="font-size:0.75rem; color:var(--accent-color); margin-top:4px;">プレイヤー</div>
+</div>
+<div style="font-size:1.2rem; color:#8b949e;">VS</div>
+<div>
+<div class="monster-char">${stage.monsterEmoji}</div>
+<div style="font-size:0.75rem; color:var(--danger-color); margin-top:4px;">${stage.monsterName}</div>
+</div>
+</div>
+`;
 
-  html += `<div class="question-text">${qData.text.replace(/\n/g, '<br>')}</div>`;
+if (isBoss) {
+html += `<div class="card boss-card"><div class="boss-header">⚠️ BOSS BATTLE ⚠️</div>`;
+} else {
+html += `<div class="card"><div class="card-header"><span>${stage.title} - Q${gameState.currentStep + 1}/${stage.questions.length}</span><span style="font-size:0.8rem; color:#8b949e; cursor:pointer;" onclick="exitStage()">✕ 中断</span></div>`;
+}
 
-  if (gameState.subStep === 0) {
-    html += `<div class="options" id="opt-list">`;
-    qData.options.forEach((opt, idx) => {
-      html += `<button class="btn" onclick="checkAnswer(${idx}, false)">${opt.label}</button>`;
-    });
-    html += `</div>`;
-  } else {
-    html += `<div style="margin-bottom:10px; font-weight:bold; color:var(--gold-color);">${qData.logicText}</div>`;
-    html += `<div class="options" id="opt-list">`;
-    qData.logicOptions.forEach((opt, idx) => {
-      html += `<button class="btn" onclick="checkAnswer(${idx}, true)">${opt.label}</button>`;
-    });
-    html += `</div>`;
-  }
+html += `<div class="question-text">${qData.text.replace(/\n/g, '<br>')}</div>`;
 
-  html += `<div id="fb" class="feedback"></div></div>`;
-  container.innerHTML = html;
+if (gameState.subStep === 0) {
+html += `<div class="options" id="opt-list">`;
+qData.options.forEach((opt, idx) => {
+html += `<button class="btn" onclick="checkAnswer(${idx}, false)">${opt.label}</button>`;
+});
+html += `</div>`;
+} else {
+html += `<div style="margin-bottom:10px; font-weight:bold; color:var(--gold-color);">${qData.logicText}</div>`;
+html += `<div class="options" id="opt-list">`;
+qData.logicOptions.forEach((opt, idx) => {
+html += `<button class="btn" onclick="checkAnswer(${idx}, true)">${opt.label}</button>`;
+});
+html += `</div>`;
+}
+
+html += `<div id="fb" class="feedback"></div></div>`;
+container.innerHTML = html;
 }
 
 function checkAnswer(selectedIndex, isLogicStep) {
-  const stage = STAGES.find(s => s.id === gameState.currentStageId);
-  const isBoss = gameState.currentStep === stage.questions.length;
-  const qData = isBoss ? stage.boss : stage.questions[gameState.currentStep];
-  const targetOptions = isLogicStep ? qData.logicOptions : qData.options;
-  const selected = targetOptions[selectedIndex];
+initAudio();
+const stage = STAGES.find(s => s.id === gameState.currentStageId);
+const isBoss = gameState.currentStep === stage.questions.length;
+const qData = isBoss ? stage.boss : stage.questions[gameState.currentStep];
+const targetOptions = isLogicStep ? qData.logicOptions : qData.options;
+const selected = targetOptions[selectedIndex];
 
-  const fbEl = document.getElementById('fb');
-  const buttons = document.querySelectorAll('#opt-list .btn');
-  buttons.forEach(b => b.disabled = true);
+const fbEl = document.getElementById('fb');
+const buttons = document.querySelectorAll('#opt-list .btn');
+buttons.forEach(b => b.disabled = true);
 
-  if (selected.correct) {
-    playSound('correct');
-    buttons[selectedIndex].classList.add('correct');
+if (selected.correct) {
+playSound('correct');
+buttons[selectedIndex].classList.add('correct');
 
-    if (!isLogicStep) {
-      gameState.exp += 10;
-      fbEl.className = "feedback active correct-fb";
-      fbEl.innerHTML = "<strong>正解！ (+10 EXP)</strong><br>続いて「判断基準」を選んでください。";
-      setTimeout(() => {
-        gameState.subStep = 1;
-        saveData();
-        render();
-      }, 1200);
-    } else {
-      gameState.exp += 20;
-      fbEl.className = "feedback active correct-fb";
-      fbEl.innerHTML = "<strong>判断基準も正解！ (+20 EXP)</strong>";
-      setTimeout(() => {
-        if (isBoss) {
-          playSound('clear');
-          if (!gameState.unlockedSkills.includes(stage.rewardSkill)) {
-            gameState.unlockedSkills.push(stage.rewardSkill);
-          }
-          if (gameState.unlockedStage === stage.id) {
-            gameState.unlockedStage = stage.id + 1;
-          }
-          alert(`🎉 ${stage.title} CLEAR!\n獲得スキル: 【${stage.rewardSkill}】`);
-          gameState.currentStageId = null;
-          gameState.currentStep = 0;
-          gameState.subStep = 0;
-        } else {
-          gameState.currentStep++;
-          gameState.subStep = 0;
-        }
-        saveData();
-        render();
-      }, 1200);
-    }
-  } else {
-    playSound('wrong');
-    buttons[selectedIndex].classList.add('wrong');
-    fbEl.className = "feedback active wrong-fb";
-    fbEl.innerHTML = `<strong>不正解...</strong><br>${qData.wrongComment}`;
-    setTimeout(() => {
-      buttons.forEach(b => b.disabled = false);
-    }, 1500);
-  }
-  saveData();
+if (!isLogicStep) {
+gameState.exp += 10;
+fbEl.className = "feedback active correct-fb";
+fbEl.innerHTML = "<strong>正解！ (+10 EXP)</strong><br>続いて「判断基準」を選んでください。";
+setTimeout(() => {
+gameState.subStep = 1;
+saveData();
+render();
+}, 1200);
+} else {
+gameState.exp += 20;
+fbEl.className = "feedback active correct-fb";
+fbEl.innerHTML = "<strong>判断基準も正解！ (+20 EXP)</strong>";
+setTimeout(() => {
+if (isBoss) {
+playSound('clear');
+if (!gameState.unlockedSkills.includes(stage.rewardSkill)) {
+gameState.unlockedSkills.push(stage.rewardSkill);
+}
+if (gameState.unlockedStage === stage.id) {
+gameState.unlockedStage = stage.id + 1;
+}
+alert(`🎉 ${stage.title} CLEAR!\n獲得スキル: 【${stage.rewardSkill}】`);
+gameState.currentStageId = null;
+gameState.currentStep = 0;
+gameState.subStep = 0;
+} else {
+gameState.currentStep++;
+gameState.subStep = 0;
+}
+saveData();
+render();
+}, 1200);
+}
+} else {
+playSound('wrong');
+buttons[selectedIndex].classList.add('wrong');
+fbEl.className = "feedback active wrong-fb";
+fbEl.innerHTML = `<strong>不正解...</strong><br>${qData.wrongComment}`;
+setTimeout(() => {
+buttons.forEach(b => b.disabled = false);
+}, 1500);
+}
+saveData();
 }
 
 function exitStage() {
-  if (confirm("ステージ選択画面に戻りますか？（進行状況は自動保存されます）")) {
-    gameState.currentStageId = null;
-    saveData();
-    render();
-  }
+if (confirm("ステージ選択画面に戻りますか？（進行状況は自動保存されます）")) {
+gameState.currentStageId = null;
+saveData();
+render();
+}
 }
 
+document.addEventListener('click', initAudio, { once: true });
 loadSaveData();
 render();
 </script>

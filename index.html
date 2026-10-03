@@ -302,7 +302,7 @@
 
 <div id="app">
   <div class="header">
-    <div class="title">⚔️️ 英語処理OS RPG</div>
+    <div class="title">⚔ 英語処理OS RPG</div>
     <div class="player-stats">
       <div style="font-size: 0.85rem;">ランク: <span id="rank-display" style="color:var(--gold-color); font-weight:bold;">1</span> (EXP: <span id="exp-display">0</span>)</div>
       <div class="exp-bar-container">
@@ -477,8 +477,8 @@ const STAGES = [
         wrongComment: "Thatは単数なのでisになり、後ろの名詞も単数形（an old bike）になります。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語が三人称単数のbe動詞はis。後ろはa(an)＋どんな＋単数形。", correct: true },
-          { label: "後ろの名詞が単数なのでbe動詞はis。", correct: false }
+          { label: "主語が三人称単数のbe動詞はis。後ろはa(an)＋どんな＋単数形", correct: true },
+          { label: "後ろの名詞が単数なのでbe動詞はis", correct: false }
         ]
       },
       {
@@ -520,8 +520,8 @@ const STAGES = [
       wrongComment: "Itは単数なので is になり、storyの前には an が必要です。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "名詞が単数形なのでisを使う", correct: false },
-        { label: "主語が三人称単数なのでisを使って、後ろの名詞も単数形にする", correct: true }
+        { label: "後ろの名詞が単数形になるのでisを使う", correct: false },
+        { label: "三人称単数の主語のbe動詞はis。後ろの名詞も単数形にする", correct: true }
       ]
     }
   },
@@ -543,8 +543,8 @@ const STAGES = [
         wrongComment: "nowとbe動詞（are）があるため、現在進行形（-ing）にします。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "文末にnowがあるので一般動詞をingの形にする。", correct: false },
-          { label: "be動詞のareがあるので一般動詞をingの形にする。", correct: true }
+          { label: "文末にnowがあるので一般動詞をingの形にする", correct: false },
+          { label: "be動詞があるので一般動詞をingの形にする", correct: true }
         ]
       },
       {
@@ -557,8 +557,8 @@ const STAGES = [
         wrongComment: "swimming（-ing）とnowがあるので、be動詞（is）を選びます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "swimmingとnowがあるので、be動詞を使う", correct: true },
-          { label: "主語がHeなのでisを使う", correct: false }
+          { label: "現在でswimmingがあるのでisを使う", correct: true },
+          { label: "主語がHeのときはisを使う", correct: false }
         ]
       },
       {
@@ -571,8 +571,8 @@ const STAGES = [
         wrongComment: "「飼っている（状態）」は進行形にできません。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "「飼っている」は状態を表す表現なので進行形にしない。", correct: true },
-          { label: "一般動詞haveは進行形にできない。", correct: false }
+          { label: "「飼っている」は状態を表し、進行形にしない", correct: true },
+          { label: "一般動詞haveは進行形にできない", correct: false }
         ]
       }
     ],
@@ -623,8 +623,8 @@ const STAGES = [
         wrongComment: "後ろに名詞があるときの代名詞の形は所有格にします。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "名詞brotherの前にあるから所有格を使う", correct: true },
-          { label: "一般動詞が三単現なので所有格を使う", correct: false }
+          { label: "名詞brotherの前にあるから所有格", correct: true },
+          { label: "一般動詞が三単現なので所有格", correct: false }
         ]
       },
       {
@@ -675,7 +675,7 @@ const STAGES = [
         wrongComment: "名詞のまとまりは、入口の単語→どんな→核の名詞の順に並べます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "日本語の意味の順に単語を並べる", correct: false },
+          { label: "日本語の言葉の順に単語を並べる", correct: false },
           { label: "aやthe→どんな（大きさ・形・古さ・色）→核の名詞の順に並べる", correct: true }
         ]
       },
@@ -690,7 +690,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "一般動詞の後ろにある語をすべて抜き出す", correct: false },
-          { label: "入口の語→どんな→核の名詞で名詞のまとまりになる", correct: true }
+          { label: "名詞のまとまりは「入口の語→どんな→核の名詞」になる", correct: true }
         ]
       },
       {
@@ -703,7 +703,7 @@ const STAGES = [
         wrongComment: "所有格は入口の語になります。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "入口の語（所有格）→数詞→核の名詞の語順", correct: true },
+          { label: "所有格→数詞→核の名詞の語順に置く", correct: true },
           { label: "複数形の前には数詞を置く", correct: false }
         ]
       }
@@ -719,7 +719,7 @@ const STAGES = [
       logicText: "【判断基準】",
       logicOptions: [
         { label: "長い髪がlong hairと２語になるので、名詞の後ろから説明する", correct: true },
-        { label: "hairが名詞なので、womanの後ろに置く", correct: false }
+        { label: "hairも名詞なので、womanの前には置けない", correct: false }
       ]
     }
   }
@@ -870,7 +870,7 @@ function addExp(amount) {
 
   if (newRank > oldRank) {
     playSound('levelup');
-    triggerConfetti();
+    // 紙吹雪の演出 (triggerConfetti) を削除しました
   }
 }
 
@@ -892,7 +892,7 @@ function updateHeader() {
   if (gameState.unlockedSkills.length === 0) {
     skillContainer.innerHTML = '<span style="color: #484f58; font-size: 0.8rem;">まだスキルを獲得していません</span>';
   } else {
-    skillContainer.innerHTML = gameState.unlockedSkills.map(s => `<span class="skill-badge">🛡️️ ${s}</span>`).join('');
+    skillContainer.innerHTML = gameState.unlockedSkills.map(s => `<span class="skill-badge">🛡 ${s}</span>`).join('');
   }
 }
 
@@ -1077,7 +1077,7 @@ function renderAllClear() {
       <h2 style="color: var(--gold-color); margin-top: 0; font-size: 1.5rem;">全STAGEクリアおめでとう！</h2>
       <p style="line-height: 1.6; color: var(--text-color); margin-bottom: 20px;">
         すべてのステージを突破し、英語処理OSの全プロセスをマスターしました！<br>
-        あなたの思考アルゴリズムは最高峰に到達しています。素晴らしい偉業です！
+        あなたの判断スキルはMAXに到達しています。素晴らしいです！
       </p>
       <button class="btn" style="text-align: center; background: var(--success-color); color: white; font-weight: bold; justify-content: center;" onclick="resetToStageSelect()">
         🗺️ ステージ選択に戻る / 続ける

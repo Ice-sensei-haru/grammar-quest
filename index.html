@@ -359,8 +359,8 @@ const STAGES = [
         wrongComment: "一般動詞の文で主語が三人称単数のときはDoesを使い、動詞は原形に戻します。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "動詞が一般動詞（三単現）→ Doesを使って動詞を原形に戻す", correct: true },
-          { label: "主語が三人称単数 → Doesを使って動詞を原形に戻す", correct: false }
+          { label: "一般動詞の形が三単現のs → Doesを使って動詞を原形に戻す", correct: true },
+          { label: "主語が１語 → Doesを使って動詞を原形に戻す", correct: false }
         ]
       },
       {
@@ -374,7 +374,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "疑問詞の後にcanを置く", correct: false },
-          { label: "疑問詞を文頭に、canがあるので主語の前に出す", correct: true }
+          { label: "疑問詞を文頭に、canを主語の前に出す", correct: true }
         ]
       }
     ],
@@ -399,7 +399,7 @@ const STAGES = [
     skillName: "S-V発見",
     rewardSkill: "S-V発見スキル",
     monsterEmoji: "🐉",
-    monsterName: "バグ・ドラゴン",
+    monsterName: "バグ・スネーク",
     questions: [
       {
         text: "① Your brother is a soccer fan. の疑問文とその答え方は？",
@@ -425,8 +425,8 @@ const STAGES = [
         wrongComment: "主語が三人称単数になると、一般動詞にs/esが付きます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語が三人称単数だから一般動詞は三単現になる", correct: true },
-          { label: "主語が１語になると一般動詞は三単現になる", correct: false }
+          { label: "主語が三人称単数だから一般動詞は三単現のsがつく", correct: true },
+          { label: "主語が１語になると一般動詞は三単現のsがつく", correct: false }
         ]
       },
       {
@@ -440,7 +440,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "主語が複数になれば、複数形を使う", correct: false },
-          { label: "be動詞の名詞の単数・複数は主語に合わす", correct: true }
+          { label: "be動詞の後ろの名詞の数は主語に合わす", correct: true }
         ]
       }
     ],
@@ -454,8 +454,8 @@ const STAGES = [
       wrongComment: "主語がHe（三人称単数）に変わるため、動詞も三単現のsが必要です。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "主語が１語になると一般動詞は三単現になる", correct: false },
-        { label: "主語が三人称単数になったので、一般動詞は三単現になる", correct: true }
+        { label: "主語が１語になると一般動詞に三単現のsがつく", correct: false },
+        { label: "主語が三人称単数になったので、一般動詞に三単現のsがつく", correct: true }
       ]
     }
   },
@@ -477,8 +477,8 @@ const STAGES = [
         wrongComment: "Thatは単数なのでisになり、後ろの名詞も単数形（an old bike）になります。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語が三人称単数のbe動詞はis。後ろはa(an)＋どんな＋単数形", correct: true },
-          { label: "後ろの名詞が単数なのでbe動詞はis", correct: false }
+          { label: "三人称単数の主語にはbe動詞をisにし、後ろはa(an)＋どんな＋単数形", correct: true },
+          { label: "後ろの名詞が単数になるとbe動詞はisを使う", correct: false }
         ]
       },
       {
@@ -520,8 +520,8 @@ const STAGES = [
       wrongComment: "Itは単数なので is になり、storyの前には an が必要です。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "後ろの名詞が単数形になるのでisを使う", correct: false },
-        { label: "三人称単数の主語のbe動詞はis。後ろの名詞も単数形にする", correct: true }
+        { label: "後ろの名詞が単数形になると、be動詞はisを使う", correct: false },
+        { label: "三人称単数の主語にはbe動詞をisにし、後ろの名詞も単数形にする", correct: true }
       ]
     }
   },
@@ -531,7 +531,7 @@ const STAGES = [
     skillName: "動詞形選択",
     rewardSkill: "動詞形選択スキル",
     monsterEmoji: "👑",
-    monsterName: "マスター・デーモン",
+    monsterName: "デーモン・クラウン",
     questions: [
       {
         text: "① Where are they (  ) soccer now? の(  )に適する語は？",
@@ -583,7 +583,7 @@ const STAGES = [
         { label: "B : Are they cutting the trees?", correct: true },
         { label: "C : Do they cutting the trees?", correct: false }
       ],
-      wrongComment: "現在進行形の疑問文は Are を文頭に出し、動詞を -ing にします。",
+      wrongComment: "現在進行形の疑問文はbe動詞を主語の前に出し、一般動詞に -ing をつけます。",
       logicText: "【判断基準】",
       logicOptions: [
         { label: "Doを使わないので一般動詞をingの形にする", correct: false },
@@ -623,8 +623,8 @@ const STAGES = [
         wrongComment: "後ろに名詞があるときの代名詞の形は所有格にします。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "名詞brotherの前にあるから所有格", correct: true },
-          { label: "一般動詞が三単現なので所有格", correct: false }
+          { label: "名詞brotherの前にあるから所有格にする", correct: true },
+          { label: "一般動詞を見て所有格＋名詞にする", correct: false }
         ]
       },
       {
@@ -638,7 +638,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "後ろにvery muchがあるときは目的格を使う", correct: false },
-          { label: "一般動詞の後ろの目的語で使う形は目的格を使う", correct: true }
+          { label: "目的語に単独で使う形は目的格を使う", correct: true }
         ]
       }
     ],
@@ -652,7 +652,7 @@ const STAGES = [
       wrongComment: "後ろに名詞dogがあります。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "主語に単独で使っていない代名詞なので所有格", correct: false },
+        { label: "主語に使うので所有格", correct: false },
         { label: "名詞dogの前にあるから所有格", correct: true }
       ]
     }
@@ -718,8 +718,8 @@ const STAGES = [
       wrongComment: "名詞を２語以上で説明するときは名詞の後ろに置きます。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "長い髪がlong hairと２語になるので、名詞の後ろから説明する", correct: true },
-        { label: "hairも名詞なので、womanの前には置けない", correct: false }
+        { label: "長い髪をした…がwith long hairと３語になるので、名詞の後ろから説明する", correct: true },
+        { label: "long hairも名詞のまとまりなので、womanの前には置けない", correct: false }
       ]
     }
   }

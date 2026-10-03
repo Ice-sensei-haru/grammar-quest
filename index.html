@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>英語処理OS RPG - Grammar Quest</title>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <style>
 :root {
 --bg-color: #0d1117;
@@ -591,13 +592,13 @@ function playSound(type) {
 initAudio();
 if (!audioCtx) return;
 
+const now = audioCtx.currentTime;
+
+if (type === 'correct') {
 const osc = audioCtx.createOscillator();
 const gain = audioCtx.createGain();
 osc.connect(gain);
 gain.connect(audioCtx.destination);
-const now = audioCtx.currentTime;
-
-if (type === 'correct') {
 osc.type = 'sine';
 osc.frequency.setValueAtTime(523.25, now);
 osc.frequency.setValueAtTime(659.25, now + 0.1);
@@ -606,6 +607,10 @@ gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
 osc.start(now);
 osc.stop(now + 0.3);
 } else if (type === 'wrong') {
+const osc = audioCtx.createOscillator();
+const gain = audioCtx.createGain();
+osc.connect(gain);
+gain.connect(audioCtx.destination);
 osc.type = 'sawtooth';
 osc.frequency.setValueAtTime(196.00, now);
 osc.frequency.setValueAtTime(146.83, now + 0.15);
@@ -614,15 +619,40 @@ gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
 osc.start(now);
 osc.stop(now + 0.35);
 } else if (type === 'clear') {
+// 🎉 ボス撃破＆ステージクリアファンファーレ音
+const notes = [
+{ freq: 523.25, dur: 0.12 }, // C5
+{ freq: 659.25, dur: 0.12 }, // E5
+{ freq: 783.99, dur: 0.12 }, // G5
+{ freq: 1046.50, dur: 0.4 } // C6 (長め)
+];
+
+let startTime = now;
+notes.forEach(note => {
+const osc = audioCtx.createOscillator();
+const gain = audioCtx.createGain();
+osc.connect(gain);
+gain.connect(audioCtx.destination);
+
 osc.type = 'triangle';
-osc.frequency.setValueAtTime(523.25, now);
-osc.frequency.setValueAtTime(659.25, now + 0.1);
-osc.frequency.setValueAtTime(783.99, now + 0.2);
-osc.frequency.setValueAtTime(1046.50, now + 0.3);
-gain.gain.setValueAtTime(0.1, now);
-gain.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
-osc.start(now);
-osc.stop(now + 0.6);
+osc.frequency.setValueAtTime(note.freq, startTime);
+gain.gain.setValueAtTime(0.15, startTime);
+gain.gain.exponentialRampToValueAtTime(0.001, startTime + note.dur);
+
+osc.start(startTime);
+osc.stop(startTime + note.dur);
+startTime += note.dur;
+});
+}
+}
+
+function triggerConfetti() {
+if (typeof confetti === 'function') {
+confetti({
+particleCount: 100,
+spread: 70,
+origin: { y: 0.6 }
+});
 }
 }
 
@@ -782,10 +812,10 @@ const buttons = document.querySelectorAll('#opt-list .btn');
 buttons.forEach(b => b.disabled = true);
 
 if (selected.correct) {
-playSound('correct');
 buttons[selectedIndex].classList.add('correct');
 
 if (!isLogicStep) {
+playSound('correct');
 gameState.exp += 10;
 fbEl.className = "feedback active correct-fb";
 fbEl.innerHTML = "<strong>正解！ (+10 EXP)</strong><br>続いて「判断基準」を選んでください。";
@@ -795,12 +825,14 @@ saveData();
 render();
 }, 1200);
 } else {
-gameState.exp += 20;
-fbEl.className = "feedback active correct-fb";
-fbEl.innerHTML = "<strong>判断基準も正解！ (+20 EXP)</strong>";
-setTimeout(() => {
 if (isBoss) {
+// ボス撃破演出！
 playSound('clear');
+triggerConfetti();
+fbEl.className = "feedback active correct-fb";
+fbEl.innerHTML = `<strong>🏆 BOSS K.O.!! (+20 EXP)</strong><br>【${stage.rewardSkill}】を獲得しました！`;
+
+setTimeout(() => {
 if (!gameState.unlockedSkills.includes(stage.rewardSkill)) {
 gameState.unlockedSkills.push(stage.rewardSkill);
 }
@@ -811,13 +843,21 @@ alert(`🎉 ${stage.title} CLEAR!\n獲得スキル: 【${stage.rewardSkill}】`)
 gameState.currentStageId = null;
 gameState.currentStep = 0;
 gameState.subStep = 0;
+saveData();
+render();
+}, 1500);
 } else {
+playSound('correct');
+gameState.exp += 20;
+fbEl.className = "feedback active correct-fb";
+fbEl.innerHTML = "<strong>判断基準も正解！ (+20 EXP)</strong>";
+setTimeout(() => {
 gameState.currentStep++;
 gameState.subStep = 0;
-}
 saveData();
 render();
 }, 1200);
+}
 }
 } else {
 playSound('wrong');

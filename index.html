@@ -2,131 +2,421 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>英語処理OS RPG - extra STAGE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英語処理OS RPG - フルバージョン</title>
 <style>
+  :root {
+    --bg-color: #121224;
+    --card-bg: #1a1a38;
+    --primary-color: #00fff5;
+    --accent-color: #e94560;
+    --text-color: #e0e0e0;
+    --sub-text: #a0a0c0;
+    --panel-bg: #0f3460;
+  }
+
   body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #1a1a2e;
-    color: #e0e0e0;
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Medyo', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
     padding: 20px;
+    display: flex;
+    justify-content: center;
   }
-  .container {
-    max-width: 700px;
-    margin: 0 auto;
-    background: #16213e;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+
+  .game-container {
+    width: 100%;
+    max-width: 800px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    border: 1px solid #2a2a50;
   }
-  h1, h2, h3 {
-    color: #00fff5;
+
+  h1 {
+    font-size: 24px;
+    color: var(--primary-color);
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(0,255,245,0.3);
   }
+
   .status-bar {
     display: flex;
     justify-content: space-between;
-    background: #0f3460;
-    padding: 10px 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
-  .btn {
-    background-color: #e94560;
-    color: white;
-    border: none;
+    align-items: center;
+    background: var(--panel-bg);
     padding: 12px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: bold;
   }
-  .btn:hover {
+
+  .status-item {
+    font-size: 16px;
+  }
+
+  .status-val {
+    color: var(--primary-color);
+    font-size: 18px;
+  }
+
+  .skill-badge {
+    display: inline-block;
+    background: var(--primary-color);
+    color: #121224;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin: 2px;
+  }
+
+  .stage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+  }
+
+  .btn {
+    background-color: var(--panel-bg);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+    padding: 12px 16px;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .btn:hover:not(:disabled) {
+    background-color: #1f4068;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,255,245,0.2);
+  }
+
+  .btn:disabled {
+    border-color: #444;
+    color: #666;
+    background: #181828;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-extra {
+    grid-column: 1 / -1;
+    background-color: #2c0e3a;
+    border: 2px solid #ff00ff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(255,0,255,0.8);
+  }
+
+  .btn-extra:hover:not(:disabled) {
+    background-color: #4a1562;
+    box-shadow: 0 0 15px rgba(255,0,255,0.5);
+  }
+
+  .btn-action {
+    width: 100%;
+    background-color: var(--accent-color);
+    border: none;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15px;
+    padding: 14px;
+    font-size: 16px;
+  }
+
+  .btn-action:hover:not(:disabled) {
     background-color: #ff6b81;
   }
-  .btn:disabled {
-    background-color: #555;
-    cursor: not-allowed;
+
+  .quiz-box {
+    background: #111122;
+    border: 1px solid #2a2a50;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 15px;
   }
+
+  .quiz-title {
+    color: var(--primary-color);
+    font-size: 18px;
+    margin-top: 0;
+  }
+
+  .quiz-text {
+    white-space: pre-wrap;
+    line-height: 1.6;
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+
   .option-btn {
     display: block;
     width: 100%;
     text-align: left;
-    background: #0f3460;
+    background: var(--panel-bg);
     color: #fff;
-    border: 1px solid #00fff5;
-    padding: 10px;
+    border: 1px solid #334e68;
+    padding: 12px;
     margin: 8px 0;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 14px;
+    line-height: 1.4;
   }
+
   .option-btn:hover {
     background: #1f4068;
+    border-color: var(--primary-color);
   }
-  .skill-badge {
-    display: inline-block;
-    background: #00fff5;
-    color: #1a1a2e;
+
+  .feedback {
+    margin-top: 15px;
+    font-size: 16px;
     font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 3px;
-    margin-top: 5px;
+    min-height: 24px;
   }
+
   .hidden {
-    display: none;
+    display: none !important;
+  }
+
+  .lock-msg {
+    color: var(--accent-color);
+    font-size: 13px;
+    margin-top: 10px;
   }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <!-- ステータス表示 -->
+<div class="game-container">
+  <h1>英語処理OS RPG</h1>
+
+  <!-- ステータス表示ヘッダー -->
   <div class="status-bar">
-    <div>STAGE: <span id="display-stage">9</span></div>
-    <div>EXP: <span id="display-exp">1300</span></div>
+    <div class="status-item">現在の到達: <span class="status-val" id="disp-stage">STAGE 1</span></div>
+    <div class="status-item">累計EXP: <span class="status-val" id="disp-exp">0</span></div>
   </div>
 
-  <!-- ステージ選択 / 進行制御画面 -->
-  <div id="stage-select-screen">
-    <h2>ステージ選択</h2>
-    <p id="lock-message" style="color: #ff6b81;"></p>
-    
-    <button class="btn" id="btn-extra-stage" onclick="startExtraStage()">
-      上位スキル進化STAGE (extra STAGE) に挑戦
-    </button>
-
-    <button class="btn" id="btn-stage10" disabled onclick="alert('STAGE 10 開始！')">
-      STAGE 10 （extra STAGEクリアで開放）
-    </button>
+  <div id="skills-display" style="margin-bottom: 15px;">
+    <strong>所持スキル:</strong> <span id="skills-list">なし</span>
   </div>
 
-  <!-- extra STAGE 実行画面 -->
-  <div id="extra-stage-screen" class="hidden">
-    <div id="badge-area"></div>
-    <h2 id="q-title">上位スキル進化STAGE</h2>
-    <p id="q-text" style="white-space: pre-wrap; line-height: 1.6;"></p>
-    <div id="options-container"></div>
-    <div id="feedback" style="margin-top: 15px; font-weight: bold;"></div>
+  <!-- STAGE 選択メニュー画面 -->
+  <div id="screen-stage-select">
+    <h2>STAGE 選択</h2>
+    <p>順番に処理プロセスを身につけ、マスターを目指そう。</p>
+
+    <div class="stage-grid">
+      <button class="btn" id="btn-st1" onclick="startStage(1)">STAGE 1 <span>語順感覚</span></button>
+      <button class="btn" id="btn-st2" disabled onclick="startStage(2)">STAGE 2 <span>主語・動詞発見</span></button>
+      <button class="btn" id="btn-st3" disabled onclick="startStage(3)">STAGE 3 <span>時制判断</span></button>
+      <button class="btn" id="btn-st4" disabled onclick="startStage(4)">STAGE 4 <span>助動詞処理</span></button>
+      <button class="btn" id="btn-st5" disabled onclick="startStage(5)">STAGE 5 <span>疑問・否定構造</span></button>
+      <button class="btn" id="btn-st6" disabled onclick="startStage(6)">STAGE 6 <span>修飾語ブロック</span></button>
+      <button class="btn" id="btn-st7" disabled onclick="startStage(7)">STAGE 7 <span>受動態変換</span></button>
+      <button class="btn" id="btn-st8" disabled onclick="startStage(8)">STAGE 8 <span>不定詞・動名詞</span></button>
+      <button class="btn" id="btn-st9" disabled onclick="startStage(9)">STAGE 9 <span>関係代名詞</span></button>
+
+      <!-- 上位スキル進化STAGE（extra STAGE） -->
+      <button class="btn btn-extra" id="btn-st-extra" disabled onclick="startStage('extra')">
+        ★ extra STAGE 【上位スキル進化】
+      </button>
+
+      <button class="btn" id="btn-st10" disabled onclick="alert('STAGE 10へようこそ！さらなる高みへ！')">
+        STAGE 10 <span>（extraクリアで開放）</span>
+      </button>
+    </div>
+
+    <div class="lock-msg" id="extra-lock-info">
+      ※extra STAGEは「STAGE 9クリア」かつ「累計1300 EXP達成」で開放されます。
+    </div>
+  </div>
+
+  <!-- クイズ実行画面 -->
+  <div id="screen-quiz" class="hidden">
+    <div id="quiz-header">
+      <div id="skill-target-area"></div>
+      <h2 id="quiz-stage-title" class="quiz-title">STAGE 1</h2>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-text" id="quiz-text">問題文がここに表示されます。</div>
+      <div id="options-container"></div>
+      <div class="feedback" id="feedback-text"></div>
+    </div>
+
+    <button class="btn btn-action hidden" id="btn-next-q" onclick="nextQuestion()">次の問題へ</button>
+    <button class="btn btn-action hidden" id="btn-back-menu" onclick="showStageSelect()">STAGE選択に戻る</button>
   </div>
 </div>
 
 <script>
 // ==========================================
-// ゲーム状態管理
+// 1. ゲーム状態 (State)
 // ==========================================
 let gameState = {
-  currentStage: 9,
-  exp: 1300,
-  isExtraStageUnlocked: true, // STAGE9クリア & EXP1300到達でtrue
+  maxUnlockedStage: 1, // 到達ステージ
+  exp: 0,
+  isStage9Cleared: false,
   isExtraStageCleared: false,
   skills: []
 };
 
+let currentPlayingStage = 1; // 現在プレイ中のステージ ('extra' または 1〜9)
+let currentQIndex = 0;
+let currentQuestions = [];
+
 // ==========================================
-// extra STAGE 問題データ定義
+// 2. STAGE 1〜9 問題データ
+// ==========================================
+const baseStagesData = {
+  1: {
+    title: "STAGE 1 : 語順感覚アルゴリズム",
+    questions: [
+      {
+        text: "① ( playing / soccer / is / Ken / in the park ).\n英文を正しく組み立てる最初の処理手順は？",
+        options: [
+          { label: "A : 「誰が／何が」にあたる主語(Ken)を先頭に置く", isCorrect: true },
+          { label: "B : 場所を表す in the park を先頭に置く", isCorrect: false },
+          { label: "C : 動詞 is playing を先頭に置く", isCorrect: false }
+        ]
+      },
+      {
+        text: "② 英語の基本的な語順パターン（肯定文）として最も正しいものは？",
+        options: [
+          { label: "A : [主語] + [場所・時間] + [動詞] + [目的語]", isCorrect: false },
+          { label: "B : [主語] + [動詞] + [目的語・補語] + [追加情報(場所・時間)]", isCorrect: true },
+          { label: "C : [動詞] + [主語] + [目的語・補語]", isCorrect: false }
+        ]
+      }
+    ]
+  },
+  2: {
+    title: "STAGE 2 : 主語・動詞発見アルゴリズム",
+    questions: [
+      {
+        text: "① The books on the desk belong to Ms. Green.\nこの文の「主語」と「動詞」の正しい組み合わせは？",
+        options: [
+          { label: "A : 主語: desk / 動詞: belong", isCorrect: false },
+          { label: "B : 主語: The books / 動詞: belong", isCorrect: true },
+          { label: "C : 主語: The books on the desk / 動詞: Ms. Green", isCorrect: false }
+        ]
+      }
+    ]
+  },
+  3: {
+    title: "STAGE 3 : 時制判断アルゴリズム",
+    questions: [
+      {
+        text: "① She ( go ) to London two years ago.\nカッコ内を正しい形にするとき、最初に見るべき根拠は？",
+        options: [
+          { label: "A : 主語が She であること", isCorrect: false },
+          { label: "B : 文末にある過去を示す語 two years ago", isCorrect: true },
+          { label: "C : to London という目的地表現", isCorrect: false }
+        ]
+      }
+    ]
+  },
+  4: {
+    title: "STAGE 4 : 助動詞処理アルゴリズム",
+    questions: [
+      {
+        text: "① You must ( clean ) your room.\n助動詞 must の直後に置く動詞のルールは？",
+        options: [
+          { label: "A : 三人称単数のsをつける", isCorrect: false },
+          { label: "B : 必ず「動詞の原形」にする", isCorrect: true },
+          { label: "C : 過去形にする", isCorrect: false }
+        ]
+      }
+    ]
+  },
+  5: {
+    title: "STAGE 5 : 疑問・否定構造アルゴリズム",
+    questions: [
+      {
+        text: "① Tom plays tennis. を疑問文にするとき、文頭に出す補助動詞は？",
+        options: [
+          { label: "A : Do", isCorrect: false },
+          { label: "B : Does", isCorrect: true },
+          { label: "C : Is", isCorrect: false }
+        ]
+      }
+    ]
+  },
+  6: {
+    title: "STAGE 6 : 修飾語ブロック判断",
+    questions: [
+      {
+        text: "① The girl ( standing by the door ) is my sister.\nカッコのカタマリ(修飾語ブロック)の役割は？",
+        options: [
+          { label: "A : 前の文全体を打ち消す", isCorrect: false },
+          { label: "B : 前の名詞 The girl を後ろから詳しく説明する", isCorrect: true },
+          { label: "C : 文の主語として機能する", isCorrect: false }
+        ]
+      }
+    ]
+  },
+  7: {
+    title: "STAGE 7 : 受動態変換アルゴリズム",
+    questions: [
+      {
+        text: "① Active: Tom wrote this letter.\nPassive: This letter (  ) by Tom.\nカッコに入る正しい組み合わせは？",
+        options: [
+          { label: "A : is written", isCorrect: false },
+          { label: "B : was written", isCorrect: true },
+          { label: "C : was write", isCorrect: false }
+        ]
+      }
+    ]
+  },
+  8: {
+    title: "STAGE 8 : 不定詞・動名詞判断アルゴリズム",
+    questions: [
+      {
+        text: "① I stopped (  ) photos. (写真を撮る「ために」立ち止まった)\n正しい形は？",
+        options: [
+          { label: "A : to take", isCorrect: true },
+          { label: "B : taking", isCorrect: false },
+          { label: "C : take", isCorrect: false }
+        ]
+      }
+    ]
+  },
+  9: {
+    title: "STAGE 9 : 関係代名詞アルゴリズム",
+    questions: [
+      {
+        text: "① I have a friend (  ) lives in Canada.\n先行詞が「人(a friend)」で、直後に動詞(lives)が続く場合の関係代名詞は？",
+        options: [
+          { label: "A : which", isCorrect: false },
+          { label: "B : who", isCorrect: true },
+          { label: "C : whom", isCorrect: false }
+        ]
+      }
+    ]
+  }
+};
+
+// ==========================================
+// 3. 上位スキル進化STAGE（extra STAGE）問題データ
 // ==========================================
 const extraStageQuestions = [
-  // ［2］問題 ①〜⑩
+  // ［2］問題 ①〜⑩ (各+20EXP)
   {
     id: 1,
     title: "［2］問題 ① (+20EXP)",
@@ -240,114 +530,180 @@ const extraStageQuestions = [
   }
 ];
 
-let currentQuestionIndex = 0;
-
 // ==========================================
-// 画面制御・更新関数
+// 4. 画面更新・進行ロジック
 // ==========================================
 function updateUI() {
-  document.getElementById('display-stage').textContent = gameState.currentStage;
-  document.getElementById('display-exp').textContent = gameState.exp;
+  document.getElementById('disp-stage').textContent = `STAGE ${gameState.maxUnlockedStage}`;
+  document.getElementById('disp-exp').textContent = gameState.exp;
 
-  const btnExtra = document.getElementById('btn-extra-stage');
-  const btnStage10 = document.getElementById('btn-stage10');
-  const lockMsg = document.getElementById('lock-message');
-
-  // 条件チェック: STAGE9クリア 且つ EXP 1300 以上
-  const canAccessExtra = (gameState.currentStage >= 9 && gameState.exp >= 1300);
-
-  if (!canAccessExtra) {
-    btnExtra.disabled = true;
-    lockMsg.textContent = "※STAGE9をクリアし、EXPが1300点に達するとextra STAGEが開放されます。";
+  // 所持スキルリスト
+  const skillListEl = document.getElementById('skills-list');
+  if (gameState.skills.length === 0) {
+    skillListEl.textContent = "なし";
   } else {
-    btnExtra.disabled = false;
-    lockMsg.textContent = "";
+    skillListEl.innerHTML = gameState.skills.map(s => `<span class="skill-badge">${s}</span>`).join(' ');
   }
 
-  // STAGE10解放フラグ
+  // STAGE 1〜9の解放状態制御
+  for (let i = 1; i <= 9; i++) {
+    const btn = document.getElementById(`btn-st${i}`);
+    if (i <= gameState.maxUnlockedStage) {
+      btn.disabled = false;
+    } else {
+      btn.disabled = true;
+    }
+  }
+
+  // extra STAGE の解放状態制御
+  // 条件：STAGE 9 クリア 且つ 1300 EXP 以上
+  const extraBtn = document.getElementById('btn-st-extra');
+  const lockInfo = document.getElementById('extra-lock-info');
+
+  const isExtraUnlocked = (gameState.isStage9Cleared && gameState.exp >= 1300);
+
+  if (isExtraUnlocked) {
+    extraBtn.disabled = false;
+    lockInfo.textContent = "★ extra STAGEへの挑戦権が開放されています！";
+    lockInfo.style.color = "#00fff5";
+  } else {
+    extraBtn.disabled = true;
+    lockInfo.textContent = "※extra STAGEは「STAGE 9クリア」かつ「累計1300 EXP達成」で開放されます。";
+    lockInfo.style.color = "var(--accent-color)";
+  }
+
+  // STAGE 10の解放状態制御（extra STAGEのクリアが必須）
+  const btn10 = document.getElementById('btn-st10');
   if (gameState.isExtraStageCleared) {
-    btnStage10.disabled = false;
-    btnStage10.textContent = "STAGE 10 （開放中）";
+    btn10.disabled = false;
   } else {
-    btnStage10.disabled = true;
-    btnStage10.textContent = "STAGE 10 （extra STAGEクリアで開放）";
+    btn10.disabled = true;
   }
 }
 
-function startExtraStage() {
-  document.getElementById('stage-select-screen').classList.add('hidden');
-  document.getElementById('extra-stage-screen').classList.remove('hidden');
-  currentQuestionIndex = 0;
-  showQuestion();
+function showStageSelect() {
+  document.getElementById('screen-stage-select').classList.remove('hidden');
+  document.getElementById('screen-quiz').classList.add('hidden');
+  updateUI();
 }
 
-function showQuestion() {
-  const q = extraStageQuestions[currentQuestionIndex];
-  document.getElementById('q-title').textContent = q.title;
-  document.getElementById('q-text').textContent = q.text;
-  document.getElementById('feedback').textContent = "";
+function startStage(stageNum) {
+  currentPlayingStage = stageNum;
+  currentQIndex = 0;
 
-  // ［1］獲得スキル目標の表示
-  const badgeArea = document.getElementById('badge-area');
-  badgeArea.innerHTML = `<span class="skill-badge">［1］獲得対象スキル：処理手順化スキル</span>`;
+  if (stageNum === 'extra') {
+    currentQuestions = extraStageQuestions;
+    document.getElementById('skill-target-area').innerHTML = 
+      `<span class="skill-badge" style="background:#ff00ff; color:#fff;">［1］獲得スキル：処理手順化スキル</span>`;
+  } else {
+    currentQuestions = baseStagesData[stageNum].questions;
+    document.getElementById('skill-target-area').innerHTML = "";
+  }
+
+  document.getElementById('screen-stage-select').classList.add('hidden');
+  document.getElementById('screen-quiz').classList.remove('hidden');
+
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = currentQuestions[currentQIndex];
+  const feedback = document.getElementById('feedback-text');
+  const btnNext = document.getElementById('btn-next-q');
+  const btnBack = document.getElementById('btn-back-menu');
+
+  feedback.textContent = "";
+  btnNext.classList.add('hidden');
+  btnBack.classList.add('hidden');
+
+  if (currentPlayingStage === 'extra') {
+    document.getElementById('quiz-stage-title').textContent = q.title;
+    document.getElementById('quiz-text').textContent = q.text;
+  } else {
+    document.getElementById('quiz-stage-title').textContent = baseStagesData[currentPlayingStage].title;
+    document.getElementById('quiz-text').textContent = q.text;
+  }
 
   const optionsContainer = document.getElementById('options-container');
   optionsContainer.innerHTML = "";
 
-  q.options.forEach(opt => {
+  q.options.forEach((opt) => {
     const btn = document.createElement('button');
     btn.className = 'option-btn';
     btn.textContent = opt.label;
-    btn.onclick = () => checkAnswer(opt.isCorrect);
+    btn.onclick = () => handleAnswer(opt.isCorrect);
     optionsContainer.appendChild(btn);
   });
 }
 
-function checkAnswer(isCorrect) {
-  const feedback = document.getElementById('feedback');
+function handleAnswer(isCorrect) {
+  const feedback = document.getElementById('feedback-text');
+  const btnNext = document.getElementById('btn-next-q');
+  const btnBack = document.getElementById('btn-back-menu');
+
+  // 連打防止のため選択肢ボタンを非有効化
+  const optionBtns = document.querySelectorAll('.option-btn');
+  optionBtns.forEach(b => b.disabled = true);
+
   if (isCorrect) {
-    feedback.style.color = "#00fff5";
-    
-    // ①〜⑩の問題（BOSS以外）は +20EXP
-    if (currentQuestionIndex < 10) {
-      gameState.exp += 20;
-      feedback.textContent = "正解！ +20EXP 獲得！";
+    feedback.style.color = "var(--primary-color)";
+
+    if (currentPlayingStage === 'extra') {
+      if (currentQIndex < 10) {
+        gameState.exp += 20;
+        feedback.textContent = "正解！ (+20 EXP 獲得)";
+      } else {
+        feedback.textContent = "BOSS BATTLE 撃破！！";
+      }
     } else {
-      feedback.textContent = "BOSS BATTLE 撃破！";
+      gameState.exp += 150; // 通常STAGEクリア時の加算例
+      feedback.textContent = "正解！ 処理手順をマスターしました！ (+150 EXP)";
     }
-    
+
     updateUI();
 
-    setTimeout(() => {
-      currentQuestionIndex++;
-      if (currentQuestionIndex < extraStageQuestions.length) {
-        showQuestion();
-      } else {
-        finishExtraStage();
-      }
-    }, 1200);
-
+    if (currentQIndex + 1 < currentQuestions.length) {
+      btnNext.classList.remove('hidden');
+    } else {
+      // ステージ最終問題をクリアした場合
+      setTimeout(finishStage, 800);
+    }
   } else {
-    feedback.style.color = "#ff6b81";
-    feedback.textContent = "不正解！ 手順や判断を見直して再挑戦しよう。";
+    feedback.style.color = "var(--accent-color)";
+    feedback.textContent = "不正解...！ 手順や条件をもう一度確認してみよう。";
+    btnBack.classList.remove('hidden');
   }
 }
 
-function finishExtraStage() {
-  gameState.isExtraStageCleared = true;
-  if (!gameState.skills.includes("処理手順化スキル")) {
-    gameState.skills.push("処理手順化スキル");
-  }
-
-  alert("CLEAR！\n『処理手順化スキル』を獲得しました！\n次のSTAGEの扉が開放されました！");
-
-  // 選択画面に戻す
-  document.getElementById('extra-stage-screen').classList.add('hidden');
-  document.getElementById('stage-select-screen').classList.remove('hidden');
-  updateUI();
+function nextQuestion() {
+  currentQIndex++;
+  renderQuestion();
 }
 
-// 初期実行
+function finishStage() {
+  if (currentPlayingStage === 'extra') {
+    gameState.isExtraStageCleared = true;
+    if (!gameState.skills.includes("処理手順化スキル")) {
+      gameState.skills.push("処理手順化スキル");
+    }
+    alert("【CLEAR！】\n『処理手順化スキル』を獲得しました！\n次のSTAGE（STAGE 10）の扉が開放されました！");
+  } else {
+    if (currentPlayingStage === 9) {
+      gameState.isStage9Cleared = true;
+    }
+    
+    // 次のステージロック解除
+    if (typeof currentPlayingStage === 'number' && currentPlayingStage >= gameState.maxUnlockedStage) {
+      gameState.maxUnlockedStage = currentPlayingStage + 1;
+    }
+
+    alert(`STAGE ${currentPlayingStage} CLEAR！\n新しいスキル・プロセスを習得しました。`);
+  }
+
+  showStageSelect();
+}
+
+// 初期化表示
 updateUI();
 </script>
 

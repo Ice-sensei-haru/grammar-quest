@@ -736,7 +736,7 @@ const STAGES = [
     title: "STAGE 7",
     skillName: "動詞形OS",
     rewardSkill: "動詞形OSスキル",
-    monsterEmoji: "👁️",
+    monsterEmoji: "👁️️",
     monsterName: "クロノス・アイ",
     questions: [
       {
@@ -922,6 +922,99 @@ const STAGES = [
         }
       ]
     }
+  },
+  {
+    id: 9,
+    title: "STAGE 9",
+    skillName: "文法構造判定",
+    rewardSkill: "文法構造判定スキル",
+    monsterEmoji: "🌌",
+    monsterName: "ヴォイド・ルーラー",
+    questions: [
+      {
+        text: "① She (  ) busy with her work. の(  )に入る適切な動詞は？",
+        options: [
+          { label: "A : sees", correct: false },
+          { label: "B : looks", correct: true },
+          { label: "C : watches", correct: false }
+        ],
+        wrongComment: "後ろに続く単語を見る → busy = Sheの関係",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "意味の解釈「～に見える」はlook", correct: false },
+          { label: "後ろを見る → 形容詞busy = Sheの関係", correct: true }
+        ]
+      },
+      {
+        text: "② She (  ) him the book. の(  )に入る適切な動詞は？",
+        options: [
+          { label: "A : gave", correct: true },
+          { label: "B : studied", correct: false },
+          { label: "C : likes", correct: false }
+        ],
+        wrongComment: "後ろに続く単語を見る → him（人）＋the book（もの）",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "後ろを見る → him（人）＋the book（もの） → 人にものを与える", correct: true },
+          { label: "意味の解釈「彼女は、彼を、本を」で判断", correct: false }
+        ]
+      },
+      {
+        text: "③ I went to bed early (  ) I was tired. の(  )に入る適切な接続詞は？",
+        options: [
+          { label: "A : if", correct: false },
+          { label: "B : so", correct: false },
+          { label: "C : because", correct: true }
+        ],
+        wrongComment: "前後の文脈で判断",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "意味の解釈で判断", correct: false },
+          { label: "前が結果、後ろが原因の文脈で判断", correct: true }
+        ]
+      },
+      {
+        text: "④ He is our English teacher. とほぼ同じ意味の文は？",
+        options: [
+          { label: "A : He teaches us to English.", correct: false },
+          { label: "B : He can teach English for us.", correct: false },
+          { label: "C : He teaches us English.", correct: true }
+        ],
+        wrongComment: "teach+er → teach+人+もの",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "意味の解釈「英語を教える」で判断", correct: false },
+          { label: "be動詞 → 一般動詞の文へ。teach → 人＋ものの語順", correct: true }
+        ]
+      }
+    ],
+    boss: {
+      type: "sort",
+      questions: [
+        {
+          text: "【BOSS BATTLE 1/2】\n「私は英語が役立つと思う。」の意味に単語をクリックして並べかえなさい。",
+          words: ["that", "useful", "is", "I", "English", "think"],
+          correctAnswer: "I think that English is useful.",
+          wrongComment: "I think + English is... の構造を作ります。",
+          logicText: "【判断基準】",
+          logicOptions: [
+            { label: "I think + English isの組み合わせを作る", correct: true },
+            { label: "単語の一つ一つの意味で判断", correct: false }
+          ]
+        },
+        {
+          text: "【BOSS BATTLE 2/2】\n「私は昨日、彼らに夕食を作ってあげた。」の意味に単語をクリックして並べかえなさい。",
+          words: ["them", "dinner", "I", "yesterday", "cooked"],
+          correctAnswer: "I cooked them dinner yesterday.",
+          wrongComment: "主語＋動詞＋人＋ものの語順を作ります。",
+          logicText: "【判断基準】",
+          logicOptions: [
+            { label: "単語の一つ一つの意味で判断", correct: false },
+            { label: "主語と動詞。人＋ものの語順を作る", correct: true }
+          ]
+        }
+      ]
+    }
   }
 ];
 
@@ -1019,7 +1112,7 @@ function triggerConfetti() {
   }
 }
 
-const STORAGE_KEY = 'grammar_quest_save_data_v5';
+const STORAGE_KEY = 'grammar_quest_save_data_v6';
 let gameState = {
   exp: 0,
   unlockedStage: 1,
@@ -1163,7 +1256,7 @@ function renderQuestion() {
   html += `<div class="question-text">${qData.text.replace(/\n/g, '<br>')}</div>`;
 
   if (isBoss && stage.boss.type === "sort" && gameState.subStep === 0) {
-    // 並べ替え問題のUI表示
+    // 並べ替えUI
     html += `<div style="font-size:0.85rem; color:#8b949e; margin-bottom:5px;">【選択した単語】（タップで取り消し）</div>`;
     html += `<div class="word-answer-box">`;
     if (gameState.selectedWords.length === 0) {
@@ -1190,7 +1283,7 @@ function renderQuestion() {
     </div>`;
 
   } else if (gameState.subStep === 0) {
-    // 通常の4択/3択問題
+    // 通常選択肢
     html += `<div class="options" id="opt-list">`;
     qData.options.forEach((opt, idx) => {
       html += `<button class="btn" onclick="checkAnswer(${idx}, false)">${opt.label}</button>`;
@@ -1224,20 +1317,17 @@ function unselectWord(idx) {
   render();
 }
 
-// 文頭の大文字・小文字、記号、余分な空白を柔軟に吸収して判定する関数
 function checkSortAnswer() {
   initAudio();
   const stage = STAGES.find(s => s.id === gameState.currentStageId);
   const qData = stage.boss.questions[gameState.bossSubStep];
   const fbEl = document.getElementById('fb');
 
-  // 作成した文字列
   const userSentence = gameState.selectedWords.map(w => w.word).join(' ');
 
-  // 正規化用ヘルパー関数（先頭大文字小文字無視、末尾記号除去）
   const normalize = (str) => {
     return str.trim()
-      .replace(/[.? !]$/, '') // 末尾の記号削除
+      .replace(/[.? !]$/, '')
       .toLowerCase();
   };
 
@@ -1297,10 +1387,8 @@ function checkAnswer(selectedIndex, isLogicStep) {
         render();
       }, 1200);
     } else {
-      // 判断基準クリア時
       if (isBoss) {
         if (gameState.bossSubStep + 1 < totalBossQuestions) {
-          // 複数問ボスの途中クリア
           playSound('correct');
           addExp(20);
           fbEl.className = "feedback active correct-fb";
@@ -1313,7 +1401,6 @@ function checkAnswer(selectedIndex, isLogicStep) {
             render();
           }, 1200);
         } else {
-          // ボス完全撃破
           playSound('clear');
           triggerConfetti();
           addExp(20);
@@ -1326,7 +1413,7 @@ function checkAnswer(selectedIndex, isLogicStep) {
             if (gameState.unlockedStage === stage.id) {
               gameState.unlockedStage = stage.id + 1;
             }
-            if (stage.id === 8) { // STAGE8が全クリア判定
+            if (stage.id === 9) { // STAGE9クリアで全クリア判定
               gameState.isAllCleared = true;
               saveData();
               render();
@@ -1346,7 +1433,6 @@ function checkAnswer(selectedIndex, isLogicStep) {
           }, 1500);
         }
       } else {
-        // 道中問題のクリア
         playSound('correct');
         addExp(20);
         fbEl.className = "feedback active correct-fb";
@@ -1382,7 +1468,7 @@ function renderAllClear() {
         複数の処理が自動化できるまでトレーニングを続けましょう。Congratulations！
       </p>
       <button class="btn" style="text-align: center; background: var(--success-color); color: white; font-weight: bold; justify-content: center;" onclick="resetToStageSelect()">
-        🗺️️ ステージ選択に戻る / 続ける
+        🗺 ステージ選択に戻る / 続ける
       </button>
     </div>
   `;

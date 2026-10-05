@@ -258,7 +258,6 @@
       0% { transform: translateY(0); }
       100% { transform: translateY(-10px); }
     }
-
     /* 並べ替えUI専用スタイル */
     .word-pool, .word-answer-box {
       display: flex;
@@ -736,7 +735,7 @@ const STAGES = [
     title: "STAGE 7",
     skillName: "動詞形OS",
     rewardSkill: "判断系スキルLv5：動詞形OS",
-    monsterEmoji: "👁️️",
+    monsterEmoji: "👁",
     monsterName: "クロノス・アイ",
     questions: [
       {
@@ -1015,9 +1014,81 @@ const STAGES = [
         }
       ]
     }
+  },
+  {
+    id: 10,
+    title: "EX STAGE",
+    skillName: "総合構造処理",
+    rewardSkill: "極・英語処理マスター",
+    monsterEmoji: "👁‍🗨",
+    monsterName: "アルティメット・オブラビオン",
+    questions: [
+      {
+        type: "sort",
+        text: "① 「公園を走っているその少女は私の妹です。」の意味に単語をクリックして並べかえなさい。",
+        words: ["is", "the", "park", "running", "girl", "my", "in", "the", "sister"],
+        correctAnswer: "The girl running in the park is my sister.",
+        wrongComment: "「公園を走っている少女」という名詞の塊（後置修飾）を主語に配置します。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "2語以上の説明（running in the park）は名詞の後ろに置く", correct: true },
+          { label: "日本語の語順どおりに語句を並べる", correct: false }
+        ]
+      },
+      {
+        type: "sort",
+        text: "② 「私はあなたにこの本を読んでほしい。」の意味に単語をクリックして並べかえなさい。",
+        words: ["want", "this", "read", "I", "to", "you", "book"],
+        correctAnswer: "I want you to read this book.",
+        wrongComment: "want + 人 + to + 動詞の原形（人に～してほしい）の構文を作ります。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "want + 人 + to + 動詞の原形 の処理パターンを適用する", correct: true },
+          { label: "to不定詞を文頭に置く", correct: false }
+        ]
+      },
+      {
+        type: "sort",
+        text: "③ 「彼は私にどのようにそのPCを使うのか教えてくれた。」の意味に単語をクリックして並べかえなさい。",
+        words: ["how", "use", "told", "computer", "to", "the", "me", "he"],
+        correctAnswer: "He told me how to use the computer.",
+        wrongComment: "主語 + 動詞(told) + 人(me) + 疑問詞+to(how to use...) の順に構築します。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "動詞 + 人 + 疑問詞+to+原形 の文型構造を作る", correct: true },
+          { label: "Howを文頭に出して疑問文にする", correct: false }
+        ]
+      }
+    ],
+    boss: {
+      type: "sort",
+      questions: [
+        {
+          text: "【EX BOSS 1/2】\n「これは私が昨日買った本です。」の意味に単語をクリックして並べかえなさい。",
+          words: ["is", "yesterday", "this", "book", "I", "the", "bought"],
+          correctAnswer: "This is the book I bought yesterday.",
+          wrongComment: "名詞(the book) の後ろに 主語+動詞(I bought) をつなげて説明します。",
+          logicText: "【判断基準】",
+          logicOptions: [
+            { label: "名詞 + [主語+動詞]（接触節/関係代名詞節）で後ろから修飾する", correct: true },
+            { label: "yesterdayを主語の直後に置く", correct: false }
+          ]
+        },
+        {
+          text: "【EX BOSS 2/2】\n「もし明日晴れたら、私たちはピクニックに行くつもりです。」の意味に単語をクリックして並べかえなさい。",
+          words: ["if", "we", "a", "will", "is", "sunny", "go", "for", "tomorrow", "it", "picnic"],
+          correctAnswer: "If it is sunny tomorrow we will go for a picnic.",
+          wrongComment: "If節（条件）の中は未来のことでも現在形(is)にし、主節にwillを用います。",
+          logicText: "【判断基準】",
+          logicOptions: [
+            { label: "条件を表すIf節内は現在形、主節はwillを用いる規則を適用する", correct: true },
+            { label: "If節の中にもwillを使う", correct: false }
+          ]
+        }
+      ]
+    }
   }
 ];
-
 let audioCtx = null;
 function initAudio() {
   if (!audioCtx) {
@@ -1111,7 +1182,6 @@ function triggerConfetti() {
     });
   }
 }
-
 const STORAGE_KEY = 'grammar_quest_save_data_v6';
 let gameState = {
   exp: 0,
@@ -1124,7 +1194,6 @@ let gameState = {
   unlockedSkills: [],
   isAllCleared: false
 };
-
 function loadSaveData() {
   const data = localStorage.getItem(STORAGE_KEY);
   if (data) {
@@ -1173,7 +1242,6 @@ function updateHeader() {
     skillContainer.innerHTML = gameState.unlockedSkills.map(s => `<span class="skill-badge">🛡 ${s}</span>`).join('');
   }
 }
-
 function render() {
   if (gameState.isAllCleared) {
     renderAllClear();
@@ -1183,7 +1251,6 @@ function render() {
     renderQuestion();
   }
 }
-
 function renderStageSelect() {
   const container = document.getElementById('main-content');
   let html = '<div class="card"><div class="card-header">🗺️ ステージを選択して挑戦</div>';
@@ -1204,7 +1271,6 @@ function renderStageSelect() {
   html += '</div>';
   container.innerHTML = html;
 }
-
 function startStage(stageId) {
   initAudio();
   gameState.currentStageId = stageId;
@@ -1215,7 +1281,6 @@ function startStage(stageId) {
   saveData();
   render();
 }
-
 function renderQuestion() {
   const container = document.getElementById('main-content');
   const stage = STAGES.find(s => s.id === gameState.currentStageId);
@@ -1231,12 +1296,11 @@ function renderQuestion() {
   } else {
     qData = stage.questions[gameState.currentStep];
   }
-
   let html = '';
   html += `
     <div class="battle-scene">
       <div>
-        <div class="pixel-char">⚔️🛡️</div>
+        <div class="pixel-char">⚔️️🛡️</div>
         <div style="font-size:0.75rem; color:var(--accent-color); margin-top:4px;">プレーヤー</div>
       </div>
       <div style="font-size:1.2rem; color:#8b949e;">VS</div>
@@ -1246,16 +1310,16 @@ function renderQuestion() {
       </div>
     </div>
   `;
-
   if (isBoss) {
     html += `<div class="card boss-card"><div class="boss-header">⚠️ BOSS BATTLE ⚠️</div>`;
   } else {
     html += `<div class="card"><div class="card-header"><span>${stage.title} - Q${gameState.currentStep + 1}/${stage.questions.length}</span><span style="font-size:0.8rem; color:#8b949e; cursor:pointer;" onclick="exitStage()">✕ 中断</span></div>`;
   }
-
   html += `<div class="question-text">${qData.text.replace(/\n/g, '<br>')}</div>`;
+  
+  const isSortType = (isBoss && stage.boss.type === "sort") || (!isBoss && qData.type === "sort");
 
-  if (isBoss && stage.boss.type === "sort" && gameState.subStep === 0) {
+  if (isSortType && gameState.subStep === 0) {
     // 並べ替えUI
     html += `<div style="font-size:0.85rem; color:#8b949e; margin-bottom:5px;">【選択した単語】（タップで取り消し）</div>`;
     html += `<div class="word-answer-box">`;
@@ -1267,7 +1331,6 @@ function renderQuestion() {
       });
     }
     html += `</div>`;
-
     html += `<div style="font-size:0.85rem; color:#8b949e; margin-bottom:5px;">【単語リスト】</div>`;
     html += `<div class="word-pool">`;
     qData.words.forEach((w, idx) => {
@@ -1277,11 +1340,9 @@ function renderQuestion() {
       }
     });
     html += `</div>`;
-
     html += `<div style="text-align:right; margin-top:10px;">
       <button class="sort-action-btn" onclick="checkSortAnswer()" ${gameState.selectedWords.length === 0 ? 'disabled' : ''}>回答判定 ▶</button>
     </div>`;
-
   } else if (gameState.subStep === 0) {
     // 通常選択肢
     html += `<div class="options" id="opt-list">`;
@@ -1298,41 +1359,39 @@ function renderQuestion() {
     });
     html += `</div>`;
   }
-
   html += `<div id="fb" class="feedback"></div></div>`;
   container.innerHTML = html;
 }
-
 function selectWord(word, origIdx) {
   initAudio();
   gameState.selectedWords.push({ word: word, origIdx: origIdx });
   saveData();
   render();
 }
-
 function unselectWord(idx) {
   initAudio();
   gameState.selectedWords.splice(idx, 1);
   saveData();
   render();
 }
-
 function checkSortAnswer() {
   initAudio();
   const stage = STAGES.find(s => s.id === gameState.currentStageId);
-  const qData = stage.boss.questions[gameState.bossSubStep];
+  const isBoss = gameState.currentStep === stage.questions.length;
+  let qData;
+  if (isBoss) {
+    qData = stage.boss.questions[gameState.bossSubStep];
+  } else {
+    qData = stage.questions[gameState.currentStep];
+  }
   const fbEl = document.getElementById('fb');
-
   const userSentence = gameState.selectedWords.map(w => w.word).join(' ');
-
   const normalize = (str) => {
     return str.trim()
       .replace(/[.? !]$/, '')
       .toLowerCase();
   };
-
   const isCorrect = normalize(userSentence) === normalize(qData.correctAnswer);
-
   if (isCorrect) {
     playSound('correct');
     addExp(10);
@@ -1349,12 +1408,10 @@ function checkSortAnswer() {
     fbEl.innerHTML = `<strong>不正解...</strong><br>${qData.wrongComment}`;
   }
 }
-
 function checkAnswer(selectedIndex, isLogicStep) {
   initAudio();
   const stage = STAGES.find(s => s.id === gameState.currentStageId);
   const isBoss = gameState.currentStep === stage.questions.length;
-
   let qData;
   let totalBossQuestions = 1;
   if (isBoss) {
@@ -1367,13 +1424,11 @@ function checkAnswer(selectedIndex, isLogicStep) {
   } else {
     qData = stage.questions[gameState.currentStep];
   }
-
   const targetOptions = isLogicStep ? qData.logicOptions : qData.options;
   const selected = targetOptions[selectedIndex];
   const fbEl = document.getElementById('fb');
   const buttons = document.querySelectorAll('#opt-list .btn');
   buttons.forEach(b => b.disabled = true);
-
   if (selected.correct) {
     buttons[selectedIndex].classList.add('correct');
     if (!isLogicStep) {
@@ -1413,7 +1468,7 @@ function checkAnswer(selectedIndex, isLogicStep) {
             if (gameState.unlockedStage === stage.id) {
               gameState.unlockedStage = stage.id + 1;
             }
-            if (stage.id === 9) { // STAGE9クリアで全クリア判定
+            if (stage.id === STAGES[STAGES.length - 1].id) { // 最短最後のステージクリアで全クリア判定
               gameState.isAllCleared = true;
               saveData();
               render();
@@ -1440,6 +1495,7 @@ function checkAnswer(selectedIndex, isLogicStep) {
         setTimeout(() => {
           gameState.currentStep++;
           gameState.subStep = 0;
+          gameState.selectedWords = [];
           saveData();
           render();
         }, 1200);
@@ -1456,7 +1512,6 @@ function checkAnswer(selectedIndex, isLogicStep) {
   }
   saveData();
 }
-
 function renderAllClear() {
   const container = document.getElementById('main-content');
   container.innerHTML = `
@@ -1464,7 +1519,7 @@ function renderAllClear() {
       <div class="trophy-icon">🏆✨</div>
       <h2 style="color: var(--gold-color); margin-top: 0; font-size: 1.5rem;">全STAGEクリアおめでとう！</h2>
       <p style="line-height: 1.6; color: var(--text-color); margin-bottom: 20px;">
-        すべてのステージを突破し、英語処理OSの基本スキルを獲得しました！<br>
+        すべてのステージ（EX STAGE含む）を突破し、英語処理OSの基本・応用スキルを獲得しました！<br>
         複数の処理が自動化できるまでトレーニングを続けましょう。Congratulations！
       </p>
       <button class="btn" style="text-align: center; background: var(--success-color); color: white; font-weight: bold; justify-content: center;" onclick="resetToStageSelect()">
@@ -1473,14 +1528,12 @@ function renderAllClear() {
     </div>
   `;
 }
-
 function resetToStageSelect() {
   gameState.isAllCleared = false;
   gameState.currentStageId = null;
   saveData();
   render();
 }
-
 function exitStage() {
   if (confirm("ステージ選択画面に戻りますか？（進行状況は自動保存されます）")) {
     gameState.currentStageId = null;
@@ -1488,7 +1541,6 @@ function exitStage() {
     render();
   }
 }
-
 document.addEventListener('click', initAudio, { once: true });
 loadSaveData();
 render();

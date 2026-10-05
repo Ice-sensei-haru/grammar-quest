@@ -15,6 +15,7 @@
       --success-color: #2ea043;
       --danger-color: #da3633;
       --gold-color: #d29922;
+      --purple-color: #a371f7;
     }
     * {
       box-sizing: border-box;
@@ -214,6 +215,13 @@
     .stage-select-btn:disabled {
       opacity: 0.4;
       cursor: not-allowed;
+    }
+    .stage-select-btn.extra-stage-btn {
+      border-color: var(--purple-color);
+      background: linear-gradient(135deg, #181124 0%, #21262d 100%);
+    }
+    .stage-select-btn.extra-stage-btn:hover:not(:disabled) {
+      border-color: #c084fc;
     }
     .battle-scene {
       display: flex;
@@ -1016,79 +1024,169 @@ const STAGES = [
     }
   },
   {
-    id: 10,
-    title: "EX STAGE",
-    skillName: "総合構造処理",
-    rewardSkill: "極・英語処理マスター",
-    monsterEmoji: "👁‍🗨",
-    monsterName: "アルティメット・オブラビオン",
+    id: "extra",
+    title: "【上位スキル進化STAGE】",
+    skillName: "処理手順化スキル",
+    rewardSkill: "処理手順化スキル",
+    monsterEmoji: "💎",
+    monsterName: "オメガ・プロセッサー",
+    requiredExp: 1300,
+    isExtra: true,
     questions: [
       {
         type: "sort",
-        text: "① 「公園を走っているその少女は私の妹です。」の意味に単語をクリックして並べかえなさい。",
-        words: ["is", "the", "park", "running", "girl", "my", "in", "the", "sister"],
-        correctAnswer: "The girl running in the park is my sister.",
-        wrongComment: "「公園を走っている少女」という名詞の塊（後置修飾）を主語に配置します。",
+        text: "① ( lunch / and Lisa / cafeteria / have / Tom / at / always / the ).\nこの英文を完成させるときの手順を正しく並べかえなさい。",
+        words: ["イ：主語と動詞の組み合わせ", "オ：文の形を確認", "ウ：動詞の後ろの目的語", "ア：追加の情報を組み立てる", "エ：文全体を整える"],
+        correctAnswer: "イ：主語と動詞の組み合わせ オ：文の形を確認 ウ：動詞の後ろの目的語 ア：追加の情報を組み立てる エ：文全体を整える",
+        wrongComment: "【正しい手順】①主語と動詞の組み合わせ(イ) → ②文の形を確認(オ) → ③動詞の後ろの目的語(ウ) → ④追加の情報(ア) → ⑤文全体を整える(エ)",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "2語以上の説明（running in the park）は名詞の後ろに置く", correct: true },
-          { label: "日本語の語順どおりに語句を並べる", correct: false }
+          { label: "【見る】主語・動詞の構成単位を把握する → 【判断する】SV構造と修飾語を特定する → 【処理する】並べ替える", correct: true },
+          { label: "日本語訳を考えて単語を直訳順に並べる", correct: false }
+        ]
+      },
+      {
+        text: "② They ate lunch yesterday. の文に使われている表現は？",
+        options: [
+          { label: "A : 現在形", correct: false },
+          { label: "B : 過去形", correct: true },
+          { label: "C : 進行形", correct: false }
+        ],
+        wrongComment: "ate は eat の過去形です。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "一般動詞の形が過去形（ate）かつyesterdayがあるため", correct: true },
+          { label: "文末にyesterdayがあるため現在進行形", correct: false }
+        ]
+      },
+      {
+        text: "③ Lunch was eaten by Tom. の文に使われている表現は？",
+        options: [
+          { label: "A : 進行形", correct: false },
+          { label: "B : 完了形", correct: false },
+          { label: "C : 受動態", correct: true }
+        ],
+        wrongComment: "be動詞(was) ＋ 過去分詞(eaten) は受動態（～された）を表します。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "be動詞 ＋ 過去分詞（was eaten）の構造があるため", correct: true },
+          { label: "was があるので過去進行形", correct: false }
+        ]
+      },
+      {
+        text: "④ Tom has just eaten lunch. の文に使われている表現は？",
+        options: [
+          { label: "A : 進行形", correct: false },
+          { label: "B : 完了形", correct: true },
+          { label: "C : 受動態", correct: false }
+        ],
+        wrongComment: "have/has ＋ 過去分詞(eaten) は現在完了形を表します。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "has ＋ 過去分詞（has eaten）の構造があるため", correct: true },
+          { label: "has があるため単なる現在形", correct: false }
+        ]
+      },
+      {
+        text: "⑤ He is in the library. に「～に違いない」という表現を加えるときは？",
+        options: [
+          { label: "A : mustを使って動詞を原形のbeにする", correct: true },
+          { label: "B : mayを使って動詞はisのままにする", correct: false },
+          { label: "C : shouldを使って動詞を原形のbeにする", correct: false }
+        ],
+        wrongComment: "「～に違いない」は 助動詞must を使い、直後の動詞は原形(be)にします。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "確信を表す助動詞must＋動詞の原形（be）", correct: true },
+          { label: "推測を表すmay＋is", correct: false }
+        ]
+      },
+      {
+        text: "⑥ 相手に提案する表現でないものは？",
+        options: [
+          { label: "A : Why don’t we go skiing?", correct: false },
+          { label: "B : Shall we have dinner?", correct: false },
+          { label: "C : Can I have your name?", correct: true }
+        ],
+        wrongComment: "Can I ... ? は「～してもいいですか（許可/尋ねる）」の表現です。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "Why don't we ... / Shall we ... は提案。Can I ... は許可・依頼", correct: true },
+          { label: "疑問詞がついているものはすべて提案", correct: false }
         ]
       },
       {
         type: "sort",
-        text: "② 「私はあなたにこの本を読んでほしい。」の意味に単語をクリックして並べかえなさい。",
-        words: ["want", "this", "read", "I", "to", "you", "book"],
-        correctAnswer: "I want you to read this book.",
-        wrongComment: "want + 人 + to + 動詞の原形（人に～してほしい）の構文を作ります。",
+        text: "⑦ Tom took these pictures. を受動態にするとき、その手順を正しく並べかえなさい。",
+        words: ["ウ：目的語を主語にする", "オ：もとの文の動詞の時制確認", "イ：be動詞を区別する", "エ：動詞を過去分詞にする", "ア：by＋行為者を加える"],
+        correctAnswer: "ウ：目的語を主語にする オ：もとの文の動詞の時制確認 イ：be動詞を区別する エ：動詞を過去分詞にする ア：by＋行為者を加える",
+        wrongComment: "【受動態の手順】①目的語を主語に(ウ) → ②時制の確認(オ) → ③be動詞の決定(イ) → ④過去分詞(エ) → ⑤by+行為者(ア)",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "want + 人 + to + 動詞の原形 の処理パターンを適用する", correct: true },
-          { label: "to不定詞を文頭に置く", correct: false }
+          { label: "目的語の受動態主化 → 時制・主語に応じたbe動詞決定 → 過去分詞化", correct: true },
+          { label: "文頭の単語と文末の単語を入れ替えるだけ", correct: false }
         ]
       },
       {
-        type: "sort",
-        text: "③ 「彼は私にどのようにそのPCを使うのか教えてくれた。」の意味に単語をクリックして並べかえなさい。",
-        words: ["how", "use", "told", "computer", "to", "the", "me", "he"],
-        correctAnswer: "He told me how to use the computer.",
-        wrongComment: "主語 + 動詞(told) + 人(me) + 疑問詞+to(how to use...) の順に構築します。",
+        text: "⑧ Tom has been to Kyoto two years ago. の間違いを訂正すると？",
+        options: [
+          { label: "A : hasがhad", correct: false },
+          { label: "B : has beenがwent", correct: true },
+          { label: "C : been toがgone to", correct: false }
+        ],
+        wrongComment: "two years ago（過去の明確な時点）は現在完了形と一緒に使えないため、過去形 went に変更します。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "動詞 + 人 + 疑問詞+to+原形 の文型構造を作る", correct: true },
-          { label: "Howを文頭に出して疑問文にする", correct: false }
+          { label: "明確な過去を表す語句（ago等）は現在完了形不可 → 過去形を使う", correct: true },
+          { label: "現在完了形の経験を表すのでhas beenのままで良い", correct: false }
+        ]
+      },
+      {
+        text: "⑨ I remember ( see ) Ken last year. の( see )を正しい語にするときの判断は？",
+        options: [
+          { label: "A : rememberの後ろで、last yearがある", correct: true },
+          { label: "B : rememberの後ろで、Kenがある", correct: false },
+          { label: "C : rememberが現在形", correct: false }
+        ],
+        wrongComment: "remember ＋ 動名詞(-ing) は「（過去に）～したことを覚えている」という意味になります。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "過去の出来事（last year）を覚えているので remember ＋ -ing（seeing）", correct: true },
+          { label: "未来の予定を表すので remember ＋ to see", correct: false }
+        ]
+      },
+      {
+        text: "⑩ Tom is taller than Ken. とほぼ同じ意味になる文は？",
+        options: [
+          { label: "A : Ken is as short as Tom.", correct: false },
+          { label: "B : Ken is less short than Tom.", correct: false },
+          { label: "C : Ken is not as tall as Tom.", correct: true }
+        ],
+        wrongComment: "「トムはケンより背が高い」＝「ケンはトムほど背が高くない（not as tall as）」となります。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "比較級 A > B は A is not as ... as B（同等比較の否定）で書き換え可能", correct: true },
+          { label: "taller を short に置き換えるだけで意味は同じになる", correct: false }
         ]
       }
     ],
     boss: {
-      type: "sort",
-      questions: [
-        {
-          text: "【EX BOSS 1/2】\n「これは私が昨日買った本です。」の意味に単語をクリックして並べかえなさい。",
-          words: ["is", "yesterday", "this", "book", "I", "the", "bought"],
-          correctAnswer: "This is the book I bought yesterday.",
-          wrongComment: "名詞(the book) の後ろに 主語+動詞(I bought) をつなげて説明します。",
-          logicText: "【判断基準】",
-          logicOptions: [
-            { label: "名詞 + [主語+動詞]（接触節/関係代名詞節）で後ろから修飾する", correct: true },
-            { label: "yesterdayを主語の直後に置く", correct: false }
-          ]
-        },
-        {
-          text: "【EX BOSS 2/2】\n「もし明日晴れたら、私たちはピクニックに行くつもりです。」の意味に単語をクリックして並べかえなさい。",
-          words: ["if", "we", "a", "will", "is", "sunny", "go", "for", "tomorrow", "it", "picnic"],
-          correctAnswer: "If it is sunny tomorrow we will go for a picnic.",
-          wrongComment: "If節（条件）の中は未来のことでも現在形(is)にし、主節にwillを用います。",
-          logicText: "【判断基準】",
-          logicOptions: [
-            { label: "条件を表すIf節内は現在形、主節はwillを用いる規則を適用する", correct: true },
-            { label: "If節の中にもwillを使う", correct: false }
-          ]
-        }
+      text: "【BOSS BATTLE】\nHow is the weather in London? の文末に tomorrow を加えた文にするとき、正しい判断はどれか？",
+      options: [
+        { label: "A : 未来 → will + 動詞の原形 → 疑問文は主語の前にwillを出す", correct: true },
+        { label: "B : 未来 → willを使う → 主語の後にwillを置く", correct: false },
+        { label: "C : 未来 → will beを使う → 主語の前に置く", correct: false }
+      ],
+      wrongComment: "tomorrow は未来を表すため will を使います。疑問文では will を主語（the weather）の前に出し、be動詞は原形の be になります。（How will the weather be in London tomorrow?）",
+      logicText: "【判断基準】",
+      logicOptions: [
+        { label: "未来を表すwillを追加し、疑問文の語順（will + 主語 + be）を構成する", correct: true },
+        { label: "is を was に変えるだけで未来を表せる", correct: false }
       ]
     }
   }
 ];
+
 let audioCtx = null;
 function initAudio() {
   if (!audioCtx) {
@@ -1255,13 +1353,25 @@ function renderStageSelect() {
   const container = document.getElementById('main-content');
   let html = '<div class="card"><div class="card-header">🗺️ ステージを選択して挑戦</div>';
   STAGES.forEach(stg => {
-    const isUnlocked = stg.id <= gameState.unlockedStage;
-    const isCleared = stg.id < gameState.unlockedStage;
+    let isUnlocked = false;
+    let isCleared = false;
+
+    if (stg.isExtra) {
+      isUnlocked = gameState.exp >= (stg.requiredExp || 1300);
+      isCleared = gameState.unlockedSkills.includes(stg.rewardSkill);
+    } else {
+      isUnlocked = stg.id <= gameState.unlockedStage;
+      isCleared = stg.id < gameState.unlockedStage;
+    }
+
+    const extraClass = stg.isExtra ? ' extra-stage-btn' : '';
+    
     html += `
-      <button class="stage-select-btn" ${isUnlocked ? '' : 'disabled'} onclick="startStage(${stg.id})">
+      <button class="stage-select-btn${extraClass}" ${isUnlocked ? '' : 'disabled'} onclick="startStage('${stg.id}')">
         <div>
           <strong>【${stg.title}】</strong> ${stg.skillName} 
           <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">出現ボス: ${stg.monsterEmoji} ${stg.monsterName}</div>
+          ${stg.isExtra && !isUnlocked ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件: 必要EXP ${stg.requiredExp} (現在: ${gameState.exp})</div>` : ''}
           ${isCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>' : ''}
         </div>
         <div>${isUnlocked ? '▶ 挑戦' : '🔒 鍵'}</div>
@@ -1273,7 +1383,9 @@ function renderStageSelect() {
 }
 function startStage(stageId) {
   initAudio();
-  gameState.currentStageId = stageId;
+  // 数値IDと文字列IDの療法に対応できるように変換
+  const parsedId = isNaN(stageId) ? stageId : Number(stageId);
+  gameState.currentStageId = parsedId;
   gameState.currentStep = 0;
   gameState.subStep = 0;
   gameState.bossSubStep = 0;
@@ -1300,7 +1412,7 @@ function renderQuestion() {
   html += `
     <div class="battle-scene">
       <div>
-        <div class="pixel-char">⚔️️🛡️</div>
+        <div class="pixel-char">⚔️🛡️</div>
         <div style="font-size:0.75rem; color:var(--accent-color); margin-top:4px;">プレーヤー</div>
       </div>
       <div style="font-size:1.2rem; color:#8b949e;">VS</div>
@@ -1317,26 +1429,26 @@ function renderQuestion() {
   }
   html += `<div class="question-text">${qData.text.replace(/\n/g, '<br>')}</div>`;
   
-  const isSortType = (isBoss && stage.boss.type === "sort") || (!isBoss && qData.type === "sort");
+  const isSortType = qData.type === "sort" || (isBoss && stage.boss.type === "sort");
 
   if (isSortType && gameState.subStep === 0) {
     // 並べ替えUI
-    html += `<div style="font-size:0.85rem; color:#8b949e; margin-bottom:5px;">【選択した単語】（タップで取り消し）</div>`;
+    html += `<div style="font-size:0.85rem; color:#8b949e; margin-bottom:5px;">【選択した項目】（タップで取り消し）</div>`;
     html += `<div class="word-answer-box">`;
     if (gameState.selectedWords.length === 0) {
-      html += `<span style="color:#484f58; font-size:0.85rem;">下の単語をクリックして並べかえ</span>`;
+      html += `<span style="color:#484f58; font-size:0.85rem;">下の項目をクリックして並べかえ</span>`;
     } else {
       gameState.selectedWords.forEach((wordObj, idx) => {
         html += `<span class="word-chip" onclick="unselectWord(${idx})">${wordObj.word}</span>`;
       });
     }
     html += `</div>`;
-    html += `<div style="font-size:0.85rem; color:#8b949e; margin-bottom:5px;">【単語リスト】</div>`;
+    html += `<div style="font-size:0.85rem; color:#8b949e; margin-bottom:5px;">【選択肢リスト】</div>`;
     html += `<div class="word-pool">`;
     qData.words.forEach((w, idx) => {
       const isUsed = gameState.selectedWords.some(item => item.origIdx === idx);
       if (!isUsed) {
-        html += `<span class="word-chip" onclick="selectWord('${w}', ${idx})">${w}</span>`;
+        html += `<span class="word-chip" onclick="selectWord('${w.replace(/'/g, "\\'")}', ${idx})">${w}</span>`;
       }
     });
     html += `</div>`;
@@ -1378,12 +1490,7 @@ function checkSortAnswer() {
   initAudio();
   const stage = STAGES.find(s => s.id === gameState.currentStageId);
   const isBoss = gameState.currentStep === stage.questions.length;
-  let qData;
-  if (isBoss) {
-    qData = stage.boss.questions[gameState.bossSubStep];
-  } else {
-    qData = stage.questions[gameState.currentStep];
-  }
+  let qData = isBoss ? stage.boss.questions[gameState.bossSubStep] : stage.questions[gameState.currentStep];
   const fbEl = document.getElementById('fb');
   const userSentence = gameState.selectedWords.map(w => w.word).join(' ');
   const normalize = (str) => {
@@ -1465,10 +1572,10 @@ function checkAnswer(selectedIndex, isLogicStep) {
             if (!gameState.unlockedSkills.includes(stage.rewardSkill)) {
               gameState.unlockedSkills.push(stage.rewardSkill);
             }
-            if (gameState.unlockedStage === stage.id) {
+            if (!stage.isExtra && gameState.unlockedStage === stage.id) {
               gameState.unlockedStage = stage.id + 1;
             }
-            if (stage.id === STAGES[STAGES.length - 1].id) { // 最短最後のステージクリアで全クリア判定
+            if (stage.id === 9 && !gameState.unlockedSkills.includes("処理手順化スキル")) { // STAGE9クリア時の全クリア演出
               gameState.isAllCleared = true;
               saveData();
               render();
@@ -1519,8 +1626,8 @@ function renderAllClear() {
       <div class="trophy-icon">🏆✨</div>
       <h2 style="color: var(--gold-color); margin-top: 0; font-size: 1.5rem;">全STAGEクリアおめでとう！</h2>
       <p style="line-height: 1.6; color: var(--text-color); margin-bottom: 20px;">
-        すべてのステージ（EX STAGE含む）を突破し、英語処理OSの基本・応用スキルを獲得しました！<br>
-        複数の処理が自動化できるまでトレーニングを続けましょう。Congratulations！
+        すべてのステージを突破し、英語処理OSの基本スキルを獲得しました！<br>
+        累計EXPが1300に達すると、さらに上位の【エクストラステージ】が開放されます！
       </p>
       <button class="btn" style="text-align: center; background: var(--success-color); color: white; font-weight: bold; justify-content: center;" onclick="resetToStageSelect()">
         🗺 ステージ選択に戻る / 続ける

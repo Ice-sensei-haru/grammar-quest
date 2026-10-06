@@ -536,7 +536,7 @@ const STAGES = [
         wrongComment: "主語が複数になるとbe動詞はareになり、後ろの名詞も複数形になります。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語が複数になれば、複数形を使う", correct: false },
+          { label: "主語が複数になれば、後の名詞はすべて複数形を使う", correct: false },
           { label: "be動詞の後ろの名詞の数は主語に合わす", correct: true }
         ]
       }
@@ -640,8 +640,8 @@ const STAGES = [
         wrongComment: "nowとbe動詞（are）があるため、現在進行形（-ing）にします。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "文末にnowがあるので一般動詞をingの形にする", correct: false },
-          { label: "be動詞があるので一般動詞をingの形にする", correct: true }
+          { label: "文末にnowがあり、theyだから一般動詞をingの形にする", correct: false },
+          { label: "文末のnowとbe動詞があるので一般動詞をingの形にする", correct: true }
         ]
       },
       {
@@ -654,8 +654,8 @@ const STAGES = [
         wrongComment: "swimming（-ing）とnowがあるので、be動詞（is）を選びます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "現在でswimmingがあるのでisを使う", correct: true },
-          { label: "主語がHeのときはisを使う", correct: false }
+          { label: "文末にnowがあり、動詞のing形があるのでisを使う", correct: true },
+          { label: "文末にnowがあり、主語がHeなのでisを使う", correct: false }
         ]
       },
       {
@@ -683,8 +683,8 @@ const STAGES = [
       wrongComment: "現在進行形の疑問文はbe動詞を主語の前に出し、一般動詞に -ing をつけます。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "Doを使わないので一般動詞をingの形にする", correct: false },
-        { label: "現在進行形はbe動詞を主語で決め、一般動詞をingの形にする", correct: true }
+        { label: "現在進行形はDoをAreに変えて、一般動詞をingの形にする", correct: false },
+        { label: "現在進行形はbe動詞を主語の前に出し、一般動詞をingの形にする", correct: true }
       ]
     }
   },
@@ -720,7 +720,7 @@ const STAGES = [
         wrongComment: "後ろに名詞があるときの代名詞の形は所有格にします。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "名詞brotherの前にあるから所有格にする", correct: true },
+          { label: "名詞 brother の前にあるから所有格にする", correct: true },
           { label: "一般動詞を見て所有格＋名詞にする", correct: false }
         ]
       },
@@ -746,11 +746,11 @@ const STAGES = [
         { label: "B : her", correct: true },
         { label: "C : him", correct: false }
       ],
-      wrongComment: "後ろに名詞dogがあります。",
+      wrongComment: "後ろに名詞 dog があります。",
       logicText: "【判断基準】",
       logicOptions: [
         { label: "主語に使うので所有格", correct: false },
-        { label: "名詞dogの前にあるから所有格", correct: true }
+        { label: "名詞 dog の前にあるから所有格", correct: true }
       ]
     }
   },
@@ -815,7 +815,7 @@ const STAGES = [
       wrongComment: "名詞を２語以上で説明するときは名詞の後ろに置きます。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "長い髪をした…がwith long hairと３語になるので、名詞の後ろから説明する", correct: true },
+        { label: "長い髪をした…が with long hair と３語になるので、名詞の後ろから説明する", correct: true },
         { label: "long hairも名詞のまとまりなので、womanの前には置けない", correct: false }
       ]
     }
@@ -1087,7 +1087,7 @@ const STAGES = [
           wrongComment: "I think + English is... の構造を作ります。",
           logicText: "【判断基準】",
           logicOptions: [
-            { label: "I think + English isの組み合わせを作る", correct: true },
+            { label: "I thinkとEnglish isの組み合わせを作る", correct: true },
             { label: "単語の一つ一つの意味で判断", correct: false }
           ]
         },
@@ -1099,7 +1099,7 @@ const STAGES = [
           logicText: "【判断基準】",
           logicOptions: [
             { label: "単語の一つ一つの意味で判断", correct: false },
-            { label: "主語と動詞。人＋ものの語順を作る", correct: true }
+            { label: "主語＋動詞（cook）＋人＋ものの語順を作る", correct: true }
           ]
         }
       ]

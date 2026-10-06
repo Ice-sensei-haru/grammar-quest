@@ -403,8 +403,8 @@ const STAGES = [
       wrongComment: "一般動詞の過去形なのでdidを使い、動詞は原形に戻します。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "lastが過去を表すのでdidを使う", correct: false },
-        { label: "一般動詞が過去形なのでdidを使う", correct: true }
+        { label: "Whenを見る → didを主語の前に置く", correct: false },
+        { label: "一般動詞を見る → 過去形 → did", correct: true }
       ]
     }
   },
@@ -414,7 +414,7 @@ const STAGES = [
     skillName: "S-V発見",
     rewardSkill: "S-V発見スキル",
     monsterEmoji: "🐉",
-    monsterName: "フェイク・キマイラ",
+    monsterName: "リトル・キマイラ",
     questions: [
       {
         text: "① Your brother is a soccer fan. の疑問文とその答え方は？",
@@ -546,7 +546,7 @@ const STAGES = [
     skillName: "動詞形選択",
     rewardSkill: "動詞形選択スキル",
     monsterEmoji: "👑",
-    monsterName: "カオス・クラウン",
+    monsterName: "デビル・クラウン",
     questions: [
       {
         text: "① Where are they (  ) soccer now? の(  )に適する語は？",
@@ -843,7 +843,7 @@ const STAGES = [
     skillName: "表現の決定",
     rewardSkill: "判断系スキルLv6：表現の決定",
     monsterEmoji: "🧙‍♂️",
-    monsterName: "マスター・グラマー",
+    monsterName: "ダーク・マスター",
     questions: [
       {
         text: "① Tom went to the park. の疑問文とその答え方は？",
@@ -1030,14 +1030,14 @@ const STAGES = [
     rewardSkill: "処理手順化スキル",
     monsterEmoji: "💎",
     monsterName: "オメガ・プロセッサー",
-    requiredExp: 1300,
+    requiredExp: 1500,
     isExtra: true,
     questions: [
       {
         type: "sort",
         text: "① ( lunch / and Lisa / cafeteria / have / Tom / at / always / the ).\nこの英文を完成させるときの手順を正しく並べかえなさい。",
-        words: ["イ：主語と動詞の組み合わせ", "オ：文の形を確認", "ウ：動詞の後ろの目的語", "ア：追加の情報を組み立てる", "エ：文全体を整える"],
-        correctAnswer: "イ：主語と動詞の組み合わせ オ：文の形を確認 ウ：動詞の後ろの目的語 ア：追加の情報を組み立てる エ：文全体を整える",
+        words: ["ア：追加の情報を組み立てる", "イ：主語と動詞の組み合わせ", "ウ：動詞の後ろの目的語", "エ：文全体を整える", "オ：肯定文・疑問文の確認"],
+        correctAnswer: "イ：主語と動詞の組み合わせ オ：肯定文・疑問文の確認 ウ：動詞の後ろの目的語 ア：追加の情報を組み立てる エ：文全体を整える",
         wrongComment: "【正しい手順】①主語と動詞の組み合わせ(イ) → ②文の形を確認(オ) → ③動詞の後ろの目的語(ウ) → ④追加の情報(ア) → ⑤文全体を整える(エ)",
         logicText: "【判断基準】",
         logicOptions: [
@@ -1055,7 +1055,7 @@ const STAGES = [
         wrongComment: "ate は eat の過去形です。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "一般動詞の形が過去形（ate）かつyesterdayがあるため", correct: true },
+          { label: "一般動詞の形が過去形（ate）かつyesterdayがある", correct: true },
           { label: "文末にyesterdayがあるため現在進行形", correct: false }
         ]
       },
@@ -1069,8 +1069,8 @@ const STAGES = [
         wrongComment: "be動詞(was) ＋ 過去分詞(eaten) は受動態（～された）を表します。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "be動詞 ＋ 過去分詞（was eaten）の構造があるため", correct: true },
-          { label: "was があるので過去進行形", correct: false }
+          { label: "was があるので過去進行形", correct: false },
+          { label: "be動詞 ＋ 過去分詞（was eaten）の構造がある", correct: true }
         ]
       },
       {
@@ -1083,7 +1083,7 @@ const STAGES = [
         wrongComment: "have/has ＋ 過去分詞(eaten) は現在完了形を表します。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "has ＋ 過去分詞（has eaten）の構造があるため", correct: true },
+          { label: "has ＋ 過去分詞（has eaten）の構造がある", correct: true },
           { label: "has があるため単なる現在形", correct: false }
         ]
       },
@@ -1111,20 +1111,20 @@ const STAGES = [
         wrongComment: "Can I ... ? は「～してもいいですか（許可/尋ねる）」の表現です。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "Why don't we ... / Shall we ... は提案。Can I ... は許可・依頼", correct: true },
-          { label: "疑問詞がついているものはすべて提案", correct: false }
+          { label: "疑問詞がついているものはすべて提案", correct: false },
+          { label: "Why don't we ... / Shall we ... は提案。Can I ... は許可・依頼", correct: true }
         ]
       },
       {
         type: "sort",
         text: "⑦ Tom took these pictures. を受動態にするとき、その手順を正しく並べかえなさい。",
-        words: ["ウ：目的語を主語にする", "オ：もとの文の動詞の時制確認", "イ：be動詞を区別する", "エ：動詞を過去分詞にする", "ア：by＋行為者を加える"],
+        words: ["ア：by＋行為者を加える", "イ：be動詞を区別する", "ウ：目的語を主語にする", "エ：動詞を過去分詞にする", "オ：もとの文の動詞の時制確認"],
         correctAnswer: "ウ：目的語を主語にする オ：もとの文の動詞の時制確認 イ：be動詞を区別する エ：動詞を過去分詞にする ア：by＋行為者を加える",
         wrongComment: "【受動態の手順】①目的語を主語に(ウ) → ②時制の確認(オ) → ③be動詞の決定(イ) → ④過去分詞(エ) → ⑤by+行為者(ア)",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "目的語の受動態主化 → 時制・主語に応じたbe動詞決定 → 過去分詞化", correct: true },
-          { label: "文頭の単語と文末の単語を入れ替えるだけ", correct: false }
+          { label: "文頭の単語と文末の単語を入れ替えてbe動詞＋過去分詞にする", correct: false },
+          { label: "目的語の受動態主化 → 時制・主語に応じたbe動詞決定 → 過去分詞化", correct: true }
         ]
       },
       {
@@ -1137,8 +1137,8 @@ const STAGES = [
         wrongComment: "two years ago（過去の明確な時点）は現在完了形と一緒に使えないため、過去形 went に変更します。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "明確な過去を表す語句（ago等）は現在完了形不可 → 過去形を使う", correct: true },
-          { label: "現在完了形の経験を表すのでhas beenのままで良い", correct: false }
+          { label: "現在完了形の経験を表すのでhas beenのままで良い", correct: false },
+          { label: "明確な過去を表す語句（agoやyesterdayなど）は現在完了形不可 → 過去形を使う", correct: true }
         ]
       },
       {
@@ -1180,8 +1180,8 @@ const STAGES = [
       wrongComment: "tomorrow は未来を表すため will を使います。疑問文では will を主語（the weather）の前に出し、be動詞は原形の be になります。（How will the weather be in London tomorrow?）",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "未来を表すwillを追加し、疑問文の語順（will + 主語 + be）を構成する", correct: true },
-        { label: "is を was に変えるだけで未来を表せる", correct: false }
+        { label: "is を will に変えるだけで未来を表せる", correct: false },
+        { label: "未来を表すwillを追加し、疑問文の語順（will + 主語 + be）を構成する", correct: true }
       ]
     }
   }
@@ -1357,7 +1357,7 @@ function renderStageSelect() {
     let isCleared = false;
 
     if (stg.isExtra) {
-      isUnlocked = gameState.exp >= (stg.requiredExp || 1300);
+      isUnlocked = gameState.exp >= (stg.requiredExp || 1500);
       isCleared = gameState.unlockedSkills.includes(stg.rewardSkill);
     } else {
       isUnlocked = stg.id <= gameState.unlockedStage;
@@ -1627,7 +1627,7 @@ function renderAllClear() {
       <h2 style="color: var(--gold-color); margin-top: 0; font-size: 1.5rem;">全STAGEクリアおめでとう！</h2>
       <p style="line-height: 1.6; color: var(--text-color); margin-bottom: 20px;">
         すべてのステージを突破し、英語処理OSの基本スキルを獲得しました！<br>
-        累計EXPが1300に達すると、さらに上位の【エクストラステージ】が開放されます！
+        累計EXPが1500に達すると、さらに上位の【エクストラステージ】が開放されます！
       </p>
       <button class="btn" style="text-align: center; background: var(--success-color); color: white; font-weight: bold; justify-content: center;" onclick="resetToStageSelect()">
         🗺 ステージ選択に戻る / 続ける

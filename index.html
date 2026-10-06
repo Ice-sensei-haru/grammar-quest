@@ -223,6 +223,10 @@
     .stage-select-btn.extra-stage-btn:hover:not(:disabled) {
       border-color: #c084fc;
     }
+    .stage-select-btn.battle-mode-btn {
+      border-color: var(--danger-color);
+      background: linear-gradient(135deg, #2d1111 0%, #21262d 100%);
+    }
     .battle-scene {
       display: flex;
       justify-content: space-around;
@@ -315,6 +319,60 @@
       cursor: not-allowed;
       opacity: 0.6;
     }
+    /* バトルモード用CSS */
+    .timer-display {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--danger-color);
+      text-align: center;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    .highlight-red {
+      color: #ff5555;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+    .skill-comment-box {
+      background: rgba(210, 153, 34, 0.15);
+      border: 1px solid var(--gold-color);
+      color: var(--gold-color);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+    .dialog-overlay {
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid var(--gold-color);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 15px;
+    }
+    .dialog-btns {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 15px;
+    }
+    .dialog-btn {
+      padding: 10px 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+    }
+    .dialog-btn-yes {
+      background: var(--success-color);
+      color: white;
+    }
+    .dialog-btn-no {
+      background: var(--danger-color);
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -341,6 +399,30 @@
   <div id="main-content"></div>
 </div>
 <script>
+// 動詞判定バトルモードの全20問データ
+const VERB_BATTLE_QUESTIONS = [
+  { id: 1, text: "Tom and Ken (  ) in the library.", options: [{ label: "A：is", correct: false }, { label: "B：are", correct: true }], highlightText: "Tom and Ken", comment: "主語が複数" },
+  { id: 2, text: "He (  ) soccer last Sunday.", options: [{ label: "A：plays", correct: false }, { label: "B：played", correct: true }], highlightText: "last Sunday", comment: "過去時制" },
+  { id: 3, text: "Is Ken (  ) the guitar now?", options: [{ label: "A：playing", correct: true }, { label: "B：played", correct: false }], highlightText: "Is", comment: "進行形" },
+  { id: 4, text: "One of them (  ) to stay here.", options: [{ label: "A：have", correct: false }, { label: "B：has", correct: true }], highlightText: "One", comment: "主語が単数" },
+  { id: 5, text: "Who (  ) the bike?", options: [{ label: "A：uses", correct: true }, { label: "B：does use", correct: false }], highlightText: "Who", comment: "疑問詞が主語" },
+  { id: 6, text: "When was the temple (  )?", options: [{ label: "A：built", correct: true }, { label: "B：building", correct: false }], highlightText: "the temple", comment: "主語が動作を受ける側" },
+  { id: 7, text: "The concert will be (  ) tomorrow.", options: [{ label: "A：hold", correct: false }, { label: "B：held", correct: true }], highlightText: "be", comment: "受動態" },
+  { id: 8, text: "My sister does not (  ) cats.", options: [{ label: "A：like", correct: true }, { label: "B：likes", correct: false }], highlightText: "does", comment: "否定文は原形" },
+  { id: 9, text: "(  ) your sister busy then?", options: [{ label: "A：Did", correct: false }, { label: "B：Was", correct: true }], highlightText: "busy", comment: "一般動詞がない" },
+  { id: 10, text: "(  ) she running there?", options: [{ label: "A：Does", correct: false }, { label: "B：Is", correct: true }], highlightText: "running", comment: "進行形" },
+  { id: 11, text: "Whose (  ) the bags?", options: [{ label: "A：is", correct: false }, { label: "B：are", correct: true }], highlightText: "bags", comment: "主語が複数" },
+  { id: 12, text: "He will (  ) here tomorrow.", options: [{ label: "A：come", correct: true }, { label: "B：comes", correct: false }], highlightText: "will", comment: "助動詞の後ろ" },
+  { id: 13, text: "She (  ) not go there yesterday.", options: [{ label: "A：was", correct: false }, { label: "B：did", correct: true }], highlightText: "go", comment: "一般動詞の否定文" },
+  { id: 14, text: "Where (  ) Tom play soccer?", options: [{ label: "A：do", correct: false }, { label: "B：can", correct: true }], highlightText: "Tom", comment: "助動詞は主語に影響しない" },
+  { id: 15, text: "Where (  ) Tom play soccer?", options: [{ label: "A：does", correct: true }, { label: "B：is", correct: false }], highlightText: "play", comment: "一般動詞の疑問文" },
+  { id: 16, text: "There (  ) a lot of books on the desk.", options: [{ label: "A：is", correct: false }, { label: "B：are", correct: true }], highlightText: "books", comment: "複数形" },
+  { id: 17, text: "There (  ) a lot of water in the bottle.", options: [{ label: "A：is", correct: true }, { label: "B：are", correct: false }], highlightText: "water", comment: "数えられない名詞" },
+  { id: 18, text: "Have you ever (  ) the movie?", options: [{ label: "A：see", correct: false }, { label: "B：seen", correct: true }], highlightText: "Have", comment: "現在完了" },
+  { id: 19, text: "(  ) she read the book yet?", options: [{ label: "A：Does", correct: false }, { label: "B：Has", correct: true }], highlightText: "yet", comment: "現在完了" },
+  { id: 20, text: "(  ) she read the book last night?", options: [{ label: "A：Did", correct: true }, { label: "B：Has", correct: false }], highlightText: "last night", comment: "過去時制" }
+];
+
 const STAGES = [
   {
     id: 1,
@@ -1360,7 +1442,8 @@ function triggerConfetti() {
     });
   }
 }
-const STORAGE_KEY = 'grammar_quest_save_data_v7';
+
+const STORAGE_KEY = 'grammar_quest_save_data_v8';
 let gameState = {
   exp: 0,
   unlockedStage: 1,
@@ -1370,8 +1453,16 @@ let gameState = {
   bossSubStep: 0,
   selectedWords: [],
   unlockedSkills: [],
-  isAllCleared: false
+  isAllCleared: false,
+  // バトルモード用状態
+  verbBattleIndex: 0,
+  verbBattleTimeLeft: 60,
+  verbBattleSkillActive: false,
+  verbBattleDialogActive: false
 };
+
+let battleTimer = null;
+
 function loadSaveData() {
   const data = localStorage.getItem(STORAGE_KEY);
   if (data) {
@@ -1379,20 +1470,42 @@ function loadSaveData() {
   }
   if (gameState.bossSubStep === undefined) gameState.bossSubStep = 0;
   if (!gameState.selectedWords) gameState.selectedWords = [];
+  if (gameState.verbBattleIndex === undefined) gameState.verbBattleIndex = 0;
+  if (gameState.verbBattleTimeLeft === undefined) gameState.verbBattleTimeLeft = 60;
+  if (gameState.verbBattleSkillActive === undefined) gameState.verbBattleSkillActive = false;
+  if (gameState.verbBattleDialogActive === undefined) gameState.verbBattleDialogActive = false;
   updateHeader();
 }
+
 function saveData() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(gameState));
   updateHeader();
 }
+
 function confirmResetData() {
   if (confirm("ゲームデータを初期化して最初から始めますか？")) {
+    stopBattleTimer();
     localStorage.removeItem(STORAGE_KEY);
-    gameState = { exp: 0, unlockedStage: 1, currentStageId: null, currentStep: 0, subStep: 0, bossSubStep: 0, selectedWords: [], unlockedSkills: [], isAllCleared: false };
+    gameState = { 
+      exp: 0, 
+      unlockedStage: 1, 
+      currentStageId: null, 
+      currentStep: 0, 
+      subStep: 0, 
+      bossSubStep: 0, 
+      selectedWords: [], 
+      unlockedSkills: [], 
+      isAllCleared: false,
+      verbBattleIndex: 0,
+      verbBattleTimeLeft: 60,
+      verbBattleSkillActive: false,
+      verbBattleDialogActive: false
+    };
     saveData();
     render();
   }
 }
+
 function addExp(amount) {
   const oldRank = Math.floor(gameState.exp / 100) + 1;
   gameState.exp += amount;
@@ -1401,9 +1514,11 @@ function addExp(amount) {
     playSound('levelup');
   }
 }
+
 function getRank(exp) {
   return Math.floor(exp / 100) + 1;
 }
+
 function updateHeader() {
   const rank = getRank(gameState.exp);
   document.getElementById('rank-display').textContent = rank;
@@ -1420,25 +1535,36 @@ function updateHeader() {
     skillContainer.innerHTML = gameState.unlockedSkills.map(s => `<span class="skill-badge">🛡 ${s}</span>`).join('');
   }
 }
+
 function render() {
   if (gameState.isAllCleared) {
     renderAllClear();
+  } else if (gameState.currentStageId === 'verb_battle') {
+    renderVerbBattle();
   } else if (gameState.currentStageId === null) {
     renderStageSelect();
   } else {
     renderQuestion();
   }
 }
+
 function renderStageSelect() {
+  stopBattleTimer();
   const container = document.getElementById('main-content');
-  let html = '<div class="card"><div class="card-header">🗺️ ステージを選択して挑戦</div>';
+  let html = '<div class="card"><div class="card-header">🗺️️ ステージを選択して挑戦</div>';
+  
+  // 上位スキル進化STAGE（処理手順化スキル）クリア判定
+  const isExtraCleared = gameState.unlockedSkills.includes("処理手順化スキル");
+  // 動詞判定バトルモード クリア判定
+  const isVerbBattleCleared = gameState.unlockedSkills.includes("動詞判定マスター");
+
   STAGES.forEach(stg => {
     let isUnlocked = false;
     let isCleared = false;
     let lockReason = "";
-
+    
     if (stg.isExtra) {
-      // エクストラステージ解放条件: STAGE 9クリア & EXP 1500以上
+      // エクストラステージ開放条件: STAGE 9クリア & EXP 1500以上
       const isStage9Cleared = gameState.unlockedStage > 9 || gameState.unlockedSkills.includes("文法構造判定スキル");
       isUnlocked = isStage9Cleared && gameState.exp >= (stg.requiredExp || 1500);
       isCleared = gameState.unlockedSkills.includes(stg.rewardSkill);
@@ -1447,10 +1573,10 @@ function renderStageSelect() {
         else lockReason = `必要EXP ${stg.requiredExp} (現在: ${gameState.exp})`;
       }
     } else if (stg.id === 10) {
-      // STAGE 10 解放条件: 上位スキル進化STAGE（処理手順化スキル）クリア
-      isUnlocked = gameState.unlockedSkills.includes("処理手順化スキル");
+      // STAGE 10 解放条件: 動詞判定バトルモードクリアが必要
+      isUnlocked = isVerbBattleCleared;
       isCleared = gameState.unlockedSkills.includes(stg.rewardSkill);
-      if (!isUnlocked) lockReason = "上位スキル進化STAGE クリアが必要";
+      if (!isUnlocked) lockReason = "動詞判定バトルモード クリアが必要";
     } else {
       // 通常ステージ 1~9
       isUnlocked = stg.id <= gameState.unlockedStage;
@@ -1470,10 +1596,29 @@ function renderStageSelect() {
         <div>${isUnlocked ? '▶ 挑戦' : '🔒 鍵'}</div>
       </button>
     `;
+
+    // 上位スキル進化STAGEの直後に「動詞判定バトルモード」を表示
+    if (stg.isExtra) {
+      const verbUnlocked = isExtraCleared;
+      const verbReason = verbUnlocked ? "" : "上位スキル進化STAGE クリアが必要";
+      html += `
+        <button class="stage-select-btn battle-mode-btn" ${verbUnlocked ? '' : 'disabled'} onclick="startVerbBattle()">
+          <div>
+            <strong>【動詞判定バトル】</strong> タイムトライアル (20問)
+            <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">制限時間: 1分間 / 誤答即リスタート</div>
+            ${!verbUnlocked ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件: ${verbReason}</div>` : ''}
+            ${isVerbBattleCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>' : ''}
+          </div>
+          <div>${verbUnlocked ? '⚔️ 挑戦' : '🔒 鍵'}</div>
+        </button>
+      `;
+    }
   });
+  
   html += '</div>';
   container.innerHTML = html;
 }
+
 function startStage(stageId) {
   initAudio();
   const parsedId = isNaN(stageId) ? stageId : Number(stageId);
@@ -1485,6 +1630,180 @@ function startStage(stageId) {
   saveData();
   render();
 }
+
+// ----------------------------------------------------
+// 動詞判定バトルモードの処理
+// ----------------------------------------------------
+function startVerbBattle() {
+  initAudio();
+  gameState.currentStageId = 'verb_battle';
+  gameState.verbBattleIndex = 0;
+  gameState.verbBattleTimeLeft = 60;
+  gameState.verbBattleDialogActive = false;
+  saveData();
+  render();
+  startBattleTimer();
+}
+
+function startBattleTimer() {
+  stopBattleTimer();
+  battleTimer = setInterval(() => {
+    if (gameState.verbBattleTimeLeft > 0 && !gameState.verbBattleDialogActive) {
+      gameState.verbBattleTimeLeft--;
+      const timerEl = document.getElementById('battle-timer');
+      if (timerEl) {
+        timerEl.textContent = `⏱️ 残り時間: ${gameState.verbBattleTimeLeft}秒`;
+      }
+      if (gameState.verbBattleTimeLeft <= 0) {
+        stopBattleTimer();
+        playSound('wrong');
+        triggerVerbBattleFail("1分経過！タイムオーバーです。");
+      }
+    }
+  }, 1000);
+}
+
+function stopBattleTimer() {
+  if (battleTimer) {
+    clearInterval(battleTimer);
+    battleTimer = null;
+  }
+}
+
+function renderVerbBattle() {
+  const container = document.getElementById('main-content');
+  const qData = VERB_BATTLE_QUESTIONS[gameState.verbBattleIndex];
+  
+  let html = `
+    <div class="battle-scene">
+      <div>
+        <div class="pixel-char">⚔️</div>
+        <div style="font-size:0.75rem; color:var(--accent-color); margin-top:4px;">プレーヤー</div>
+      </div>
+      <div style="font-size:1.2rem; color:#8b949e;">VS</div>
+      <div>
+        <div class="monster-char">⏱️</div>
+        <div style="font-size:0.75rem; color:var(--danger-color); margin-top:4px;">動詞判定マスター</div>
+      </div>
+    </div>
+    <div class="card boss-card">
+      <div class="card-header">
+        <span>🔥 動詞判定バトル (Q${gameState.verbBattleIndex + 1}/20)</span>
+        <span style="font-size:0.8rem; color:#8b949e; cursor:pointer;" onclick="exitStage()">✕ 中断</span>
+      </div>
+      <div id="battle-timer" class="timer-display">⏱️ 残り時間: ${gameState.verbBattleTimeLeft}秒</div>
+  `;
+
+  // スキル発動時の表示（赤色ハイライト＆コメント）
+  if (gameState.verbBattleSkillActive) {
+    html += `<div class="skill-comment-box">💡 スキルコメント: ${qData.comment}</div>`;
+  }
+
+  let formattedText = qData.text;
+  if (gameState.verbBattleSkillActive && qData.highlightText) {
+    formattedText = formattedText.replace(
+      qData.highlightText,
+      `<span class="highlight-red">${qData.highlightText}</span>`
+    );
+  }
+
+  html += `<div class="question-text">${formattedText}</div>`;
+
+  if (!gameState.verbBattleDialogActive) {
+    html += `<div class="options" id="opt-list">`;
+    qData.options.forEach((opt, idx) => {
+      html += `<button class="btn" onclick="checkVerbBattleAnswer(${idx})">${opt.label}</button>`;
+    });
+    html += `</div>`;
+  } else {
+    // 失敗・タイムオーバー時のダイアログを表示
+    html += `
+      <div class="dialog-overlay">
+        <h3 style="color:var(--gold-color); margin-top:0;">クリア条件未達</h3>
+        <p style="font-size:1.05rem;">「判断処理スキルを発動しますか？」</p>
+        <div class="dialog-btns">
+          <button class="dialog-btn dialog-btn-yes" onclick="handleSkillDialog(true)">YES</button>
+          <button class="dialog-btn dialog-btn-no" onclick="handleSkillDialog(false)">NO</button>
+        </div>
+      </div>
+    `;
+  }
+
+  html += `<div id="fb" class="feedback"></div></div>`;
+  container.innerHTML = html;
+}
+
+function checkVerbBattleAnswer(selectedIndex) {
+  initAudio();
+  const qData = VERB_BATTLE_QUESTIONS[gameState.verbBattleIndex];
+  const selected = qData.options[selectedIndex];
+  const fbEl = document.getElementById('fb');
+  const buttons = document.querySelectorAll('#opt-list .btn');
+  buttons.forEach(b => b.disabled = true);
+
+  if (selected.correct) {
+    playSound('correct');
+    buttons[selectedIndex].classList.add('correct');
+    
+    if (gameState.verbBattleIndex + 1 < VERB_BATTLE_QUESTIONS.length) {
+      setTimeout(() => {
+        gameState.verbBattleIndex++;
+        saveData();
+        render();
+      }, 400);
+    } else {
+      // 20問全勝クリア！
+      stopBattleTimer();
+      playSound('clear');
+      triggerConfetti();
+      fbEl.className = "feedback active correct-fb";
+      fbEl.innerHTML = "<strong>🏆 動詞判定バトル PERFECT CLEAR!!</strong>";
+      
+      if (!gameState.unlockedSkills.includes("動詞判定マスター")) {
+        gameState.unlockedSkills.push("動詞判定マスター");
+      }
+      saveData();
+      
+      setTimeout(() => {
+        alert("🎉 動詞判定バトルクリア！\nSTAGE 10 が開放されました！");
+        gameState.currentStageId = null;
+        render();
+      }, 1000);
+    }
+  } else {
+    // 誤答時は1問目からリスタート
+    playSound('wrong');
+    buttons[selectedIndex].classList.add('wrong');
+    stopBattleTimer();
+    triggerVerbBattleFail("不正解！１問目からリスタートです。");
+  }
+}
+
+function triggerVerbBattleFail(reasonText) {
+  gameState.verbBattleDialogActive = true;
+  saveData();
+  render();
+  const fbEl = document.getElementById('fb');
+  if (fbEl) {
+    fbEl.className = "feedback active wrong-fb";
+    fbEl.innerHTML = `<strong>${reasonText}</strong>`;
+  }
+}
+
+function handleSkillDialog(useSkill) {
+  initAudio();
+  gameState.verbBattleSkillActive = useSkill;
+  gameState.verbBattleDialogActive = false;
+  gameState.verbBattleIndex = 0;
+  gameState.verbBattleTimeLeft = 60;
+  saveData();
+  render();
+  startBattleTimer();
+}
+
+// ----------------------------------------------------
+// 通常ステージの判定処理
+// ----------------------------------------------------
 function renderQuestion() {
   const container = document.getElementById('main-content');
   const stage = STAGES.find(s => s.id === gameState.currentStageId);
@@ -1504,7 +1823,7 @@ function renderQuestion() {
   html += `
     <div class="battle-scene">
       <div>
-        <div class="pixel-char">⚔️🛡️</div>
+        <div class="pixel-char">⚔️️🛡️</div>
         <div style="font-size:0.75rem; color:var(--accent-color); margin-top:4px;">プレーヤー</div>
       </div>
       <div style="font-size:1.2rem; color:#8b949e;">VS</div>
@@ -1562,6 +1881,7 @@ function renderQuestion() {
   html += `<div id="fb" class="feedback"></div></div>`;
   container.innerHTML = html;
 }
+
 function selectWord(word, origIdx) {
   initAudio();
   gameState.selectedWords.push({ word: word, origIdx: origIdx });
@@ -1574,6 +1894,7 @@ function unselectWord(idx) {
   saveData();
   render();
 }
+
 function checkSortAnswer() {
   initAudio();
   const stage = STAGES.find(s => s.id === gameState.currentStageId);
@@ -1603,6 +1924,7 @@ function checkSortAnswer() {
     fbEl.innerHTML = `<strong>不正解...</strong><br>${qData.wrongComment}`;
   }
 }
+
 function checkAnswer(selectedIndex, isLogicStep) {
   initAudio();
   const stage = STAGES.find(s => s.id === gameState.currentStageId);
@@ -1624,6 +1946,7 @@ function checkAnswer(selectedIndex, isLogicStep) {
   const fbEl = document.getElementById('fb');
   const buttons = document.querySelectorAll('#opt-list .btn');
   buttons.forEach(b => b.disabled = true);
+  
   if (selected.correct) {
     buttons[selectedIndex].classList.add('correct');
     if (!isLogicStep) {
@@ -1709,6 +2032,7 @@ function checkAnswer(selectedIndex, isLogicStep) {
   }
   saveData();
 }
+
 function renderAllClear() {
   const container = document.getElementById('main-content');
   container.innerHTML = `
@@ -1725,19 +2049,23 @@ function renderAllClear() {
     </div>
   `;
 }
+
 function resetToStageSelect() {
   gameState.isAllCleared = false;
   gameState.currentStageId = null;
   saveData();
   render();
 }
+
 function exitStage() {
   if (confirm("ステージ選択画面に戻りますか？（進行状況は自動保存されます）")) {
+    stopBattleTimer();
     gameState.currentStageId = null;
     saveData();
     render();
   }
 }
+
 document.addEventListener('click', initAudio, { once: true });
 loadSaveData();
 render();

@@ -1026,7 +1026,7 @@ const STAGES = [
   {
     id: "extra",
     title: "【上位スキル進化STAGE】",
-    skillName: "処理手順化スキル",
+    skillName: "処理手順化",
     rewardSkill: "処理手順化スキル",
     monsterEmoji: "💎",
     monsterName: "オメガ・プロセッサー",
@@ -1184,6 +1184,86 @@ const STAGES = [
         { label: "未来を表すwillを追加し、疑問文の語順（will + 主語 + be）を構成する", correct: true }
       ]
     }
+  },
+  {
+    id: 10,
+    title: "STAGE 10",
+    skillName: "情報操作",
+    rewardSkill: "情報操作スキル",
+    monsterEmoji: "🔱",
+    monsterName: "ロード・オペレーター",
+    questions: [
+      {
+        text: "① Tom often plays basketball. に対する次の設問への答え方は？\n設問：Does Tom often play tennis?",
+        options: [
+          { label: "A : Yes, he does.", correct: false },
+          { label: "B : No, he doesn’t.", correct: true },
+          { label: "C : Tom plays basketball.", correct: false }
+        ],
+        wrongComment: "疑問詞がない → Yes / Noで答える。主語は代名詞に変える",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "疑問詞がない → Yes / Noで答える。主語は代名詞に変える", correct: true },
+          { label: "使われている単語の違いで判断", correct: false }
+        ]
+      },
+      {
+        text: "② Lisa has three cats. に対する次の設問への答え方は？\n設問：How many cats does Lisa have?",
+        options: [
+          { label: "A : She has three.", correct: true },
+          { label: "B : Three cats are.", correct: false },
+          { label: "C : Lisa has three.", correct: false }
+        ],
+        wrongComment: "主語は代名詞に。動詞は疑問文の形に合わせる",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "意味の解釈「リサは３匹のネコを飼っている」で判断", correct: false },
+          { label: "主語は代名詞に。動詞は疑問文の形に合わせる", correct: true }
+        ]
+      },
+      {
+        text: "③ It was rainy, so Lisa and Tom came by taxi. に対する次の設問への答え方は？\n設問：Why did Lisa and Tom came by taxi?",
+        options: [
+          { label: "A : So they like taking a taxi.", correct: false },
+          { label: "B : They had rain.", correct: false },
+          { label: "C : Because it was rainy.", correct: true }
+        ],
+        wrongComment: "Whyに対する答え方はBecause＋主語＋動詞の形を使う",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "Whyに対する答え方はBecause＋主語＋動詞の形を使う", correct: true },
+          { label: "「雨が降っていた。だからタクシーで来た」と解釈する", correct: false }
+        ]
+      },
+      {
+        text: "④ Tom usually cleans his room on Sundays. に対する次の設問への答え方は？\n設問：What does Tom usually do on Sundays?",
+        options: [
+          { label: "A : He plays soccer.", correct: false },
+          { label: "B : He cleans his room.", correct: true },
+          { label: "C : His room is.", correct: false }
+        ],
+        wrongComment: "主語は代名詞に、時制と動詞の形は疑問文に合わせる",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "主語は代名詞に、時制と動詞の形は疑問文に合わせる", correct: true },
+          { label: "疑問文の意味に合わせて答える", correct: false }
+        ]
+      }
+    ],
+    boss: {
+      text: "【BOSS BATTLE】\nTom cooks dinner every day. に対する次の設問への答え方は？\n設問：Who cooks dinner?",
+      options: [
+        { label: "A : Tom is.", correct: false },
+        { label: "B : He cooks dinner.", correct: false },
+        { label: "C : Tom does.", correct: true }
+      ],
+      wrongComment: "主語＋（助）動詞.で答える。一般動詞のみの文ではdo, does, didで答える",
+      logicText: "【判断基準】",
+      logicOptions: [
+        { label: "主語を代名詞にして、動詞を本文に合わす", correct: false },
+        { label: "主語＋（助）動詞.で答える。一般動詞のみの文ではdo, does, didで答える", correct: true }
+      ]
+    }
   }
 ];
 
@@ -1280,7 +1360,7 @@ function triggerConfetti() {
     });
   }
 }
-const STORAGE_KEY = 'grammar_quest_save_data_v6';
+const STORAGE_KEY = 'grammar_quest_save_data_v7';
 let gameState = {
   exp: 0,
   unlockedStage: 1,
@@ -1355,15 +1435,28 @@ function renderStageSelect() {
   STAGES.forEach(stg => {
     let isUnlocked = false;
     let isCleared = false;
+    let lockReason = "";
 
     if (stg.isExtra) {
-      isUnlocked = gameState.exp >= (stg.requiredExp || 1500);
+      // エクストラステージ解放条件: STAGE 9クリア & EXP 1500以上
+      const isStage9Cleared = gameState.unlockedStage > 9 || gameState.unlockedSkills.includes("文法構造判定スキル");
+      isUnlocked = isStage9Cleared && gameState.exp >= (stg.requiredExp || 1500);
       isCleared = gameState.unlockedSkills.includes(stg.rewardSkill);
+      if (!isUnlocked) {
+        if (!isStage9Cleared) lockReason = "STAGE 9 クリアが必要";
+        else lockReason = `必要EXP ${stg.requiredExp} (現在: ${gameState.exp})`;
+      }
+    } else if (stg.id === 10) {
+      // STAGE 10 解放条件: 上位スキル進化STAGE（処理手順化スキル）クリア
+      isUnlocked = gameState.unlockedSkills.includes("処理手順化スキル");
+      isCleared = gameState.unlockedSkills.includes(stg.rewardSkill);
+      if (!isUnlocked) lockReason = "上位スキル進化STAGE クリアが必要";
     } else {
+      // 通常ステージ 1~9
       isUnlocked = stg.id <= gameState.unlockedStage;
       isCleared = stg.id < gameState.unlockedStage;
     }
-
+    
     const extraClass = stg.isExtra ? ' extra-stage-btn' : '';
     
     html += `
@@ -1371,7 +1464,7 @@ function renderStageSelect() {
         <div>
           <strong>【${stg.title}】</strong> ${stg.skillName} 
           <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">出現ボス: ${stg.monsterEmoji} ${stg.monsterName}</div>
-          ${stg.isExtra && !isUnlocked ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件: 必要EXP ${stg.requiredExp} (現在: ${gameState.exp})</div>` : ''}
+          ${!isUnlocked && lockReason ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件: ${lockReason}</div>` : ''}
           ${isCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>' : ''}
         </div>
         <div>${isUnlocked ? '▶ 挑戦' : '🔒 鍵'}</div>
@@ -1383,7 +1476,6 @@ function renderStageSelect() {
 }
 function startStage(stageId) {
   initAudio();
-  // 数値IDと文字列IDの療法に対応できるように変換
   const parsedId = isNaN(stageId) ? stageId : Number(stageId);
   gameState.currentStageId = parsedId;
   gameState.currentStep = 0;
@@ -1430,9 +1522,7 @@ function renderQuestion() {
   html += `<div class="question-text">${qData.text.replace(/\n/g, '<br>')}</div>`;
   
   const isSortType = qData.type === "sort" || (isBoss && stage.boss.type === "sort");
-
   if (isSortType && gameState.subStep === 0) {
-    // 並べ替えUI
     html += `<div style="font-size:0.85rem; color:#8b949e; margin-bottom:5px;">【選択した項目】（タップで取り消し）</div>`;
     html += `<div class="word-answer-box">`;
     if (gameState.selectedWords.length === 0) {
@@ -1456,14 +1546,12 @@ function renderQuestion() {
       <button class="sort-action-btn" onclick="checkSortAnswer()" ${gameState.selectedWords.length === 0 ? 'disabled' : ''}>回答判定 ▶</button>
     </div>`;
   } else if (gameState.subStep === 0) {
-    // 通常選択肢
     html += `<div class="options" id="opt-list">`;
     qData.options.forEach((opt, idx) => {
       html += `<button class="btn" onclick="checkAnswer(${idx}, false)">${opt.label}</button>`;
     });
     html += `</div>`;
   } else {
-    // 判断基準の選択肢
     html += `<div style="margin-bottom:10px; font-weight:bold; color:var(--gold-color);">${qData.logicText}</div>`;
     html += `<div class="options" id="opt-list">`;
     qData.logicOptions.forEach((opt, idx) => {
@@ -1572,10 +1660,12 @@ function checkAnswer(selectedIndex, isLogicStep) {
             if (!gameState.unlockedSkills.includes(stage.rewardSkill)) {
               gameState.unlockedSkills.push(stage.rewardSkill);
             }
-            if (!stage.isExtra && gameState.unlockedStage === stage.id) {
+            if (typeof stage.id === 'number' && gameState.unlockedStage === stage.id) {
               gameState.unlockedStage = stage.id + 1;
             }
-            if (stage.id === 9 && !gameState.unlockedSkills.includes("処理手順化スキル")) { // STAGE9クリア時の全クリア演出
+            
+            // STAGE 10 クリア時の全クリア演出
+            if (stage.id === 10) {
               gameState.isAllCleared = true;
               saveData();
               render();
@@ -1626,11 +1716,11 @@ function renderAllClear() {
       <div class="trophy-icon">🏆✨</div>
       <h2 style="color: var(--gold-color); margin-top: 0; font-size: 1.5rem;">全STAGEクリアおめでとう！</h2>
       <p style="line-height: 1.6; color: var(--text-color); margin-bottom: 20px;">
-        すべてのステージを突破し、英語処理OSの基本スキルを獲得しました！<br>
-        累計EXPが1500に達すると、さらに上位の【エクストラステージ】が開放されます！
+        すべてのステージ（STAGE 1〜10、上位スキル進化STAGE）を完遂し、<br>
+        完璧な英語処理OSをマスターしました！
       </p>
       <button class="btn" style="text-align: center; background: var(--success-color); color: white; font-weight: bold; justify-content: center;" onclick="resetToStageSelect()">
-        🗺 ステージ選択に戻る / 続ける
+        🗺 ステージ選択に戻る / 復習する
       </button>
     </div>
   `;

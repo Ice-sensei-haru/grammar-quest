@@ -1076,15 +1076,15 @@ const STAGES = [
       {
         text: "④ Tom has just eaten lunch. の文に使われている表現は？",
         options: [
-          { label: "A : 進行形", correct: false },
-          { label: "B : 完了形", correct: true },
+          { label: "A : 完了形（継続）", correct: false },
+          { label: "B : 完了形（完了）", correct: true },
           { label: "C : 受動態", correct: false }
         ],
-        wrongComment: "have/has ＋ 過去分詞(eaten) は現在完了形を表します。",
+        wrongComment: "have/has ＋ just ＋ 過去分詞(eaten) は現在完了形（完了）を表します。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "has ＋ 過去分詞（has eaten）の構造がある", correct: true },
-          { label: "has があるため単なる現在形", correct: false }
+          { label: "has ＋ 過去分詞（has eaten）とjustが過去分詞の前にある", correct: true },
+          { label: "過去分詞があるため受動態", correct: false }
         ]
       },
       {
@@ -1194,7 +1194,7 @@ const STAGES = [
     monsterName: "ロード・オペレーター",
     questions: [
       {
-        text: "① Tom often plays basketball. に対する次の設問への答え方は？\n設問：Does Tom often play tennis?",
+        text: "① 【英問英答】Tom often plays basketball. に対する次の設問への答え方は？\n設問：Does Tom often play tennis?",
         options: [
           { label: "A : Yes, he does.", correct: false },
           { label: "B : No, he doesn’t.", correct: true },
@@ -1208,7 +1208,7 @@ const STAGES = [
         ]
       },
       {
-        text: "② Lisa has three cats. に対する次の設問への答え方は？\n設問：How many cats does Lisa have?",
+        text: "② 【英問英答】Lisa has three cats. に対する次の設問への答え方は？\n設問：How many cats does Lisa have?",
         options: [
           { label: "A : She has three.", correct: true },
           { label: "B : Three cats are.", correct: false },
@@ -1222,7 +1222,7 @@ const STAGES = [
         ]
       },
       {
-        text: "③ It was rainy, so Lisa and Tom came by taxi. に対する次の設問への答え方は？\n設問：Why did Lisa and Tom came by taxi?",
+        text: "③ 【英問英答】It was rainy, so Lisa and Tom came by taxi. に対する次の設問への答え方は？\n設問：Why did Lisa and Tom came by taxi?",
         options: [
           { label: "A : So they like taking a taxi.", correct: false },
           { label: "B : They had rain.", correct: false },
@@ -1236,7 +1236,7 @@ const STAGES = [
         ]
       },
       {
-        text: "④ Tom usually cleans his room on Sundays. に対する次の設問への答え方は？\n設問：What does Tom usually do on Sundays?",
+        text: "④ 【英問英答】Tom usually cleans his room on Sundays. に対する次の設問への答え方は？\n設問：What does Tom usually do on Sundays?",
         options: [
           { label: "A : He plays soccer.", correct: false },
           { label: "B : He cleans his room.", correct: true },
@@ -1251,7 +1251,7 @@ const STAGES = [
       }
     ],
     boss: {
-      text: "【BOSS BATTLE】\nTom cooks dinner every day. に対する次の設問への答え方は？\n設問：Who cooks dinner?",
+      text: "【BOSS BATTLE】\n【英問英答】Tom cooks dinner every day. に対する次の設問への答え方は？\n設問：Who cooks dinner?",
       options: [
         { label: "A : Tom is.", correct: false },
         { label: "B : He cooks dinner.", correct: false },
@@ -1716,8 +1716,8 @@ function renderAllClear() {
       <div class="trophy-icon">🏆✨</div>
       <h2 style="color: var(--gold-color); margin-top: 0; font-size: 1.5rem;">全STAGEクリアおめでとう！</h2>
       <p style="line-height: 1.6; color: var(--text-color); margin-bottom: 20px;">
-        すべてのステージ（STAGE 1〜10、上位スキル進化STAGE）を完遂し、<br>
-        完璧な英語処理OSをマスターしました！
+        すべてのSTAGE SKILLを獲得しました！<br>
+        完璧な英語処理OSをマスターを目指してトレーニングしましょう！
       </p>
       <button class="btn" style="text-align: center; background: var(--success-color); color: white; font-weight: bold; justify-content: center;" onclick="resetToStageSelect()">
         🗺 ステージ選択に戻る / 復習する

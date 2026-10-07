@@ -951,7 +951,7 @@ const STAGES = [
         wrongComment: "thereの文はthereで答えます。疑問文はsomeをanyに変えます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "be動詞 → thereの前へ。some → anyへ", correct: true },
+          { label: "be動詞 → thereの前へ。some → 疑問文・否定文はanyへ", correct: true },
           { label: "意味の解釈「そこに少年が何人かいますか。」で判断", correct: false }
         ]
       },
@@ -1777,7 +1777,7 @@ function renderStageSelect() {
   stopBattleTimer();
   stopStage12Timer();
   const container = document.getElementById('main-content');
-  let html = '<div class="card"><div class="card-header">🗺 ステージを選択して挑戦</div>';
+  let html = '<div class="card"><div class="card-header">★ ステージを選択して挑戦</div>';
   
   const isExtraCleared = gameState.unlockedSkills.includes("処理手順化スキル");
   const isVerbBattleCleared = gameState.unlockedSkills.includes("動詞判定マスター");
@@ -1949,7 +1949,7 @@ function renderVerbBattle() {
     html += `
       <div class="dialog-overlay">
         <h3 style="color:var(--gold-color); margin-top:0;">クリア条件未達</h3>
-        <p style="font-size:1.05rem;">「獲得スキルを発動しますか？」</p>
+        <p style="font-size:1.05rem;">「ユニークスキルを発動しますか？」</p>
         <div class="dialog-btns">
           <button class="dialog-btn dialog-btn-yes" onclick="handleSkillDialog(true)">YES</button>
           <button class="dialog-btn dialog-btn-no" onclick="handleSkillDialog(false)">NO</button>
@@ -2102,7 +2102,7 @@ function renderStage12Boss() {
     html += `
       <div class="dialog-overlay">
         <h3 style="color:var(--gold-color); margin-top:0;">クリア条件未達</h3>
-        <p style="font-size:1.05rem;">「ユニークスキルを発動しますか？」</p>
+        <p style="font-size:1.05rem;">「判断処理スキルを発動しますか？」</p>
         <div class="dialog-btns">
           <button class="dialog-btn dialog-btn-yes" onclick="handleStage12SkillDialog(true)">YES</button>
           <button class="dialog-btn dialog-btn-no" onclick="handleStage12SkillDialog(false)">NO</button>
@@ -2423,15 +2423,29 @@ function renderAllClear() {
       <div class="trophy-icon">🏆✨</div>
       <h2 style="color: var(--gold-color); margin-top: 0; font-size: 1.5rem;">全STAGEクリアおめでとう！</h2>
       <p style="line-height: 1.6; color: var(--text-color); margin-bottom: 20px;">
-        すべてのSTAGE SKILLを獲得しました！<br>
-        英語処理OSをマスターしました！
+        すべての英語処理OSスキルを獲得しました！<br>
+        さらなる高みを目指してトレーニングしましょう！
       </p>
-      <button class="btn" style="text-align:center; background:var(--accent-color); color:#0d1117; font-weight:bold; width:100%;" onclick="confirmResetData()">最初から再挑戦する</button>
+      <button class="btn" style="text-align: center; background: var(--success-color); color: white; font-weight: bold; justify-content: center;" onclick="resetToStageSelect()">
+        ★ ステージ選択に戻る / 復習する
+      </button>
     </div>
   `;
 }
-
-// 初期化実行
+function resetToStageSelect() {
+  gameState.isAllCleared = false;
+  gameState.currentStageId = null;
+  saveData();
+  render();
+}
+function exitStage() {
+  if (confirm("ステージ選択画面に戻りますか？（進行状況は自動保存されます）")) {
+    gameState.currentStageId = null;
+    saveData();
+    render();
+  }
+}
+document.addEventListener('click', initAudio, { once: true });
 loadSaveData();
 render();
 </script>

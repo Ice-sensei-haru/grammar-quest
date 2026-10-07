@@ -175,9 +175,12 @@
       border: 2px solid var(--danger-color);
       background: linear-gradient(180deg, #200a0a 0%, #0d1117 100%);
     }
-    .gokui-card {
-      border: 2px solid var(--gold-color);
-      background: linear-gradient(180deg, #241d0b 0%, #0d1117 100%);
+    .boss-header {
+      color: var(--danger-color);
+      font-weight: bold;
+      text-align: center;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
     }
     .reset-btn {
       background: transparent;
@@ -217,9 +220,8 @@
       border-color: var(--purple-color);
       background: linear-gradient(135deg, #181124 0%, #21262d 100%);
     }
-    .stage-select-btn.gokui-stage-btn {
-      border-color: var(--gold-color);
-      background: linear-gradient(135deg, #2d2411 0%, #21262d 100%);
+    .stage-select-btn.extra-stage-btn:hover:not(:disabled) {
+      border-color: #c084fc;
     }
     .stage-select-btn.battle-mode-btn {
       border-color: var(--danger-color);
@@ -988,7 +990,7 @@ const STAGES = [
         {
           text: "【BOSS BATTLE 1/2】\n「彼は日曜日に図書館へ行きます。」の意味に単語をクリックして並べかえなさい。",
           words: ["to", "Sundays", "he", "library", "on", "goes", "the"],
-          correctAnswer: "he goes to the library on Sundays",
+          correctAnswer: "He goes to the library on Sundays.",
           wrongComment: "主語 → 動詞を決め、場所や時の表現を作ります。",
           logicText: "【判断基準】",
           logicOptions: [
@@ -999,7 +1001,7 @@ const STAGES = [
         {
           text: "【BOSS BATTLE 2/2】\n「彼は何冊の英語の本を持っていますか。」の意味に単語をクリックして並べかえなさい。",
           words: ["he", "English", "many", "have", "how", "books", "does"],
-          correctAnswer: "how many English books does he have",
+          correctAnswer: "How many English books does he have?",
           wrongComment: "疑問詞の塊＋助動詞/動詞＋主語＋原形の順に並べます。",
           logicText: "【判断基準】",
           logicOptions: [
@@ -1081,7 +1083,7 @@ const STAGES = [
         {
           text: "【BOSS BATTLE 1/2】\n「私は英語が役立つと思う。」の意味に単語をクリックして並べかえなさい。",
           words: ["that", "useful", "is", "I", "English", "think"],
-          correctAnswer: "I think that English is useful",
+          correctAnswer: "I think that English is useful.",
           wrongComment: "I think + English is... の構造を作ります。",
           logicText: "【判断基準】",
           logicOptions: [
@@ -1092,7 +1094,7 @@ const STAGES = [
         {
           text: "【BOSS BATTLE 2/2】\n「私は昨日、彼らに夕食を作ってあげた。」の意味に単語をクリックして並べかえなさい。",
           words: ["them", "dinner", "I", "yesterday", "cooked"],
-          correctAnswer: "I cooked them dinner yesterday",
+          correctAnswer: "I cooked them dinner yesterday.",
           wrongComment: "主語＋動詞＋人＋ものの語順を作ります。",
           logicText: "【判断基準】",
           logicOptions: [
@@ -1413,7 +1415,7 @@ const STAGES = [
         type: "sort",
         text: "⑤ 「私は何か冷たい飲み物がほしい。」 となるように英語を並べかえなさい。",
         words: ["drink", "I", "cold", "to", "something", "want"],
-        correctAnswer: "I want something cold to drink",
+        correctAnswer: "I want something cold to drink.",
         wrongComment: "「何か飲むためのもの」 → 形容詞的用法 → something + 形容詞 + to drink",
         logicText: "【判断基準】",
         logicOptions: [
@@ -1461,7 +1463,7 @@ const STAGES = [
     title: "STAGE 12",
     skillName: "比較判定",
     rewardSkill: "比較判定スキル",
-    monsterEmoji: "秤",
+    monsterEmoji: "⚖️",
     monsterName: "コンパレータ・カイザー",
     questions: [
       {
@@ -1538,97 +1540,6 @@ const STAGES = [
     boss: {
       isTimeTrial: true
     }
-  },
-  {
-    id: 13,
-    title: "英語処理の極意書",
-    skillName: "英語処理マスター",
-    rewardSkill: "英語処理マスター",
-    monsterEmoji: "📖",
-    monsterName: "処理OSの真髄",
-    isGokui: true,
-    questions: [
-      {
-        text: "① 英語は［  ］で始まる。",
-        options: [
-          { label: "A：主語→動詞", correct: true },
-          { label: "B：動詞→目的語", correct: false },
-          { label: "C：人→もの", correct: false }
-        ]
-      },
-      {
-        text: "② 英文を読むときはまず、［  ］を探す。",
-        options: [
-          { label: "A：人ともの", correct: false },
-          { label: "B：動詞と時の言葉", correct: false },
-          { label: "C：主語と動詞", correct: true }
-        ]
-      },
-      {
-        text: "③ 日本語の文末で［  ］を区別する。",
-        options: [
-          { label: "A：現在か過去か未来か", correct: false },
-          { label: "B：時制、表現、文の形（肯定・否定・疑問・命令）", correct: true },
-          { label: "C：主語と動詞", correct: false }
-        ]
-      },
-      {
-        text: "④ 疑問文を作るとき［  ］の前に一語を置く。",
-        options: [
-          { label: "A：文", correct: false },
-          { label: "B：主語", correct: true },
-          { label: "C：動詞", correct: false }
-        ]
-      },
-      {
-        text: "⑤ 受動態は［  ］で表現される。",
-        options: [
-          { label: "A：be動詞＋過去分詞", correct: true },
-          { label: "B：be動詞＋現在分詞", correct: false },
-          { label: "C：have（has）＋過去分詞", correct: false }
-        ]
-      },
-      {
-        text: "⑥ 命令文は［  ］を表現するときの文。",
-        options: [
-          { label: "A：感情、意見、主張", correct: false },
-          { label: "B：評価、提示、感想", correct: false },
-          { label: "C：指示、案内、ルール、注意", correct: true }
-        ]
-      },
-      {
-        text: "⑦ 現在完了は［  ］で表現される。",
-        options: [
-          { label: "A：be動詞＋過去分詞", correct: false },
-          { label: "B：be動詞＋現在分詞", correct: false },
-          { label: "C：have（has）＋過去分詞", correct: true }
-        ]
-      },
-      {
-        text: "⑧ 名詞の単数形を使う際、［  ］の順に置く。",
-        options: [
-          { label: "A：入口の言葉→どんなにあたる言葉→名詞", correct: true },
-          { label: "B：日本語で表現される単語", correct: false },
-          { label: "C：どんなにあたる言葉→色口の言葉→名詞", correct: false }
-        ]
-      },
-      {
-        text: "⑨ 進行形は［  ］で表現される。",
-        options: [
-          { label: "A：be動詞＋過去分詞", correct: false },
-          { label: "B：be動詞＋現在分詞", correct: true },
-          { label: "C：have（has）＋過去分詞", correct: false }
-        ]
-      },
-      {
-        text: "⑩ 動詞の形は、主語と［  ］で決まる。",
-        options: [
-          { label: "A：動詞の後ろにある単語", correct: false },
-          { label: "B：表現（単純形・進行形・完了形・受動態）だけ", correct: false },
-          { label: "C：時制、表現、文の形（肯定・否定・疑問・命令）", correct: true }
-        ]
-      }
-    ]
   }
 ];
 
@@ -1658,7 +1569,6 @@ function initAudio() {
     audioCtx.resume();
   }
 }
-
 function playSound(type) {
   initAudio();
   if (!audioCtx) return;
@@ -1731,7 +1641,6 @@ function playSound(type) {
     });
   }
 }
-
 function triggerConfetti() {
   if (typeof confetti === 'function') {
     confetti({
@@ -1742,7 +1651,7 @@ function triggerConfetti() {
   }
 }
 
-const STORAGE_KEY = 'grammar_quest_save_data_v10';
+const STORAGE_KEY = 'grammar_quest_save_data_v9';
 let gameState = {
   exp: 0,
   unlockedStage: 1,
@@ -1784,6 +1693,7 @@ function loadSaveData() {
   if (gameState.stage12TimeLeft === undefined) gameState.stage12TimeLeft = 30;
   if (gameState.stage12SkillActive === undefined) gameState.stage12SkillActive = false;
   if (gameState.stage12DialogActive === undefined) gameState.stage12DialogActive = false;
+
   updateHeader();
 }
 
@@ -1871,6 +1781,7 @@ function renderStageSelect() {
   
   const isExtraCleared = gameState.unlockedSkills.includes("処理手順化スキル");
   const isVerbBattleCleared = gameState.unlockedSkills.includes("動詞判定マスター");
+
   STAGES.forEach(stg => {
     let isUnlocked = false;
     let isCleared = false;
@@ -1888,21 +1799,15 @@ function renderStageSelect() {
       isUnlocked = isVerbBattleCleared;
       isCleared = gameState.unlockedSkills.includes(stg.rewardSkill);
       if (!isUnlocked) lockReason = "動詞判定バトルモード クリアが必要";
-    } else if (stg.id === 13) {
-      isUnlocked = gameState.unlockedStage > 12 || gameState.unlockedSkills.includes("比較判定スキル");
-      isCleared = gameState.unlockedSkills.includes(stg.rewardSkill);
-      if (!isUnlocked) lockReason = "STAGE 12 クリアが必要";
     } else {
       isUnlocked = stg.id <= gameState.unlockedStage;
       isCleared = stg.id < gameState.unlockedStage || gameState.unlockedSkills.includes(stg.rewardSkill);
     }
     
-    let btnClass = 'stage-select-btn';
-    if (stg.isExtra) btnClass += ' extra-stage-btn';
-    if (stg.isGokui) btnClass += ' gokui-stage-btn';
+    const extraClass = stg.isExtra ? ' extra-stage-btn' : '';
     
     html += `
-      <button class="${btnClass}" ${isUnlocked ? '' : 'disabled'} onclick="startStage('${stg.id}')">
+      <button class="stage-select-btn${extraClass}" ${isUnlocked ? '' : 'disabled'} onclick="startStage('${stg.id}')">
         <div>
           <strong>【${stg.title}】</strong> ${stg.skillName} 
           <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">出現ボス: ${stg.monsterEmoji} ${stg.monsterName}</div>
@@ -1912,6 +1817,7 @@ function renderStageSelect() {
         <div>${isUnlocked ? '▶ 挑戦' : '🔒 鍵'}</div>
       </button>
     `;
+
     if (stg.isExtra) {
       const verbUnlocked = isExtraCleared;
       const verbReason = verbUnlocked ? "" : "上位スキル進化STAGE クリアが必要";
@@ -1946,6 +1852,7 @@ function startStage(stageId) {
   gameState.stage12BossIndex = 0;
   gameState.stage12TimeLeft = 30;
   gameState.stage12DialogActive = false;
+
   saveData();
   render();
 }
@@ -2020,6 +1927,7 @@ function renderVerbBattle() {
       </div>
       <div id="battle-timer" class="timer-display">⏱️ 残り時間: ${gameState.verbBattleTimeLeft}秒</div>
   `;
+
   if (gameState.verbBattleSkillActive) {
     html += `<div class="skill-comment-box">💡 スキルコメント: ${qData.comment}</div>`;
   }
@@ -2169,9 +2077,11 @@ function renderStage12Boss() {
       </div>
       <div id="stage12-timer" class="timer-display">⏱️ 残り時間: ${gameState.stage12TimeLeft}秒</div>
   `;
+
   if (gameState.stage12SkillActive) {
     html += `<div class="skill-comment-box">💡 スキルコメント: ${qData.comment}</div>`;
   }
+
   let formattedText = qData.text;
   if (gameState.stage12SkillActive && qData.highlightText) {
     formattedText = formattedText.replace(
@@ -2179,7 +2089,9 @@ function renderStage12Boss() {
       `<span class="highlight-red">${qData.highlightText}</span>`
     );
   }
+
   html += `<div class="question-text">${formattedText}</div>`;
+
   if (!gameState.stage12DialogActive) {
     html += `<div class="options" id="opt-list">`;
     qData.options.forEach((opt, idx) => {
@@ -2200,6 +2112,7 @@ function renderStage12Boss() {
   }
   html += `<div id="fb" class="feedback"></div></div>`;
   container.innerHTML = html;
+
   if (!gameState.stage12DialogActive && !stage12Timer) {
     startStage12Timer();
   }
@@ -2212,6 +2125,7 @@ function checkStage12BossAnswer(selectedIndex) {
   const fbEl = document.getElementById('fb');
   const buttons = document.querySelectorAll('#opt-list .btn');
   buttons.forEach(b => b.disabled = true);
+
   if (selected.correct) {
     playSound('correct');
     buttons[selectedIndex].classList.add('correct');
@@ -2233,15 +2147,14 @@ function checkStage12BossAnswer(selectedIndex) {
       if (!gameState.unlockedSkills.includes(stg12.rewardSkill)) {
         gameState.unlockedSkills.push(stg12.rewardSkill);
       }
-      if (gameState.unlockedStage <= 12) {
-        gameState.unlockedStage = 13;
-      }
-      saveData();
       
       setTimeout(() => {
-        alert("🎉 STAGE 12 クリア！\n最終ステージ『英語処理の極意書』が開放されました！");
-        gameState.currentStageId = null;
+        gameState.isAllCleared = true;
+        saveData();
         render();
+        triggerConfetti();
+        setTimeout(triggerConfetti, 500);
+        setTimeout(triggerConfetti, 1000);
       }, 1500);
     }
   } else {
@@ -2275,405 +2188,264 @@ function handleStage12SkillDialog(useSkill) {
 }
 
 // ----------------------------------------------------
-// 通常ステージ・極意書ステージ描画＆問題判定
+// 通常ステージの判定処理
 // ----------------------------------------------------
 function renderQuestion() {
-  const stg = STAGES.find(s => s.id === gameState.currentStageId);
-  if (!stg) return;
-
-  if (stg.isGokui) {
-    renderGokuiStage(stg);
-    return;
-  }
-
-  const isBossStep = gameState.currentStep >= stg.questions.length;
-  if (isBossStep && stg.boss && stg.boss.isTimeTrial) {
+  const stage = STAGES.find(s => s.id === gameState.currentStageId);
+  const isBoss = gameState.currentStep === stage.questions.length;
+  
+  if (isBoss && stage.boss && stage.boss.isTimeTrial) {
     renderStage12Boss();
     return;
   }
 
   const container = document.getElementById('main-content');
-  let html = `
+  let qData;
+  if (isBoss) {
+    if (stage.boss.type === "normal" || stage.boss.type === "sort") {
+      qData = stage.boss.questions[gameState.bossSubStep];
+    } else {
+      qData = stage.boss;
+    }
+  } else {
+    qData = stage.questions[gameState.currentStep];
+  }
+
+  let html = '';
+  html += `
     <div class="battle-scene">
       <div>
-        <div class="pixel-char">⚔️</div>
+        <div class="pixel-char">⚔🛡️</div>
         <div style="font-size:0.75rem; color:var(--accent-color); margin-top:4px;">プレーヤー</div>
       </div>
       <div style="font-size:1.2rem; color:#8b949e;">VS</div>
       <div>
-        <div class="monster-char">${stg.monsterEmoji}</div>
-        <div style="font-size:0.75rem; color:var(--danger-color); margin-top:4px;">${stg.monsterName}</div>
+        <div class="monster-char">${stage.monsterEmoji}</div>
+        <div style="font-size:0.75rem; color:var(--danger-color); margin-top:4px;">${stage.monsterName}</div>
       </div>
     </div>
   `;
-
-  if (!isBossStep) {
-    const q = stg.questions[gameState.currentStep];
-    html += `
-      <div class="card">
-        <div class="card-header">
-          <span>【${stg.title}】 Question ${gameState.currentStep + 1}/${stg.questions.length}</span>
-          <span style="font-size:0.8rem; color:#8b949e; cursor:pointer;" onclick="exitStage()">✕ 中断</span>
-        </div>
-        <div class="question-text">${q.text.replace(/\n/g, '<br>')}</div>
-    `;
-
-    if (q.type === 'sort') {
-      html += renderSortQuestionUI(q);
-    } else {
-      if (gameState.subStep === 0) {
-        html += `<div class="options" id="opt-list">`;
-        q.options.forEach((opt, idx) => {
-          html += `<button class="btn" onclick="checkAnswer(${idx})">${opt.label}</button>`;
-        });
-        html += `</div>`;
-      } else {
-        html += `
-          <div style="margin-top:10px; font-weight:bold; color:var(--gold-color);">${q.logicText}</div>
-          <div class="options" id="logic-opt-list" style="margin-top:8px;">`;
-        q.logicOptions.forEach((lopt, idx) => {
-          html += `<button class="btn" onclick="checkLogicAnswer(${idx})">${lopt.label}</button>`;
-        });
-        html += `</div>`;
-      }
-    }
-    html += `<div id="fb" class="feedback"></div></div>`;
+  if (isBoss) {
+    html += `<div class="card boss-card"><div class="boss-header">⚠️ BOSS BATTLE ⚠️</div>`;
   } else {
-    // ボス戦処理
-    const b = stg.boss;
-    html += `
-      <div class="card boss-card">
-        <div class="card-header">
-          <span class="boss-header">🔥 ${stg.monsterName} との対決！</span>
-          <span style="font-size:0.8rem; color:#8b949e; cursor:pointer;" onclick="exitStage()">✕ 中断</span>
-        </div>
-    `;
-
-    if (b.type === 'normal') {
-      const bq = b.questions[gameState.bossSubStep];
-      html += `<div class="question-text">${bq.text.replace(/\n/g, '<br>')}</div>`;
-      if (gameState.subStep === 0) {
-        html += `<div class="options" id="opt-list">`;
-        bq.options.forEach((opt, idx) => {
-          html += `<button class="btn" onclick="checkAnswer(${idx})">${opt.label}</button>`;
-        });
-        html += `</div>`;
-      } else {
-        html += `
-          <div style="margin-top:10px; font-weight:bold; color:var(--gold-color);">${bq.logicText}</div>
-          <div class="options" id="logic-opt-list" style="margin-top:8px;">`;
-        bq.logicOptions.forEach((lopt, idx) => {
-          html += `<button class="btn" onclick="checkLogicAnswer(${idx})">${lopt.label}</button>`;
-        });
-        html += `</div>`;
-      }
-    } else if (b.type === 'sort') {
-      const bq = b.questions[gameState.bossSubStep];
-      html += `<div class="question-text">${bq.text.replace(/\n/g, '<br>')}</div>`;
-      if (gameState.subStep === 0) {
-        html += renderSortQuestionUI(bq);
-      } else {
-        html += `
-          <div style="margin-top:10px; font-weight:bold; color:var(--gold-color);">${bq.logicText}</div>
-          <div class="options" id="logic-opt-list" style="margin-top:8px;">`;
-        bq.logicOptions.forEach((lopt, idx) => {
-          html += `<button class="btn" onclick="checkLogicAnswer(${idx})">${lopt.label}</button>`;
-        });
-        html += `</div>`;
-      }
-    } else {
-      html += `<div class="question-text">${b.text.replace(/\n/g, '<br>')}</div>`;
-      if (gameState.subStep === 0) {
-        html += `<div class="options" id="opt-list">`;
-        b.options.forEach((opt, idx) => {
-          html += `<button class="btn" onclick="checkAnswer(${idx})">${opt.label}</button>`;
-        });
-        html += `</div>`;
-      } else {
-        html += `
-          <div style="margin-top:10px; font-weight:bold; color:var(--gold-color);">${b.logicText}</div>
-          <div class="options" id="logic-opt-list" style="margin-top:8px;">`;
-        b.logicOptions.forEach((lopt, idx) => {
-          html += `<button class="btn" onclick="checkLogicAnswer(${idx})">${lopt.label}</button>`;
-        });
-        html += `</div>`;
-      }
-    }
-    html += `<div id="fb" class="feedback"></div></div>`;
+    html += `<div class="card"><div class="card-header"><span>${stage.title} - Q${gameState.currentStep + 1}/${stage.questions.length}</span><span style="font-size:0.8rem; color:#8b949e; cursor:pointer;" onclick="exitStage()">✕ 中断</span></div>`;
   }
-  container.innerHTML = html;
-}
-
-// Gokui Stage Render
-function renderGokuiStage(stg) {
-  const container = document.getElementById('main-content');
-  const q = stg.questions[gameState.currentStep];
-  let html = `
-    <div class="card gokui-card">
-      <div class="card-header">
-        <span style="color:var(--gold-color);">★ 英語処理の極意書 ★ (問 ${gameState.currentStep + 1}/10)</span>
-        <span style="font-size:0.8rem; color:#8b949e; cursor:pointer;" onclick="exitStage()">✕ 中断</span>
-      </div>
-      <div class="question-text">${q.text}</div>
-      <div class="options" id="opt-list">
-  `;
-  q.options.forEach((opt, idx) => {
-    html += `<button class="btn" onclick="checkGokuiAnswer(${idx})">${opt.label}</button>`;
-  });
-  html += `</div><div id="fb" class="feedback"></div></div>`;
-  container.innerHTML = html;
-}
-
-function checkGokuiAnswer(selectedIndex) {
-  initAudio();
-  const stg = STAGES.find(s => s.id === gameState.currentStageId);
-  const q = stg.questions[gameState.currentStep];
-  const selected = q.options[selectedIndex];
-  const fbEl = document.getElementById('fb');
-  const buttons = document.querySelectorAll('#opt-list .btn');
-  buttons.forEach(b => b.disabled = true);
-
-  if (selected.correct) {
-    playSound('correct');
-    buttons[selectedIndex].classList.add('correct');
-    addExp(20);
-    saveData();
-
-    if (gameState.currentStep + 1 < stg.questions.length) {
-      setTimeout(() => {
-        gameState.currentStep++;
-        saveData();
-        render();
-      }, 500);
+  html += `<div class="question-text">${qData.text.replace(/\n/g, '<br>')}</div>`;
+  
+  const isSortType = qData.type === "sort" || (isBoss && stage.boss.type === "sort");
+  if (isSortType && gameState.subStep === 0) {
+    html += `<div style="font-size:0.85rem; color:#8b949e; margin-bottom:5px;">【選択した項目】（タップで取り消し）</div>`;
+    html += `<div class="word-answer-box">`;
+    if (gameState.selectedWords.length === 0) {
+      html += `<span style="color:#484f58; font-size:0.85rem;">下の項目をクリックして並べかえ</span>`;
     } else {
-      playSound('clear');
-      triggerConfetti();
-      fbEl.className = "feedback active correct-fb";
-      fbEl.innerHTML = "<strong>🏆 英語処理の極意書 COMPLETION!!</strong>";
-      if (!gameState.unlockedSkills.includes(stg.rewardSkill)) {
-        gameState.unlockedSkills.push(stg.rewardSkill);
-      }
-      setTimeout(() => {
-        gameState.isAllCleared = true;
-        saveData();
-        render();
-      }, 1200);
+      gameState.selectedWords.forEach((wordObj, idx) => {
+        html += `<span class="word-chip" onclick="unselectWord(${idx})">${wordObj.word}</span>`;
+      });
     }
-  } else {
-    playSound('wrong');
-    buttons[selectedIndex].classList.add('wrong');
-    fbEl.className = "feedback active wrong-fb";
-    fbEl.innerHTML = "<strong>不正解です。もう一度考え直してみましょう！</strong>";
-    setTimeout(() => {
-      buttons.forEach(b => b.disabled = false);
-      buttons[selectedIndex].classList.remove('wrong');
-      fbEl.className = "feedback";
-    }, 1200);
-  }
-}
-
-// 並べ替えUIレンダリング
-function renderSortQuestionUI(q) {
-  let poolWords = q.words.filter(w => !gameState.selectedWords.includes(w));
-  let html = `
-    <div style="font-size:0.85rem; color:#8b949e; margin-bottom:4px;">作成した解答:</div>
-    <div class="word-answer-box" id="answer-box">
-  `;
-  if (gameState.selectedWords.length === 0) {
-    html += `<span style="color:#484f58; font-size:0.85rem;">単語チップをクリックして並べ替えてください</span>`;
-  } else {
-    gameState.selectedWords.forEach((w, idx) => {
-      html += `<span class="word-chip" onclick="deselectWord(${idx})">${w}</span>`;
+    html += `</div>`;
+    html += `<div style="font-size:0.85rem; color:#8b949e; margin-bottom:5px;">【選択肢リスト】</div>`;
+    html += `<div class="word-pool">`;
+    qData.words.forEach((w, idx) => {
+      const isUsed = gameState.selectedWords.some(item => item.origIdx === idx);
+      if (!isUsed) {
+        html += `<span class="word-chip" onclick="selectWord('${w.replace(/'/g, "\\'")}', ${idx})">${w}</span>`;
+      }
     });
+    html += `</div>`;
+    html += `<div style="text-align:right; margin-top:10px;">
+      <button class="sort-action-btn" onclick="checkSortAnswer()" ${gameState.selectedWords.length === 0 ? 'disabled' : ''}>回答判定 ▶</button>
+    </div>`;
+  } else if (gameState.subStep === 0) {
+    html += `<div class="options" id="opt-list">`;
+    qData.options.forEach((opt, idx) => {
+      html += `<button class="btn" onclick="checkAnswer(${idx}, false)">${opt.label}</button>`;
+    });
+    html += `</div>`;
+  } else {
+    html += `<div style="margin-bottom:10px; font-weight:bold; color:var(--gold-color);">${qData.logicText}</div>`;
+    html += `<div class="options" id="opt-list">`;
+    qData.logicOptions.forEach((opt, idx) => {
+      html += `<button class="btn" onclick="checkAnswer(${idx}, true)">${opt.label}</button>`;
+    });
+    html += `</div>`;
   }
-  html += `</div>`;
-
-  html += `<div style="font-size:0.85rem; color:#8b949e; margin-bottom:4px;">選択肢プール:</div>`;
-  html += `<div class="word-pool">`;
-  poolWords.forEach(w => {
-    html += `<span class="word-chip" onclick="selectWord('${w.replace(/'/g, "\\'")}')">${w}</span>`;
-  });
-  html += `</div>`;
-
-  html += `
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
-      <button class="reset-btn" onclick="resetSortWords()">リセット</button>
-      <button class="sort-action-btn" ${gameState.selectedWords.length === 0 ? 'disabled' : ''} onclick="checkSortAnswer()">回答判定</button>
-    </div>
-  `;
-  return html;
+  html += `<div id="fb" class="feedback"></div></div>`;
+  container.innerHTML = html;
 }
 
-function selectWord(word) {
+function selectWord(word, origIdx) {
   initAudio();
-  gameState.selectedWords.push(word);
+  gameState.selectedWords.push({ word: word, origIdx: origIdx });
+  saveData();
   render();
 }
 
-function deselectWord(index) {
+function unselectWord(idx) {
   initAudio();
-  gameState.selectedWords.splice(index, 1);
-  render();
-}
-
-function resetSortWords() {
-  initAudio();
-  gameState.selectedWords = [];
+  gameState.selectedWords.splice(idx, 1);
+  saveData();
   render();
 }
 
 function checkSortAnswer() {
   initAudio();
-  const stg = STAGES.find(s => s.id === gameState.currentStageId);
-  const isBossStep = gameState.currentStep >= stg.questions.length;
-  let q = isBossStep ? stg.boss.questions[gameState.bossSubStep] : stg.questions[gameState.currentStep];
-  
-  const userAns = gameState.selectedWords.join(q.words[0].includes('：') ? ' ' : ' ').trim();
-  const targetAns = q.correctAnswer.trim();
+  const stage = STAGES.find(s => s.id === gameState.currentStageId);
+  const isBoss = gameState.currentStep === stage.questions.length;
+  let qData = isBoss ? stage.boss.questions[gameState.bossSubStep] : stage.questions[gameState.currentStep];
   const fbEl = document.getElementById('fb');
-
-  if (userAns === targetAns) {
+  const userSentence = gameState.selectedWords.map(w => w.word).join(' ');
+  const normalize = (str) => {
+    return str.trim()
+      .replace(/[.? !]$/, '')
+      .toLowerCase();
+  };
+  const isCorrect = normalize(userSentence) === normalize(qData.correctAnswer);
+  if (isCorrect) {
     playSound('correct');
-    addExp(30);
-    gameState.subStep = 1;
-    gameState.selectedWords = [];
-    saveData();
-    render();
+    addExp(10);
+    fbEl.className = "feedback active correct-fb";
+    fbEl.innerHTML = "<strong>並べかえ正解！ (+10 EXP)</strong><br>続いて「判断基準」を選んでください。";
+    setTimeout(() => {
+      gameState.subStep = 1;
+      saveData();
+      render();
+    }, 1200);
   } else {
     playSound('wrong');
     fbEl.className = "feedback active wrong-fb";
-    fbEl.innerHTML = `<strong>不正解！</strong><br>${q.wrongComment}`;
+    fbEl.innerHTML = `<strong>不正解...</strong><br>${qData.wrongComment}`;
   }
 }
 
-function checkAnswer(selectedIndex) {
+function checkAnswer(selectedIndex, isLogicStep) {
   initAudio();
-  const stg = STAGES.find(s => s.id === gameState.currentStageId);
-  const isBossStep = gameState.currentStep >= stg.questions.length;
-  let q;
-  if (!isBossStep) {
-    q = stg.questions[gameState.currentStep];
+  const stage = STAGES.find(s => s.id === gameState.currentStageId);
+  const isBoss = gameState.currentStep === stage.questions.length;
+  let qData;
+  let totalBossQuestions = 1;
+  if (isBoss) {
+    if (stage.boss.type === "normal" || stage.boss.type === "sort") {
+      qData = stage.boss.questions[gameState.bossSubStep];
+      totalBossQuestions = stage.boss.questions.length;
+    } else {
+      qData = stage.boss;
+    }
   } else {
-    q = stg.boss.type === 'normal' ? stg.boss.questions[gameState.bossSubStep] : stg.boss;
+    qData = stage.questions[gameState.currentStep];
   }
-
-  const selected = q.options[selectedIndex];
+  const targetOptions = isLogicStep ? qData.logicOptions : qData.options;
+  const selected = targetOptions[selectedIndex];
   const fbEl = document.getElementById('fb');
   const buttons = document.querySelectorAll('#opt-list .btn');
   buttons.forEach(b => b.disabled = true);
-
+  
   if (selected.correct) {
-    playSound('correct');
     buttons[selectedIndex].classList.add('correct');
-    addExp(20);
-    gameState.subStep = 1;
-    saveData();
-    setTimeout(() => { render(); }, 400);
-  } else {
-    playSound('wrong');
-    buttons[selectedIndex].classList.add('wrong');
-    fbEl.className = "feedback active wrong-fb";
-    fbEl.innerHTML = `<strong>不正解！</strong><br>${q.wrongComment}`;
-    setTimeout(() => {
-      buttons.forEach(b => b.disabled = false);
-      buttons[selectedIndex].classList.remove('wrong');
-    }, 1200);
-  }
-}
-
-function checkLogicAnswer(selectedIndex) {
-  initAudio();
-  const stg = STAGES.find(s => s.id === gameState.currentStageId);
-  const isBossStep = gameState.currentStep >= stg.questions.length;
-  let q;
-  if (!isBossStep) {
-    q = stg.questions[gameState.currentStep];
-  } else {
-    q = stg.boss.type === 'normal' || stg.boss.type === 'sort' ? stg.boss.questions[gameState.bossSubStep] : stg.boss;
-  }
-
-  const selected = q.logicOptions[selectedIndex];
-  const fbEl = document.getElementById('fb');
-  const buttons = document.querySelectorAll('#logic-opt-list .btn');
-  buttons.forEach(b => b.disabled = true);
-
-  if (selected.correct) {
-    playSound('correct');
-    buttons[selectedIndex].classList.add('correct');
-    addExp(20);
-    gameState.subStep = 0;
-    gameState.selectedWords = [];
-
-    if (!isBossStep) {
-      if (gameState.currentStep + 1 < stg.questions.length) {
-        gameState.currentStep++;
+    if (!isLogicStep) {
+      playSound('correct');
+      addExp(10);
+      fbEl.className = "feedback active correct-fb";
+      fbEl.innerHTML = "<strong>正解！ (+10 EXP)</strong><br>続いて「判断基準」を選んでください。";
+      setTimeout(() => {
+        gameState.subStep = 1;
         saveData();
-        setTimeout(() => { render(); }, 500);
-      } else {
-        gameState.currentStep++;
-        saveData();
-        setTimeout(() => { render(); }, 500);
-      }
+        render();
+      }, 1200);
     } else {
-      if ((stg.boss.type === 'normal' || stg.boss.type === 'sort') && gameState.bossSubStep + 1 < stg.boss.questions.length) {
-        gameState.bossSubStep++;
-        saveData();
-        setTimeout(() => { render(); }, 500);
+      if (isBoss) {
+        if (gameState.bossSubStep + 1 < totalBossQuestions) {
+          playSound('correct');
+          addExp(20);
+          fbEl.className = "feedback active correct-fb";
+          fbEl.innerHTML = "<strong>判断基準も正解！ (+20 EXP)</strong><br>次のボス問題へ！";
+          setTimeout(() => {
+            gameState.bossSubStep++;
+            gameState.subStep = 0;
+            gameState.selectedWords = [];
+            saveData();
+            render();
+          }, 1200);
+        } else {
+          playSound('clear');
+          triggerConfetti();
+          addExp(20);
+          fbEl.className = "feedback active correct-fb";
+          fbEl.innerHTML = `<strong>🏆 BOSS K.O.!! (+20 EXP)</strong><br>【${stage.rewardSkill}】を獲得しました！`;
+          setTimeout(() => {
+            if (!gameState.unlockedSkills.includes(stage.rewardSkill)) {
+              gameState.unlockedSkills.push(stage.rewardSkill);
+            }
+            if (typeof stage.id === 'number' && gameState.unlockedStage === stage.id) {
+              gameState.unlockedStage = stage.id + 1;
+            }
+            
+            alert(`🎉 ${stage.title} CLEAR!\n獲得スキル: 【${stage.rewardSkill}】`);
+            gameState.currentStageId = null;
+            gameState.currentStep = 0;
+            gameState.subStep = 0;
+            gameState.bossSubStep = 0;
+            gameState.selectedWords = [];
+            saveData();
+            render();
+          }, 1500);
+        }
       } else {
-        // Stage Clear!
-        playSound('clear');
-        triggerConfetti();
+        playSound('correct');
+        addExp(20);
         fbEl.className = "feedback active correct-fb";
-        fbEl.innerHTML = `<strong>🏆 STAGE CLEAR!!</strong><br>【${stg.rewardSkill}】を獲得しました！`;
-
-        if (!gameState.unlockedSkills.includes(stg.rewardSkill)) {
-          gameState.unlockedSkills.push(stg.rewardSkill);
-        }
-        if (typeof stg.id === 'number' && gameState.unlockedStage <= stg.id) {
-          gameState.unlockedStage = stg.id + 1;
-        }
-        saveData();
-
+        fbEl.innerHTML = "<strong>判断基準も正解！ (+20 EXP)</strong>";
         setTimeout(() => {
-          gameState.currentStageId = null;
+          gameState.currentStep++;
+          gameState.subStep = 0;
+          gameState.selectedWords = [];
+          saveData();
           render();
-        }, 1500);
+        }, 1200);
       }
     }
   } else {
     playSound('wrong');
     buttons[selectedIndex].classList.add('wrong');
     fbEl.className = "feedback active wrong-fb";
-    fbEl.innerHTML = "<strong>判断基準が異なります！もう一度正解の思考を選び直してください。</strong>";
+    fbEl.innerHTML = `<strong>不正解...</strong><br>${qData.wrongComment}`;
     setTimeout(() => {
       buttons.forEach(b => b.disabled = false);
-      buttons[selectedIndex].classList.remove('wrong');
-    }, 1200);
+    }, 1500);
   }
+  saveData();
 }
 
 function renderAllClear() {
   const container = document.getElementById('main-content');
   container.innerHTML = `
     <div class="all-clear-card">
-      <div class="trophy-icon">🏆</div>
-      <h2 style="color:var(--gold-color); margin-top:0;">ALL STAGES CLEARED!!</h2>
-      <p style="line-height:1.6;">
-        おめでとうございます！<br>
-        すべての問題・ボス・極意書を完全攻略しました！<br>
-        <strong>英語処理OSマスター</strong>の称号を獲得しました！
+      <div class="trophy-icon">🏆✨</div>
+      <h2 style="color: var(--gold-color); margin-top: 0; font-size: 1.5rem;">全STAGEクリアおめでとう！</h2>
+      <p style="line-height: 1.6; color: var(--text-color); margin-bottom: 20px;">
+        すべての英語処理OSスキルを獲得しました！<br>
+        さらなる高みを目指してトレーニングしましょう！
       </p>
-      <div style="margin:20px 0; background:#0d1117; padding:15px; border-radius:8px; border:1px solid var(--border-color);">
-        <div style="font-size:0.9rem; color:#8b949e;">最終達成記録</div>
-        <div style="font-size:1.4rem; font-weight:bold; color:var(--accent-color); margin-top:5px;">RANK ${getRank(gameState.exp)} (EXP: ${gameState.exp})</div>
-        <div style="font-size:0.9rem; color:var(--gold-color); margin-top:5px;">獲得スキル数: ${gameState.unlockedSkills.length}個</div>
-      </div>
-      <button class="btn" style="background:var(--success-color); color:white; font-weight:bold; width:100%; text-align:center;" onclick="confirmResetData()">最初からやり直す</button>
+      <button class="btn" style="text-align: center; background: var(--success-color); color: white; font-weight: bold; justify-content: center;" onclick="resetToStageSelect()">
+        ★ ステージ選択に戻る / 復習する
+      </button>
     </div>
   `;
 }
-
-// 初期起動
+function resetToStageSelect() {
+  gameState.isAllCleared = false;
+  gameState.currentStageId = null;
+  saveData();
+  render();
+}
+function exitStage() {
+  if (confirm("ステージ選択画面に戻りますか？（進行状況は自動保存されます）")) {
+    gameState.currentStageId = null;
+    saveData();
+    render();
+  }
+}
+document.addEventListener('click', initAudio, { once: true });
 loadSaveData();
 render();
 </script>

@@ -603,7 +603,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "主語がIndia、動詞がspeakなのでdoesを使う", correct: false },
-          { label: "主語がthe man、動詞がspeakなのでdoesを使う", correct: true }
+          { label: "主語がThe man、動詞がspeakなのでdoesを使う", correct: true }
         ]
       }
     ],
@@ -1346,7 +1346,215 @@ const STAGES = [
         { label: "主語＋（助）動詞.で答える。一般動詞のみの文ではdo, does, didで答える", correct: true }
       ]
     }
+  },
+  {
+    id: 11,
+    title: "STAGE 11",
+    skillName: "前方探索",
+    rewardSkill: "前方探索スキル",
+    monsterEmoji: "🔮",
+    monsterName: "ルックアヘッド・ゴーレム",
+    questions: [
+      {
+        text: "① He wants (  ) tennis. の(  )に適する英語は？",
+        options: [
+          { label: "A : plays", correct: false },
+          { label: "B : to play", correct: true },
+          { label: "C : playing", correct: false }
+        ],
+        wrongComment: "中心の動詞ではない → wantの後ろ → to V",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "中心の動詞ではない → wantの後ろ → to V", correct: true },
+          { label: "「テニスをしたい」という表現はwant to play tennisを使う", correct: false }
+        ]
+      },
+      {
+        text: "② He enjoys (  ) tennis. の(  )に適する英語は？",
+        options: [
+          { label: "A : plays", correct: false },
+          { label: "B : to play", correct: false },
+          { label: "C : playing", correct: true }
+        ],
+        wrongComment: "中心の動詞ではない → enjoyの後ろ → Ving",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "「テニスをするのを楽しむ」という表現はenjoy playing tennisを使う", correct: false },
+          { label: "中心の動詞ではない → enjoyの後ろ → Ving", correct: true }
+        ]
+      },
+      {
+        text: "③ I’m looking forward (  ) Kyoto. の(  )に適する英語は？",
+        options: [
+          { label: "A : visiting", correct: false },
+          { label: "B : to visit", correct: false },
+          { label: "C : to visiting", correct: true }
+        ],
+        wrongComment: "look forward to～で「～を楽しみに待つ」という表現",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "進行形に合わせてVingを使う", correct: false },
+          { label: "look forward toのtoは前置詞なので、その後ろはVing", correct: true }
+        ]
+      },
+      {
+        text: "④ It is important (  ) children (  ) books. の(  )に適する英語は？",
+        options: [
+          { label: "A : for / to read", correct: true },
+          { label: "B : to / reading", correct: false },
+          { label: "C : for / to reading", correct: false }
+        ],
+        wrongComment: "It to構文は不定詞の主語をfor＋人の形で前に置く",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "It to構文は不定詞の主語をfor＋人の形で前に置く", correct: true },
+          { label: "「子供たちにとって」、「読むことは」で解釈をする", correct: false }
+        ]
+      },
+      {
+        type: "sort",
+        text: "⑤ 「私は何か冷たい飲み物がほしい。」 となるように英語を並べかえなさい。",
+        words: ["drink", "I", "cold", "to", "something", "want"],
+        correctAnswer: "I want something cold to drink.",
+        wrongComment: "「何か飲むためのもの」 → 形容詞的用法 → something + 形容詞 + to drink",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "somethingを使うときは後ろに不定詞を置く", correct: false },
+          { label: "「何か飲むためのもの」 → 形容詞的用法 → something +形容詞 + to drink", correct: true }
+        ]
+      }
+    ],
+    boss: {
+      type: "normal",
+      questions: [
+        {
+          text: "【BOSS BATTLE 1/2】\nShe has already finished (  ) the book. の(  )に適する英語は？",
+          options: [
+            { label: "A : read", correct: false },
+            { label: "B : to read", correct: false },
+            { label: "C : reading", correct: true }
+          ],
+          wrongComment: "中心の動詞ではない → finishの後ろ → Ving",
+          logicText: "【判断基準】",
+          logicOptions: [
+            { label: "現在完了進行形の形でVingを使う", correct: false },
+            { label: "中心の動詞ではない → finishの後ろ → Ving", correct: true }
+          ]
+        },
+        {
+          text: "【BOSS BATTLE 2/2】\n(  ) books (  ) a lot of fun for me. の(  )に適する英語は？",
+          options: [
+            { label: "A : To read / are", correct: false },
+            { label: "B : Read / is", correct: false },
+            { label: "C : Reading / is", correct: true }
+          ],
+          wrongComment: "中心の動詞ではない → to VかVingを使う → 不定詞や動名詞は単数扱い",
+          logicText: "【判断基準】",
+          logicOptions: [
+            { label: "中心の動詞ではない → to VかVingを使う → 不定詞や動名詞は単数扱い", correct: true },
+            { label: "文頭に使う形は動名詞 → 「とても楽しいです」の表現からbe動詞はisを使う", correct: false }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: 12,
+    title: "STAGE 12",
+    skillName: "比較判定",
+    rewardSkill: "比較判定スキル",
+    monsterEmoji: "⚖️",
+    monsterName: "コンパレータ・カイザー",
+    questions: [
+      {
+        text: "① Lisa can run (  ) than Meg. の(  )に適する英語は？",
+        options: [
+          { label: "A : faster", correct: true },
+          { label: "B : more fast", correct: false },
+          { label: "C : the faster", correct: false }
+        ],
+        wrongComment: "than Meg → ２人の比較 → 比較級",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "than Meg → ２人の比較 → 比較級", correct: true },
+          { label: "比較級にはmoreを使う", correct: false }
+        ]
+      },
+      {
+        text: "② She is (  ) cook of the three. の(  )に適する英語は？",
+        options: [
+          { label: "A : a good", correct: false },
+          { label: "B : the best", correct: true },
+          { label: "C : a better", correct: false }
+        ],
+        wrongComment: "of the three → ３人以上の比較 → 最上級",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "「いちばん上手な料理人」と解釈できる", correct: false },
+          { label: "of the three → ３人以上の比較 → 最上級", correct: true }
+        ]
+      },
+      {
+        text: "③ Which is (  ), this movie or that one? の(  )に適する英語は？",
+        options: [
+          { label: "A : famous", correct: false },
+          { label: "B : the most famous", correct: false },
+          { label: "C : more famous", correct: true }
+        ],
+        wrongComment: "A or B → ２つの比較 → 比較級",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "A or B → ２つの比較 → 比較級", correct: true },
+          { label: "Which → 比較級", correct: false }
+        ]
+      },
+      {
+        text: "④ Tom has (  ) I. の(  )に適する英語は？",
+        options: [
+          { label: "A : many books than", correct: false },
+          { label: "B : more books than", correct: true },
+          { label: "C : books more than", correct: false }
+        ],
+        wrongComment: "moreはmanyの比較級として、more＋複数形として使える",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "bookを比較級にできないからmoreを使う", correct: false },
+          { label: "moreはmanyの比較級として、more＋複数形として使う", correct: true }
+        ]
+      },
+      {
+        text: "⑤ Tom is the tallest boy in his class. とほぼ同じ意味の英文は？",
+        options: [
+          { label: "A : Tom is taller than all the boys in his class.", correct: false },
+          { label: "B : Tom is taller than any other boy in his class.", correct: true },
+          { label: "C : Tom is not as tall as any boys in his class.", correct: false }
+        ],
+        wrongComment: "最上級表現 → 比較級＋than any other＋単数名詞",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "意味の解釈でいちばん近いものを選ぶ", correct: false },
+          { label: "最上級表現 → 比較級＋than any other＋単数名詞", correct: true }
+        ]
+      }
+    ],
+    boss: {
+      isTimeTrial: true
+    }
   }
+];
+
+// STAGE12 BOSS BATTLE タイムトライアル問題データ
+const STAGE12_BOSS_QUESTIONS = [
+  { id: 1, text: "This book is (  ) than that one.", options: [{ label: "A：interesting", correct: false }, { label: "B：more interesting", correct: true }], highlightText: "than that one", comment: "２つの比較" },
+  { id: 2, text: "Ken can’t swim (  ) as Tom.", options: [{ label: "A：as fast", correct: true }, { label: "B：faster", correct: false }], highlightText: "as Tom", comment: "原級比較" },
+  { id: 3, text: "Which do you like (  ), spring or fall?", options: [{ label: "A：better", correct: true }, { label: "B：more", correct: false }], highlightText: "like", comment: "likeを使った比較" },
+  { id: 4, text: "Kyoto is one of the more popular (  ) in Japan.", options: [{ label: "A：city", correct: false }, { label: "B：cities", correct: true }], highlightText: "one of", comment: "one ofの後は複数形" },
+  { id: 5, text: "(  ) can run faster, Tom or Ken?", options: [{ label: "A：Which", correct: false }, { label: "B：Who", correct: true }], highlightText: "Tom or Ken", comment: "人の比較" },
+  { id: 6, text: "It is (  ) colder today than yesterday.", options: [{ label: "A：much", correct: true }, { label: "B：more", correct: false }], highlightText: "colder", comment: "比較の強調" },
+  { id: 7, text: "This is the (  ) beautiful picture of all.", options: [{ label: "A：best", correct: false }, { label: "B：most", correct: true }], highlightText: "beautiful", comment: "長い語の形容詞の最上級" },
+  { id: 8, text: "I don’t have as (  ) money as you.", options: [{ label: "A：many", correct: false }, { label: "B：much", correct: true }], highlightText: "money", comment: "量が多さ" },
+  { id: 9, text: "This park is (  ) as large as that one.", options: [{ label: "A：second", correct: false }, { label: "B：twice", correct: true }], highlightText: "as large", comment: "２倍 → ２回分" },
+  { id: 10, text: "I like red as (  ) as blue.", options: [{ label: "A：good", correct: false }, { label: "B：much", correct: true }], highlightText: "like", comment: "likeの同等比較" }
 ];
 
 let audioCtx = null;
@@ -1443,7 +1651,7 @@ function triggerConfetti() {
   }
 }
 
-const STORAGE_KEY = 'grammar_quest_save_data_v8';
+const STORAGE_KEY = 'grammar_quest_save_data_v9';
 let gameState = {
   exp: 0,
   unlockedStage: 1,
@@ -1454,14 +1662,20 @@ let gameState = {
   selectedWords: [],
   unlockedSkills: [],
   isAllCleared: false,
-  // バトルモード用状態
+  // 動詞判定バトルモード用状態
   verbBattleIndex: 0,
   verbBattleTimeLeft: 60,
   verbBattleSkillActive: false,
-  verbBattleDialogActive: false
+  verbBattleDialogActive: false,
+  // STAGE12 タイムトライアル用状態
+  stage12BossIndex: 0,
+  stage12TimeLeft: 30,
+  stage12SkillActive: false,
+  stage12DialogActive: false
 };
 
 let battleTimer = null;
+let stage12Timer = null;
 
 function loadSaveData() {
   const data = localStorage.getItem(STORAGE_KEY);
@@ -1474,6 +1688,12 @@ function loadSaveData() {
   if (gameState.verbBattleTimeLeft === undefined) gameState.verbBattleTimeLeft = 60;
   if (gameState.verbBattleSkillActive === undefined) gameState.verbBattleSkillActive = false;
   if (gameState.verbBattleDialogActive === undefined) gameState.verbBattleDialogActive = false;
+  
+  if (gameState.stage12BossIndex === undefined) gameState.stage12BossIndex = 0;
+  if (gameState.stage12TimeLeft === undefined) gameState.stage12TimeLeft = 30;
+  if (gameState.stage12SkillActive === undefined) gameState.stage12SkillActive = false;
+  if (gameState.stage12DialogActive === undefined) gameState.stage12DialogActive = false;
+
   updateHeader();
 }
 
@@ -1485,6 +1705,7 @@ function saveData() {
 function confirmResetData() {
   if (confirm("ゲームデータを初期化して最初から始めますか？")) {
     stopBattleTimer();
+    stopStage12Timer();
     localStorage.removeItem(STORAGE_KEY);
     gameState = { 
       exp: 0, 
@@ -1499,7 +1720,11 @@ function confirmResetData() {
       verbBattleIndex: 0,
       verbBattleTimeLeft: 60,
       verbBattleSkillActive: false,
-      verbBattleDialogActive: false
+      verbBattleDialogActive: false,
+      stage12BossIndex: 0,
+      stage12TimeLeft: 30,
+      stage12SkillActive: false,
+      stage12DialogActive: false
     };
     saveData();
     render();
@@ -1550,12 +1775,11 @@ function render() {
 
 function renderStageSelect() {
   stopBattleTimer();
+  stopStage12Timer();
   const container = document.getElementById('main-content');
-  let html = '<div class="card"><div class="card-header">🗺️️ ステージを選択して挑戦</div>';
+  let html = '<div class="card"><div class="card-header">🗺 ステージを選択して挑戦</div>';
   
-  // 上位スキル進化STAGE（処理手順化スキル）クリア判定
   const isExtraCleared = gameState.unlockedSkills.includes("処理手順化スキル");
-  // 動詞判定バトルモード クリア判定
   const isVerbBattleCleared = gameState.unlockedSkills.includes("動詞判定マスター");
 
   STAGES.forEach(stg => {
@@ -1564,7 +1788,6 @@ function renderStageSelect() {
     let lockReason = "";
     
     if (stg.isExtra) {
-      // エクストラステージ開放条件: STAGE 9クリア & EXP 1500以上
       const isStage9Cleared = gameState.unlockedStage > 9 || gameState.unlockedSkills.includes("文法構造判定スキル");
       isUnlocked = isStage9Cleared && gameState.exp >= (stg.requiredExp || 1500);
       isCleared = gameState.unlockedSkills.includes(stg.rewardSkill);
@@ -1573,14 +1796,12 @@ function renderStageSelect() {
         else lockReason = `必要EXP ${stg.requiredExp} (現在: ${gameState.exp})`;
       }
     } else if (stg.id === 10) {
-      // STAGE 10 解放条件: 動詞判定バトルモードクリアが必要
       isUnlocked = isVerbBattleCleared;
       isCleared = gameState.unlockedSkills.includes(stg.rewardSkill);
       if (!isUnlocked) lockReason = "動詞判定バトルモード クリアが必要";
     } else {
-      // 通常ステージ 1~9
       isUnlocked = stg.id <= gameState.unlockedStage;
-      isCleared = stg.id < gameState.unlockedStage;
+      isCleared = stg.id < gameState.unlockedStage || gameState.unlockedSkills.includes(stg.rewardSkill);
     }
     
     const extraClass = stg.isExtra ? ' extra-stage-btn' : '';
@@ -1597,7 +1818,6 @@ function renderStageSelect() {
       </button>
     `;
 
-    // 上位スキル進化STAGEの直後に「動詞判定バトルモード」を表示
     if (stg.isExtra) {
       const verbUnlocked = isExtraCleared;
       const verbReason = verbUnlocked ? "" : "上位スキル進化STAGE クリアが必要";
@@ -1627,6 +1847,20 @@ function startStage(stageId) {
   gameState.subStep = 0;
   gameState.bossSubStep = 0;
   gameState.selectedWords = [];
+  
+  // STAGE12 タイムトライアルの初期化
+  gameState.stage12BossIndex = 0;
+  gameState.stage12TimeLeft = 30;
+  gameState.stage12DialogActive = false;
+
+  saveData();
+  render();
+}
+
+function exitStage() {
+  stopBattleTimer();
+  stopStage12Timer();
+  gameState.currentStageId = null;
   saveData();
   render();
 }
@@ -1694,11 +1928,9 @@ function renderVerbBattle() {
       <div id="battle-timer" class="timer-display">⏱️ 残り時間: ${gameState.verbBattleTimeLeft}秒</div>
   `;
 
-  // スキル発動時の表示（赤色ハイライト＆コメント）
   if (gameState.verbBattleSkillActive) {
     html += `<div class="skill-comment-box">💡 スキルコメント: ${qData.comment}</div>`;
   }
-
   let formattedText = qData.text;
   if (gameState.verbBattleSkillActive && qData.highlightText) {
     formattedText = formattedText.replace(
@@ -1706,9 +1938,7 @@ function renderVerbBattle() {
       `<span class="highlight-red">${qData.highlightText}</span>`
     );
   }
-
   html += `<div class="question-text">${formattedText}</div>`;
-
   if (!gameState.verbBattleDialogActive) {
     html += `<div class="options" id="opt-list">`;
     qData.options.forEach((opt, idx) => {
@@ -1716,7 +1946,6 @@ function renderVerbBattle() {
     });
     html += `</div>`;
   } else {
-    // 失敗・タイムオーバー時のダイアログを表示
     html += `
       <div class="dialog-overlay">
         <h3 style="color:var(--gold-color); margin-top:0;">クリア条件未達</h3>
@@ -1728,7 +1957,6 @@ function renderVerbBattle() {
       </div>
     `;
   }
-
   html += `<div id="fb" class="feedback"></div></div>`;
   container.innerHTML = html;
 }
@@ -1740,7 +1968,6 @@ function checkVerbBattleAnswer(selectedIndex) {
   const fbEl = document.getElementById('fb');
   const buttons = document.querySelectorAll('#opt-list .btn');
   buttons.forEach(b => b.disabled = true);
-
   if (selected.correct) {
     playSound('correct');
     buttons[selectedIndex].classList.add('correct');
@@ -1752,7 +1979,6 @@ function checkVerbBattleAnswer(selectedIndex) {
         render();
       }, 400);
     } else {
-      // 20問全勝クリア！
       stopBattleTimer();
       playSound('clear');
       triggerConfetti();
@@ -1771,7 +1997,6 @@ function checkVerbBattleAnswer(selectedIndex) {
       }, 1000);
     }
   } else {
-    // 誤答時は1問目からリスタート
     playSound('wrong');
     buttons[selectedIndex].classList.add('wrong');
     stopBattleTimer();
@@ -1802,13 +2027,179 @@ function handleSkillDialog(useSkill) {
 }
 
 // ----------------------------------------------------
+// STAGE 12 BOSS BATTLE タイムトライアル処理
+// ----------------------------------------------------
+function startStage12Timer() {
+  stopStage12Timer();
+  stage12Timer = setInterval(() => {
+    if (gameState.stage12TimeLeft > 0 && !gameState.stage12DialogActive) {
+      gameState.stage12TimeLeft--;
+      const timerEl = document.getElementById('stage12-timer');
+      if (timerEl) {
+        timerEl.textContent = `⏱️ 残り時間: ${gameState.stage12TimeLeft}秒`;
+      }
+      if (gameState.stage12TimeLeft <= 0) {
+        stopStage12Timer();
+        playSound('wrong');
+        triggerStage12Fail("30秒経過！時間切れです。");
+      }
+    }
+  }, 1000);
+}
+
+function stopStage12Timer() {
+  if (stage12Timer) {
+    clearInterval(stage12Timer);
+    stage12Timer = null;
+  }
+}
+
+function renderStage12Boss() {
+  const container = document.getElementById('main-content');
+  const qData = STAGE12_BOSS_QUESTIONS[gameState.stage12BossIndex];
+  
+  let html = `
+    <div class="battle-scene">
+      <div>
+        <div class="pixel-char">⚔️</div>
+        <div style="font-size:0.75rem; color:var(--accent-color); margin-top:4px;">プレーヤー</div>
+      </div>
+      <div style="font-size:1.2rem; color:#8b949e;">VS</div>
+      <div>
+        <div class="monster-char">⚖️</div>
+        <div style="font-size:0.75rem; color:var(--danger-color); margin-top:4px;">コンパレータ・カイザー</div>
+      </div>
+    </div>
+    <div class="card boss-card">
+      <div class="card-header">
+        <span>🔥 STAGE 12 BOSS BATTLE (Q${gameState.stage12BossIndex + 1}/10)</span>
+        <span style="font-size:0.8rem; color:#8b949e; cursor:pointer;" onclick="exitStage()">✕ 中断</span>
+      </div>
+      <div id="stage12-timer" class="timer-display">⏱️ 残り時間: ${gameState.stage12TimeLeft}秒</div>
+  `;
+
+  if (gameState.stage12SkillActive) {
+    html += `<div class="skill-comment-box">💡 スキルコメント: ${qData.comment}</div>`;
+  }
+
+  let formattedText = qData.text;
+  if (gameState.stage12SkillActive && qData.highlightText) {
+    formattedText = formattedText.replace(
+      qData.highlightText,
+      `<span class="highlight-red">${qData.highlightText}</span>`
+    );
+  }
+
+  html += `<div class="question-text">${formattedText}</div>`;
+
+  if (!gameState.stage12DialogActive) {
+    html += `<div class="options" id="opt-list">`;
+    qData.options.forEach((opt, idx) => {
+      html += `<button class="btn" onclick="checkStage12BossAnswer(${idx})">${opt.label}</button>`;
+    });
+    html += `</div>`;
+  } else {
+    html += `
+      <div class="dialog-overlay">
+        <h3 style="color:var(--gold-color); margin-top:0;">クリア条件未達</h3>
+        <p style="font-size:1.05rem;">「判断処理スキルを発動しますか？」</p>
+        <div class="dialog-btns">
+          <button class="dialog-btn dialog-btn-yes" onclick="handleStage12SkillDialog(true)">YES</button>
+          <button class="dialog-btn dialog-btn-no" onclick="handleStage12SkillDialog(false)">NO</button>
+        </div>
+      </div>
+    `;
+  }
+  html += `<div id="fb" class="feedback"></div></div>`;
+  container.innerHTML = html;
+
+  if (!gameState.stage12DialogActive && !stage12Timer) {
+    startStage12Timer();
+  }
+}
+
+function checkStage12BossAnswer(selectedIndex) {
+  initAudio();
+  const qData = STAGE12_BOSS_QUESTIONS[gameState.stage12BossIndex];
+  const selected = qData.options[selectedIndex];
+  const fbEl = document.getElementById('fb');
+  const buttons = document.querySelectorAll('#opt-list .btn');
+  buttons.forEach(b => b.disabled = true);
+
+  if (selected.correct) {
+    playSound('correct');
+    buttons[selectedIndex].classList.add('correct');
+    
+    if (gameState.stage12BossIndex + 1 < STAGE12_BOSS_QUESTIONS.length) {
+      setTimeout(() => {
+        gameState.stage12BossIndex++;
+        saveData();
+        render();
+      }, 300);
+    } else {
+      stopStage12Timer();
+      playSound('clear');
+      triggerConfetti();
+      fbEl.className = "feedback active correct-fb";
+      fbEl.innerHTML = "<strong>🏆 STAGE 12 BOSS K.O.!!</strong><br>【比較判定スキル】を獲得しました！";
+      
+      const stg12 = STAGES.find(s => s.id === 12);
+      if (!gameState.unlockedSkills.includes(stg12.rewardSkill)) {
+        gameState.unlockedSkills.push(stg12.rewardSkill);
+      }
+      
+      setTimeout(() => {
+        gameState.isAllCleared = true;
+        saveData();
+        render();
+        triggerConfetti();
+        setTimeout(triggerConfetti, 500);
+        setTimeout(triggerConfetti, 1000);
+      }, 1500);
+    }
+  } else {
+    playSound('wrong');
+    buttons[selectedIndex].classList.add('wrong');
+    stopStage12Timer();
+    triggerStage12Fail("不正解！１問目からリスタートです。");
+  }
+}
+
+function triggerStage12Fail(reasonText) {
+  gameState.stage12DialogActive = true;
+  saveData();
+  render();
+  const fbEl = document.getElementById('fb');
+  if (fbEl) {
+    fbEl.className = "feedback active wrong-fb";
+    fbEl.innerHTML = `<strong>${reasonText}</strong>`;
+  }
+}
+
+function handleStage12SkillDialog(useSkill) {
+  initAudio();
+  gameState.stage12SkillActive = useSkill;
+  gameState.stage12DialogActive = false;
+  gameState.stage12BossIndex = 0;
+  gameState.stage12TimeLeft = 30;
+  saveData();
+  render();
+  startStage12Timer();
+}
+
+// ----------------------------------------------------
 // 通常ステージの判定処理
 // ----------------------------------------------------
 function renderQuestion() {
-  const container = document.getElementById('main-content');
   const stage = STAGES.find(s => s.id === gameState.currentStageId);
   const isBoss = gameState.currentStep === stage.questions.length;
   
+  if (isBoss && stage.boss && stage.boss.isTimeTrial) {
+    renderStage12Boss();
+    return;
+  }
+
+  const container = document.getElementById('main-content');
   let qData;
   if (isBoss) {
     if (stage.boss.type === "normal" || stage.boss.type === "sort") {
@@ -1819,11 +2210,12 @@ function renderQuestion() {
   } else {
     qData = stage.questions[gameState.currentStep];
   }
+
   let html = '';
   html += `
     <div class="battle-scene">
       <div>
-        <div class="pixel-char">⚔️️🛡️</div>
+        <div class="pixel-char">⚔🛡️</div>
         <div style="font-size:0.75rem; color:var(--accent-color); margin-top:4px;">プレーヤー</div>
       </div>
       <div style="font-size:1.2rem; color:#8b949e;">VS</div>
@@ -1888,6 +2280,7 @@ function selectWord(word, origIdx) {
   saveData();
   render();
 }
+
 function unselectWord(idx) {
   initAudio();
   gameState.selectedWords.splice(idx, 1);
@@ -1987,24 +2380,14 @@ function checkAnswer(selectedIndex, isLogicStep) {
               gameState.unlockedStage = stage.id + 1;
             }
             
-            // STAGE 10 クリア時の全クリア演出
-            if (stage.id === 10) {
-              gameState.isAllCleared = true;
-              saveData();
-              render();
-              triggerConfetti();
-              setTimeout(triggerConfetti, 500);
-              setTimeout(triggerConfetti, 1000);
-            } else {
-              alert(`🎉 ${stage.title} CLEAR!\n獲得スキル: 【${stage.rewardSkill}】`);
-              gameState.currentStageId = null;
-              gameState.currentStep = 0;
-              gameState.subStep = 0;
-              gameState.bossSubStep = 0;
-              gameState.selectedWords = [];
-              saveData();
-              render();
-            }
+            alert(`🎉 ${stage.title} CLEAR!\n獲得スキル: 【${stage.rewardSkill}】`);
+            gameState.currentStageId = null;
+            gameState.currentStep = 0;
+            gameState.subStep = 0;
+            gameState.bossSubStep = 0;
+            gameState.selectedWords = [];
+            saveData();
+            render();
           }, 1500);
         }
       } else {
@@ -2041,32 +2424,14 @@ function renderAllClear() {
       <h2 style="color: var(--gold-color); margin-top: 0; font-size: 1.5rem;">全STAGEクリアおめでとう！</h2>
       <p style="line-height: 1.6; color: var(--text-color); margin-bottom: 20px;">
         すべてのSTAGE SKILLを獲得しました！<br>
-        完璧な英語処理OSをマスターを目指してトレーニングしましょう！
+        完璧な英語処理OSをマスターしました！
       </p>
-      <button class="btn" style="text-align: center; background: var(--success-color); color: white; font-weight: bold; justify-content: center;" onclick="resetToStageSelect()">
-        🗺 ステージ選択に戻る / 復習する
-      </button>
+      <button class="btn" style="text-align:center; background:var(--accent-color); color:#0d1117; font-weight:bold; width:100%;" onclick="confirmResetData()">最初から再挑戦する</button>
     </div>
   `;
 }
 
-function resetToStageSelect() {
-  gameState.isAllCleared = false;
-  gameState.currentStageId = null;
-  saveData();
-  render();
-}
-
-function exitStage() {
-  if (confirm("ステージ選択画面に戻りますか？（進行状況は自動保存されます）")) {
-    stopBattleTimer();
-    gameState.currentStageId = null;
-    saveData();
-    render();
-  }
-}
-
-document.addEventListener('click', initAudio, { once: true });
+// 初期化実行
 loadSaveData();
 render();
 </script>

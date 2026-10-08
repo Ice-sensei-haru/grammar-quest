@@ -1034,7 +1034,7 @@ const STAGES = [
           logicText: "【判断基準】",
           logicOptions: [
             { label: "単語の一つ一つの意味で判断", correct: false },
-            { label: "主語と動詞。疑問文は主語の前の１語を置く。疑問詞との組み合わせ", correct: true }
+            { label: "主語と動詞。疑問文は主語の前の一語を置く。疑問詞との組み合わせ", correct: true }
           ]
         }
       ]
@@ -1055,11 +1055,11 @@ const STAGES = [
           { label: "B : looks", correct: true },
           { label: "C : watches", correct: false }
         ],
-        wrongComment: "後ろに続く単語を見る → busy = Sheの関係",
+        wrongComment: "後ろに続く単語を見る → busyはSheの状態",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "意味の解釈「～に見える」はlook", correct: false },
-          { label: "後ろを見る → 形容詞busy = Sheの関係", correct: true }
+          { label: "後ろを見る → 形容詞busyはSheの状態", correct: true }
         ]
       },
       {
@@ -2107,7 +2107,7 @@ function renderStageSelect() {
   // STAGE12クリア後に「英語処理の極意書」を表示
   const gokuiUnlocked = !!gameState.gokuiUnlocked ||
     gameState.gokuiCleared ||
-    gameState.unlockedSkills.includes("動詞操作マスタースキル");
+    gameState.unlockedSkills.includes("動詞操作マスター");
   html += `
     <div style="margin-top:18px; border-top:1px solid #30363d; padding-top:15px;">
       <button class="stage-select-btn extra-stage-btn"
@@ -2378,7 +2378,7 @@ function renderStage12Boss() {
     html += `
       <div class="dialog-overlay">
         <h3 style="color:var(--gold-color); margin-top:0;">クリア条件未達</h3>
-        <p style="font-size:1.05rem;">「コンパリションスキルを発動しますか？」</p>
+        <p style="font-size:1.05rem;">「比較判定スキルを先取りして発動しますか？」</p>
         <div class="dialog-btns">
           <button class="dialog-btn dialog-btn-yes" onclick="handleStage12SkillDialog(true)">YES</button>
           <button class="dialog-btn dialog-btn-no" onclick="handleStage12SkillDialog(false)">NO</button>

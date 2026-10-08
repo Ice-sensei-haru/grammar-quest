@@ -254,7 +254,37 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.08); }
     }
-    .all-clear-card {
+    .endroll-card {
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #161b22 0%, #1f2633 100%);
+    border: 2px solid var(--gold-color);
+    border-radius: 12px;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .endroll-skill {
+    font-size: 1.15rem;
+    color: var(--gold-color);
+    font-weight: bold;
+    margin: 10px 0;
+    animation: endrollIn 0.6s ease both;
+  }
+  @keyframes endrollIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .endroll-final {
+    animation: endrollFinal 1s ease both;
+  }
+  @keyframes endrollFinal {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .all-clear-card {
       text-align: center;
       padding: 30px 20px;
       background: linear-gradient(135deg, #161b22 0%, #1f2633 100%);
@@ -1557,6 +1587,92 @@ const STAGE12_BOSS_QUESTIONS = [
   { id: 10, text: "I like red as (   ) as blue.", options: [{ label: "A：good", correct: false }, { label: "B：much", correct: true }], highlightText: "like", comment: "likeの同等比較" }
 ];
 
+// ----------------------------------------------------
+// 「英語処理の極意書」問題データ
+// ----------------------------------------------------
+const EIGO_SHORI_GOKUI_QUESTIONS = [
+  {
+    text: "①　英語は［　　］で始まる。",
+    options: [
+      { label: "A：主語と動詞", correct: true },
+      { label: "B：動詞と目的語", correct: false },
+      { label: "C：人ともの", correct: false }
+    ]
+  },
+  {
+    text: "②　英文を読むときはまず、［　　］を探す。",
+    options: [
+      { label: "A：人ともの", correct: false },
+      { label: "B：動詞と時の言葉", correct: false },
+      { label: "C：主語と動詞", correct: true }
+    ]
+  },
+  {
+    text: "③　日本語の文末で［　　］を区別する。",
+    options: [
+      { label: "A：現在か過去か未来か", correct: false },
+      { label: "B：時制、表現、文の形（肯定・否定・疑問・命令）", correct: true },
+      { label: "C：主語と動詞", correct: false }
+    ]
+  },
+  {
+    text: "④　疑問文を作るとき［　　］の前に一語を置く。",
+    options: [
+      { label: "A：文", correct: false },
+      { label: "B：主語", correct: true },
+      { label: "C：動詞", correct: false }
+    ]
+  },
+  {
+    text: "⑤　受動態は［　　］で表現される。",
+    options: [
+      { label: "A：be動詞＋過去分詞", correct: true },
+      { label: "B：be動詞＋現在分詞", correct: false },
+      { label: "C：have（has）＋過去分詞", correct: false }
+    ]
+  },
+  {
+    text: "⑥　命令文は［　　］を表現するときの文。",
+    options: [
+      { label: "A：感情、意見、主張", correct: false },
+      { label: "B：評価、提示、感想", correct: false },
+      { label: "C：指示、案内、ルール、注意", correct: true }
+    ]
+  },
+  {
+    text: "⑦　現在完了は［　　］で表現される。",
+    options: [
+      { label: "A：be動詞＋過去分詞", correct: false },
+      { label: "B：be動詞＋現在分詞", correct: false },
+      { label: "C：have（has）＋過去分詞", correct: true }
+    ]
+  },
+  {
+    text: "⑧　名詞の単数形を使う際、［　　］の順に置く。",
+    options: [
+      { label: "A：入口の言葉→どんなにあたる言葉→名詞", correct: true },
+      { label: "B：日本語で表現される単語", correct: false },
+      { label: "C：どんなにあたる言葉→入口の言葉→名詞", correct: false }
+    ]
+  },
+  {
+    text: "⑨　進行形は［　　］で表現される。",
+    options: [
+      { label: "A：be動詞＋過去分詞", correct: false },
+      { label: "B：be動詞＋現在分詞", correct: true },
+      { label: "C：have（has）＋過去分詞", correct: false }
+    ]
+  },
+  {
+    text: "⑩　動詞の形は、主語と［　　］で決まる。",
+    options: [
+      { label: "A：動詞の後ろにある単語", correct: false },
+      { label: "B：表現（単純形・進行形・完了形・受動態）だけ", correct: false },
+      { label: "C：時制、表現、文の形（肯定・否定・疑問・命令）", correct: true }
+    ]
+  }
+];
+
 let audioCtx = null;
 function initAudio() {
   if (!audioCtx) {
@@ -1671,7 +1787,11 @@ let gameState = {
   stage12BossIndex: 0,
   stage12TimeLeft: 30,
   stage12SkillActive: false,
-  stage12DialogActive: false
+  stage12DialogActive: false,
+  gokuiIndex: 0,
+  gokuiCleared: false,
+  gokuiUnlocked: false,
+  endrollIndex: 0
 };
 
 let battleTimer = null;
@@ -1693,6 +1813,15 @@ function loadSaveData() {
   if (gameState.stage12TimeLeft === undefined) gameState.stage12TimeLeft = 30;
   if (gameState.stage12SkillActive === undefined) gameState.stage12SkillActive = false;
   if (gameState.stage12DialogActive === undefined) gameState.stage12DialogActive = false;
+
+  if (gameState.gokuiIndex === undefined) gameState.gokuiIndex = 0;
+  if (gameState.gokuiCleared === undefined) gameState.gokuiCleared = false;
+  if (gameState.gokuiUnlocked === undefined) {
+    gameState.gokuiUnlocked =
+      gameState.gokuiCleared ||
+      gameState.unlockedSkills.includes("比較判定スキル");
+  }
+  if (gameState.endrollIndex === undefined) gameState.endrollIndex = 0;
 
   updateHeader();
 }
@@ -1724,7 +1853,11 @@ function confirmResetData() {
       stage12BossIndex: 0,
       stage12TimeLeft: 30,
       stage12SkillActive: false,
-      stage12DialogActive: false
+      stage12DialogActive: false,
+     gokuiIndex: 0,
+     gokuiCleared: false,
+     gokuiUnlocked: false,
+     endrollIndex: 0
     };
     saveData();
     render();
@@ -1766,6 +1899,10 @@ function render() {
     renderAllClear();
   } else if (gameState.currentStageId === 'verb_battle') {
     renderVerbBattle();
+  } else if (gameState.currentStageId === 'gokui') {
+    renderGokui();
+  } else if (gameState.currentStageId === 'endroll') {
+    renderEndroll();
   } else if (gameState.currentStageId === null) {
     renderStageSelect();
   } else {
@@ -1835,6 +1972,33 @@ function renderStageSelect() {
     }
   });
   
+  // STAGE12クリア後に「英語処理の極意書」を表示
+  const gokuiUnlocked = !!gameState.gokuiUnlocked ||
+    gameState.gokuiCleared ||
+    gameState.unlockedSkills.includes("比較判定スキル");
+
+  html += `
+    <div style="margin-top:18px; border-top:1px solid #30363d; padding-top:15px;">
+      <button class="stage-select-btn extra-stage-btn"
+        ${gokuiUnlocked ? '' : 'disabled'}
+        onclick="startGokui()">
+        <div>
+          <strong>【英語処理の極意書】</strong> 最終ステージ
+          <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">
+            STAGE1〜12で身につけた英語処理OSを総確認
+          </div>
+          ${!gokuiUnlocked
+            ? '<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">開放条件: STAGE 12 クリア</div>'
+            : ''}
+          ${gameState.gokuiCleared
+            ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>'
+            : ''}
+        </div>
+        <div>${gokuiUnlocked ? '▶ 挑戦' : '🔒 鍵'}</div>
+      </button>
+    </div>
+  `;
+
   html += '</div>';
   container.innerHTML = html;
 }
@@ -2149,12 +2313,21 @@ function checkStage12BossAnswer(selectedIndex) {
       }
       
       setTimeout(() => {
-        gameState.isAllCleared = true;
+        // STAGE12クリア → 「英語処理の極意書」を開放
+        gameState.gokuiUnlocked = true;
+        gameState.isAllCleared = false;
+        gameState.currentStageId = null;
+        gameState.currentStep = 0;
+        gameState.subStep = 0;
+        gameState.bossSubStep = 0;
+        gameState.gokuiIndex = 0;
+        gameState.endrollIndex = 0;
         saveData();
         render();
         triggerConfetti();
         setTimeout(triggerConfetti, 500);
         setTimeout(triggerConfetti, 1000);
+        alert("STAGE 12 CLEAR！\\n「英語処理の極意書」が開放されました！");
       }, 1500);
     }
   } else {
@@ -2416,6 +2589,176 @@ function checkAnswer(selectedIndex, isLogicStep) {
   saveData();
 }
 
+// ----------------------------------------------------
+// 「英語処理の極意書」
+// ----------------------------------------------------
+function startGokui() {
+  initAudio();
+  gameState.currentStageId = 'gokui';
+  gameState.gokuiIndex = 0;
+  gameState.endrollIndex = 0;
+  gameState.gokuiUnlocked = true;
+  saveData();
+  render();
+}
+
+function renderGokui() {
+  const container = document.getElementById('main-content');
+  const q = EIGO_SHORI_GOKUI_QUESTIONS[gameState.gokuiIndex];
+
+  let html = `
+    <div class="card">
+      <div class="card-header">
+        <span>★ 英語処理の極意書</span>
+        <span style="font-size:0.8rem; color:#8b949e; cursor:pointer;" onclick="exitStage()">✕ 中断</span>
+      </div>
+      <div class="question-text">
+        ${q.text.replace(/\n/g, '<br>')}
+      </div>
+      <div style="font-size:0.85rem; color:var(--gold-color); margin-bottom:10px;">
+        正解すれば +20 EXP
+      </div>
+      <div class="options" id="gokui-opt-list">
+  `;
+
+  q.options.forEach((opt, idx) => {
+    html += `<button class="btn" onclick="checkGokuiAnswer(${idx})">${opt.label}</button>`;
+  });
+
+  html += `
+      </div>
+      <div id="gokui-fb" class="feedback"></div>
+    </div>
+  `;
+
+  container.innerHTML = html;
+}
+
+function checkGokuiAnswer(selectedIndex) {
+  initAudio();
+  const q = EIGO_SHORI_GOKUI_QUESTIONS[gameState.gokuiIndex];
+  const selected = q.options[selectedIndex];
+  const buttons = document.querySelectorAll('#gokui-opt-list .btn');
+  const fbEl = document.getElementById('gokui-fb');
+
+  if (selected.correct) {
+    buttons.forEach(b => b.disabled = true);
+    buttons[selectedIndex].classList.add('correct');
+    playSound('correct');
+    addExp(20);
+
+    fbEl.className = "feedback active correct-fb";
+    fbEl.innerHTML = "<strong>正解！ (+20 EXP)</strong>";
+
+    setTimeout(() => {
+      if (gameState.gokuiIndex + 1 < EIGO_SHORI_GOKUI_QUESTIONS.length) {
+        gameState.gokuiIndex++;
+        saveData();
+        render();
+      } else {
+        // 極意書クリア → 獲得スキルのエンドロールへ
+        gameState.gokuiCleared = true;
+        gameState.gokuiUnlocked = true;
+        gameState.endrollIndex = 0;
+        gameState.currentStageId = 'endroll';
+        gameState.isAllCleared = false;
+        saveData();
+        playSound('clear');
+        triggerConfetti();
+        render();
+      }
+    }, 900);
+  } else {
+    playSound('wrong');
+    buttons[selectedIndex].classList.add('wrong');
+    fbEl.className = "feedback active wrong-fb";
+    fbEl.innerHTML = "<strong>間違いです。もう一度</strong>";
+    setTimeout(() => {
+      buttons[selectedIndex].classList.remove('wrong');
+      buttons[selectedIndex].disabled = false;
+    }, 700);
+  }
+}
+
+// ----------------------------------------------------
+// 獲得スキル・エンドロール
+// ----------------------------------------------------
+function renderEndroll() {
+  const container = document.getElementById('main-content');
+  const skills = gameState.unlockedSkills.slice();
+
+  // これまで獲得したスキルをSTAGE順に並べる。
+  const stageOrder = STAGES
+    .filter(s => typeof s.id === 'number')
+    .sort((a, b) => a.id - b.id)
+    .map(s => s.rewardSkill);
+
+  const orderedSkills = [];
+  stageOrder.forEach(skill => {
+    if (skills.includes(skill)) orderedSkills.push(skill);
+  });
+
+  // STAGE側に存在しない追加スキルは最後に残す。
+  skills.forEach(skill => {
+    if (!orderedSkills.includes(skill)) orderedSkills.push(skill);
+  });
+
+  const idx = gameState.endrollIndex;
+
+  if (idx < orderedSkills.length) {
+    const currentSkill = orderedSkills[idx];
+
+    container.innerHTML = `
+      <div class="endroll-card">
+        <div style="color:var(--accent-color); font-size:0.9rem; margin-bottom:10px;">
+          ★ 英語処理OS 獲得スキル ★
+        </div>
+        <div style="color:#8b949e; font-size:0.85rem;">
+          ${idx + 1} / ${orderedSkills.length}
+        </div>
+        <div class="endroll-skill">
+          【${currentSkill}】
+        </div>
+        <div style="color:#8b949e; font-size:0.8rem; margin-top:20px;">
+          次のスキルへ……
+        </div>
+      </div>
+    `;
+
+    setTimeout(() => {
+      // 画面遷移中に別操作されても進みすぎないよう現在値を確認
+      if (gameState.currentStageId === 'endroll' &&
+          gameState.endrollIndex === idx) {
+        gameState.endrollIndex++;
+        saveData();
+        render();
+      }
+    }, 1400);
+    return;
+  }
+
+  gameState.isAllCleared = true;
+  saveData();
+
+  container.innerHTML = `
+    <div class="endroll-card endroll-final">
+      <div class="trophy-icon">🏆✨</div>
+      <h2 style="color:var(--gold-color); margin-top:0; font-size:1.35rem;">
+        Congratulations!
+      </h2>
+      <p style="line-height:1.8; color:var(--text-color); margin:10px 0 25px;">
+        あなたは英語処理OSマスターの称号を獲得しました！<br>
+        さらなる高みを目指してトレーニングを続けていきましょう！
+      </p>
+      <button class="btn" style="text-align:center; background:var(--success-color);
+        color:white; font-weight:bold; justify-content:center;"
+        onclick="resetToStageSelect()">
+        ★ ステージ選択に戻る / 復習する
+      </button>
+    </div>
+  `;
+}
+
 function renderAllClear() {
   const container = document.getElementById('main-content');
   container.innerHTML = `
@@ -2435,6 +2778,7 @@ function renderAllClear() {
 function resetToStageSelect() {
   gameState.isAllCleared = false;
   gameState.currentStageId = null;
+  gameState.endrollIndex = 0;
   saveData();
   render();
 }

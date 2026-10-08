@@ -460,7 +460,7 @@ const STAGES = [
     skillName: "基礎認識",
     rewardSkill: "基礎認識スキル",
     monsterEmoji: "👾",
-    monsterName: "エラー・スライム",
+    monsterName: "ベーシック・スライム",
     questions: [
       {
         text: "① Tom and Ken play tennis. の主語と動詞はどれ？",
@@ -487,7 +487,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "一般動詞の形が三単現のs → Doesを使って動詞を原形に戻す", correct: true },
-          { label: "主語が１語 → Doesを使って動詞を原形に戻す", correct: false }
+          { label: "主語が一語 → Doesを使って動詞を原形に戻す", correct: false }
         ]
       },
       {
@@ -526,7 +526,7 @@ const STAGES = [
     skillName: "S-V発見",
     rewardSkill: "S-V発見スキル",
     monsterEmoji: "🐉",
-    monsterName: "リトル・キマイラ",
+    monsterName: "SV・キマイラ",
     questions: [
       {
         text: "① Your brother is a soccer fan. の疑問文とその答え方は？",
@@ -553,7 +553,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "主語が三人称単数だから一般動詞は三単現のsがつく", correct: true },
-          { label: "主語が１語になると一般動詞は三単現のsがつく", correct: false }
+          { label: "主語が一語になると一般動詞は三単現のsがつく", correct: false }
         ]
       },
       {
@@ -581,7 +581,7 @@ const STAGES = [
       wrongComment: "主語がHe（三人称単数）に変わるため、動詞も三単現のsが必要です。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "主語が１語になると一般動詞に三単現のsがつく", correct: false },
+        { label: "主語が一語になると一般動詞に三単現のsがつく", correct: false },
         { label: "主語が三人称単数になったので、一般動詞に三単現のsがつく", correct: true }
       ]
     }
@@ -618,7 +618,7 @@ const STAGES = [
         wrongComment: "主語が三人称単数の否定文では doesn't を使い、動詞は原形にします。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語が１語になると一般動詞の否定文にはdoesを使う", correct: false },
+          { label: "主語が一語になると一般動詞の否定文にはdoesを使う", correct: false },
           { label: "主語が三人称単数だから一般動詞の否定文にはdoesを使う", correct: true }
         ]
       },
@@ -658,7 +658,7 @@ const STAGES = [
     skillName: "動詞形選択",
     rewardSkill: "動詞形選択スキル",
     monsterEmoji: "👑",
-    monsterName: "デビル・クラウン",
+    monsterName: "クラウン・セレクター",
     questions: [
       {
         text: "① Where are they (  ) soccer now? の(  )に適する語は？",
@@ -724,7 +724,7 @@ const STAGES = [
     skillName: "代名詞判断",
     rewardSkill: "代名詞判断スキル",
     monsterEmoji: "🛡️",
-    monsterName: "キラー・ナイト",
+    monsterName: "プロナウン・キラー",
     questions: [
       {
         text: "① Do you and Ken play tennis? – Yes, (  ) do. の(  )に入る適切な語は？",
@@ -955,7 +955,7 @@ const STAGES = [
     skillName: "表現決定",
     rewardSkill: "表現決定スキル",
     monsterEmoji: "🧙‍♂️",
-    monsterName: "エクスプレッション・マスター",
+    monsterName: "エクスプレッサー",
     questions: [
       {
         text: "① Tom went to the park. の疑問文とその答え方は？",
@@ -1985,7 +1985,7 @@ function renderStageSelect() {
         <div>
           <strong>【英語処理の極意書】</strong> 最終ステージ
           <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">
-            STAGE1〜12で身につけた英語処理OSを総確認
+            英語処理OSの核心
           </div>
           ${!gokuiUnlocked
             ? '<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">開放条件: STAGE 12 クリア</div>'
@@ -2113,7 +2113,7 @@ function renderVerbBattle() {
     html += `
       <div class="dialog-overlay">
         <h3 style="color:var(--gold-color); margin-top:0;">クリア条件未達</h3>
-        <p style="font-size:1.05rem;">「ユニークスキルを発動しますか？」</p>
+        <p style="font-size:1.05rem;">「獲得したジャッジメントスキルを発動しますか？」</p>
         <div class="dialog-btns">
           <button class="dialog-btn dialog-btn-yes" onclick="handleSkillDialog(true)">YES</button>
           <button class="dialog-btn dialog-btn-no" onclick="handleSkillDialog(false)">NO</button>
@@ -2266,7 +2266,7 @@ function renderStage12Boss() {
     html += `
       <div class="dialog-overlay">
         <h3 style="color:var(--gold-color); margin-top:0;">クリア条件未達</h3>
-        <p style="font-size:1.05rem;">「判断処理スキルを発動しますか？」</p>
+        <p style="font-size:1.05rem;">「コンパリションスキルを発動しますか？」</p>
         <div class="dialog-btns">
           <button class="dialog-btn dialog-btn-yes" onclick="handleStage12SkillDialog(true)">YES</button>
           <button class="dialog-btn dialog-btn-no" onclick="handleStage12SkillDialog(false)">NO</button>

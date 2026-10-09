@@ -2253,7 +2253,7 @@ function renderStageSelect() {
     <div style="margin-top:10px;">
       <button class="stage-select-btn battle-mode-btn" ${lastBossUnlocked ? '' : 'disabled'} onclick="startLastBoss()">
         <div>
-          <strong>【LAST BOSS】カオスヴァーブ・オーガ</strong>
+          <strong>【LAST BATTLE】カオスヴァーブ・オーガ</strong>
           <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">タイムトライアル：60秒以内に全20問正解 / 誤答で1問目から再挑戦</div>
           ${!gameState.gokuiCleared ? '<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：英語処理の極意書クリア</div>' : ''}
           ${gameState.gokuiCleared && getRank(gameState.exp) < 33 ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：ランク33以上（現在ランク${getRank(gameState.exp)}）</div>` : ''}
@@ -2897,7 +2897,7 @@ function checkGokuiAnswer(selectedIndex) {
         saveData();
         render();
       } else {
-        // 極意書クリア後はステージ選択へ戻り、条件達成後にLAST BOSSへ挑戦
+        // 極意書クリア後はステージ選択へ戻り、条件達成後にLAST BATTLEへ挑戦
         gameState.gokuiCleared = true;
         gameState.gokuiUnlocked = true;
         gameState.currentStageId = null;
@@ -2914,7 +2914,7 @@ function checkGokuiAnswer(selectedIndex) {
         playSound('clear');
         triggerConfetti();
         render();
-        alert("「英語処理の極意書」CLEAR！\nランク33以上で ラスボス「カオスヴァーブ・オーガ」に挑戦できます。");
+        alert("「英語処理の極意書」CLEAR！\nランク33以上で LAST BATTLE「カオスヴァーブ・オーガ」に挑戦できます。");
       }
     }, 900);
   } else {
@@ -2929,11 +2929,11 @@ function checkGokuiAnswer(selectedIndex) {
   }
 }
 // ----------------------------------------------------
-// ラスボス「カオスヴァーブ・オーガ」タイムトライアル
+// LAST BATTLE「カオスヴァーブ・オーガ」タイムトライアル
 // ----------------------------------------------------
 function startLastBoss() {
   if (!gameState.gokuiCleared || getRank(gameState.exp) < 33) {
-    alert("LAST BOSSの開放条件は「英語処理の極意書クリア」かつ「ランク33以上」です。");
+    alert("LAST BATTLEの開放条件は「英語処理の極意書クリア」かつ「ランク33以上」です。");
     return;
   }
   initAudio();
@@ -2993,7 +2993,7 @@ function renderLastBoss() {
       <div id="last-boss-timer" class="timer-display">⏱️ 残り時間: ${gameState.lastBossTimeLeft}秒</div>
   `;
   if (gameState.lastBossSkillActive) {
-    html += `<div class="skill-comment-box">💡 スキルコメント: ${qData.comment}</div>`;
+    html += `<div class="skill-comment-box">💡 判断の理コメント: ${qData.comment}</div>`;
   }
   let formattedText = qData.text;
   if (gameState.lastBossSkillActive && qData.highlightText) {

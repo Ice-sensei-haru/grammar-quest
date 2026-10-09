@@ -2278,8 +2278,11 @@ function startStage(stageId) {
   gameState.stage12BossIndex = 0;
   gameState.stage12TimeLeft = 30;
   gameState.stage12DialogActive = false;
+  // ステージ選択画面の下部から移動した際、旧スクロール位置で画面が空白に見えるのを防ぐ
+  window.scrollTo(0, 0);
   saveData();
   render();
+  requestAnimationFrame(() => window.scrollTo(0, 0));
 }
 function exitStage() {
   stopBattleTimer();
@@ -2796,12 +2799,23 @@ function checkAnswer(selectedIndex, isLogicStep) {
           }, 1500);
         }
       } else {
-        playSound('correct');
+        const isFinalNoBossQuestion =
+          stage.noBoss && gameState.currentStep + 1 >= stage.questions.length;
+
+        // 最終問題では、クリア演出をコメント表示より先に実行する
+        if (isFinalNoBossQuestion) {
+          playSound('clear');
+          triggerConfetti();
+        } else {
+          playSound('correct');
+        }
         addExp(20);
         fbEl.className = "feedback active correct-fb";
-        fbEl.innerHTML = "<strong>判断基準も正解！ (+20 EXP)</strong>";
+        fbEl.innerHTML = isFinalNoBossQuestion
+          ? `<strong>🏆 ${stage.title} CLEAR!</strong><br>【${stage.rewardSkill}】を獲得しました！`
+          : "<strong>判断基準も正解！ (+20 EXP)</strong>";
         setTimeout(() => {
-          if (stage.noBoss && gameState.currentStep + 1 >= stage.questions.length) {
+          if (isFinalNoBossQuestion) {
             if (!gameState.unlockedSkills.includes(stage.rewardSkill)) {
               gameState.unlockedSkills.push(stage.rewardSkill);
             }
@@ -2813,8 +2827,7 @@ function checkAnswer(selectedIndex, isLogicStep) {
             gameState.bossSubStep = 0;
             gameState.selectedWords = [];
             saveData();
-            triggerConfetti();
-            alert(`🎉 ${stage.title} CLEAR!\n獲得した判断の理: 【${stage.rewardSkill}】\n「英語処理の極意書」が開放されました！`);
+            alert(`🎉 ${stage.title} CLEAR!\\n獲得した判断の理: 【${stage.rewardSkill}】\\n「英語処理の極意書」が開放されました！`);
             render();
             return;
           }
@@ -2847,8 +2860,11 @@ function startGokui() {
   gameState.gokuiIndex = 0;
   gameState.endrollIndex = 0;
   gameState.gokuiUnlocked = true;
+  // 極意書は選択画面の下部にあるため、開始時に表示位置を先頭へ戻す
+  window.scrollTo(0, 0);
   saveData();
   render();
+  requestAnimationFrame(() => window.scrollTo(0, 0));
 }
 function renderGokui() {
   const container = document.getElementById('main-content');
@@ -2886,10 +2902,20 @@ function checkGokuiAnswer(selectedIndex) {
   if (selected.correct) {
     buttons.forEach(b => b.disabled = true);
     buttons[selectedIndex].classList.add('correct');
-    playSound('correct');
+    const isFinalGokuiQuestion =
+      gameState.gokuiIndex + 1 >= EIGO_SHORI_GOKUI_QUESTIONS.length;
+    // 極意書の最終問題では、クリア音と紙吹雪をクリア表示より先に出す
+    if (isFinalGokuiQuestion) {
+      playSound('clear');
+      triggerConfetti();
+    } else {
+      playSound('correct');
+    }
     addExp(20);
     fbEl.className = "feedback active correct-fb";
-    fbEl.innerHTML = "<strong>正解！ (+20 EXP)</strong>";
+    fbEl.innerHTML = isFinalGokuiQuestion
+      ? "<strong>🏆 英語処理の極意書 CLEAR!</strong><br>全問クリア！"
+      : "<strong>正解！ (+20 EXP)</strong>";
     setTimeout(() => {
       if (gameState.gokuiIndex + 1 < EIGO_SHORI_GOKUI_QUESTIONS.length) {
         gameState.gokuiIndex++;
@@ -2910,8 +2936,6 @@ function checkGokuiAnswer(selectedIndex) {
         gameState.endrollIndex = 0;
         gameState.isAllCleared = false;
         saveData();
-        playSound('clear');
-        triggerConfetti();
         render();
         alert("「英語処理の極意書」CLEAR！\nランク33以上で LAST BATTLE「カオスヴァーブ・オーガ」に挑戦できます。");
       }

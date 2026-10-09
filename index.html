@@ -1741,13 +1741,13 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
   {
     text: "①　英語は［　　］で始まる。",
     options: [
-      { label: "A：主語と動詞", correct: true },
-      { label: "B：動詞と目的語", correct: false },
-      { label: "C：人ともの", correct: false }
+      { label: "A：主語から動詞", correct: true },
+      { label: "B：動詞から目的語", correct: false },
+      { label: "C：人からもの", correct: false }
     ]
   },
   {
-    text: "②　英文を読むときはまず、［　　］を探す。",
+    text: "②　英文を読むときはまず、［　　］の組み合わせを探す。",
     options: [
       { label: "A：人ともの", correct: false },
       { label: "B：動詞と時の言葉", correct: false },
@@ -1755,7 +1755,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "③　日本語の文末で［　　］を区別する。",
+    text: "③　日本語の文末で［　　］を決める。",
     options: [
       { label: "A：現在か過去か未来か", correct: false },
       { label: "B：時制、表現、文の形（肯定・否定・疑問・命令）", correct: true },
@@ -1763,7 +1763,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "④　疑問文を作るとき［　　］の前に一語を置く。",
+    text: "④　疑問文を作るとき［　　］の前にbe動詞、do・does・did・助動詞の一語を置く。",
     options: [
       { label: "A：文", correct: false },
       { label: "B：主語", correct: true },
@@ -1797,9 +1797,9 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
   {
     text: "⑧　名詞の単数形を使う際、［　　］の順に置く。",
     options: [
-      { label: "A：入口の言葉→どんなにあたる言葉→名詞", correct: true },
+      { label: "A：入口の言葉（aやthe）→形容詞→核の名詞", correct: true },
       { label: "B：日本語で表現される単語", correct: false },
-      { label: "C：どんなにあたる言葉→入口の言葉→名詞", correct: false }
+      { label: "C：形容詞→入口の言葉→核の名詞", correct: false }
     ]
   },
   {
@@ -1827,7 +1827,23 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑫　長文読解の因果関係は、［　　］の順で判断する。",
+    text: "⑫　名詞を修飾する分詞は、［　　］になる。",
+    options: [
+      { label: "A：目的語と動詞の関係", correct: false },
+      { label: "B：目的語と補語の関係", correct: false },
+      { label: "C：主語と動詞の関係", correct: true }
+    ]
+  },
+  {
+    text: "⑬　英文を組み立てるときは、［　　］ようにする。",
+    options: [
+      { label: "A：主語を書く→文末から前へ順に並べる", correct: false },
+      { label: "B：SV関係→表現が作れる語の組み合わせ→英文での配置を整える", correct: true },
+      { label: "C：意味の解釈→表現に合う構文を探す→前から順に並べる", correct: false }
+    ]
+  },
+  {
+    text: "⑭　長文読解の因果関係は、［　　］の順で判断する。",
     options: [
       { label: "A：行動 → 気持ち → 出来事", correct: false },
       { label: "B：出来事 → 気持ち → 行動", correct: true },
@@ -1835,7 +1851,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑬　長文読解で因果関係を示す印に［　　］がある。",
+    text: "⑮　長文読解で因果関係を示す印に［　　］がある。",
     options: [
       { label: "A：because, so, but, howeverなど", correct: true },
       { label: "B：if, for example, 前置詞など", correct: false },
@@ -1843,7 +1859,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑭　長文読解で正誤の条件は［　　］を確認する。",
+    text: "⑯　長文読解で正誤の条件は［　　］を確認する。",
     options: [
       { label: "A：同じ単語が使われているか", correct: false },
       { label: "B：主張や評価が同じか", correct: false },
@@ -1851,7 +1867,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑮　長文読解で要約するときは［　　］を見る。",
+    text: "⑰　長文読解で要約するときは［　　］を見る。",
     options: [
       { label: "A：段落の中央あたり", correct: false },
       { label: "B：for exampleの後", correct: false },
@@ -1859,7 +1875,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑯　長文読解で内容を比較するときは［　　］に分ける。",
+    text: "⑱　長文読解で内容を比較するときは［　　］に分ける。",
     options: [
       { label: "A：意見と事実", correct: true },
       { label: "B：理由と結果", correct: false },
@@ -1967,21 +1983,21 @@ const LAST_BOSS_QUESTIONS = [
   { text: "③ He is (  ) Tom by everyone.", options: [{label:"A：call",correct:false},{label:"B：calls",correct:false},{label:"C：called",correct:true}], highlightText:["is","by everyone"], comment:"受動態" },
   { text: "④ I have just (  ) lunch.", options: [{label:"A：eat",correct:false},{label:"B：eating",correct:false},{label:"C：eaten",correct:true}], highlightText:["have"], comment:"現在完了" },
   { text: "⑤ She enjoyed (  ) soccer.", options: [{label:"A：plays",correct:false},{label:"B：playing",correct:true},{label:"C：to play",correct:false}], highlightText:["enjoyed"], comment:"動名詞" },
-  { text: "⑥ I don’t know how (  ) the PC.", options: [{label:"A：use",correct:false},{label:"B：using",correct:false},{label:"C：to use",correct:true}], highlightText:["how"], comment:"不定詞" },
-  { text: "⑦ I’m looking forward (  ) you.", options: [{label:"A：to seeing",correct:true},{label:"B：to see",correct:false},{label:"C：seeing",correct:false}], highlightText:["looking forward"], comment:"動名詞" },
+  { text: "⑥ I don’t know how (  ) the PC.", options: [{label:"A：use",correct:false},{label:"B：using",correct:false},{label:"C：to use",correct:true}], highlightText:["how"], comment:"疑問詞＋不定詞" },
+  { text: "⑦ I’m looking forward (  ) you.", options: [{label:"A：to seeing",correct:true},{label:"B：to see",correct:false},{label:"C：seeing",correct:false}], highlightText:["looking forward"], comment:"前置詞＋動名詞" },
   { text: "⑧ He made me (  ) the PC.", options: [{label:"A：use",correct:true},{label:"B：using",correct:false},{label:"C：to use",correct:false}], highlightText:["made"], comment:"make＋O＋原形不定詞" },
   { text: "⑨ I want something hot (  ).", options: [{label:"A：eat",correct:false},{label:"B：to eat",correct:true},{label:"C：eating",correct:false}], highlightText:["something"], comment:"不定詞の形容詞的用法" },
   { text: "⑩ The mountain (  ) from here is Mt. Fuji.", options: [{label:"A：see",correct:false},{label:"B：seeing",correct:false},{label:"C：seen",correct:true}], highlightText:["The mountain"], comment:"過去分詞の形容詞的用法" },
   { text: "⑪ The bus over there (  ) to Osaka.", options: [{label:"A：go",correct:false},{label:"B：goes",correct:true},{label:"C：going",correct:false}], highlightText:["The bus"], comment:"三単現のs" },
   { text: "⑫ What was the girl (  ) here then?", options: [{label:"A：do",correct:false},{label:"B：does",correct:false},{label:"C：doing",correct:true}], highlightText:["was"], comment:"過去進行形" },
   { text: "⑬ He told me that she (  ) a doctor.", options: [{label:"A：is",correct:false},{label:"B：was",correct:true},{label:"C：be",correct:false}], highlightText:["told","that"], comment:"時制の一致" },
-  { text: "⑭ If he (  ) here tomorrow, give it to him.", options: [{label:"A：comes",correct:true},{label:"B：will come",correct:false},{label:"C：come",correct:false}], highlightText:["If he"], comment:"未来でも現在形" },
+  { text: "⑭ If he (  ) here tomorrow, give it to him.", options: [{label:"A：comes",correct:true},{label:"B：will come",correct:false},{label:"C：come",correct:false}], highlightText:["If he"], comment:"副詞節→未来でも現在形" },
   { text: "⑮ They decided (  ) London.", options: [{label:"A：visit",correct:false},{label:"B：to visit",correct:true},{label:"C：visiting",correct:false}], highlightText:["decided"], comment:"不定詞" },
-  { text: "⑯ She asked the man (  ) the box.", options: [{label:"A：carried",correct:false},{label:"B：to carry",correct:true},{label:"C：carry",correct:false}], highlightText:["asked"], comment:"不定詞" },
+  { text: "⑯ She asked the man (  ) the box.", options: [{label:"A：carried",correct:false},{label:"B：to carry",correct:true},{label:"C：carry",correct:false}], highlightText:["asked"], comment:"ask＋人＋不定詞" },
   { text: "⑰ When must I (  ) the room?", options: [{label:"A：clean",correct:true},{label:"B：to clean",correct:false},{label:"C：cleaned",correct:false}], highlightText:["must"], comment:"助動詞＋動詞の原形" },
   { text: "⑱ I helped Tom (  ) to the apartment.", options: [{label:"A：moved",correct:false},{label:"B：would move",correct:false},{label:"C：move",correct:true}], highlightText:["helped"], comment:"help＋O＋原形不定詞" },
   { text: "⑲ Do you know the boy (  ) over there?", options: [{label:"A：dance",correct:false},{label:"B：dancing",correct:true},{label:"C：danced",correct:false}], highlightText:["the boy"], comment:"現在分詞の形容詞的用法" },
-  { text: "⑳ I have the pictures that (  ) taken in Kyoto.", options: [{label:"A：is",correct:false},{label:"B：was",correct:false},{label:"C：were",correct:true}], highlightText:["the pictures"], comment:"関係代名詞（主格）" }
+  { text: "⑳ I have the pictures that (  ) taken in Kyoto.", options: [{label:"A：is",correct:false},{label:"B：was",correct:false},{label:"C：were",correct:true}], highlightText:["the pictures"], comment:"関係代名詞（主格）で先行詞が複数" }
 ];
 
 const STORAGE_KEY = 'grammar_quest_save_data_v9';

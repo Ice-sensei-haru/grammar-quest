@@ -489,11 +489,11 @@ const STAGES = [
         ]
       },
       {
-        text: "③ Tom can play the guitar. の( the guitar )をたずねる疑問文は？",
+        text: "③ Tom can cook curry well. の( curry )をたずねる疑問文は？",
         options: [
-          { label: "A : What can Tom play?", correct: true },
-          { label: "B : What Tom can play?", correct: false },
-          { label: "C : What does Tom play?", correct: false }
+          { label: "A : What can Tom cook well?", correct: true },
+          { label: "B : What Tom can cook well?", correct: false },
+          { label: "C : What does Tom cook well?", correct: false }
         ],
         wrongComment: "助動詞canがある文の疑問文は、canを主語の前に出します。",
         logicText: "【判断基準】",
@@ -510,11 +510,11 @@ const STAGES = [
         { label: "B : When did Tom go fishing?", correct: true },
         { label: "C : When does Tom went fishing?", correct: false }
       ],
-      wrongComment: "一般動詞の過去形なのでdidを使い、動詞は原形に戻します。",
+      wrongComment: "一般動詞の過去形なので主語の前にdidを置き、動詞を原形に戻します。",
       logicText: "【判断基準】",
       logicOptions: [
         { label: "Whenを見る → didを主語の前に置く", correct: false },
-        { label: "一般動詞を見る → 過去形 → did", correct: true }
+        { label: "一般動詞を見る → 過去形 → didを主語の前に置く", correct: true }
       ]
     }
   },
@@ -565,7 +565,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "主語が複数になれば、後の名詞はすべて複数形を使う", correct: false },
-          { label: "be動詞の後ろの名詞の数は主語に合わす", correct: true }
+          { label: "be動詞の後ろの名詞の単複は主語の単複に合わす", correct: true }
         ]
       }
     ],
@@ -599,11 +599,11 @@ const STAGES = [
           { label: "B : That is an old bike.", correct: true },
           { label: "C : That is old bike.", correct: false }
         ],
-        wrongComment: "Thatは単数なのでisになり、後ろの名詞も単数形（an old bike）になります。",
+        wrongComment: "That → be動詞は is → 後ろの名詞も単数形になります。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "三人称単数の主語にはbe動詞をisにし、後ろはa(an)＋どんな＋単数形", correct: true },
-          { label: "後ろの名詞が単数になるとbe動詞はisを使う", correct: false }
+          { label: "三人称単数の主語 → be動詞は is → 後ろはa(an)＋どんな＋単数形", correct: true },
+          { label: "後ろの名詞が単数 → be動詞は is", correct: false }
         ]
       },
       {
@@ -613,7 +613,7 @@ const STAGES = [
           { label: "B : Tom doesn’t swim.", correct: true },
           { label: "C : Tom is not swim.", correct: false }
         ],
-        wrongComment: "主語が三人称単数の否定文では doesn't を使い、動詞は原形にします。",
+        wrongComment: "主語が三人称単数 → doがdoesになります。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "主語が一語になると一般動詞の否定文にはdoesを使う", correct: false },
@@ -627,11 +627,11 @@ const STAGES = [
           { label: "B : Can the man from India speak English?", correct: false },
           { label: "C : Does the man from India speak English?", correct: true }
         ],
-        wrongComment: "主語は the man（三人称単数）、動詞が speaks なので Does を使います。",
+        wrongComment: "動詞 → speaks（三単現のs） → 主語の前に Does を使います。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語がIndia、動詞がspeakなのでdoesを使う", correct: false },
-          { label: "主語がthe man、動詞がspeakなのでdoesを使う", correct: true }
+          { label: "主語がIndia、動詞がspeakなのでDoesを使う", correct: false },
+          { label: "動詞が三単現のs → Doesを主語の前に置く → 動詞を原形に戻す", correct: true }
         ]
       }
     ],
@@ -642,11 +642,11 @@ const STAGES = [
         { label: "B : It are interesting stories.", correct: false },
         { label: "C : It is an interesting story.", correct: true }
       ],
-      wrongComment: "Itは単数なので is になり、storyの前には an が必要です。",
+      wrongComment: "三人称単数 → be動詞は is → 後ろの名詞も単数形になります。",
       logicText: "【判断基準】",
       logicOptions: [
         { label: "後ろの名詞が単数形になると、be動詞はisを使う", correct: false },
-        { label: "三人称単数の主語にはbe動詞をisにし、後ろの名詞も単数形にする", correct: true }
+        { label: "三人称単数の主語 → be動詞は is → 後ろの名詞も単数形", correct: true }
       ]
     }
   },
@@ -656,7 +656,7 @@ const STAGES = [
     skillName: "動詞形判定",
     rewardSkill: "動詞形判定の理",
     monsterEmoji: "👑",
-    monsterName: "クラウン・セレクター",
+    monsterName: "ジャッジメント・クラウン",
     questions: [
       {
         text: "① Where are they (  ) soccer now? の(  )に適する語は？",
@@ -668,8 +668,8 @@ const STAGES = [
         wrongComment: "nowとbe動詞（are）があるため、現在進行形（-ing）にします。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "文末にnowがあり、theyだから一般動詞をingの形にする", correct: false },
-          { label: "文末のnowとbe動詞があるので一般動詞をingの形にする", correct: true }
+          { label: "文末に now があり、主語が they だから一般動詞をingの形にする", correct: false },
+          { label: "文末に now があり、be動詞があるので一般動詞をingの形にする", correct: true }
         ]
       },
       {
@@ -682,8 +682,8 @@ const STAGES = [
         wrongComment: "swimming（-ing）とnowがあるので、be動詞（is）を選びます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "文末にnowがあり、動詞のing形があるのでisを使う", correct: true },
-          { label: "文末にnowがあり、主語がHeなのでisを使う", correct: false }
+          { label: "文末に now があり、動詞のing形があるのでisを使う", correct: true },
+          { label: "文末に now があり、主語がHeなのでisを使う", correct: false }
         ]
       },
       {
@@ -696,8 +696,8 @@ const STAGES = [
         wrongComment: "「飼っている（状態）」は進行形にできません。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "「飼っている」は状態を表し、進行形にしない", correct: true },
-          { label: "一般動詞haveは進行形にできない", correct: false }
+          { label: "「飼っている」は状態を表し、進行形にできない", correct: true },
+          { label: "一般動詞 have は進行形にできない", correct: false }
         ]
       }
     ],
@@ -711,7 +711,7 @@ const STAGES = [
       wrongComment: "現在進行形の疑問文はbe動詞を主語の前に出し、一般動詞に -ing をつけます。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "現在進行形はDoをAreに変えて、一般動詞をingの形にする", correct: false },
+        { label: "現在進行形は Do を Are に変えて、一般動詞をingの形にする", correct: false },
         { label: "現在進行形はbe動詞を主語の前に出し、一般動詞をingの形にする", correct: true }
       ]
     }
@@ -735,7 +735,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "Do you ～で始まる疑問文に対する答えの代名詞はwe", correct: false },
-          { label: "疑問文の主語がyou and Kenに対する答えの代名詞はwe", correct: true }
+          { label: "疑問文の主語が you and Ken に対する答えの代名詞はwe", correct: true }
         ]
       },
       {
@@ -762,7 +762,7 @@ const STAGES = [
         wrongComment: "単独の主語ではなく、後ろに名詞もありません。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "後ろにvery muchがあるときは目的格を使う", correct: false },
+          { label: "後ろに very much があるときは目的格を使う", correct: false },
           { label: "目的語に単独で使う形は目的格を使う", correct: true }
         ]
       }
@@ -843,7 +843,7 @@ const STAGES = [
       wrongComment: "名詞を２語以上で説明するときは名詞の後ろに置きます。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "長い髪をした…が with long hair と３語になるので、名詞の後ろから説明する", correct: true },
+        { label: "「長い髪をした…」が with long hair と３語になるので、名詞の後ろから説明する", correct: true },
         { label: "long hairも名詞のまとまりなので、womanの前には置けない", correct: false }
       ]
     }
@@ -867,7 +867,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "主語の三人称単数から三単現のs", correct: false },
-          { label: "文末のlast Sundayから時制が過去", correct: true }
+          { label: "文末の last Sunday から時制が過去", correct: true }
         ]
       },
       {
@@ -926,7 +926,7 @@ const STAGES = [
           wrongComment: "動詞の区別 → 時制 → 主語の数の順に判断します。",
           logicText: "【判断基準】",
           logicOptions: [
-            { label: "一般動詞がread、文末のlast nightから時制が過去", correct: true },
+            { label: "一般動詞が read、文末の last night から時制が過去", correct: true },
             { label: "主語が三人称単数だから三単現のs", correct: false }
           ]
         },
@@ -976,10 +976,10 @@ const STAGES = [
           { label: "B : Are there some boys there? – Yes, there are.", correct: false },
           { label: "C : Are there any boys there? – Yes, there are.", correct: true }
         ],
-        wrongComment: "thereの文はthereで答えます。疑問文はsomeをanyに変えます。",
+        wrongComment: "thereの文は there で答えます。疑問文は some を any に変えます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "be動詞 → thereの前へ。some → 疑問文・否定文はanyへ", correct: true },
+          { label: "be動詞 → there の前へ。some → 疑問文・否定文は any へ", correct: true },
           { label: "意味の解釈「そこに少年が何人かいますか。」で判断", correct: false }
         ]
       },
@@ -1058,7 +1058,7 @@ const STAGES = [
         wrongComment: "後ろに続く単語を見る → busyはSheの状態",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "意味の解釈「～に見える」はlook", correct: false },
+          { label: "意味の解釈「～に見える」は look", correct: false },
           { label: "後ろを見る → 形容詞 busy は She の状態", correct: true }
         ]
       },
@@ -1129,7 +1129,7 @@ const STAGES = [
           wrongComment: "I think + English is... の構造を作ります。",
           logicText: "【判断基準】",
           logicOptions: [
-            { label: "I thinkとEnglish isの組み合わせを作る", correct: true },
+            { label: "I think と English is の組み合わせを作る", correct: true },
             { label: "単語の一つ一つの意味で判断", correct: false }
           ]
         },
@@ -1179,7 +1179,7 @@ const STAGES = [
         wrongComment: "ate は eat の過去形です。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "一般動詞の形が過去形（ate）かつyesterdayがある", correct: true },
+          { label: "一般動詞の形が過去形（ate）かつ yesterday がある", correct: true },
           { label: "文末にyesterdayがあるため現在進行形", correct: false }
         ]
       },
@@ -1221,8 +1221,8 @@ const STAGES = [
         wrongComment: "「～に違いない」は 助動詞must を使い、直後の動詞は原形(be)にします。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "確信を表す助動詞must＋動詞の原形（be）", correct: true },
-          { label: "推測を表すmay＋is", correct: false }
+          { label: "確信を表す助動詞 must ＋動詞の原形（be）", correct: true },
+          { label: "推測を表す may ＋ is", correct: false }
         ]
       },
       {
@@ -1261,7 +1261,7 @@ const STAGES = [
         wrongComment: "two years ago（過去の明確な時点）は現在完了形と一緒に使えないため、過去形 went に変更します。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "現在完了形の経験を表すのでhas beenのままで良い", correct: false },
+          { label: "現在完了形の経験を表すので has been のままで良い", correct: false },
           { label: "明確な過去を表す語句（agoやyesterdayなど）は現在完了形不可 → 過去形を使う", correct: true }
         ]
       },
@@ -1297,9 +1297,9 @@ const STAGES = [
     boss: {
       text: "【BOSS BATTLE】\nHow is the weather in London? の文末に tomorrow を加えた文にするとき、正しい判断はどれか？",
       options: [
-        { label: "A : 未来 → will + 動詞の原形 → 疑問文は主語の前にwillを出す", correct: true },
-        { label: "B : 未来 → willを使う → 主語の後にwillを置く", correct: false },
-        { label: "C : 未来 → will beを使う → 主語の前に置く", correct: false }
+        { label: "A : 未来 → will + 動詞の原形 → willを主語の前に出す", correct: true },
+        { label: "B : 未来 → willを使う → is を will に変える", correct: false },
+        { label: "C : 未来 → will be → 主語の前に置く", correct: false }
       ],
       wrongComment: "tomorrow は未来を表すため will を使います。疑問文では will を主語（the weather）の前に出し、be動詞は原形の be になります。（How will the weather be in London tomorrow?）",
       logicText: "【判断基準】",

@@ -1960,6 +1960,30 @@ function triggerConfetti() {
     });
   }
 }
+
+const LAST_BOSS_QUESTIONS = [
+  { text: "① Tom’s parents (  ) tennis every Sunday.", options: [{label:"A：play",correct:true},{label:"B：plays",correct:false},{label:"C：playing",correct:false}], highlightText:["parents"], comment:"主語が複数" },
+  { text: "② He (  ) the novel last night.", options: [{label:"A：read",correct:true},{label:"B：reads",correct:false},{label:"C：reading",correct:false}], highlightText:["last night"], comment:"過去時制" },
+  { text: "③ He is (  ) Tom by everyone.", options: [{label:"A：call",correct:false},{label:"B：calls",correct:false},{label:"C：called",correct:true}], highlightText:["is","by everyone"], comment:"受動態" },
+  { text: "④ I have just (  ) lunch.", options: [{label:"A：eat",correct:false},{label:"B：eating",correct:false},{label:"C：eaten",correct:true}], highlightText:["have"], comment:"現在完了" },
+  { text: "⑤ She enjoyed (  ) soccer.", options: [{label:"A：plays",correct:false},{label:"B：playing",correct:true},{label:"C：to play",correct:false}], highlightText:["enjoyed"], comment:"動名詞" },
+  { text: "⑥ I don’t know how (  ) the PC.", options: [{label:"A：use",correct:false},{label:"B：using",correct:false},{label:"C：to use",correct:true}], highlightText:["how"], comment:"不定詞" },
+  { text: "⑦ I’m looking forward (  ) you.", options: [{label:"A：to seeing",correct:true},{label:"B：to see",correct:false},{label:"C：seeing",correct:false}], highlightText:["looking forward"], comment:"動名詞" },
+  { text: "⑧ He made me (  ) the PC.", options: [{label:"A：use",correct:true},{label:"B：using",correct:false},{label:"C：to use",correct:false}], highlightText:["made"], comment:"make＋O＋原形不定詞" },
+  { text: "⑨ I want something hot (  ).", options: [{label:"A：eat",correct:false},{label:"B：to eat",correct:true},{label:"C：eating",correct:false}], highlightText:["something"], comment:"不定詞の形容詞的用法" },
+  { text: "⑩ The mountain (  ) from here is Mt. Fuji.", options: [{label:"A：see",correct:false},{label:"B：seeing",correct:false},{label:"C：seen",correct:true}], highlightText:["The mountain"], comment:"過去分詞の形容詞的用法" },
+  { text: "⑪ The bus over there (  ) to Osaka.", options: [{label:"A：go",correct:false},{label:"B：goes",correct:true},{label:"C：going",correct:false}], highlightText:["The bus"], comment:"三単現のs" },
+  { text: "⑫ What was the girl (  ) here then?", options: [{label:"A：do",correct:false},{label:"B：does",correct:false},{label:"C：doing",correct:true}], highlightText:["was"], comment:"過去進行形" },
+  { text: "⑬ He told me that she (  ) a doctor.", options: [{label:"A：is",correct:false},{label:"B：was",correct:true},{label:"C：be",correct:false}], highlightText:["told","that"], comment:"時制の一致" },
+  { text: "⑭ If he (  ) here tomorrow, give it to him.", options: [{label:"A：comes",correct:true},{label:"B：will come",correct:false},{label:"C：come",correct:false}], highlightText:["If he"], comment:"未来でも現在形" },
+  { text: "⑮ They decided (  ) London.", options: [{label:"A：visit",correct:false},{label:"B：to visit",correct:true},{label:"C：visiting",correct:false}], highlightText:["decided"], comment:"不定詞" },
+  { text: "⑯ She asked the man (  ) the box.", options: [{label:"A：carried",correct:false},{label:"B：to carry",correct:true},{label:"C：carry",correct:false}], highlightText:["asked"], comment:"不定詞" },
+  { text: "⑰ When must I (  ) the room?", options: [{label:"A：clean",correct:true},{label:"B：to clean",correct:false},{label:"C：cleaned",correct:false}], highlightText:["must"], comment:"助動詞＋動詞の原形" },
+  { text: "⑱ I helped Tom (  ) to the apartment.", options: [{label:"A：moved",correct:false},{label:"B：would move",correct:false},{label:"C：move",correct:true}], highlightText:["helped"], comment:"help＋O＋原形不定詞" },
+  { text: "⑲ Do you know the boy (  ) over there?", options: [{label:"A：dance",correct:false},{label:"B：dancing",correct:true},{label:"C：danced",correct:false}], highlightText:["the boy"], comment:"現在分詞の形容詞的用法" },
+  { text: "⑳ I have the pictures that (  ) taken in Kyoto.", options: [{label:"A：is",correct:false},{label:"B：was",correct:false},{label:"C：were",correct:true}], highlightText:["the pictures"], comment:"関係代名詞（主格）" }
+];
+
 const STORAGE_KEY = 'grammar_quest_save_data_v9';
 let gameState = {
   exp: 0,
@@ -1984,10 +2008,17 @@ let gameState = {
   gokuiIndex: 0,
   gokuiCleared: false,
   gokuiUnlocked: false,
+  lastBossIndex: 0,
+  lastBossTimeLeft: 60,
+  lastBossSkillActive: false,
+  lastBossDialogActive: false,
+  lastBossFailReason: "",
+  lastBossCleared: false,
   endrollIndex: 0
 };
 let battleTimer = null;
 let stage12Timer = null;
+let lastBossTimer = null;
 function loadSaveData() {
   const data = localStorage.getItem(STORAGE_KEY);
   if (data) {
@@ -2011,6 +2042,12 @@ function loadSaveData() {
       gameState.gokuiCleared ||
       gameState.unlockedSkills.includes("動詞操作スキル");
   }
+  if (gameState.lastBossIndex === undefined) gameState.lastBossIndex = 0;
+  if (gameState.lastBossTimeLeft === undefined) gameState.lastBossTimeLeft = 60;
+  if (gameState.lastBossSkillActive === undefined) gameState.lastBossSkillActive = false;
+  if (gameState.lastBossDialogActive === undefined) gameState.lastBossDialogActive = false;
+  if (gameState.lastBossFailReason === undefined) gameState.lastBossFailReason = "";
+  if (gameState.lastBossCleared === undefined) gameState.lastBossCleared = false;
   if (gameState.endrollIndex === undefined) gameState.endrollIndex = 0;
   updateHeader();
 }
@@ -2022,6 +2059,7 @@ function confirmResetData() {
   if (confirm("ゲームデータを初期化して最初から始めますか？")) {
     stopBattleTimer();
     stopStage12Timer();
+    stopLastBossTimer();
     localStorage.removeItem(STORAGE_KEY);
     gameState = { 
       exp: 0, 
@@ -2084,6 +2122,8 @@ function render() {
     renderVerbBattle();
   } else if (gameState.currentStageId === 'gokui') {
     renderGokui();
+  } else if (gameState.currentStageId === 'last_boss') {
+    renderLastBoss();
   } else if (gameState.currentStageId === 'endroll') {
     renderEndroll();
   } else if (gameState.currentStageId === null) {
@@ -2095,6 +2135,7 @@ function render() {
 function renderStageSelect() {
   stopBattleTimer();
   stopStage12Timer();
+  stopLastBossTimer();
   const container = document.getElementById('main-content');
   let html = '<div class="card"><div class="card-header">★ ステージを選択して挑戦</div>';
   
@@ -2174,6 +2215,21 @@ function renderStageSelect() {
             : ''}
         </div>
         <div>${gokuiUnlocked ? '▶ 挑戦' : '🔒 鍵'}</div>
+      </button>
+    </div>
+  `;
+  const lastBossUnlocked = !!gameState.gokuiCleared && getRank(gameState.exp) >= 31;
+  html += `
+    <div style="margin-top:10px;">
+      <button class="stage-select-btn battle-mode-btn" ${lastBossUnlocked ? '' : 'disabled'} onclick="startLastBoss()">
+        <div>
+          <strong>【LAST BOSS】カオスヴァーブ・ドライヴァ</strong>
+          <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">タイムトライアル：60秒以内に全20問正解 / 誤答で1問目から再挑戦</div>
+          ${!gameState.gokuiCleared ? '<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：英語処理の極意書クリア</div>' : ''}
+          ${gameState.gokuiCleared && getRank(gameState.exp) < 31 ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：ランク31以上（現在ランク${getRank(gameState.exp)}）</div>` : ''}
+          ${gameState.lastBossCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>' : ''}
+        </div>
+        <div>${lastBossUnlocked ? '⚔️ 挑戦' : '🔒 鍵'}</div>
       </button>
     </div>
   `;
@@ -2811,16 +2867,24 @@ function checkGokuiAnswer(selectedIndex) {
         saveData();
         render();
       } else {
-        // 極意書クリア → 獲得スキルのエンドロールへ
+        // 極意書クリア後はステージ選択へ戻り、条件達成後にLAST BOSSへ挑戦
         gameState.gokuiCleared = true;
         gameState.gokuiUnlocked = true;
+        gameState.currentStageId = null;
+        gameState.currentStep = 0;
+        gameState.subStep = 0;
+        gameState.bossSubStep = 0;
+        gameState.lastBossIndex = 0;
+        gameState.lastBossTimeLeft = 60;
+        gameState.lastBossDialogActive = false;
+        gameState.lastBossFailReason = "";
         gameState.endrollIndex = 0;
-        gameState.currentStageId = 'endroll';
         gameState.isAllCleared = false;
         saveData();
         playSound('clear');
         triggerConfetti();
         render();
+        alert("「英語処理の極意書」CLEAR！\nランク31以上で LAST BOSS「カオスヴァーブ・ドライヴァ」に挑戦できます。");
       }
     }, 900);
   } else {
@@ -2833,6 +2897,150 @@ function checkGokuiAnswer(selectedIndex) {
       buttons[selectedIndex].disabled = false;
     }, 700);
   }
+}
+// ----------------------------------------------------
+// LAST BOSS「カオスヴァーブ・ドライヴァ」タイムトライアル
+// ----------------------------------------------------
+function startLastBoss() {
+  if (!gameState.gokuiCleared || getRank(gameState.exp) < 31) {
+    alert("LAST BOSSの開放条件は「英語処理の極意書クリア」かつ「ランク31以上」です。");
+    return;
+  }
+  initAudio();
+  stopLastBossTimer();
+  gameState.currentStageId = 'last_boss';
+  gameState.lastBossIndex = 0;
+  gameState.lastBossTimeLeft = 60;
+  gameState.lastBossSkillActive = false;
+  gameState.lastBossDialogActive = false;
+  gameState.lastBossFailReason = "";
+  gameState.isAllCleared = false;
+  saveData();
+  render();
+  startLastBossTimer();
+}
+function startLastBossTimer() {
+  stopLastBossTimer();
+  lastBossTimer = setInterval(() => {
+    if (gameState.currentStageId !== 'last_boss' || gameState.lastBossDialogActive) return;
+    gameState.lastBossTimeLeft--;
+    const timerEl = document.getElementById('last-boss-timer');
+    if (timerEl) timerEl.textContent = `⏱️ 残り時間: ${gameState.lastBossTimeLeft}秒`;
+    if (gameState.lastBossTimeLeft <= 0) {
+      stopLastBossTimer();
+      playSound('wrong');
+      triggerLastBossFail("1分経過！タイムオーバーです。");
+    }
+    saveData();
+  }, 1000);
+}
+function stopLastBossTimer() {
+  if (lastBossTimer) {
+    clearInterval(lastBossTimer);
+    lastBossTimer = null;
+  }
+}
+function renderLastBoss() {
+  const container = document.getElementById('main-content');
+  const qData = LAST_BOSS_QUESTIONS[gameState.lastBossIndex];
+  let html = `
+    <div class="battle-scene">
+      <div>
+        <div class="pixel-char">⚔️</div>
+        <div style="font-size:0.75rem; color:var(--accent-color); margin-top:4px;">プレーヤー</div>
+      </div>
+      <div style="font-size:1.2rem; color:#8b949e;">VS</div>
+      <div>
+        <div class="monster-char">👹</div>
+        <div style="font-size:0.75rem; color:var(--danger-color); margin-top:4px;">カオスヴァーブ・ドライヴァ</div>
+      </div>
+    </div>
+    <div class="card boss-card">
+      <div class="card-header">
+        <span>🔥 LAST BOSS (Q${gameState.lastBossIndex + 1}/20)</span>
+        <span style="font-size:0.8rem; color:#8b949e; cursor:pointer;" onclick="exitStage()">✕ 中断</span>
+      </div>
+      <div id="last-boss-timer" class="timer-display">⏱️ 残り時間: ${gameState.lastBossTimeLeft}秒</div>
+  `;
+  if (gameState.lastBossSkillActive) {
+    html += `<div class="skill-comment-box">💡 スキルコメント: ${qData.comment}</div>`;
+  }
+  let formattedText = qData.text;
+  if (gameState.lastBossSkillActive && qData.highlightText) {
+    const terms = qData.highlightText.slice().sort((a,b) => b.length - a.length);
+    const escapedTerms = terms.map(term => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    const regex = new RegExp(escapedTerms.map(term => `(${term})`).join('|'), 'gi');
+    formattedText = formattedText.replace(regex, match => `<span class="highlight-red">${match}</span>`);
+  }
+  html += `<div class="question-text">${formattedText}</div>`;
+  if (!gameState.lastBossDialogActive) {
+    html += `<div class="options" id="last-boss-options">`;
+    qData.options.forEach((opt, idx) => {
+      html += `<button class="btn" onclick="checkLastBossAnswer(${idx})">${opt.label}</button>`;
+    });
+    html += `</div>`;
+  } else {
+    html += `
+      <div class="dialog-overlay">
+        <h3 style="color:var(--gold-color); margin-top:0;">クリア条件未達</h3>
+        <p style="font-size:1.05rem;">${gameState.lastBossFailReason}</p>
+        <p style="font-size:1.05rem;">アルティメットスキルを発動しますか？</p>
+        <div class="dialog-btns">
+          <button class="dialog-btn dialog-btn-yes" onclick="handleLastBossSkillDialog(true)">YES</button>
+          <button class="dialog-btn dialog-btn-no" onclick="handleLastBossSkillDialog(false)">NO</button>
+        </div>
+      </div>
+    `;
+  }
+  html += `</div>`;
+  container.innerHTML = html;
+}
+function checkLastBossAnswer(selectedIndex) {
+  initAudio();
+  if (gameState.lastBossDialogActive) return;
+  const qData = LAST_BOSS_QUESTIONS[gameState.lastBossIndex];
+  const selected = qData.options[selectedIndex];
+  if (!selected) return;
+  if (!selected.correct) {
+    playSound('wrong');
+    triggerLastBossFail("不正解！1問目からリスタートです。");
+    return;
+  }
+  playSound('correct');
+  if (gameState.lastBossIndex + 1 < LAST_BOSS_QUESTIONS.length) {
+    gameState.lastBossIndex++;
+    saveData();
+    render();
+  } else {
+    stopLastBossTimer();
+    playSound('clear');
+    triggerConfetti();
+    gameState.lastBossCleared = true;
+    gameState.endrollIndex = 0;
+    gameState.currentStageId = 'endroll';
+    gameState.isAllCleared = false;
+    gameState.lastBossDialogActive = false;
+    saveData();
+    render();
+  }
+}
+function triggerLastBossFail(reasonText) {
+  stopLastBossTimer();
+  gameState.lastBossDialogActive = true;
+  gameState.lastBossFailReason = reasonText;
+  saveData();
+  render();
+}
+function handleLastBossSkillDialog(useSkill) {
+  initAudio();
+  gameState.lastBossSkillActive = useSkill;
+  gameState.lastBossDialogActive = false;
+  gameState.lastBossFailReason = "";
+  gameState.lastBossIndex = 0;
+  gameState.lastBossTimeLeft = 60;
+  saveData();
+  render();
+  startLastBossTimer();
 }
 // ----------------------------------------------------
 // 獲得スキル・エンドロール
@@ -2920,6 +3128,7 @@ function renderAllClear() {
   `;
 }
 function resetToStageSelect() {
+  stopLastBossTimer();
   gameState.isAllCleared = false;
   gameState.currentStageId = null;
   gameState.endrollIndex = 0;
@@ -2927,6 +3136,7 @@ function resetToStageSelect() {
   render();
 }
 function exitStage() {
+  stopLastBossTimer();
   if (confirm("ステージ選択画面に戻りますか？（進行状況は自動保存されます）")) {
     gameState.currentStageId = null;
     saveData();
@@ -2936,6 +3146,7 @@ function exitStage() {
 document.addEventListener('click', initAudio, { once: true });
 loadSaveData();
 render();
+if (gameState.currentStageId === 'last_boss' && !gameState.lastBossDialogActive) startLastBossTimer();
 </script>
 </body>
 </html>

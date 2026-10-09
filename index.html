@@ -2434,9 +2434,7 @@ function checkStage12BossAnswer(selectedIndex) {
         gameState.endrollIndex = 0;
         saveData();
         render();
-        triggerConfetti();
-        setTimeout(triggerConfetti, 500);
-        setTimeout(triggerConfetti, 1000);
+        // 花吹雪はSTAGE12のクリア処理冒頭で1回だけ実行する
         alert("STAGE 12 CLEAR！STAGE 13「動詞操作マスター」が開放されました！");
       }, 1500);
     }

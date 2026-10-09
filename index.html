@@ -2218,7 +2218,7 @@ function renderStageSelect() {
       </button>
     </div>
   `;
-  const lastBossUnlocked = !!gameState.gokuiCleared && getRank(gameState.exp) >= 31;
+  const lastBossUnlocked = !!gameState.gokuiCleared && getRank(gameState.exp) >= 33;
   html += `
     <div style="margin-top:10px;">
       <button class="stage-select-btn battle-mode-btn" ${lastBossUnlocked ? '' : 'disabled'} onclick="startLastBoss()">
@@ -2226,7 +2226,7 @@ function renderStageSelect() {
           <strong>【LAST BOSS】カオスヴァーブ・オーガ</strong>
           <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">タイムトライアル：60秒以内に全20問正解 / 誤答で1問目から再挑戦</div>
           ${!gameState.gokuiCleared ? '<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：英語処理の極意書クリア</div>' : ''}
-          ${gameState.gokuiCleared && getRank(gameState.exp) < 33 ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：ランク31以上（現在ランク${getRank(gameState.exp)}）</div>` : ''}
+          ${gameState.gokuiCleared && getRank(gameState.exp) < 33 ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：ランク33以上（現在ランク${getRank(gameState.exp)}）</div>` : ''}
           ${gameState.lastBossCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>' : ''}
         </div>
         <div>${lastBossUnlocked ? '⚔️ 挑戦' : '🔒 鍵'}</div>

@@ -1573,7 +1573,7 @@ const STAGES = [
     id: 13,
     title: "STAGE 13",
     skillName: "動詞操作マスター",
-    rewardSkill: "動詞操作マスター",
+    rewardSkill: "動詞操作スキル",
     monsterEmoji: "🕶️",
     monsterName: "ダーク・マニピュレーター",
     noBoss: true,
@@ -1961,7 +1961,7 @@ function loadSaveData() {
   if (gameState.gokuiUnlocked === undefined) {
     gameState.gokuiUnlocked =
       gameState.gokuiCleared ||
-      gameState.unlockedSkills.includes("動詞操作マスタースキル");
+      gameState.unlockedSkills.includes("動詞操作スキル");
   }
   if (gameState.endrollIndex === undefined) gameState.endrollIndex = 0;
   updateHeader();
@@ -2107,7 +2107,7 @@ function renderStageSelect() {
   // STAGE12クリア後に「英語処理の極意書」を表示
   const gokuiUnlocked = !!gameState.gokuiUnlocked ||
     gameState.gokuiCleared ||
-    gameState.unlockedSkills.includes("動詞操作マスター");
+    gameState.unlockedSkills.includes("動詞操作スキル");
   html += `
     <div style="margin-top:18px; border-top:1px solid #30363d; padding-top:15px;">
       <button class="stage-select-btn extra-stage-btn"
@@ -2437,7 +2437,7 @@ function checkStage12BossAnswer(selectedIndex) {
         triggerConfetti();
         setTimeout(triggerConfetti, 500);
         setTimeout(triggerConfetti, 1000);
-        alert("STAGE 12 CLEAR！\\nSTAGE 13「動詞操作マスター」が開放されました！");
+        alert("STAGE 12 CLEAR！STAGE 13「動詞操作マスター」が開放されました！");
       }, 1500);
     }
   } else {

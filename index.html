@@ -418,11 +418,11 @@
   </div>
   <div class="skills-container">
     <div style="font-size: 0.75rem; color: #8b949e; margin-bottom: 4px; display:flex; justify-content:space-between; align-items:center;">
-      <span>獲得した判断の理 (<span id="skill-count">0</span>個)</span>
+      <span>獲得した判断の眼 (<span id="skill-count">0</span>個)</span>
       <button class="reset-btn" onclick="confirmResetData()">データ削除</button>
     </div>
     <div id="skills-list">
-      <span style="color: #484f58; font-size: 0.8rem;">まだ判断の理を獲得していません</span>
+      <span style="color: #484f58; font-size: 0.8rem;">まだ判断の眼を獲得していません</span>
     </div>
   </div>
   <div id="main-content"></div>
@@ -456,7 +456,7 @@ const STAGES = [
     id: 1,
     title: "STAGE 1",
     skillName: "英文認識",
-    rewardSkill: "英文認識の理",
+    rewardSkill: "英文認識の眼",
     monsterEmoji: "👾",
     monsterName: "ベーシック・スライム",
     questions: [
@@ -536,7 +536,7 @@ const STAGES = [
     id: 2,
     title: "STAGE 2",
     skillName: "S-V連動",
-    rewardSkill: "S-V連動の理",
+    rewardSkill: "S-V連動の眼",
     monsterEmoji: "🐉",
     monsterName: "SV・キマイラ",
     questions: [
@@ -616,7 +616,7 @@ const STAGES = [
     id: 3,
     title: "STAGE 3",
     skillName: "主語変化対応",
-    rewardSkill: "主語変化対応の理",
+    rewardSkill: "主語変化対応の眼",
     monsterEmoji: "🤖",
     monsterName: "シンタックス・ゴーレム",
     questions: [
@@ -696,7 +696,7 @@ const STAGES = [
     id: 4,
     title: "STAGE 4",
     skillName: "動詞形判定",
-    rewardSkill: "動詞形判定の理",
+    rewardSkill: "動詞形判定の眼",
     monsterEmoji: "👑",
     monsterName: "ジャッジメント・クラウン",
     questions: [
@@ -776,7 +776,7 @@ const STAGES = [
     id: 5,
     title: "STAGE 5",
     skillName: "代名詞対応",
-    rewardSkill: "代名詞対応の理",
+    rewardSkill: "代名詞対応の眼",
     monsterEmoji: "🛡️",
     monsterName: "プロナウン・キラー",
     questions: [
@@ -856,7 +856,7 @@ const STAGES = [
     id: 6,
     title: "STAGE 6",
     skillName: "名詞鎖認識",
-    rewardSkill: "名詞鎖認識の理",
+    rewardSkill: "名詞鎖認識の眼",
     monsterEmoji: "🐉",
     monsterName: "チャンキング・ドラゴン",
     questions: [
@@ -936,7 +936,7 @@ const STAGES = [
     id: 7,
     title: "STAGE 7",
     skillName: "動詞形統合",
-    rewardSkill: "動詞形統合の理",
+    rewardSkill: "動詞形統合の眼",
     monsterEmoji: "👁",
     monsterName: "クロノス・アイ",
     questions: [
@@ -1035,7 +1035,7 @@ const STAGES = [
     id: 8,
     title: "STAGE 8",
     skillName: "表現選択",
-    rewardSkill: "表現選択の理",
+    rewardSkill: "表現選択の眼",
     monsterEmoji: "🧙‍♂️",
     monsterName: "エクスプレッサー",
     questions: [
@@ -1128,7 +1128,7 @@ const STAGES = [
     id: 9,
     title: "STAGE 9",
     skillName: "文構造判定",
-    rewardSkill: "文構造判定の理",
+    rewardSkill: "文構造判定の眼",
     monsterEmoji: "🌌",
     monsterName: "ヴォイド・ルーラー",
     questions: [
@@ -1235,7 +1235,7 @@ const STAGES = [
     id: "extra",
     title: "【上位スキル進化STAGE】",
     skillName: "処理手順化",
-    rewardSkill: "処理手順化の理",
+    rewardSkill: "処理手順化の眼",
     monsterEmoji: "💎",
     monsterName: "オメガ・プロセッサー",
     requiredExp: 1500,
@@ -1397,7 +1397,7 @@ const STAGES = [
     id: 10,
     title: "STAGE 10",
     skillName: "情報照合",
-    rewardSkill: "情報照合の理",
+    rewardSkill: "情報照合の眼",
     monsterEmoji: "🔱",
     monsterName: "ロード・オペレーター",
     questions: [
@@ -1477,7 +1477,7 @@ const STAGES = [
     id: 11,
     title: "STAGE 11",
     skillName: "後続要素予測",
-    rewardSkill: "後続要素予測の理",
+    rewardSkill: "後続要素予測の眼",
     monsterEmoji: "🔮",
     monsterName: "ルックアヘッド・ゴーレム",
     questions: [
@@ -1588,7 +1588,7 @@ const STAGES = [
     id: 12,
     title: "STAGE 12",
     skillName: "比較構造判定",
-    rewardSkill: "比較構造判定の理",
+    rewardSkill: "比較構造判定の眼",
     monsterEmoji: "⚖️",
     monsterName: "コンパレータ・カイザー",
     questions: [
@@ -1671,7 +1671,7 @@ const STAGES = [
     id: 13,
     title: "STAGE 13",
     skillName: "動詞操作統合",
-    rewardSkill: "動詞操作統合の理",
+    rewardSkill: "動詞操作統合の眼",
     monsterEmoji: "🕶️",
     monsterName: "ダーク・マニピュレーター",
     noBoss: true,
@@ -2154,7 +2154,7 @@ function loadSaveData() {
   if (gameState.gokuiUnlocked === undefined) {
     gameState.gokuiUnlocked =
       gameState.gokuiCleared ||
-      gameState.unlockedSkills.includes("動詞操作統合の理");
+      gameState.unlockedSkills.includes("動詞操作統合の眼");
   }
   if (gameState.lastBossIndex === undefined) gameState.lastBossIndex = 0;
   if (gameState.lastBossTimeLeft === undefined) gameState.lastBossTimeLeft = 60;
@@ -2224,7 +2224,7 @@ function updateHeader() {
   document.getElementById('skill-count').textContent = gameState.unlockedSkills.length;
   
   if (gameState.unlockedSkills.length === 0) {
-    skillContainer.innerHTML = '<span style="color: #484f58; font-size: 0.8rem;">まだ判断の理を獲得していません</span>';
+    skillContainer.innerHTML = '<span style="color: #484f58; font-size: 0.8rem;">まだ判断の眼を獲得していません</span>';
   } else {
     skillContainer.innerHTML = gameState.unlockedSkills.map(s => `<span class="skill-badge">🛡 ${s}</span>`).join('');
   }
@@ -2253,15 +2253,15 @@ function renderStageSelect() {
   const container = document.getElementById('main-content');
   let html = '<div class="card"><div class="card-header">★ ステージを選択して挑戦</div>';
   
-  const isExtraCleared = gameState.unlockedSkills.includes("処理手順化の理");
-  const isVerbBattleCleared = gameState.unlockedSkills.includes("動詞判定マスター");
+  const isExtraCleared = gameState.unlockedSkills.includes("処理手順化の眼");
+  const isVerbBattleCleared = gameState.unlockedSkills.includes("動詞判定の眼");
   STAGES.forEach(stg => {
     let isUnlocked = false;
     let isCleared = false;
     let lockReason = "";
     
     if (stg.isExtra) {
-      const isStage9Cleared = gameState.unlockedStage > 9 || gameState.unlockedSkills.includes("文構造判定の理");
+      const isStage9Cleared = gameState.unlockedStage > 9 || gameState.unlockedSkills.includes("文構造判定の眼");
       isUnlocked = isStage9Cleared && gameState.exp >= (stg.requiredExp || 1500);
       isCleared = gameState.unlockedSkills.includes(stg.rewardSkill);
       if (!isUnlocked) {
@@ -2309,7 +2309,7 @@ function renderStageSelect() {
   // STAGE13クリア後に「英語処理の極意書」を表示
   const gokuiUnlocked = !!gameState.gokuiUnlocked ||
     gameState.gokuiCleared ||
-    gameState.unlockedSkills.includes("動詞操作統合の理");
+    gameState.unlockedSkills.includes("動詞操作統合の眼");
   html += `
     <div style="margin-top:18px; border-top:1px solid #30363d; padding-top:15px;">
       <button class="stage-select-btn extra-stage-btn"
@@ -2331,7 +2331,7 @@ function renderStageSelect() {
       </button>
     </div>
   `;
-  const lastBossUnlocked = !!gameState.gokuiCleared && getRank(gameState.exp) >= 33;
+  const lastBossUnlocked = !!gameState.gokuiCleared && getRank(gameState.exp) >= 35;
   html += `
     <div style="margin-top:10px;">
       <button class="stage-select-btn battle-mode-btn" ${lastBossUnlocked ? '' : 'disabled'} onclick="startLastBoss()">
@@ -2339,7 +2339,7 @@ function renderStageSelect() {
           <strong>【LAST BATTLE】カオスヴァーブ・オーガ</strong>
           <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">タイムトライアル：60秒以内に全20問正解 / 誤答で1問目から再挑戦</div>
           ${!gameState.gokuiCleared ? '<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：英語処理の極意書クリア</div>' : ''}
-          ${gameState.gokuiCleared && getRank(gameState.exp) < 33 ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：ランク33以上（現在ランク${getRank(gameState.exp)}）</div>` : ''}
+          ${gameState.gokuiCleared && getRank(gameState.exp) < 35 ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：ランク35以上（現在ランク${getRank(gameState.exp)}）</div>` : ''}
           ${gameState.lastBossCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>' : ''}
         </div>
         <div>${lastBossUnlocked ? '⚔️ 挑戦' : '🔒 鍵'}</div>
@@ -2424,7 +2424,7 @@ function renderVerbBattle() {
       <div style="font-size:1.2rem; color:#8b949e;">VS</div>
       <div>
         <div class="monster-char">⏱️</div>
-        <div style="font-size:0.75rem; color:var(--danger-color); margin-top:4px;">動詞判定マスター</div>
+        <div style="font-size:0.75rem; color:var(--danger-color); margin-top:4px;">動詞判定の眼</div>
       </div>
     </div>
     <div class="card boss-card">
@@ -2435,7 +2435,7 @@ function renderVerbBattle() {
       <div id="battle-timer" class="timer-display">⏱️ 残り時間: ${gameState.verbBattleTimeLeft}秒</div>
   `;
   if (gameState.verbBattleSkillActive) {
-    html += `<div class="skill-comment-box">💡 判断の理コメント: ${qData.comment}</div>`;
+    html += `<div class="skill-comment-box">💡 判断の眼コメント: ${qData.comment}</div>`;
   }
   let formattedText = qData.text;
   if (gameState.verbBattleSkillActive && qData.highlightText) {
@@ -2455,7 +2455,7 @@ function renderVerbBattle() {
     html += `
       <div class="dialog-overlay">
         <h3 style="color:var(--gold-color); margin-top:0;">クリア条件未達</h3>
-        <p style="font-size:1.05rem;">「獲得した判断の理を発動しますか？」</p>
+        <p style="font-size:1.05rem;">「★判断の眼（発現）★を発動しますか？」</p>
         <div class="dialog-btns">
           <button class="dialog-btn dialog-btn-yes" onclick="handleSkillDialog(true)">YES</button>
           <button class="dialog-btn dialog-btn-no" onclick="handleSkillDialog(false)">NO</button>
@@ -2490,8 +2490,8 @@ function checkVerbBattleAnswer(selectedIndex) {
       fbEl.className = "feedback active correct-fb";
       fbEl.innerHTML = "<strong>🏆 動詞判定バトル PERFECT CLEAR!!</strong>";
       
-      if (!gameState.unlockedSkills.includes("動詞判定マスター")) {
-        gameState.unlockedSkills.push("動詞判定マスター");
+      if (!gameState.unlockedSkills.includes("動詞判定の眼")) {
+        gameState.unlockedSkills.push("動詞判定の眼");
       }
       saveData();
       
@@ -2578,7 +2578,7 @@ function renderStage12Boss() {
       <div id="stage12-timer" class="timer-display">⏱️ 残り時間: ${gameState.stage12TimeLeft}秒</div>
   `;
   if (gameState.stage12SkillActive) {
-    html += `<div class="skill-comment-box">💡 スキルコメント: ${qData.comment}</div>`;
+    html += `<div class="skill-comment-box">💡 判断の眼コメント: ${qData.comment}</div>`;
   }
   let formattedText = qData.text;
   if (gameState.stage12SkillActive && qData.highlightText) {
@@ -2598,7 +2598,7 @@ function renderStage12Boss() {
     html += `
       <div class="dialog-overlay">
         <h3 style="color:var(--gold-color); margin-top:0;">クリア条件未達</h3>
-        <p style="font-size:1.05rem;">「判断の理を発動しますか？」</p>
+        <p style="font-size:1.05rem;">「★判断の眼（顕現）★を発動しますか？」</p>
         <div class="dialog-btns">
           <button class="dialog-btn dialog-btn-yes" onclick="handleStage12SkillDialog(true)">YES</button>
           <button class="dialog-btn dialog-btn-no" onclick="handleStage12SkillDialog(false)">NO</button>
@@ -2634,7 +2634,7 @@ function checkStage12BossAnswer(selectedIndex) {
       playSound('clear');
       triggerConfetti();
       fbEl.className = "feedback active correct-fb";
-      fbEl.innerHTML = "<strong>🏆 STAGE 12 BOSS K.O.!!</strong><br>【比較構造判定の理】を獲得しました！";
+      fbEl.innerHTML = "<strong>🏆 STAGE 12 BOSS K.O.!!</strong><br>【比較構造判定の眼】を獲得しました！";
       
       const stg12 = STAGES.find(s => s.id === 12);
       if (!gameState.unlockedSkills.includes(stg12.rewardSkill)) {
@@ -2872,7 +2872,7 @@ function checkAnswer(selectedIndex, isLogicStep) {
               gameState.unlockedStage = stage.id + 1;
             }
             
-            alert(`🎉 ${stage.title} CLEAR!\n獲得した判断の理: 【${stage.rewardSkill}】`);
+            alert(`🎉 ${stage.title} CLEAR!\n獲得した判断の眼: 【${stage.rewardSkill}】`);
             gameState.currentStageId = null;
             gameState.currentStep = 0;
             gameState.subStep = 0;
@@ -2911,7 +2911,7 @@ function checkAnswer(selectedIndex, isLogicStep) {
             gameState.bossSubStep = 0;
             gameState.selectedWords = [];
             saveData();
-            alert(`🎉 ${stage.title} CLEAR!\n獲得した判断の理:【${stage.rewardSkill}】を獲得しました！`);
+            alert(`🎉 ${stage.title} CLEAR!\n獲得した判断の眼:【${stage.rewardSkill}】を獲得しました！`);
             render();
             return;
           }
@@ -3021,7 +3021,7 @@ function checkGokuiAnswer(selectedIndex) {
         gameState.isAllCleared = false;
         saveData();
         render();
-        alert("「英語処理の極意書」CLEAR！\nランク33以上で LAST BATTLE「カオスヴァーブ・オーガ」に挑戦できます。");
+        alert("「英語処理の極意書」CLEAR！\nランク35以上で LAST BATTLE「カオスヴァーブ・オーガ」に挑戦できます。");
       }
     }, 900);
   } else {
@@ -3039,8 +3039,8 @@ function checkGokuiAnswer(selectedIndex) {
 // LAST BATTLE「カオスヴァーブ・オーガ」タイムトライアル
 // ----------------------------------------------------
 function startLastBoss() {
-  if (!gameState.gokuiCleared || getRank(gameState.exp) < 33) {
-    alert("LAST BATTLEの開放条件は「英語処理の極意書クリア」かつ「ランク33以上」です。");
+  if (!gameState.gokuiCleared || getRank(gameState.exp) < 35) {
+    alert("LAST BATTLEの開放条件は「英語処理の極意書クリア」かつ「ランク35以上」です。");
     return;
   }
   initAudio();
@@ -3121,7 +3121,7 @@ function renderLastBoss() {
       <div class="dialog-overlay">
         <h3 style="color:var(--gold-color); margin-top:0;">クリア条件未達</h3>
         <p style="font-size:1.05rem;">${gameState.lastBossFailReason}</p>
-        <p style="font-size:1.05rem;">すべての判断の理を発動しますか？</p>
+        <p style="font-size:1.05rem;">★判断の眼（開眼）★を発動しますか？</p>
         <div class="dialog-btns">
           <button class="dialog-btn dialog-btn-yes" onclick="handleLastBossSkillDialog(true)">YES</button>
           <button class="dialog-btn dialog-btn-no" onclick="handleLastBossSkillDialog(false)">NO</button>
@@ -3204,7 +3204,7 @@ function renderEndroll() {
     container.innerHTML = `
       <div class="endroll-card">
         <div style="color:var(--accent-color); font-size:0.9rem; margin-bottom:10px;">
-          ★ 英語処理OS 獲得した判断の理 ★
+          ★ 英語処理OS 獲得した判断の眼 ★
         </div>
         <div style="color:#8b949e; font-size:0.85rem;">
           ${idx + 1} / ${orderedSkills.length}
@@ -3213,7 +3213,7 @@ function renderEndroll() {
           【${currentSkill}】
         </div>
         <div style="color:#8b949e; font-size:0.8rem; margin-top:20px;">
-          次の判断の理へ……
+          次の判断の眼へ……
         </div>
       </div>
     `;

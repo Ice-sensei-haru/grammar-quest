@@ -635,7 +635,21 @@ const STAGES = [
         ]
       },
       {
-        text: "② Tom and Lisa don’t swim. の主語をTomだけにすると？",
+        text: "① Whose books are these? のTheseをThisに変えると？",
+        options: [
+          { label: "A : Whose books is this?", correct: false },
+          { label: "B : Whose book are this?", correct: false },
+          { label: "C : Whose book is this?", correct: true }
+        ],
+        wrongComment: "That → be動詞は is → 後ろの名詞も単数形になります。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "三人称単数の主語 → be動詞は is → 後ろはa(an)＋どんな＋単数形", correct: true },
+          { label: "後ろの名詞が単数 → be動詞は is", correct: false }
+        ]
+      },
+      {
+        text: "③ Tom and Lisa don’t swim. の主語をTomだけにすると？",
         options: [
           { label: "A : Tom don’t swims.", correct: false },
           { label: "B : Tom doesn’t swim.", correct: true },
@@ -649,7 +663,7 @@ const STAGES = [
         ]
       },
       {
-        text: "③ The man from India speaks English. を疑問文に変えると？",
+        text: "④ The man from India speaks English. を疑問文に変えると？",
         options: [
           { label: "A : Do the man from India speak English?", correct: false },
           { label: "B : Can the man from India speak English?", correct: false },
@@ -701,21 +715,35 @@ const STAGES = [
         ]
       },
       {
-        text: "② He (  ) not swimming now . の(  )に適する語は？",
+        text: "② He (  ) not go there last Sunday. の(  )に適する語は？",
         options: [
-          { label: "A : is", correct: true },
-          { label: "B : does", correct: false },
-          { label: "C : was", correct: false }
+          { label: "A : did", correct: true },
+          { label: "B : was", correct: false },
+          { label: "C : does", correct: false }
         ],
-        wrongComment: "swimming（-ing）とnowがあるので、be動詞（is）を選びます。",
+        wrongComment: "一般動詞goと文末last Sunday → 過去形 → didを選びます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "文末に now があり、動詞のing形があるのでisを使う", correct: true },
-          { label: "文末に now があり、主語がHeなのでisを使う", correct: false }
+          { label: "主語が三人称単数 → last Sunday → was", correct: false },
+          { label: "一般動詞goと文末last Sunday → 過去形 → did", correct: true }
         ]
       },
       {
-        text: "③ 「トムはネコを飼っています。」 の正しい英語表現は？",
+        text: "③ The girl will (  ) fifteen years old next month. の(  )に適する語は？",
+        options: [
+          { label: "A : is", correct: false },
+          { label: "B : be", correct: ture },
+          { label: "C : do", correct: false }
+        ],
+        wrongComment: "助動詞will → 動詞の原形 → be動詞の原形はbeを使います。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "助動詞will → 動詞の原形 → be動詞の原形でbe", correct: true },
+          { label: "主語が三人称単数 → 未来時制next month → be", correct: false }
+        ]
+      },
+      {
+        text: "④ 「トムはネコを飼っています。」 の正しい英語表現は？",
         options: [
           { label: "A : Tom having a cat.", correct: false },
           { label: "B : Tom is having a cat.", correct: false },
@@ -793,6 +821,20 @@ const STAGES = [
           { label: "後ろに very much があるときは目的格を使う", correct: false },
           { label: "目的語に単独で使う形は目的格を使う", correct: true }
         ]
+      },
+      {
+        text: "④ Ms. Green is kind to (  ). の(  )に入る適切な語は？",
+        options: [
+          { label: "A : us", correct: true },
+          { label: "B : their", correct: false },
+          { label: "C : my", correct: false }
+        ],
+        wrongComment: "単独の主語ではなく、後ろに名詞もありません。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "be kind toの後は目的格を使う", correct: false },
+          { label: "前置詞の後ろに単独で使う形は目的格を使う", correct: true }
+        ]
       }
     ],
     boss: {
@@ -847,7 +889,21 @@ const STAGES = [
         ]
       },
       {
-        text: "③ 「私は３人の彼の子どもを知っています。」を英文にすると？",
+        text: "③ The book on the desk is Tom's. のon the deskが修飾している語は？",
+        options: [
+          { label: "A : Tom's", correct: false },
+          { label: "B : The book", correct: true },
+          { label: "C : is", correct: false }
+        ],
+        wrongComment: "２語以上で名詞を修飾するときは、名詞の後ろに置きます。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "前置詞＋名詞はその前にある名詞を修飾する", correct: false },
+          { label: "２語以上で名詞を修飾するときは、名詞の後ろに置く", correct: true }
+        ]
+      },
+      {
+        text: "④ 「私は３人の彼の子どもを知っています。」を英文にすると？",
         options: [
           { label: "A : I know three his children.", correct: false },
           { label: "B : I know his children of three.", correct: false },

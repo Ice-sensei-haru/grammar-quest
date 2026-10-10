@@ -428,7 +428,7 @@
   <div id="main-content"></div>
 </div>
 <script>
-// 動詞判定バトルモードの全20問データ
+// 動詞操作バトルモードの全20問データ
 const VERB_BATTLE_QUESTIONS = [
   { id: 1, text: "Tom and Ken (  ) in the library.", options: [{ label: "A：is", correct: false }, { label: "B：are", correct: true }], highlightText: "Tom and Ken", comment: "主語が複数" },
   { id: 2, text: "He (  ) soccer last Sunday.", options: [{ label: "A：plays", correct: false }, { label: "B：played", correct: true }], highlightText: "last Sunday", comment: "過去時制" },
@@ -2109,7 +2109,7 @@ let gameState = {
   selectedWords: [],
   unlockedSkills: [],
   isAllCleared: false,
-  // 動詞判定バトルモード用状態
+  // 動詞操作バトルモード用状態
   verbBattleIndex: 0,
   verbBattleTimeLeft: 60,
   verbBattleSkillActive: false,
@@ -2254,7 +2254,7 @@ function renderStageSelect() {
   let html = '<div class="card"><div class="card-header">★ ステージを選択して挑戦</div>';
   
   const isExtraCleared = gameState.unlockedSkills.includes("処理手順化の眼");
-  const isVerbBattleCleared = gameState.unlockedSkills.includes("動詞判定の眼");
+  const isVerbBattleCleared = gameState.unlockedSkills.includes("動詞操作の眼");
   STAGES.forEach(stg => {
     let isUnlocked = false;
     let isCleared = false;
@@ -2271,7 +2271,7 @@ function renderStageSelect() {
     } else if (stg.id === 10) {
       isUnlocked = isVerbBattleCleared;
       isCleared = gameState.unlockedSkills.includes(stg.rewardSkill);
-      if (!isUnlocked) lockReason = "動詞判定バトルモード クリアが必要";
+      if (!isUnlocked) lockReason = "動詞操作バトルモード クリアが必要";
     } else {
       isUnlocked = stg.id <= gameState.unlockedStage;
       isCleared = stg.id < gameState.unlockedStage || gameState.unlockedSkills.includes(stg.rewardSkill);
@@ -2296,7 +2296,7 @@ function renderStageSelect() {
       html += `
         <button class="stage-select-btn battle-mode-btn" ${verbUnlocked ? '' : 'disabled'} onclick="startVerbBattle()">
           <div>
-            <strong>【動詞判定バトル】</strong> タイムトライアル (20問)
+            <strong>【動詞操作バトル】</strong> タイムトライアル (20問)
             <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">制限時間: 1分間 / 誤答即リスタート</div>
             ${!verbUnlocked ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件: ${verbReason}</div>` : ''}
             ${isVerbBattleCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>' : ''}
@@ -2376,7 +2376,7 @@ function exitStage() {
   render();
 }
 // ----------------------------------------------------
-// 動詞判定バトルモードの処理
+// 動詞操作バトルモードの処理
 // ----------------------------------------------------
 function startVerbBattle() {
   initAudio();
@@ -2424,12 +2424,12 @@ function renderVerbBattle() {
       <div style="font-size:1.2rem; color:#8b949e;">VS</div>
       <div>
         <div class="monster-char">⏱️</div>
-        <div style="font-size:0.75rem; color:var(--danger-color); margin-top:4px;">動詞判定の眼</div>
+        <div style="font-size:0.75rem; color:var(--danger-color); margin-top:4px;">動詞操作の眼</div>
       </div>
     </div>
     <div class="card boss-card">
       <div class="card-header">
-        <span>🔥 動詞判定バトル (Q${gameState.verbBattleIndex + 1}/20)</span>
+        <span>🔥 動詞操作バトル (Q${gameState.verbBattleIndex + 1}/20)</span>
         <span style="font-size:0.8rem; color:#8b949e; cursor:pointer;" onclick="exitStage()">✕ 中断</span>
       </div>
       <div id="battle-timer" class="timer-display">⏱️ 残り時間: ${gameState.verbBattleTimeLeft}秒</div>
@@ -2488,15 +2488,15 @@ function checkVerbBattleAnswer(selectedIndex) {
       playSound('clear');
       triggerConfetti();
       fbEl.className = "feedback active correct-fb";
-      fbEl.innerHTML = "<strong>🏆 動詞判定バトル PERFECT CLEAR!!</strong>";
+      fbEl.innerHTML = "<strong>🏆 動詞操作バトル PERFECT CLEAR!!</strong>";
       
-      if (!gameState.unlockedSkills.includes("動詞判定の眼")) {
-        gameState.unlockedSkills.push("動詞判定の眼");
+      if (!gameState.unlockedSkills.includes("動詞操作の眼")) {
+        gameState.unlockedSkills.push("動詞操作の眼");
       }
       saveData();
       
       setTimeout(() => {
-        alert("🎉 動詞判定バトルクリア！\nSTAGE 10 が開放されました！");
+        alert("🎉 動詞操作バトルクリア！\nSTAGE 10 が開放されました！");
         gameState.currentStageId = null;
         render();
       }, 1000);

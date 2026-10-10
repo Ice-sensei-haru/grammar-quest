@@ -474,7 +474,7 @@ const STAGES = [
           { label: "主語は文頭の単語", correct: false }
         ]
       },
-      {
+       {
         text: "② Tom likes dogs. の疑問文とその答え方は？",
         options: [
           { label: "A : Is Tom like dogs? – Yes, he is.", correct: false },
@@ -489,11 +489,25 @@ const STAGES = [
         ]
       },
       {
-        text: "③ Tom can cook curry well. の( curry )をたずねる疑問文は？",
+        text: "③ Meg played tennis. を否定文にすると？",
         options: [
-          { label: "A : What can Tom cook well?", correct: true },
-          { label: "B : What Tom can cook well?", correct: false },
-          { label: "C : What does Tom cook well?", correct: false }
+          { label: "A : Meg wasn't play tennis.", correct: false },
+          { label: "B : Meg didn't play tennis.", correct: true },
+          { label: "C : Meg doesn't played tennis.", correct: false }
+        ],
+        wrongComment: "一般動詞 → 過去形 → didn'tを置いて原形に戻します。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "主語が三単現 → 一般動詞 → doesn'tを置く", correct: false },
+          { label: "一般動詞 → 過去形 → didn'tを置いて原形", correct: true }
+        ]
+      },
+      {
+        text: "④ We can camp there in summer. の( in summer )をたずねる疑問文は？",
+        options: [
+          { label: "A : When can we camp there?", correct: true },
+          { label: "B : When we can camp there?", correct: false },
+          { label: "C : When do we camp there?", correct: false }
         ],
         wrongComment: "助動詞canがある文の疑問文は、canを主語の前に出します。",
         logicText: "【判断基準】",
@@ -555,7 +569,21 @@ const STAGES = [
         ]
       },
       {
-        text: "③ I am a tennis fan. のIをWeに変えると？",
+        text: "③ Do you do after school?　のyouをyour sisterにすると？",
+        options: [
+          { label: "A : Does your sister do after school?", correct: true },
+          { label: "B : Does your sister does after school?", correct: false },
+          { label: "C : Do your sister does after school?: false }
+        ],
+        wrongComment: "主語が三人称単数になると、疑問文は主語の前にdoesを置きます。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "主語が三人称単数だから疑問文は主語の前にdoesを置く", correct: true },
+          { label: "主語に関係なく、一般動詞の疑問文にはdoesを置く", correct: false }
+        ]
+      },
+      {
+        text: "④ I am a tennis fan. のIをWeに変えると？",
         options: [
           { label: "A : We are tennis fans.", correct: true },
           { label: "B : We are a tennis fan.", correct: false },

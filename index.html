@@ -2345,7 +2345,7 @@ function renderStageSelect() {
       </button>
     </div>
   `;
-  const lastBossUnlocked = !!gameState.gokuiCleared && getRank(gameState.exp) >= 35;
+  const lastBossUnlocked = !!gameState.gokuiCleared && getRank(gameState.exp) >= 40;
   html += `
     <div style="margin-top:10px;">
       <button class="stage-select-btn battle-mode-btn" ${lastBossUnlocked ? '' : 'disabled'} onclick="startLastBoss()">
@@ -2353,7 +2353,7 @@ function renderStageSelect() {
           <strong>【LAST BATTLE】カオスヴァーブ・オーガ</strong>
           <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">タイムトライアル：60秒以内に全20問正解 / 誤答で1問目から再挑戦</div>
           ${!gameState.gokuiCleared ? '<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：英語処理の極意書クリア</div>' : ''}
-          ${gameState.gokuiCleared && getRank(gameState.exp) < 35 ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：ランク35以上（現在ランク${getRank(gameState.exp)}）</div>` : ''}
+          ${gameState.gokuiCleared && getRank(gameState.exp) < 40 ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：ランク40以上（現在ランク${getRank(gameState.exp)}）</div>` : ''}
           ${gameState.lastBossCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>' : ''}
         </div>
         <div>${lastBossUnlocked ? '⚔️ 挑戦' : '🔒 鍵'}</div>
@@ -2612,7 +2612,7 @@ function renderStage12Boss() {
     html += `
       <div class="dialog-overlay">
         <h3 style="color:var(--gold-color); margin-top:0;">クリア条件未達</h3>
-        <p style="font-size:1.05rem;">「★判断の眼（顕現）★を発動しますか？」</p>
+        <p style="font-size:1.05rem;">「★判断の眼（奔流顕現）★を発動しますか？」</p>
         <div class="dialog-btns">
           <button class="dialog-btn dialog-btn-yes" onclick="handleStage12SkillDialog(true)">YES</button>
           <button class="dialog-btn dialog-btn-no" onclick="handleStage12SkillDialog(false)">NO</button>
@@ -3035,7 +3035,7 @@ function checkGokuiAnswer(selectedIndex) {
         gameState.isAllCleared = false;
         saveData();
         render();
-        alert("「英語処理の極意書」CLEAR！\nランク35以上で LAST BATTLE「カオスヴァーブ・オーガ」に挑戦できます。");
+        alert("「英語処理の極意書」CLEAR！\nランク40以上で LAST BATTLE「カオスヴァーブ・オーガ」に挑戦できます。");
       }
     }, 900);
   } else {
@@ -3053,8 +3053,8 @@ function checkGokuiAnswer(selectedIndex) {
 // LAST BATTLE「カオスヴァーブ・オーガ」タイムトライアル
 // ----------------------------------------------------
 function startLastBoss() {
-  if (!gameState.gokuiCleared || getRank(gameState.exp) < 35) {
-    alert("LAST BATTLEの開放条件は「英語処理の極意書クリア」かつ「ランク35以上」です。");
+  if (!gameState.gokuiCleared || getRank(gameState.exp) < 40) {
+    alert("LAST BATTLEの開放条件は「英語処理の極意書クリア」かつ「ランク40以上」です。");
     return;
   }
   initAudio();
@@ -3114,7 +3114,7 @@ function renderLastBoss() {
       <div id="last-boss-timer" class="timer-display">⏱️ 残り時間: ${gameState.lastBossTimeLeft}秒</div>
   `;
   if (gameState.lastBossSkillActive) {
-    html += `<div class="skill-comment-box">💡 判断の理コメント: ${qData.comment}</div>`;
+    html += `<div class="skill-comment-box">💡 判断の眼コメント: ${qData.comment}</div>`;
   }
   let formattedText = qData.text;
   if (gameState.lastBossSkillActive && qData.highlightText) {
@@ -3135,7 +3135,7 @@ function renderLastBoss() {
       <div class="dialog-overlay">
         <h3 style="color:var(--gold-color); margin-top:0;">クリア条件未達</h3>
         <p style="font-size:1.05rem;">${gameState.lastBossFailReason}</p>
-        <p style="font-size:1.05rem;">★判断の眼（開眼）★を発動しますか？</p>
+        <p style="font-size:1.05rem;">★判断の眼（飛翔開眼）★を発動しますか？</p>
         <div class="dialog-btns">
           <button class="dialog-btn dialog-btn-yes" onclick="handleLastBossSkillDialog(true)">YES</button>
           <button class="dialog-btn dialog-btn-no" onclick="handleLastBossSkillDialog(false)">NO</button>

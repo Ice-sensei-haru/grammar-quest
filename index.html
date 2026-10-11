@@ -555,25 +555,25 @@ const STAGES = [
     monsterName: "SV・キマイラ",
     questions: [
       {
-        text: "① These are my books. の These を This にすると？",
+        text: "① We (  ) soccer every day. の(  )にあてはまる語は？",
         options: [
-          { label: "A : This are my book.", correct: false },
-          { label: "B : This is my books.", correct: false },
-          { label: "C : This is my book.", correct: true }
+          { label: "A : playing", correct: false },
+          { label: "B : plays", correct: false },
+          { label: "C : play", correct: true }
         ],
-        wrongComment: "主語が単数 → be動詞を is にする → 後ろの名詞も単数形にします。",
+        wrongComment: "主語が複数 → 一般動詞は原形を使います。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語が単数 → be動詞を is にする → 後ろの名詞も単数形", correct: true },
-          { label: "be動詞の後ろに名詞の単数形を置くときは is を使う", correct: false }
+          { label: "主語が複数 → 一般動詞は原形", correct: true },
+          { label: "主語が We → 一般動詞は三単現のs", correct: false }
         ]
       },
       {
-        text: "② Tom and Ken play soccer. の主語をTomだけにすると？",
+        text: "② Tom often (  ) soccer. の(  )にあてはまる語は？",
         options: [
-          { label: "A : Tom play soccer.", correct: false },
-          { label: "B : Tom plays soccer.", correct: true },
-          { label: "C : Tom is play soccer.", correct: false }
+          { label: "A : play", correct: false },
+          { label: "B : plays", correct: true },
+          { label: "C : playing", correct: false }
         ],
         wrongComment: "主語が三人称単数になると、一般動詞にs（es）が付きます。",
         logicText: "【判断基準】",
@@ -583,46 +583,46 @@ const STAGES = [
         ]
       },
       {
-        text: "③ Do you do after school?　のyouをyour sisterにすると？",
+        text: "③ These books (  ) new.　の(  )にあてはまる語は？",
         options: [
-          { label: "A : Does your sister do after school?", correct: true },
-          { label: "B : Does your sister does after school?", correct: false },
-          { label: "C : Do your sister does after school?", correct: false }
+          { label: "A : are", correct: true },
+          { label: "B : is", correct: false },
+          { label: "C : be", correct: false }
         ],
-        wrongComment: "主語が三人称単数になると、疑問文は主語の前に does を置きます。",
+        wrongComment: "主語が複数のときのbe動詞は are を使います。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語が三人称単数だから疑問文は主語の前に does を置く", correct: true },
-          { label: "主語に関係なく、一般動詞の疑問文には does を置く", correct: false }
+          { label: "主語が複数 → be動詞 → are", correct: true },
+          { label: "主語に関係なく、be動詞は are を置く", correct: false }
         ]
       },
       {
-        text: "④ I am a tennis fan. の I を We に変えると？",
+        text: "④ There (  ) some food on the plate.　の(  )にあてはまる語は？",
         options: [
-          { label: "A : We are tennis fans.", correct: true },
-          { label: "B : We are a tennis fan.", correct: false },
-          { label: "C : We are a tennis fans.", correct: false }
+          { label: "A : is", correct: true },
+          { label: "B : are", correct: false },
+          { label: "C : be", correct: false }
         ],
-        wrongComment: "主語が複数になるとbe動詞は are になり、後ろの名詞も複数形になります。",
+        wrongComment: "food は数えられない名詞なので単数扱い → be動詞に is を使います。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語が複数になれば、後の名詞はすべて複数形を使う", correct: false },
-          { label: "be動詞の後ろの名詞の単複は主語の単複に合わす", correct: true }
+          { label: "There の文には is を使う", correct: false },
+          { label: "food は数えられない名詞なので単数扱い → be動詞は is", correct: true }
         ]
       }
     ],
     boss: {
-      text: "【BOSS BATTLE】\nThey always watch soccer games. のTheyをHeに変えると？",
+      text: "【BOSS BATTLE】\nThe bus (  ) to Tokyo. の(  )にあてはまる語は？",
       options: [
-        { label: "A : He always watch a soccer game.", correct: false },
-        { label: "B : He always watches soccer games.", correct: true },
-        { label: "C : He always watches a soccer game.", correct: false }
+        { label: "A : go", correct: false },
+        { label: "B : goes", correct: true },
+        { label: "C : going", correct: false }
       ],
-      wrongComment: "主語が He（三人称単数）に変わるため、動詞も三単現のsが必要です。",
+      wrongComment: "主語が三人称単数 → 動詞の形は三単現のsを使います。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "主語が１語になると一般動詞に三単現のsがつく", correct: false },
-        { label: "主語が三人称単数になったので、一般動詞に三単現のsがつく", correct: true }
+        { label: "主語が I や you 以外 → 一般動詞は三単現のs", correct: false },
+        { label: "主語が三人称単数 → 一般動詞は三単現のs", correct: true }
       ]
     }
   },
@@ -635,7 +635,7 @@ const STAGES = [
     monsterName: "シンタックス・ゴーレム",
     questions: [
       {
-        text: "① Are those old bikes? のthoseをthatに変えると？",
+        text: "① Are those old bikes? の those を that に変えると？",
         options: [
           { label: "A : Are that old bikes?", correct: false },
           { label: "B : Is that an old bike?", correct: true },
@@ -757,7 +757,21 @@ const STAGES = [
         ]
       },
       {
-        text: "④ 「トムはネコを飼っています。」を英語にすると？",
+        text: "④ She read the book. を疑問文にすると？",
+        options: [
+          { label: "A : Does she read the book?", correct: false },
+          { label: "B : Did she read the book?", correct: true },
+          { label: "C : Is she read the book?", correct: false }
+        ],
+        wrongComment: "主語が単数 → 三単現のsがない → read は過去形だと判断します。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "主語が三人称単数 → 三単現のsがない → read は過去形", correct: true },
+          { label: "主語が三人称単数 → 一般動詞 → Does を使って動詞の原形", correct: false }
+        ]
+      },
+      {
+        text: "⑤ 「トムはネコを飼っています。」を英語にすると？",
         options: [
           { label: "A : Tom having a cat.", correct: false },
           { label: "B : Tom is having a cat.", correct: false },
@@ -955,17 +969,17 @@ const STAGES = [
     monsterName: "クロノス・アイ",
     questions: [
       {
-        text: "① He (  ) the party last Sunday. の(  )に入る適切な語は？",
+        text: "① He ate breakfast. を否定文にすると？",
         options: [
-          { label: "A : enjoy", correct: false },
-          { label: "B : enjoys", correct: false },
-          { label: "C : enjoyed", correct: true }
+          { label: "A : He wasn't eat breakfast.", correct: false },
+          { label: "B : He ate not breakfast.", correct: false },
+          { label: "C : He didn't eat breakfast.", correct: true }
         ],
-        wrongComment: "動詞の区別 → 時制 → 主語の数の順に判断します。",
+        wrongComment: "動詞の区別 → 一般動詞の過去形 → didn'tを使って原形に戻します。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語の三人称単数から三単現のs", correct: false },
-          { label: "文末の last Sunday から時制が過去", correct: true }
+          { label: "主語の三人称単数 → 否定文 → wasn't を使う", correct: false },
+          { label: "動詞の区別 → 一般動詞の過去形 → didn't を使って原形に", correct: true }
         ]
       },
       {
@@ -997,17 +1011,45 @@ const STAGES = [
         ]
       },
       {
-        text: "④ Tom usually uses this bike. の( Tom )をたずねる疑問文の形は？",
+        text: "④ Tom swam in the sea. の文末に then を加えて過去進行形にすると？",
         options: [
-          { label: "A : Who does usually use this bike?", correct: false },
-          { label: "B : Who do usually uses this bike?", correct: false },
-          { label: "C : Who usually uses this bike?", correct: true }
+          { label: "A : Tom swimming in the sea then.", correct: false },
+          { label: "B : Tom was swimming in the sea then.", correct: true },
+          { label: "C : Tom is swam in the sea then.", correct: false }
         ],
-        wrongComment: "疑問詞が主語になるときは、肯定文の語順になります。",
+        wrongComment: "be動詞を過去形にして、動詞はingの形にします。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "過去進行形 → be動詞＋過去形にする", correct: false },
+          { label: "be動詞を過去形にして、動詞は原形にしてingの形にする", correct: true }
+        ]
+      },
+      {
+        text: "⑤ I study math. の文末に last night を加えると？",
+        options: [
+          { label: "A : I was study math last night.", correct: false },
+          { label: "B : I studied math last night.", correct: true },
+          { label: "C : I did study math last night.", correct: false }
+        ],
+        wrongComment: "動詞を見て疑問文の形にする。その前に疑問詞を置きます。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "疑問詞の後 does + 主語 + 原形にする", correct: false },
+          { label: "疑問詞の後、動詞を見て主語の前に一語を置く", correct: true }
+        ]
+      },
+      {
+        text: "⑥ Tom and Lisa usually play tennis. の( Tom and Lisa )をたずねる疑問文の形は？",
+        options: [
+          { label: "A : Who does usually play tennis?", correct: false },
+          { label: "B : Who do usually play tennis?", correct: false },
+          { label: "C : Who usually plays tennis?", correct: true }
+        ],
+        wrongComment: "疑問詞が主語のときは三人称単数扱いし、肯定文の語順になります。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "疑問詞が主語のときは三人称単数扱いし、肯定文の語順になる", correct: true },
-          { label: "人をたずねる疑問詞はWhoにはdoを使わない", correct: false }
+          { label: "人をたずねる疑問詞は Who には do を使わない", correct: false }
         ]
       }
     ],

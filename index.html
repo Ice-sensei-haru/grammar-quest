@@ -1203,7 +1203,21 @@ const STAGES = [
     monsterName: "ヴォイド・ルーラー",
     questions: [
       {
-        text: "① She (  ) busy with her work. の(  )に入る適切な動詞は？",
+        text: "① He always does his homework before dinner. の動詞と目的語はは？",
+        options: [
+          { label: "A : 動詞は always 目的語は his homewor", correct: false },
+          { label: "B : 動詞は does 目的語は before dinner", correct: false },
+          { label: "C : 動詞は does 目的語は his homework", correct: true }
+        ],
+        wrongComment: "主語 → 動詞 → 目的語/補語 → 場所や時の追加情報の順に並びます。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "一般動詞の後ろにあって、動きの対象となる名詞が目的語", correct: true },
+          { label: "主語のすぐ後ろが動詞で、文末にある名詞が目的語", correct: false }
+        ]
+      },
+      {
+        text: "② She (  ) busy with her work. の(  )に入る適切な動詞は？",
         options: [
           { label: "A : sees", correct: false },
           { label: "B : looks", correct: true },
@@ -1217,7 +1231,7 @@ const STAGES = [
         ]
       },
       {
-        text: "② She (  ) him the book. の(  )に入る適切な動詞は？",
+        text: "③ She (  ) him the book. の(  )に入る適切な動詞は？",
         options: [
           { label: "A : gave", correct: true },
           { label: "B : studied", correct: false },
@@ -1231,7 +1245,7 @@ const STAGES = [
         ]
       },
       {
-        text: "③ I went to bed early (  ) I was tired. の(  )に入る適切な接続詞は？",
+        text: "④ I went to bed early (  ) I was tired. の(  )に入る適切な接続詞は？",
         options: [
           { label: "A : if", correct: false },
           { label: "B : so", correct: false },
@@ -1243,9 +1257,23 @@ const STAGES = [
           { label: "意味の解釈で判断", correct: false },
           { label: "前が結果、後ろが原因の文脈で判断", correct: true }
         ]
-      },
+      },     
       {
-        text: "④ He is our English teacher. とほぼ同じ意味の文は？",
+        text: "⑤ (  ) I stay in London, I'll visit my uncle. の(  )に入る語は？",
+        options: [
+          { label: "A : While", correct: true },
+          { label: "B : But", correct: false },
+          { label: "C : During", correct: false }
+        ],
+        wrongComment: "後ろにSVが2組続く → 接続詞を使います。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "後ろにSVが２組続く → 接続詞を使う", correct: true },
+          { label: "後ろの文に未来の表現がある → While を使う", correct: false }
+        ]
+      },      
+      {
+        text: "⑥ He is our English teacher. とほぼ同じ意味の文は？",
         options: [
           { label: "A : He teaches us to English.", correct: false },
           { label: "B : He can teach English for us.", correct: false },
@@ -1259,7 +1287,21 @@ const STAGES = [
         ]
       },
       {
-        text: "⑤ The movie (  ) me sad. の(  )に入る適切な動詞は？",
+        text: "⑦ 「私たちはそのイヌをポチと名付けた。」を英語にすると？",
+        options: [
+          { label: "A : We named Pochi the dog.", correct: false },
+          { label: "B : We named the dog Pochi.", correct: true },
+          { label: "C : The dog named us Pochi.", correct: false }
+        ],
+        wrongComment: "name は後ろに目的語（～を）、補語（～と）をとる動詞です。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "日本語の動詞から、単語を逆に並べる", correct: false },
+          { label: "動詞が name → 後ろに目的語（～を）→ 補語（～と）の順", correct: true }
+        ]
+      },
+      {
+        text: "⑧ The movie (  ) me sad. の(  )に入る適切な動詞は？",
         options: [
           { label: "A : made", correct: true },
           { label: "B : went", correct: false },
@@ -1288,14 +1330,14 @@ const STAGES = [
           ]
         },
         {
-          text: "【BOSS BATTLE 2/2】\n「私は昨日、彼らに夕食を作ってあげた。」の意味に単語をクリックして並べかえなさい。",
-          words: ["them", "dinner", "I", "yesterday", "cooked"],
-          correctAnswer: "I cooked them dinner yesterday",
+          text: "【BOSS BATTLE 2/2】\n「彼は彼の息子に、新しい自転車を買ってあげた。」の意味に単語をクリックして並べかえなさい。",
+          words: ["son", "he", "bike", "bought", "his", "new", "a"],
+          correctAnswer: "he bought his son a new bike",
           wrongComment: "主語＋動詞＋人＋ものの語順を作ります。",
           logicText: "【判断基準】",
           logicOptions: [
-            { label: "単語の一つ一つの意味で判断", correct: false },
-            { label: "主語＋動詞（cook）＋人＋ものの文構造を作る", correct: true }
+            { label: "日本語の述語から前へ順に単語を並べる", correct: false },
+            { label: "主語＋動詞 → 人（ his son ）→ もの（ a new bike ）の文構造を作る", correct: true }
           ]
         }
       ]
@@ -1478,7 +1520,7 @@ const STAGES = [
           { label: "B : No, he doesn’t.", correct: true },
           { label: "C : Tom plays basketball.", correct: false }
         ],
-        wrongComment: "疑問詞がない → Yes / Noで答える。主語は代名詞に変える",
+        wrongComment: "疑問詞がない → Yes / Noで答える。主語は代名詞に変えます。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "疑問詞がない → Yes / Noで答える。主語は代名詞に変える", correct: true },
@@ -1486,13 +1528,27 @@ const STAGES = [
         ]
       },
       {
-        text: "② 【英問英答】Lisa has three cats. に対する次の設問への答え方は？\n設問：How many cats does Lisa have?",
+        text: "② 【英問英答】Lisa will visit Kyoto next Sunday. に対する次の設問への答え方は？\n設問：Where will Lisa go next Sunday?",
+        options: [
+          { label: "A : She will go next Sunday.", correct: false },
+          { label: "B : She will go to Kyoto.", correct: true },
+          { label: "C : Yes, she will.", correct: false }
+        ],
+        wrongComment: "主語は代名詞に。動詞は疑問文の形に合わせます。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "時をたずねているので、next Sunday を答える", correct: false },
+          { label: "主語は代名詞に。動詞は疑問文の形に合わせる", correct: true }
+        ]
+      },
+      {
+        text: "③ 【英問英答】Lisa has three cats. に対する次の設問への答え方は？\n設問：How many cats does Lisa have?",
         options: [
           { label: "A : She has three.", correct: true },
           { label: "B : Three cats are.", correct: false },
           { label: "C : Lisa has three.", correct: false }
         ],
-        wrongComment: "主語は代名詞に。動詞は疑問文の形に合わせる",
+        wrongComment: "主語は代名詞に。動詞は疑問文の形に合わせます。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "意味の解釈「リサは３匹のネコを飼っている」で判断", correct: false },
@@ -1500,13 +1556,13 @@ const STAGES = [
         ]
       },
       {
-        text: "③ 【英問英答】It was rainy, so Lisa and Tom came by taxi. に対する次の設問への答え方は？\n設問：Why did Lisa and Tom came by taxi?",
+        text: "④ 【英問英答】It was rainy, so Lisa and Tom came by taxi. に対する次の設問への答え方は？\n設問：Why did Lisa and Tom came by taxi?",
         options: [
           { label: "A : So they like taking a taxi.", correct: false },
           { label: "B : They had rain.", correct: false },
           { label: "C : Because it was rainy.", correct: true }
         ],
-        wrongComment: "Whyに対する答え方はBecause＋主語＋動詞の形を使う",
+        wrongComment: "Whyに対する答え方はBecause＋主語＋動詞の形を使います。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "Whyに対する答え方はBecause＋主語＋動詞の形を使う", correct: true },
@@ -1514,13 +1570,13 @@ const STAGES = [
         ]
       },
       {
-        text: "④ 【英問英答】Tom usually cleans his room on Sundays. に対する次の設問への答え方は？\n設問：What does Tom usually do on Sundays?",
+        text: "⑤ 【英問英答】Tom usually cleans his room on Sundays. に対する次の設問への答え方は？\n設問：What does Tom usually do on Sundays?",
         options: [
           { label: "A : He plays soccer.", correct: false },
           { label: "B : He cleans his room.", correct: true },
           { label: "C : His room is.", correct: false }
         ],
-        wrongComment: "主語は代名詞に、時制と動詞の形は疑問文に合わせる",
+        wrongComment: "主語は代名詞に、時制と動詞の形は疑問文に合わせます。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "主語は代名詞に、時制と動詞の形は疑問文に合わせる", correct: true },
@@ -1535,7 +1591,7 @@ const STAGES = [
         { label: "B : He cooks dinner.", correct: false },
         { label: "C : Tom does.", correct: true }
       ],
-      wrongComment: "主語＋（助）動詞.で答える。一般動詞のみの文ではdo, does, didで答える",
+      wrongComment: "主語＋（助）動詞.で答える。一般動詞のみの文ではdo, does, didで答えます。",
       logicText: "【判断基準】",
       logicOptions: [
         { label: "主語を代名詞にして、動詞を本文に合わす", correct: false },
@@ -1558,7 +1614,7 @@ const STAGES = [
           { label: "B : to play", correct: true },
           { label: "C : playing", correct: false }
         ],
-        wrongComment: "中心の動詞ではない → wantの後ろ → to V",
+        wrongComment: "中心の動詞ではない → wantの後ろ → to V を使います。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "中心の動詞ではない → wantの後ろ → to V", correct: true },
@@ -1572,7 +1628,7 @@ const STAGES = [
           { label: "B : to play", correct: false },
           { label: "C : playing", correct: true }
         ],
-        wrongComment: "中心の動詞ではない → enjoyの後ろ → Ving",
+        wrongComment: "中心の動詞ではない → enjoyの後ろ → Ving を使います。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "「テニスをするのを楽しむ」という表現はenjoy playing tennisを使う", correct: false },
@@ -1586,7 +1642,7 @@ const STAGES = [
           { label: "B : to visit", correct: false },
           { label: "C : to visiting", correct: true }
         ],
-        wrongComment: "look forward to～で「～を楽しみに待つ」という表現",
+        wrongComment: "look forward to～で「～を楽しみに待つ」という表現です。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "進行形に合わせてVingを使う", correct: false },
@@ -1600,7 +1656,7 @@ const STAGES = [
           { label: "B : to / reading", correct: false },
           { label: "C : for / to reading", correct: false }
         ],
-        wrongComment: "It to構文は不定詞の主語をfor＋人の形で前に置く",
+        wrongComment: "It to構文は不定詞の主語をfor＋人の形で前に置きます。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "It to構文は不定詞の主語をfor＋人の形で前に置く", correct: true },
@@ -1612,7 +1668,7 @@ const STAGES = [
         text: "⑤ 「私は何か冷たい飲み物がほしい。」 となるように英語を並べかえなさい。",
         words: ["drink", "I", "cold", "to", "something", "want"],
         correctAnswer: "I want something cold to drink.",
-        wrongComment: "「何か飲むためのもの」 → 形容詞的用法 → something + 形容詞 + to drink",
+        wrongComment: "「何か飲むためのもの」 → 形容詞的用法 → something + 形容詞 + to drink と判断します。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "somethingを使うときは後ろに不定詞を置く", correct: false },
@@ -1630,7 +1686,7 @@ const STAGES = [
             { label: "B : to read", correct: false },
             { label: "C : reading", correct: true }
           ],
-          wrongComment: "中心の動詞ではない → finishの後ろ → Ving",
+          wrongComment: "中心の動詞ではない → finishの後ろ → Ving を使います。",
           logicText: "【判断基準】",
           logicOptions: [
             { label: "現在完了進行形の形でVingを使う", correct: false },
@@ -1644,7 +1700,7 @@ const STAGES = [
             { label: "B : Read / is", correct: false },
             { label: "C : Reading / is", correct: true }
           ],
-          wrongComment: "中心の動詞ではない → to VかVingを使う → 不定詞や動名詞は単数扱い",
+          wrongComment: "中心の動詞ではない → to VかVingを使う → 不定詞や動名詞は単数扱いと判断します。",
           logicText: "【判断基準】",
           logicOptions: [
             { label: "中心の動詞ではない → to VかVingを使う → 不定詞や動名詞は単数扱い", correct: true },
@@ -1669,7 +1725,7 @@ const STAGES = [
           { label: "B : more fast", correct: false },
           { label: "C : the faster", correct: false }
         ],
-        wrongComment: "than Meg → ２人の比較 → 比較級",
+        wrongComment: "than Meg → ２人の比較 → 比較級と判断します。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "than Meg → ２人の比較 → 比較級", correct: true },
@@ -1683,7 +1739,7 @@ const STAGES = [
           { label: "B : the best", correct: true },
           { label: "C : a better", correct: false }
         ],
-        wrongComment: "of the three → ３人以上の比較 → 最上級",
+        wrongComment: "of the three → ３人以上の比較 → 最上級と判断します。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "「いちばん上手な料理人」と解釈できる", correct: false },
@@ -1697,7 +1753,7 @@ const STAGES = [
           { label: "B : the most famous", correct: false },
           { label: "C : more famous", correct: true }
         ],
-        wrongComment: "A or B → ２つの比較 → 比較級",
+        wrongComment: "A or B → ２つの比較 → 比較級と判断します。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "A or B → ２つの比較 → 比較級", correct: true },
@@ -1711,11 +1767,11 @@ const STAGES = [
           { label: "B : more books than", correct: true },
           { label: "C : books more than", correct: false }
         ],
-        wrongComment: "moreはmanyの比較級として、more＋複数形として使える",
+        wrongComment: "more は many の比較級として、more＋複数形として使えます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "bookを比較級にできないからmoreを使う", correct: false },
-          { label: "moreはmanyの比較級として、more＋複数形として使う", correct: true }
+          { label: "book を比較級にできないから more を使う", correct: false },
+          { label: "more は many の比較級として、more＋複数形として使う", correct: true }
         ]
       },
       {
@@ -1725,7 +1781,7 @@ const STAGES = [
           { label: "B : Tom is taller than any other boy in his class.", correct: true },
           { label: "C : Tom is not as tall as any boys in his class.", correct: false }
         ],
-        wrongComment: "最上級表現 → 比較級＋than any other＋単数名詞",
+        wrongComment: "最上級表現 → 比較級＋than any other＋単数名詞にします。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "意味の解釈でいちばん近いものを選ぶ", correct: false },
@@ -1927,11 +1983,19 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     options: [
       { label: "A：現在か過去か未来か", correct: false },
       { label: "B：時制、表現、文の形（肯定・否定・疑問・命令）", correct: true },
-      { label: "C：主語と動詞", correct: false }
+      { label: "C：主語と動詞、表現", correct: false }
     ]
   },
   {
-    text: "④　疑問文を作るとき［　　］の前にbe動詞、do・does・did・助動詞の一語を置く。",
+    text: "④　文の中心として使われる動詞の形は［　　］の３つである。",
+    options: [
+      { label: "A：原形・三単現のs・過去形", correct: true },
+      { label: "B：不定詞・動名詞・分詞", correct: false },
+      { label: "C：現在形・過去形・未来形", correct: false }
+    ]
+  },
+  {
+    text: "⑤　疑問文を作るとき［　　］の前にbe動詞、do・does・did・助動詞の一語を置く。",
     options: [
       { label: "A：文", correct: false },
       { label: "B：主語", correct: true },
@@ -1939,7 +2003,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑤　受動態は［　　］で表現される。",
+    text: "⑥　受動態は［　　］で表現される。",
     options: [
       { label: "A：be動詞＋過去分詞", correct: true },
       { label: "B：be動詞＋現在分詞", correct: false },
@@ -1947,7 +2011,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑥　命令文は［　　］を表現するときの文。",
+    text: "⑦　命令文は主語がない文で、［　　］を表現するときの文。",
     options: [
       { label: "A：感情、意見、主張", correct: false },
       { label: "B：評価、提示、感想", correct: false },
@@ -1955,7 +2019,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑦　現在完了は［　　］で表現される。",
+    text: "⑧　現在完了は［　　］で表現される。",
     options: [
       { label: "A：be動詞＋過去分詞", correct: false },
       { label: "B：be動詞＋現在分詞", correct: false },
@@ -1963,15 +2027,23 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑧　名詞の単数形を使う際、［　　］の順に置く。",
+    text: "⑨　動詞の使い方や意味は［　　］を見て判断する。",
     options: [
-      { label: "A：入口の言葉（aやthe）→形容詞→核の名詞", correct: true },
-      { label: "B：日本語で表現される単語", correct: false },
-      { label: "C：形容詞→入口の言葉→核の名詞", correct: false }
+      { label: "A：主語との関係", correct: false },
+      { label: "B：後ろの単語のつながり", correct: true },
+      { label: "C：文全体", correct: false }
     ]
   },
   {
-    text: "⑨　進行形は［　　］で表現される。",
+    text: "⑩　名詞の単数形を使う時、［　　］の順に置く。",
+    options: [
+      { label: "A：入口の言葉（a, the, myなど）→ 形容詞 → 核の名詞", correct: true },
+      { label: "B：日本語で表現される単語のまま", correct: false },
+      { label: "C：形容詞 → 入口の言葉 → 核の名詞", correct: false }
+    ]
+  },
+  {
+    text: "⑪　進行形は［　　］で表現される。",
     options: [
       { label: "A：be動詞＋過去分詞", correct: false },
       { label: "B：be動詞＋現在分詞", correct: true },
@@ -1979,15 +2051,15 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑩　動詞の形は、主語と［　　］で決まる。",
+    text: "⑫　動詞の形は、主語と［　　］で決まる。",
     options: [
-      { label: "A：動詞の後ろにある単語", correct: false },
-      { label: "B：表現（単純形・進行形・完了形・受動態）だけ", correct: false },
+      { label: "A：時制（現在、過去、未来）", correct: false },
+      { label: "B：時制、表現（単純形・進行形・完了形・受動態）", correct: false },
       { label: "C：時制、表現、文の形（肯定・否定・疑問・命令）", correct: true }
     ]
   },
   {
-    text: "⑪　文の中心でない動詞の形は、［　　］を見て判断する。",
+    text: "⑬　文の中心でない動詞の形は、［　　］を見て判断する。",
     options: [
       { label: "A：後ろの語", correct: false },
       { label: "B：語順", correct: false },
@@ -1995,23 +2067,23 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑫　名詞を修飾する分詞は、［　　］になる。",
+    text: "⑭　名詞を修飾する分詞は、［　　］になる。",
     options: [
-      { label: "A：目的語と動詞の関係", correct: false },
-      { label: "B：目的語と補語の関係", correct: false },
+      { label: "A：主語と目的語の関係", correct: false },
+      { label: "B：補語と動詞の関係", correct: false },
       { label: "C：主語と動詞の関係", correct: true }
     ]
   },
   {
-    text: "⑬　英文を組み立てるときは、［　　］ようにする。",
+    text: "⑮　英文を組み立てるときは、［　　］ようにする。",
     options: [
-      { label: "A：主語を書く→文末から前へ順に並べる", correct: false },
-      { label: "B：SV関係→表現が作れる語の組み合わせ→英文での配置を整える", correct: true },
-      { label: "C：意味の解釈→表現に合う構文を探す→前から順に並べる", correct: false }
+      { label: "A：主語を書く → 日本語の文末から前へ順に並べる", correct: false },
+      { label: "B：SV関係を作る → 表現が作れる語の組み合わせ → 英文での配置を整える", correct: true },
+      { label: "C：意味の解釈 → 表現に合う構文を探す → 前から単語を並べる", correct: false }
     ]
   },
   {
-    text: "⑭　長文読解の因果関係は、［　　］の順で判断する。",
+    text: "⑯　長文読解の因果関係は、［　　］の順で判断する。",
     options: [
       { label: "A：行動 → 気持ち → 出来事", correct: false },
       { label: "B：出来事 → 気持ち → 行動", correct: true },
@@ -2019,7 +2091,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑮　長文読解で因果関係を示す印に［　　］がある。",
+    text: "⑰　長文読解で因果関係を示す印に［　　］がある。",
     options: [
       { label: "A：because, so, but, howeverなど", correct: true },
       { label: "B：if, for example, 前置詞など", correct: false },
@@ -2027,7 +2099,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑯　長文読解で正誤の条件は［　　］を確認する。",
+    text: "⑱　長文読解で正誤の条件は［　　］を確認する。",
     options: [
       { label: "A：同じ単語が使われているか", correct: false },
       { label: "B：主張や評価が同じか", correct: false },
@@ -2035,7 +2107,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑰　長文読解で要約するときは［　　］を見る。",
+    text: "⑲　長文読解で要約するときは［　　］を見る。",
     options: [
       { label: "A：段落の中央あたり", correct: false },
       { label: "B：for exampleの後", correct: false },
@@ -2043,7 +2115,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑱　長文読解で内容を比較するときは［　　］に分ける。",
+    text: "⑳　長文読解で内容を比較するときは［　　］に分ける。",
     options: [
       { label: "A：意見と事実", correct: true },
       { label: "B：理由と結果", correct: false },
@@ -3307,7 +3379,7 @@ function renderEndroll() {
         Congratulations!
       </h2>
       <p style="line-height:1.8; color:var(--text-color); margin:10px 0 25px;">
-        あなたは英語処理OSマスターの称号を獲得！<br>
+        英語処理OSマスターの称号を獲得！<br>
         さらなる高みを目指してトレーニングを続けていきましょう！
       </p>
       <button class="btn" style="text-align:center; background:var(--success-color);
@@ -3325,7 +3397,7 @@ function renderAllClear() {
       <div class="trophy-icon">🏆✨</div>
       <h2 style="color: var(--gold-color); margin-top: 0; font-size: 1.5rem;">全STAGEクリアおめでとう！</h2>
       <p style="line-height: 1.6; color: var(--text-color); margin-bottom: 20px;">
-        すべての英語処理OSマスターの称号を獲得！<br>
+        英語処理OSマスターの称号を獲得！<br>
         さらなる高みを目指してトレーニングを続けていきましょう！
       </p>
       <button class="btn" style="text-align: center; background: var(--success-color); color: white; font-weight: bold; justify-content: center;" onclick="resetToStageSelect()">

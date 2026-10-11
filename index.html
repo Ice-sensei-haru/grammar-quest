@@ -806,7 +806,7 @@ const STAGES = [
     skillName: "代名詞対応",
     rewardSkill: "代名詞対応の眼",
     monsterEmoji: "🛡️",
-    monsterName: "プロナウン・キラー",
+    monsterName: "プロナウン・ガーディアン",
     questions: [
       {
         text: "① Do you and Ken play tennis? – Yes, (  ) do. の(  )に入る適切な語は？",
@@ -1093,7 +1093,7 @@ const STAGES = [
     skillName: "表現選択",
     rewardSkill: "表現選択の眼",
     monsterEmoji: "🧙‍♂️",
-    monsterName: "エクスプレッサー",
+    monsterName: "エクスプス・メイガス",
     questions: [
       {
         text: "① Tom went to the park. の疑問文とその答え方は？",
@@ -1605,7 +1605,7 @@ const STAGES = [
     skillName: "後続要素予測",
     rewardSkill: "後続要素予測の眼",
     monsterEmoji: "🔮",
-    monsterName: "ルックアヘッド・ゴーレム",
+    monsterName: "ネクストリンカー",
     questions: [
       {
         text: "① He wants (   ) tennis. の(   )に適する英語は？",
@@ -1799,7 +1799,7 @@ const STAGES = [
     skillName: "動詞操作統合",
     rewardSkill: "動詞操作統合の眼",
     monsterEmoji: "🕶️",
-    monsterName: "ダーク・マニピュレーター",
+    monsterName: "ダーク・マニピュレータ",
     noBoss: true,
     questions: [
       {
@@ -2478,7 +2478,7 @@ function renderStageSelect() {
     <div style="margin-top:10px;">
       <button class="stage-select-btn battle-mode-btn" ${lastBossUnlocked ? '' : 'disabled'} onclick="startLastBoss()">
         <div>
-          <strong>【LAST BATTLE】カオスヴァーブ・オーガ</strong>
+          <strong>【LAST BATTLE】ヴァーバルアーチデーモン</strong>
           <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">タイムトライアル：60秒以内に全20問正解 / 誤答で1問目から再挑戦</div>
           ${!gameState.gokuiCleared ? '<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：英語処理の極意書クリア</div>' : ''}
           ${gameState.gokuiCleared && getRank(gameState.exp) < 40 ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：ランク40以上（現在ランク${getRank(gameState.exp)}）</div>` : ''}
@@ -3163,7 +3163,7 @@ function checkGokuiAnswer(selectedIndex) {
         gameState.isAllCleared = false;
         saveData();
         render();
-        alert("「英語処理の極意書」CLEAR！\nランク40以上で LAST BATTLE「カオスヴァーブ・オーガ」に挑戦できます。");
+        alert("「英語処理の極意書」CLEAR！\nランク40以上で LAST BATTLE「ヴァーバルアーチデーモン」に挑戦できます。");
       }
     }, 900);
   } else {
@@ -3178,7 +3178,7 @@ function checkGokuiAnswer(selectedIndex) {
   }
 }
 // ----------------------------------------------------
-// LAST BATTLE「カオスヴァーブ・オーガ」タイムトライアル
+// LAST BATTLE「ヴァーバルアーチデーモン」タイムトライアル
 // ----------------------------------------------------
 function startLastBoss() {
   if (!gameState.gokuiCleared || getRank(gameState.exp) < 40) {
@@ -3231,7 +3231,7 @@ function renderLastBoss() {
       <div style="font-size:1.2rem; color:#8b949e;">VS</div>
       <div>
         <div class="monster-char">👹</div>
-        <div style="font-size:0.75rem; color:var(--danger-color); margin-top:4px;">カオスヴァーブ・オーガ</div>
+        <div style="font-size:0.75rem; color:var(--danger-color); margin-top:4px;">ヴァーバルアーチデーモン</div>
       </div>
     </div>
     <div class="card boss-card">

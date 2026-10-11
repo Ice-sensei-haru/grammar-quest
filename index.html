@@ -475,7 +475,21 @@ const STAGES = [
         ]
       },
       {
-        text: "② Tom likes dogs. の疑問文とその答え方は？",
+        text: "② He (  ) good at basketball. の(  )にあてはまる英語は？",
+        options: [
+          { label: "A : is", correct: true },
+          { label: "B : plays", correct: false },
+          { label: "C : can", correct: false }
+        ],
+        wrongComment: "He = good at basketballの関係があります。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "主語は He のときは is を使う", correct: false },
+          { label: "He = good at basketballの構造", correct: true }
+        ]
+      },
+      {
+        text: "③ Tom likes dogs. の疑問文とその答え方は？",
         options: [
           { label: "A : Is Tom like dogs? – Yes, he is.", correct: false },
           { label: "B : Do Tom likes dogs? – Yes, he do.", correct: false },
@@ -485,11 +499,11 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "一般動詞の形が三単現のs → Does を使って動詞を原形に戻す", correct: true },
-          { label: "主語が一語 → Does を使って動詞を原形に戻す", correct: false }
+          { label: "主語が１語 → Does を使って動詞を原形に戻す", correct: false }
         ]
       },
       {
-        text: "③ Meg played tennis. を否定文にすると？",
+        text: "④ Meg played tennis. を否定文にすると？",
         options: [
           { label: "A : Meg wasn't play tennis.", correct: false },
           { label: "B : Meg didn't play tennis.", correct: true },
@@ -503,7 +517,7 @@ const STAGES = [
         ]
       },
       {
-        text: "④ We can camp there in summer. の( in summer )をたずねる疑問文は？",
+        text: "⑤ We can camp there in summer. の( in summer )をたずねる疑問文は？",
         options: [
           { label: "A : When can we camp there?", correct: true },
           { label: "B : When we can camp there?", correct: false },
@@ -518,17 +532,17 @@ const STAGES = [
       }
     ],
     boss: {
-      text: "【BOSS BATTLE】\nTom went fishing last Sunday. の( last Sunday )をたずねる疑問文にしなさい。",
+      text: "【BOSS BATTLE】\n「あなたは何を持っていますか。」を英語にすると？",
       options: [
-        { label: "A : When was Tom go fishing?", correct: false },
-        { label: "B : When did Tom go fishing?", correct: true },
-        { label: "C : When does Tom went fishing?", correct: false }
+        { label: "A : What are you have?", correct: false },
+        { label: "B : What do you have?", correct: true },
+        { label: "C : What you are have?", correct: false }
       ],
-      wrongComment: "一般動詞の過去形なので主語の前に did を置き、動詞を原形に戻します。",
+      wrongComment: "動詞の区別 → 主語がyou → 疑問文 → 主語の前に do を置きます。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "Whenを見る → didを主語の前に置く", correct: false },
-        { label: "一般動詞を見る → 過去形 → didを主語の前に置く", correct: true }
+        { label: "何が What → 疑問文で do → 主語が you", correct: false },
+        { label: "動詞が一般動詞 → 主語が you → 疑問文 → 主語の前に do", correct: true }
       ]
     }
   },
@@ -541,17 +555,17 @@ const STAGES = [
     monsterName: "SV・キマイラ",
     questions: [
       {
-        text: "① Your brother is a soccer fan. の疑問文とその答え方は？",
+        text: "① These are my books. の These を This にすると？",
         options: [
-          { label: "A : Are your brother a soccer fan? – Yes, I am.", correct: false },
-          { label: "B : Is your brother a soccer fan? – Yes, it is.", correct: false },
-          { label: "C : Is your brother a soccer fan? – Yes, he is.", correct: true }
+          { label: "A : This are my book.", correct: false },
+          { label: "B : This is my books.", correct: false },
+          { label: "C : This is my book.", correct: true }
         ],
-        wrongComment: "be動詞を前に出し、答えの文の代名詞は主語に合わせます。",
+        wrongComment: "主語が単数 → be動詞を is にする → 後ろの名詞も単数形にします。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "be動詞を主語の前に出す。答える文の主語は疑問文に合わせる", correct: true },
-          { label: "主語が単数だから is を主語の前に出す。答える文は人ならheを使う", correct: false }
+          { label: "主語が単数 → be動詞を is にする → 後ろの名詞も単数形", correct: true },
+          { label: "be動詞の後ろに名詞の単数形を置くときは is を使う", correct: false }
         ]
       },
       {
@@ -561,11 +575,11 @@ const STAGES = [
           { label: "B : Tom plays soccer.", correct: true },
           { label: "C : Tom is play soccer.", correct: false }
         ],
-        wrongComment: "主語が三人称単数になると、一般動詞にs/esが付きます。",
+        wrongComment: "主語が三人称単数になると、一般動詞にs（es）が付きます。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "主語が三人称単数だから一般動詞は三単現のsがつく", correct: true },
-          { label: "主語が一語になると一般動詞は三単現のsがつく", correct: false }
+          { label: "主語が１語になると一般動詞は三単現のsがつく", correct: false }
         ]
       },
       {
@@ -575,7 +589,7 @@ const STAGES = [
           { label: "B : Does your sister does after school?", correct: false },
           { label: "C : Do your sister does after school?", correct: false }
         ],
-        wrongComment: "主語が三人称単数になると、疑問文は主語の前にdoesを置きます。",
+        wrongComment: "主語が三人称単数になると、疑問文は主語の前に does を置きます。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "主語が三人称単数だから疑問文は主語の前に does を置く", correct: true },
@@ -604,10 +618,10 @@ const STAGES = [
         { label: "B : He always watches soccer games.", correct: true },
         { label: "C : He always watches a soccer game.", correct: false }
       ],
-      wrongComment: "主語がHe（三人称単数）に変わるため、動詞も三単現のsが必要です。",
+      wrongComment: "主語が He（三人称単数）に変わるため、動詞も三単現のsが必要です。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "主語が一語になると一般動詞に三単現のsがつく", correct: false },
+        { label: "主語が１語になると一般動詞に三単現のsがつく", correct: false },
         { label: "主語が三人称単数になったので、一般動詞に三単現のsがつく", correct: true }
       ]
     }
@@ -621,31 +635,31 @@ const STAGES = [
     monsterName: "シンタックス・ゴーレム",
     questions: [
       {
-        text: "① Those are old bikes. のThoseをThatに変えると？",
+        text: "① Are those old bikes? のthoseをthatに変えると？",
         options: [
-          { label: "A : That are old bikes.", correct: false },
-          { label: "B : That is an old bike.", correct: true },
-          { label: "C : That is old bike.", correct: false }
+          { label: "A : Are that old bikes?", correct: false },
+          { label: "B : Is that an old bike?", correct: true },
+          { label: "C : Is that old bike?", correct: false }
         ],
-        wrongComment: "That → be動詞は is → 後ろの名詞も単数形になります。",
+        wrongComment: "主語が単数 that → be動詞は is → 後ろの名詞も単数形になります。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "三人称単数の主語 → be動詞は is → 後ろはa(an)＋どんな＋単数形", correct: true },
-          { label: "後ろの名詞が単数 → be動詞は is", correct: false }
+          { label: "後ろの名詞が単数形 → be動詞は is", correct: false }
         ]
       },
       {
-        text: "① Whose books are these? のTheseをThisに変えると？",
+        text: "② 「これらはあなたの本ですか。ー はい、そうです。」を英語にすると？",
         options: [
-          { label: "A : Whose books is this?", correct: false },
-          { label: "B : Whose book are this?", correct: false },
-          { label: "C : Whose book is this?", correct: true }
+          { label: "A : Are these your books? - Yes, I am.", correct: false },
+          { label: "B : Is these your books? - Yes, it is.", correct: false },
+          { label: "C : Are these your books? - Yes, they are.", correct: true }
         ],
-        wrongComment: "That → be動詞は is → 後ろの名詞も単数形になります。",
+        wrongComment: "主語が複数 these → be動詞は are → ものが複数の代名詞には theyを使います。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "三人称単数の主語 → be動詞は is → 後ろはa(an)＋どんな＋単数形", correct: true },
-          { label: "後ろの名詞が単数 → be動詞は is", correct: false }
+          { label: "主語が複数 these → be動詞は are → ものが複数の代名詞には they", correct: true },
+          { label: "「あなたの本」 → your book → I で答える", correct: false }
         ]
       },
       {
@@ -658,8 +672,8 @@ const STAGES = [
         wrongComment: "主語が三人称単数 → doがdoesになります。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語が一語になると一般動詞の否定文にはdoesを使う", correct: false },
-          { label: "主語が三人称単数だから一般動詞の否定文にはdoesを使う", correct: true }
+          { label: "主語が１語になると一般動詞の否定文には does を使う", correct: false },
+          { label: "主語が三人称単数だから一般動詞の否定文には does を使う", correct: true }
         ]
       },
       {
@@ -684,7 +698,7 @@ const STAGES = [
         { label: "B : These book is an interesting.", correct: false },
         { label: "C : This book is interesting.", correct: true }
       ],
-      wrongComment: "主語が単数 → theseはthisに → be動詞は is になります。",
+      wrongComment: "主語が単数 → these は this に → be動詞は is になります。",
       logicText: "【判断基準】",
       logicOptions: [
         { label: "主語が単数 → be動詞は is → a（an）を使う", correct: false },
@@ -707,7 +721,7 @@ const STAGES = [
           { label: "B : plays", correct: false },
           { label: "C : playing", correct: true }
         ],
-        wrongComment: "nowとbe動詞（are）があるため、現在進行形（-ing）にします。",
+        wrongComment: "now とbe動詞（are）があるため、現在進行形（-ing）にします。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "文末に now があり、主語が they だから一般動詞をingの形にする", correct: false },
@@ -721,11 +735,11 @@ const STAGES = [
           { label: "B : was", correct: false },
           { label: "C : does", correct: false }
         ],
-        wrongComment: "一般動詞goと文末last Sunday → 過去形 → didを選びます。",
+        wrongComment: "一般動詞 go と文末 last Sunday → 過去形 → didを選びます。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "主語が三人称単数 → last Sunday → was", correct: false },
-          { label: "一般動詞goと文末last Sunday → 過去形 → did", correct: true }
+          { label: "一般動詞 go と文末 last Sunday → 過去形 → did", correct: true }
         ]
       },
       {
@@ -735,15 +749,15 @@ const STAGES = [
           { label: "B : be", correct: true },
           { label: "C : do", correct: false }
         ],
-        wrongComment: "助動詞will → 動詞の原形 → be動詞の原形はbeを使います。",
+        wrongComment: "助動詞 will → 動詞の原形 → be動詞の原形は be を使います。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "助動詞will → 動詞の原形 → be動詞の原形でbe", correct: true },
-          { label: "主語が三人称単数 → 未来時制next month → be", correct: false }
+          { label: "助動詞 will → 動詞の原形 → be動詞の原形で be", correct: true },
+          { label: "主語が三人称単数 → 未来時制 next month → be", correct: false }
         ]
       },
       {
-        text: "④ 「トムはネコを飼っています。」 の正しい英語表現は？",
+        text: "④ 「トムはネコを飼っています。」を英語にすると？",
         options: [
           { label: "A : Tom having a cat.", correct: false },
           { label: "B : Tom is having a cat.", correct: false },
@@ -790,8 +804,8 @@ const STAGES = [
         wrongComment: "疑問文の主語と答える文の主語は一致します。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "Do you ～で始まる疑問文に対する答えの代名詞はwe", correct: false },
-          { label: "疑問文の主語が you and Ken に対する答えの代名詞はwe", correct: true }
+          { label: "Do you ～で始まる疑問文に対する答えの代名詞は we", correct: false },
+          { label: "疑問文の主語が you and Ken（複数）に対する答えの代名詞は we", correct: true }
         ]
       },
       {
@@ -832,7 +846,7 @@ const STAGES = [
         wrongComment: "単独の主語ではなく、後ろに名詞もありません。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "be kind toの後は必ず目的格を使う", correct: false },
+          { label: "be kind to の後は必ず目的格を使う", correct: false },
           { label: "前置詞の後ろに単独で使う形は目的格を使う", correct: true }
         ]
       }
@@ -861,17 +875,17 @@ const STAGES = [
     monsterName: "チャンキング・ドラゴン",
     questions: [
       {
-        text: "① 「赤い古い本」を英語にすると？",
+        text: "① 「あの大きな白い箱」を英語にすると？",
         options: [
-          { label: "A : an old red book", correct: true },
-          { label: "B : red old book", correct: false },
-          { label: "C : old red a book", correct: false }
+          { label: "A : that big white box", correct: true },
+          { label: "B : that big white a box", correct: false },
+          { label: "C : that a big white box", correct: false }
         ],
-        wrongComment: "名詞のまとまりは、入口の単語（aやthe）→どんな→核の名詞の順に並べます。",
+        wrongComment: "名詞のまとまりは、入口の語（a, the, my, thatなど）→ どんな → 核の名詞の順に並べます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "どんな（大きさ・形・古さ・色）→ aやthe → 核の名詞の順に並べる", correct: false },
-          { label: "入口の語（aやthe）→どんな（大きさ・形・古さ・色）→核の名詞の順に並べる", correct: true }
+          { label: "どんな（大きさ・形・古さ・色）→ a, the, my, thatなどから１つ → 核の名詞の順に並べる", correct: false },
+          { label: "a, the, my, thatなどから１つ → どんな（大きさ・形・古さ・色）→ 核の名詞の順に並べる", correct: true }
         ]
       },
       {
@@ -881,11 +895,11 @@ const STAGES = [
           { label: "B : old pictures", correct: false },
           { label: "C : some old pictures", correct: true }
         ],
-        wrongComment: "名詞のまとまりは、入口の語（aやthe）＋どんな＋核の名詞で捉えます。",
+        wrongComment: "名詞のまとまりは、入口の語（a, theなど）＋どんな＋核の名詞で捉えます。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "一般動詞の後ろにある語をすべて抜き出す", correct: false },
-          { label: "名詞のまとまりは「入口の語（aやthe）→どんな→核の名詞」になる", correct: true }
+          { label: "名詞のまとまりは「入口の語（a, theなど）＋どんな＋核の名詞」で捉える", correct: true }
         ]
       },
       {
@@ -903,22 +917,22 @@ const STAGES = [
         ]
       },
       {
-        text: "④ 「私は３人の彼の子どもを知っています。」を英文にすると？",
+        text: "④ 「私は３人の彼の子どもを知っています。」を英語にすると？",
         options: [
           { label: "A : I know three his children.", correct: false },
           { label: "B : I know his children of three.", correct: false },
           { label: "C : I know his three children.", correct: true }
         ],
-        wrongComment: "所有格は入口の語になります。",
+        wrongComment: "所有格（my, your, hisなど）は入口の語になります。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "所有格→数詞→核の名詞の語順に置く", correct: true },
+          { label: "所有格（my, your, hisなど） → 数詞 → 核の名詞の語順に置く", correct: true },
           { label: "複数形の前には数詞を置く", correct: false }
         ]
       }
     ],
     boss: {
-      text: "【BOSS BATTLE】\n「あの髪の長い女性を見て。」を英文にすると？",
+      text: "【BOSS BATTLE】\n「あの髪の長い女性を見て。」を英語にすると？",
       options: [
         { label: "A : Look at that long hair woman.", correct: false },
         { label: "B : Look at that woman with long hair.", correct: true },
@@ -965,7 +979,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "主語の後ろに一般動詞がないのでbe動詞の文", correct: true },
-          { label: "現在で主語が複数なのでAre", correct: false }
+          { label: "現在で主語が複数なので Are", correct: false }
         ]
       },
       {
@@ -1025,7 +1039,7 @@ const STAGES = [
           logicText: "【判断基準】",
           logicOptions: [
             { label: "「何をしていましたか」という意味を解釈する", correct: false },
-            { label: "行為をたずねる疑問文にはWhatとdoを使う", correct: true }
+            { label: "行為をたずねる疑問文には What と do を使う", correct: true }
           ]
         }
       ]
@@ -1049,7 +1063,7 @@ const STAGES = [
         wrongComment: "疑問文を作るときは動詞を区別します。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "動詞went → 過去 → 主語の前にDid", correct: true },
+          { label: "動詞 went → 過去 → 主語の前に Did", correct: true },
           { label: "意味の解釈「トムは公園に行きましたか。」で判断", correct: false }
         ]
       },
@@ -1116,7 +1130,7 @@ const STAGES = [
         {
           text: "【BOSS BATTLE 1/2】\n「彼は日曜日に図書館へ行きます。」の意味に単語をクリックして並べかえなさい。",
           words: ["to", "Sundays", "he", "library", "on", "goes", "the"],
-          correctAnswer: "He goes to the library on Sundays.",
+          correctAnswer: "he goes to the library on Sundays",
           wrongComment: "主語 → 動詞を決め、場所や時の表現を作ります。",
           logicText: "【判断基準】",
           logicOptions: [
@@ -1127,12 +1141,12 @@ const STAGES = [
         {
           text: "【BOSS BATTLE 2/2】\n「彼は何冊の英語の本を持っていますか。」の意味に単語をクリックして並べかえなさい。",
           words: ["he", "English", "many", "have", "how", "books", "does"],
-          correctAnswer: "How many English books does he have?",
-          wrongComment: "疑問詞の塊＋助動詞/動詞＋主語＋原形の順に並べます。",
+          correctAnswer: "how many English books does he have",
+          wrongComment: "疑問詞のまとまり＋一語＋主語の順に並べます。",
           logicText: "【判断基準】",
           logicOptions: [
             { label: "単語の一つ一つの意味で判断", correct: false },
-            { label: "主語と動詞。疑問文は主語の前の一語を置く。疑問詞との組み合わせ", correct: true }
+            { label: "主語と動詞。疑問文は主語の前の一語を置く。疑問詞のまとまり＋一語＋主語の順", correct: true }
           ]
         }
       ]
@@ -1170,7 +1184,7 @@ const STAGES = [
         wrongComment: "後ろに続く単語を見る → him（人）＋the book（もの）",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "後ろを見る → him（人）＋the book（もの） → 人にものを与える", correct: true },
+          { label: "後ろを見る → him（人）＋ the book（もの） → 人にものを与える", correct: true },
           { label: "意味の解釈「彼女は、彼を、本を」で判断", correct: false }
         ]
       },
@@ -1195,10 +1209,10 @@ const STAGES = [
           { label: "B : He can teach English for us.", correct: false },
           { label: "C : He teaches us English.", correct: true }
         ],
-        wrongComment: "teach+er → teach+人+もの",
+        wrongComment: "is our English teacher → teach us English",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "意味の解釈「英語を教える」で判断", correct: false },
+          { label: "teach English を組み合わせる", correct: false },
           { label: "be動詞 → 一般動詞の文へ。teach → 人＋ものの語順", correct: true }
         ]
       },
@@ -1212,8 +1226,8 @@ const STAGES = [
         wrongComment: "me（私）がsad（悲しい）の状態に「させる」",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "The movieを見て、sad（悲しい）の状態になったと解釈する", correct: false },
-          { label: "me（私）がsad（悲しい）の状態に「させる」という構造で判断", correct: true }
+          { label: "The movieがsad（悲しい）と解釈する", correct: false },
+          { label: "me（私）がsad（悲しい）の状態になるという構造で判断", correct: true }
         ]
       }
     ],
@@ -1223,7 +1237,7 @@ const STAGES = [
         {
           text: "【BOSS BATTLE 1/2】\n「私は英語が役立つと思う。」の意味に単語をクリックして並べかえなさい。",
           words: ["that", "useful", "is", "I", "English", "think"],
-          correctAnswer: "I think that English is useful.",
+          correctAnswer: "I think that English is useful",
           wrongComment: "I think + English is... の構造を作ります。",
           logicText: "【判断基準】",
           logicOptions: [
@@ -1234,7 +1248,7 @@ const STAGES = [
         {
           text: "【BOSS BATTLE 2/2】\n「私は昨日、彼らに夕食を作ってあげた。」の意味に単語をクリックして並べかえなさい。",
           words: ["them", "dinner", "I", "yesterday", "cooked"],
-          correctAnswer: "I cooked them dinner yesterday.",
+          correctAnswer: "I cooked them dinner yesterday",
           wrongComment: "主語＋動詞＋人＋ものの語順を作ります。",
           logicText: "【判断基準】",
           logicOptions: [
@@ -1310,17 +1324,17 @@ const STAGES = [
         ]
       },
       {
-        text: "⑤ He is in the library. に「～に違いない」という表現を加えるときは？",
+        text: "⑤ Must I eat this? に対する答え方は？",
         options: [
-          { label: "A : mustを使って動詞を原形のbeにする", correct: true },
-          { label: "B : mayを使って動詞はisのままにする", correct: false },
-          { label: "C : shouldを使って動詞を原形のbeにする", correct: false }
+          { label: "A : No, you don't have to.", correct: true },
+          { label: "B : No, you must not.", correct: false },
+          { label: "C : No, I don't.", correct: false }
         ],
-        wrongComment: "「～に違いない」は 助動詞must を使い、直後の動詞は原形(be)にします。",
+        wrongComment: "must に対する否定の返事は「～する必要がない」で答えます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "確信を表す助動詞 must ＋動詞の原形（be）", correct: true },
-          { label: "推測を表す may ＋ is", correct: false }
+          { label: "must に対する否定の返事は「～する必要がない」で答える", correct: true },
+          { label: "must に対する答え方は must で答える", correct: false }
         ]
       },
       {
@@ -1403,7 +1417,7 @@ const STAGES = [
       logicText: "【判断基準】",
       logicOptions: [
         { label: "is を will に変えるだけで未来を表せる", correct: false },
-        { label: "未来を表すwillを追加し、疑問文の語順（will + 主語 + be）を構成する", correct: true }
+        { label: "未来を表す will を追加し、疑問文の語順（will + 主語 + be）を構成する", correct: true }
       ]
     }
   },

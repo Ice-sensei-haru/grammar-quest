@@ -592,8 +592,8 @@ const STAGES = [
         wrongComment: "主語が複数のときのbe動詞は are を使います。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語が複数 → be動詞 → are", correct: true },
-          { label: "主語に関係なく、be動詞は are を置く", correct: false }
+          { label: "主語に関係なく、be動詞は are を置く", correct: false },
+          { label: "主語が複数 → be動詞 → are", correct: true }
         ]
       },
       {
@@ -608,6 +608,20 @@ const STAGES = [
         logicOptions: [
           { label: "There の文には is を使う", correct: false },
           { label: "food は数えられない名詞なので単数扱い → be動詞は is", correct: true }
+        ]
+      },
+      {
+        text: "⑤ (  ) of the students has a smartphone.　の(  )にあてはまる語は？",
+        options: [
+          { label: "A : Most", correct: false },
+          { label: "B : All", correct: false },
+          { label: "C : Each", correct: true }
+        ],
+        wrongComment: "動詞（has）が三単現のs → 主語は単数だと判断します。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "動詞（has）が三単現のs → 主語は単数扱いする Each", correct: true },
+          { label: "目的語（a smartphone）が単数 → 主語も単数にする", correct: false }
         ]
       }
     ],
@@ -688,6 +702,20 @@ const STAGES = [
         logicOptions: [
           { label: "一般動詞で現在形 → 三単現のsを使う", correct: false },
           { label: "一般動詞で現在形 → 主語が複数 → 原形を使う", correct: true }
+        ]
+      },
+      {
+        text: "⑤ It snows a lot here. とほぼ同じ意味の文は？",
+        options: [
+          { label: "A : It has a lot of snow here.", correct: false },
+          { label: "B : We have a lot of snow here.", correct: true },
+          { label: "C : We are in a lot of snow.", correct: false }
+        ],
+        wrongComment: "私たちはたくさんの雪が降る「状態を持っている」 → We have を使います。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "主語 It → 動詞は snow。主語 We → 動詞は have", correct: true },
+          { label: "雪の存在を表すために、be動詞を使う", correct: false }
         ]
       }
     ],
@@ -863,6 +891,20 @@ const STAGES = [
           { label: "be kind to の後は必ず目的格を使う", correct: false },
           { label: "前置詞の後ろに単独で使う形は目的格を使う", correct: true }
         ]
+      },
+      {
+        text: "⑤ My opinion is different from (  ). の(  )に入る適切な語は？",
+        options: [
+          { label: "A : you", correct: false },
+          { label: "B : your", correct: false },
+          { label: "C : yours", correct: true }
+        ],
+        wrongComment: "主語（My opinion）との対比で、「あなたのもの」と判断します。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "主語（My opinion）［意見］の対比 → あなたのもの", correct: true },
+          { label: "different from の後ろは「もの」を置く", correct: false }
+        ]
       }
     ],
     boss: {
@@ -889,7 +931,21 @@ const STAGES = [
     monsterName: "チャンキング・ドラゴン",
     questions: [
       {
-        text: "① 「あの大きな白い箱」を英語にすると？",
+        text: "① 「私はサッカーファンだが、サッカーはしない」を英語にすると？",
+        options: [
+          { label: "A : I am soccer fan, but I don't play soccer.", correct: false },
+          { label: "B : I am a soccer fan, but I don't play soccer.", correct: true },
+          { label: "C : I am a soccer fan, but I don't play a soccer.", correct: false }
+        ],
+        wrongComment: "soccer fan は数えられるので a(an) が必要です。soccer は数えられないので a は不要です。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "ある適当な１つのものを表す単数形の前には a(an) は必要", correct: true },
+          { label: "数えられる名詞の前には a(an) が必要", correct: false }
+        ]
+      },
+      {
+        text: "② 「あの大きな白い箱」を英語にすると？",
         options: [
           { label: "A : that big white box", correct: true },
           { label: "B : that big white a box", correct: false },
@@ -903,21 +959,21 @@ const STAGES = [
         ]
       },
       {
-        text: "② I have some old pictures. Please look at them. のthemが指す語は？",
+        text: "③ I have some old pictures. Please look at them. のthemが指す語は？",
         options: [
           { label: "A : pictures", correct: false },
           { label: "B : old pictures", correct: false },
           { label: "C : some old pictures", correct: true }
         ],
-        wrongComment: "名詞のまとまりは、入口の語（a, theなど）＋どんな＋核の名詞で捉えます。",
+        wrongComment: "名詞のまとまりは、入口の語（a, the, my, someなど）＋どんな＋核の名詞で捉えます。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "一般動詞の後ろにある語をすべて抜き出す", correct: false },
-          { label: "名詞のまとまりは「入口の語（a, theなど）＋どんな＋核の名詞」で捉える", correct: true }
+          { label: "名詞のまとまりは「入口の語（a, the, my, someなど）＋どんな＋核の名詞」で捉える", correct: true }
         ]
       },
       {
-        text: "③ The book on the desk is Tom's. の（on the desk）が修飾している語は？",
+        text: "④ The book on the desk is Tom's. の（on the desk）が修飾している語は？",
         options: [
           { label: "A : Tom's", correct: false },
           { label: "B : book", correct: true },
@@ -931,7 +987,7 @@ const STAGES = [
         ]
       },
       {
-        text: "④ 「私は３人の彼の子どもを知っています。」を英語にすると？",
+        text: "⑤ 「私は３人の彼の子どもを知っています。」を英語にすると？",
         options: [
           { label: "A : I know three his children.", correct: false },
           { label: "B : I know his children of three.", correct: false },
@@ -1963,15 +2019,15 @@ const STAGE12_BOSS_QUESTIONS = [
 // ----------------------------------------------------
 const EIGO_SHORI_GOKUI_QUESTIONS = [
   {
-    text: "①　英語は［　　］で始まる。",
+    text: "1:　英語の基本の骨格は［　　］である。",
     options: [
-      { label: "A：主語から動詞", correct: true },
-      { label: "B：動詞から目的語", correct: false },
-      { label: "C：人からもの", correct: false }
+      { label: "A：誰が・どうする・何を・どこで・いつ", correct: true },
+      { label: "B：誰が・何を・どうする・どこで・いつ", correct: false },
+      { label: "C：誰が・いつ・どこで・何を・どうする", correct: false }
     ]
   },
   {
-    text: "②　英文を読むときはまず、［　　］の組み合わせを探す。",
+    text: "2:　英文を読むときはまず、［　　］のつながりを探す。",
     options: [
       { label: "A：人ともの", correct: false },
       { label: "B：動詞と時の言葉", correct: false },
@@ -1979,7 +2035,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "③　日本語の文末で［　　］を決める。",
+    text: "3:　日本語の文末で［　　］を決める。",
     options: [
       { label: "A：現在か過去か未来か", correct: false },
       { label: "B：時制、表現、文の形（肯定・否定・疑問・命令）", correct: true },
@@ -1987,15 +2043,15 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "④　文の中心として使われる動詞の形は［　　］の３つである。",
+    text: "4:　文の中心として使われる動詞の形は［　　］の３つである。",
     options: [
       { label: "A：原形・三単現のs・過去形", correct: true },
       { label: "B：不定詞・動名詞・分詞", correct: false },
-      { label: "C：現在形・過去形・未来形", correct: false }
+      { label: "C：現在形・過去形・完了形", correct: false }
     ]
   },
   {
-    text: "⑤　疑問文を作るとき［　　］の前にbe動詞、do・does・did・助動詞の一語を置く。",
+    text: "5:　疑問文を作るとき［　　］の前にbe動詞や do・does・did・助動詞の一語を置く。",
     options: [
       { label: "A：文", correct: false },
       { label: "B：主語", correct: true },
@@ -2003,7 +2059,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑥　受動態は［　　］で表現される。",
+    text: "6:　受動態は［　　］で表現される。",
     options: [
       { label: "A：be動詞＋過去分詞", correct: true },
       { label: "B：be動詞＋現在分詞", correct: false },
@@ -2011,7 +2067,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑦　命令文は主語がない文で、［　　］を表現するときの文。",
+    text: "7:　命令文は主語がない文で、［　　］を表現するときの文。",
     options: [
       { label: "A：感情、意見、主張", correct: false },
       { label: "B：評価、提示、感想", correct: false },
@@ -2019,7 +2075,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑧　現在完了は［　　］で表現される。",
+    text: "8:　現在完了は［　　］で表現される。",
     options: [
       { label: "A：be動詞＋過去分詞", correct: false },
       { label: "B：be動詞＋現在分詞", correct: false },
@@ -2027,23 +2083,23 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑨　動詞の使い方や意味は［　　］を見て判断する。",
+    text: "9:　動詞の使い方や意味は［　　］で判断する。",
     options: [
       { label: "A：主語との関係", correct: false },
-      { label: "B：後ろの単語のつながり", correct: true },
+      { label: "B：後ろの単語とのつながり", correct: true },
       { label: "C：文全体", correct: false }
     ]
   },
   {
-    text: "⑩　名詞の単数形を使う時、［　　］の順に置く。",
+    text: "10:　名詞の単数形を使う時、［　　］の順に置く。",
     options: [
       { label: "A：入口の言葉（a, the, myなど）→ 形容詞 → 核の名詞", correct: true },
-      { label: "B：日本語で表現される単語のまま", correct: false },
+      { label: "B：日本語で表現される単語", correct: false },
       { label: "C：形容詞 → 入口の言葉 → 核の名詞", correct: false }
     ]
   },
   {
-    text: "⑪　進行形は［　　］で表現される。",
+    text: "11:　進行形は［　　］で表現される。",
     options: [
       { label: "A：be動詞＋過去分詞", correct: false },
       { label: "B：be動詞＋現在分詞", correct: true },
@@ -2051,7 +2107,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑫　動詞の形は、主語と［　　］で決まる。",
+    text: "12:　動詞の形は、主語と［　　］を判断してから決める。",
     options: [
       { label: "A：時制（現在、過去、未来）", correct: false },
       { label: "B：時制、表現（単純形・進行形・完了形・受動態）", correct: false },
@@ -2059,15 +2115,15 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑬　文の中心でない動詞の形は、［　　］を見て判断する。",
+    text: "13:　文の中心でない動詞の形（不定詞・動名詞・分詞）は、［　　］で判断する。",
     options: [
-      { label: "A：後ろの語", correct: false },
+      { label: "A：後ろの語とのつながり", correct: false },
       { label: "B：語順", correct: false },
-      { label: "C：前の語", correct: true }
+      { label: "C：前の語とのつながり", correct: true }
     ]
   },
   {
-    text: "⑭　名詞を修飾する分詞は、［　　］になる。",
+    text: "14:　名詞を修飾する分詞は、その名詞と分詞の間で［　　］になる。",
     options: [
       { label: "A：主語と目的語の関係", correct: false },
       { label: "B：補語と動詞の関係", correct: false },
@@ -2075,23 +2131,55 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑮　英文を組み立てるときは、［　　］ようにする。",
+    text: "15:　英文を組み立てるときは、［　　］ようにする。",
     options: [
       { label: "A：主語を書く → 日本語の文末から前へ順に並べる", correct: false },
-      { label: "B：SV関係を作る → 表現が作れる語の組み合わせ → 英文での配置を整える", correct: true },
-      { label: "C：意味の解釈 → 表現に合う構文を探す → 前から単語を並べる", correct: false }
+      { label: "B：SV関係を作る → 意味がまとまる語を組み合わせる → 英文での配置を整える", correct: true },
+      { label: "C：意味を解釈する → 表現に合う構文を探す → 前から単語を並べる", correct: false }
     ]
   },
   {
-    text: "⑯　長文読解の因果関係は、［　　］の順で判断する。",
+    text: "16:　英問英答の答える文では、［　　］を合わす。",
+    options: [
+      { label: "A：質問文の主語（代名詞）と動詞（時制・表現）の形", correct: true },
+      { label: "B：本文に使われている場所・時・数", correct: false },
+      { label: "C：本文に使われている文の形", correct: false }
+    ]
+  },
+  {
+    text: "17:　読解のストーリー型（体験・出来事）タイプは、［　　］に注目する。",
+    options: [
+      { label: "A：主張・理由・結論", correct: false },
+      { label: "B：目的・条件・必要情報", correct: false },
+      { label: "C：出来事の変化・気持ち", correct: true }
+    ]
+  },
+  {
+    text: "18:　読解の説明文型（社会・科学・文化）タイプは、［　　］に注目する。",
+    options: [
+      { label: "A：主張・理由・結論", correct: true },
+      { label: "B：目的・条件・必要情報", correct: false },
+      { label: "C：出来事の変化・気持ち", correct: false }
+    ]
+  },
+  {
+    text: "19:　読解の資料・実用文型（案内・広告・ポスター・メール）タイプは、［　　］に注目する。",
+    options: [
+      { label: "A：主張・理由・結論", correct: false },
+      { label: "B：目的・条件・必要情報", correct: true },
+      { label: "C：出来事の変化・気持ち", correct: false }
+    ]
+  },
+  {
+    text: "20:　読解の因果関係は、［　　］の順で判断する。",
     options: [
       { label: "A：行動 → 気持ち → 出来事", correct: false },
       { label: "B：出来事 → 気持ち → 行動", correct: true },
       { label: "C：気持ち → 出来事 → 行動", correct: false }
     ]
-  },
+  },  
   {
-    text: "⑰　長文読解で因果関係を示す印に［　　］がある。",
+    text: "21:　読解で因果関係を示す印に［　　］がある。",
     options: [
       { label: "A：because, so, but, howeverなど", correct: true },
       { label: "B：if, for example, 前置詞など", correct: false },
@@ -2099,7 +2187,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑱　長文読解で正誤の条件は［　　］を確認する。",
+    text: "22:　読解で正誤の条件は［　　］を確認する。",
     options: [
       { label: "A：同じ単語が使われているか", correct: false },
       { label: "B：主張や評価が同じか", correct: false },
@@ -2107,7 +2195,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑲　長文読解で要約するときは［　　］を見る。",
+    text: "23:　読解で要約するときは［　　］を見る。",
     options: [
       { label: "A：段落の中央あたり", correct: false },
       { label: "B：for exampleの後", correct: false },
@@ -2115,10 +2203,10 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "⑳　長文読解で内容を比較するときは［　　］に分ける。",
+    text: "24:　読解で情報を比較するときは［　　］に分ける。",
     options: [
       { label: "A：意見と事実", correct: true },
-      { label: "B：理由と結果", correct: false },
+      { label: "B：現在と過去", correct: false },
       { label: "C：真実と嘘", correct: false }
     ]
   } 
@@ -2473,7 +2561,7 @@ function renderStageSelect() {
       </button>
     </div>
   `;
-  const lastBossUnlocked = !!gameState.gokuiCleared && getRank(gameState.exp) >= 40;
+  const lastBossUnlocked = !!gameState.gokuiCleared && getRank(gameState.exp) >= 42;
   html += `
     <div style="margin-top:10px;">
       <button class="stage-select-btn battle-mode-btn" ${lastBossUnlocked ? '' : 'disabled'} onclick="startLastBoss()">
@@ -2481,7 +2569,7 @@ function renderStageSelect() {
           <strong>【LAST BATTLE】ヴァーバルアーチデーモン</strong>
           <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">タイムトライアル：60秒以内に全20問正解 / 誤答で1問目から再挑戦</div>
           ${!gameState.gokuiCleared ? '<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：英語処理の極意書クリア</div>' : ''}
-          ${gameState.gokuiCleared && getRank(gameState.exp) < 40 ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：ランク40以上（現在ランク${getRank(gameState.exp)}）</div>` : ''}
+          ${gameState.gokuiCleared && getRank(gameState.exp) < 42 ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：ランク42以上（現在ランク${getRank(gameState.exp)}）</div>` : ''}
           ${gameState.lastBossCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>' : ''}
         </div>
         <div>${lastBossUnlocked ? '⚔️ 挑戦' : '🔒 鍵'}</div>
@@ -3163,7 +3251,7 @@ function checkGokuiAnswer(selectedIndex) {
         gameState.isAllCleared = false;
         saveData();
         render();
-        alert("「英語処理の極意書」CLEAR！\nランク40以上で LAST BATTLE「ヴァーバルアーチデーモン」に挑戦できます。");
+        alert("「英語処理の極意書」CLEAR！\nランク42以上で LAST BATTLE「ヴァーバルアーチデーモン」に挑戦できます。");
       }
     }, 900);
   } else {
@@ -3181,8 +3269,8 @@ function checkGokuiAnswer(selectedIndex) {
 // LAST BATTLE「ヴァーバルアーチデーモン」タイムトライアル
 // ----------------------------------------------------
 function startLastBoss() {
-  if (!gameState.gokuiCleared || getRank(gameState.exp) < 40) {
-    alert("LAST BATTLEの開放条件は「英語処理の極意書クリア」かつ「ランク40以上」です。");
+  if (!gameState.gokuiCleared || getRank(gameState.exp) < 42) {
+    alert("LAST BATTLEの開放条件は「英語処理の極意書クリア」かつ「ランク42以上」です。");
     return;
   }
   initAudio();

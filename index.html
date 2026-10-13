@@ -461,11 +461,11 @@ const STAGES = [
     monsterName: "ベーシック・スライム",
     questions: [
       {
-        text: "① Your brothers often play tennis. の主語と動詞はどれ？",
+        text: "① Your brothers play tennis. の主語と動詞はどれ？",
         options: [
           { label: "A : 主語 Your 動詞 play", correct: false },
           { label: "B : 主語 Your brothers 動詞 play", correct: true },
-          { label: "C : 主語 Your brothers 動詞 often", correct: false }
+          { label: "C : 主語 Your brothers 動詞 tennis", correct: false }
         ],
         wrongComment: "主語は「だれが」にあたる名詞のまとまり全体で見ます。",
         logicText: "【判断基準】",
@@ -475,17 +475,17 @@ const STAGES = [
         ]
       },
       {
-        text: "② He (  ) good at basketball. の(  )にあてはまる英語は？",
+        text: "② She (  ) busy now. の(  )にあてはまる英語は？",
         options: [
           { label: "A : is", correct: true },
-          { label: "B : plays", correct: false },
+          { label: "B : does", correct: false },
           { label: "C : can", correct: false }
         ],
-        wrongComment: "He = good at basketballの関係があります。",
+        wrongComment: "She = busy の関係があります。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語は He のときは is を使う", correct: false },
-          { label: "He = good at basketballの構造", correct: true }
+          { label: "主語は She のときは is を使う", correct: false },
+          { label: "She = busy の構造", correct: true }
         ]
       },
       {
@@ -532,17 +532,17 @@ const STAGES = [
       }
     ],
     boss: {
-      text: "【BOSS BATTLE】\n「あなたは何を持っていますか。」を英語にすると？",
+      text: "【BOSS BATTLE】\n「あなたは朝食に何を食べますか。」を英語にすると？",
       options: [
-        { label: "A : What are you have?", correct: false },
-        { label: "B : What do you have?", correct: true },
-        { label: "C : What you are have?", correct: false }
+        { label: "A : What are you have for breakfast?", correct: false },
+        { label: "B : What do you have for breakfast?", correct: true },
+        { label: "C : What you have for breakfast?", correct: false }
       ],
       wrongComment: "動詞の区別 → 主語がyou → 疑問文 → 主語の前に do を置きます。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "何が What → 疑問文で do → 主語が you", correct: false },
-        { label: "動詞が一般動詞 → 主語が you → 疑問文 → 主語の前に do", correct: true }
+        { label: "疑問詞を先頭に置くと疑問文になる → 主語を見る → are you か do you にする", correct: false },
+        { label: "動詞が一般動詞 → 現在・疑問文・主語が you → do you have → 疑問文の前に What", correct: true }
       ]
     }
   },
@@ -555,7 +555,7 @@ const STAGES = [
     monsterName: "SV・キマイラ",
     questions: [
       {
-        text: "① We (  ) soccer every day. の(  )にあてはまる語は？",
+        text: "① They (  ) soccer every day. の(  )にあてはまる語は？",
         options: [
           { label: "A : playing", correct: false },
           { label: "B : plays", correct: false },
@@ -565,7 +565,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "主語が複数 → 一般動詞は原形", correct: true },
-          { label: "主語が We → 一般動詞は三単現のs", correct: false }
+          { label: "主語が They → 一般動詞は三単現のs", correct: false }
         ]
       },
       {
@@ -583,7 +583,7 @@ const STAGES = [
         ]
       },
       {
-        text: "③ These books (  ) new.　の(  )にあてはまる語は？",
+        text: "③ These books (  ) interesting.　の(  )にあてはまる語は？",
         options: [
           { label: "A : are", correct: true },
           { label: "B : is", correct: false },
@@ -611,17 +611,17 @@ const STAGES = [
         ]
       },
       {
-        text: "⑤ (  ) of the students has a smartphone.　の(  )にあてはまる語は？",
+        text: "⑤ (  ) usually has his or her ID card.　の(  )にあてはまる語は？",
         options: [
-          { label: "A : Most", correct: false },
-          { label: "B : All", correct: false },
-          { label: "C : Each", correct: true }
+          { label: "A : Some of them", correct: false },
+          { label: "B : All the students", correct: false },
+          { label: "C : Every student", correct: true }
         ],
         wrongComment: "動詞（has）が三単現のs → 主語は単数だと判断します。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "動詞（has）が三単現のs → 主語は単数扱いする Each", correct: true },
-          { label: "目的語（a smartphone）が単数 → 主語も単数にする", correct: false }
+          { label: "動詞（has）が三単現のs → 主語が単数になる Every student を使う", correct: true },
+          { label: "目的語が単数 → 主語も単数にする", correct: false }
         ]
       }
     ],
@@ -649,13 +649,13 @@ const STAGES = [
     monsterName: "シンタックス・ゴーレム",
     questions: [
       {
-        text: "① Are those old bikes? の those を that に変えると？",
+        text: "① Those are old bikes? の Those を That に変えると？",
         options: [
-          { label: "A : Are that old bikes?", correct: false },
-          { label: "B : Is that an old bike?", correct: true },
-          { label: "C : Is that old bike?", correct: false }
+          { label: "A : That are old bikes.", correct: false },
+          { label: "B : That is an old bike.", correct: true },
+          { label: "C : That's old bike.", correct: false }
         ],
-        wrongComment: "主語が単数 that → be動詞は is → 後ろの名詞も単数形になります。",
+        wrongComment: "主語が単数 That → be動詞は is → 後ろの名詞も単数形になります。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "三人称単数の主語 → be動詞は is → 後ろはa(an)＋どんな＋単数形", correct: true },
@@ -1049,7 +1049,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "主語の後ろに一般動詞がないのでbe動詞の文", correct: true },
-          { label: "現在で主語が複数なので Are", correct: false }
+          { label: "現在で主語が複数なので Do", correct: false }
         ]
       },
       {
@@ -1062,7 +1062,7 @@ const STAGES = [
         wrongComment: "動詞を見て疑問文の形にする。その前に疑問詞を置きます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "疑問詞の後 does + 主語 + 原形にする", correct: false },
+          { label: "疑問詞の後ろには do、does、did を置く", correct: false },
           { label: "疑問詞の後、動詞を見て主語の前に一語を置く", correct: true }
         ]
       },
@@ -1104,7 +1104,7 @@ const STAGES = [
         wrongComment: "疑問詞が主語のときは三人称単数扱いし、肯定文の語順になります。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "疑問詞が主語のときは三人称単数扱いし、肯定文の語順になる", correct: true },
+          { label: "疑問詞が主語のときは三人称単数扱いし、肯定文の語順にする", correct: true },
           { label: "人をたずねる疑問詞は Who には do を使わない", correct: false }
         ]
       }

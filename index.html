@@ -2019,7 +2019,15 @@ const STAGE12_BOSS_QUESTIONS = [
 // ----------------------------------------------------
 const EIGO_SHORI_GOKUI_QUESTIONS = [
   {
-    text: "1:　英語の基本の骨格は［　　］である。",
+    text: "1:　間違いの原因は［　　］を区別して修正する。",
+    options: [
+      { label: "A：単語・表現・文法事項", correct: false },
+      { label: "B：問題の種類・演習量・かかった時間", correct: false },
+      { label: "C：決まった内容・判断の手順・処理の仕方", correct: true }
+    ]
+  },
+  {
+    text: "2:　英語の基本の骨格は［　　］である。",
     options: [
       { label: "A：誰が・どうする・何を・どこで・いつ", correct: true },
       { label: "B：誰が・何を・どうする・どこで・いつ", correct: false },
@@ -2027,7 +2035,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "2:　英文を読むときはまず、［　　］のつながりを探す。",
+    text: "3:　英文を読むときはまず、［　　］のつながりを探す。",
     options: [
       { label: "A：人ともの", correct: false },
       { label: "B：動詞と時の言葉", correct: false },
@@ -2035,7 +2043,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "3:　日本語の文末で［　　］を決める。",
+    text: "4:　日本語の文末で［　　］を決める。",
     options: [
       { label: "A：現在か過去か未来か", correct: false },
       { label: "B：時制、表現、文の形（肯定・否定・疑問・命令）", correct: true },
@@ -2043,7 +2051,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "4:　文の中心として使われる動詞の形は［　　］の３つである。",
+    text: "5:　文の中心として使われる動詞の形は［　　］の３つである。",
     options: [
       { label: "A：原形・三単現のs・過去形", correct: true },
       { label: "B：不定詞・動名詞・分詞", correct: false },
@@ -2051,7 +2059,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "5:　疑問文を作るとき［　　］の前にbe動詞や do・does・did・助動詞の一語を置く。",
+    text: "6:　疑問文を作るとき［　　］の前にbe動詞や do・does・did・助動詞の一語を置く。",
     options: [
       { label: "A：文", correct: false },
       { label: "B：主語", correct: true },
@@ -2059,7 +2067,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "6:　受動態は［　　］で表現される。",
+    text: "7:　受動態は［　　］で表現される。",
     options: [
       { label: "A：be動詞＋過去分詞", correct: true },
       { label: "B：be動詞＋現在分詞", correct: false },
@@ -2067,7 +2075,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "7:　命令文は主語がない文で、［　　］を表現するときの文。",
+    text: "8:　命令文は主語がない文で、［　　］を表現するときの文。",
     options: [
       { label: "A：感情、意見、主張", correct: false },
       { label: "B：評価、提示、感想", correct: false },
@@ -2075,7 +2083,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "8:　現在完了は［　　］で表現される。",
+    text: "9:　現在完了は［　　］で表現される。",
     options: [
       { label: "A：be動詞＋過去分詞", correct: false },
       { label: "B：be動詞＋現在分詞", correct: false },
@@ -2083,7 +2091,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "9:　動詞の使い方や意味は［　　］で判断する。",
+    text: "10:　動詞の使い方や意味は［　　］で判断する。",
     options: [
       { label: "A：主語との関係", correct: false },
       { label: "B：後ろの単語とのつながり", correct: true },
@@ -2091,7 +2099,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "10:　名詞の単数形を使う時、［　　］の順に置く。",
+    text: "11:　名詞の単数形を使う時、［　　］の順に置く。",
     options: [
       { label: "A：入口の言葉（a, the, myなど）→ 形容詞 → 核の名詞", correct: true },
       { label: "B：日本語で表現される単語", correct: false },
@@ -2099,7 +2107,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "11:　進行形は［　　］で表現される。",
+    text: "12:　進行形は［　　］で表現される。",
     options: [
       { label: "A：be動詞＋過去分詞", correct: false },
       { label: "B：be動詞＋現在分詞", correct: true },
@@ -2107,7 +2115,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "12:　動詞の形は、主語と［　　］を判断してから決める。",
+    text: "13:　動詞の形は、主語と［　　］を判断してから決める。",
     options: [
       { label: "A：時制（現在、過去、未来）", correct: false },
       { label: "B：時制＋表現（単純形・進行形・完了形・受動態）", correct: false },
@@ -2115,7 +2123,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "13:　文の中心でない動詞の形（不定詞・動名詞・分詞）は、［　　］で判断する。",
+    text: "14:　文の中心でない動詞の形（不定詞・動名詞・分詞）は、［　　］で判断する。",
     options: [
       { label: "A：後ろの語とのつながり", correct: false },
       { label: "B：語順", correct: false },
@@ -2123,7 +2131,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "14:　名詞を修飾する分詞は、その名詞と分詞の間で［　　］になる。",
+    text: "15:　名詞を修飾する分詞は、その名詞と分詞の間で［　　］になる。",
     options: [
       { label: "A：主語と目的語の関係", correct: false },
       { label: "B：補語と動詞の関係", correct: false },
@@ -2131,7 +2139,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "15:　英文を組み立てるときは、［　　］ようにする。",
+    text: "16:　英文を組み立てるときは、［　　］ようにする。",
     options: [
       { label: "A：主語を書く → 日本語の文末から前へ順に並べる", correct: false },
       { label: "B：SV関係を作る → 意味を作る語を組み合わせる → 英文での配置を整える", correct: true },
@@ -2139,7 +2147,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "16:　英問英答の答える文では、［　　］を合わす。",
+    text: "17:　英問英答の答える文では、［　　］を合わす。",
     options: [
       { label: "A：質問文の主語（代名詞）と動詞（時制・表現）の形", correct: true },
       { label: "B：本文に使われている場所・時・数", correct: false },
@@ -2147,7 +2155,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "17:　読解のストーリー型（体験・出来事）タイプは、［　　］に注目する。",
+    text: "18:　読解のストーリー型（体験・出来事）タイプは、［　　］に注目する。",
     options: [
       { label: "A：主張・理由・結論", correct: false },
       { label: "B：目的・条件・必要情報", correct: false },
@@ -2155,7 +2163,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "18:　読解の説明文型（社会・科学・文化）タイプは、［　　］に注目する。",
+    text: "19:　読解の説明文型（社会・科学・文化）タイプは、［　　］に注目する。",
     options: [
       { label: "A：主張・理由・結論", correct: true },
       { label: "B：目的・条件・必要情報", correct: false },
@@ -2163,7 +2171,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "19:　読解の資料・実用文型（案内・広告・ポスター・メール）タイプは、［　　］に注目する。",
+    text: "20:　読解の資料・実用文型（案内・広告・ポスター・メール）タイプは、［　　］に注目する。",
     options: [
       { label: "A：主張・理由・結論", correct: false },
       { label: "B：目的・条件・必要情報", correct: true },
@@ -2171,7 +2179,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "20:　読解の因果関係は、［　　］の順で判断する。",
+    text: "21:　読解の因果関係は、［　　］の順で判断する。",
     options: [
       { label: "A：行動 → 気持ち → 出来事", correct: false },
       { label: "B：出来事 → 気持ち → 行動", correct: true },
@@ -2179,7 +2187,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },  
   {
-    text: "21:　読解で因果関係を示す印に［　　］がある。",
+    text: "22:　読解で因果関係を示す印に［　　］がある。",
     options: [
       { label: "A：because, so, but, howeverなど", correct: true },
       { label: "B：if, for example, 前置詞など", correct: false },
@@ -2187,7 +2195,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "22:　読解で正誤の条件は［　　］を確認する。",
+    text: "23:　読解で正誤の条件は［　　］を確認する。",
     options: [
       { label: "A：同じ単語が使われているか", correct: false },
       { label: "B：主張や評価が同じか", correct: false },
@@ -2195,7 +2203,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "23:　読解で要約するときは［　　］を見る。",
+    text: "24:　読解で要約するときは［　　］を見る。",
     options: [
       { label: "A：段落の中央あたり", correct: false },
       { label: "B：for exampleの後", correct: false },
@@ -2203,7 +2211,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "24:　読解で情報を比較するときは［　　］に分ける。",
+    text: "25:　読解で情報を比較するときは［　　］に分ける。",
     options: [
       { label: "A：意見と事実", correct: true },
       { label: "B：現在と過去", correct: false },

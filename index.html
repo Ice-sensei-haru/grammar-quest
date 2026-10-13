@@ -1315,7 +1315,7 @@ const STAGES = [
         ]
       },     
       {
-        text: "⑤ (  ) I stay in London, I'll visit my uncle. の(  )に入る語は？",
+        text: "⑤ (  ) he stays in London, he'll visit his uncle. の(  )に入る語は？",
         options: [
           { label: "A : While", correct: true },
           { label: "B : But", correct: false },
@@ -1411,42 +1411,42 @@ const STAGES = [
     questions: [
       {
         type: "sort",
-        text: "① ( lunch / and Lisa / cafeteria / have / Tom / at / always / the ).\nこの英文を完成させるときの手順を正しく並べかえなさい。",
+        text: "① ( soccer / they / the park / play / in / always ).\nこの英文を完成させるときの手順を正しく並べかえなさい。",
         words: ["ア：追加の情報を組み立てる", "イ：主語と動詞の組み合わせ", "ウ：動詞の後ろの目的語", "エ：文全体を整える", "オ：肯定文・疑問文の確認"],
         correctAnswer: "イ：主語と動詞の組み合わせ オ：肯定文・疑問文の確認 ウ：動詞の後ろの目的語 ア：追加の情報を組み立てる エ：文全体を整える",
         wrongComment: "【正しい手順】①主語と動詞の組み合わせ(イ) → ②文の形を確認(オ) → ③動詞の後ろの目的語(ウ) → ④追加の情報(ア) → ⑤文全体を整える(エ)",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "【見る】主語・動詞の構成単位を把握する → 【判断する】SV構造と修飾語を特定する → 【処理する】並べ替える", correct: true },
-          { label: "日本語訳を考えて単語を直訳順に並べる", correct: false }
+          { label: "SV構造（they play） → 肯定文 → 目的語（play soccer） → 追加の情報（in the park） → 整える（They always play soccer in the park.）", correct: true },
+          { label: "単語群から日本語訳（彼らは公園でサッカーをいつもする）を考えて単語を並べる", correct: false }
         ]
       },
       {
-        text: "② They ate lunch yesterday. の文に使われている表現は？",
+        text: "② She saw Tom yesterday. の文に使われている表現は？",
         options: [
           { label: "A : 現在形", correct: false },
           { label: "B : 過去形", correct: true },
           { label: "C : 進行形", correct: false }
         ],
-        wrongComment: "ate は eat の過去形です。",
+        wrongComment: "saw は see の過去形です。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "一般動詞の形が過去形（ate）かつ yesterday がある", correct: true },
-          { label: "文末にyesterdayがあるため現在進行形", correct: false }
+          { label: "一般動詞の形が過去形（saw）かつ yesterday がある", correct: true },
+          { label: "文末に yesterday があるため現在形", correct: false }
         ]
       },
       {
-        text: "③ Lunch was eaten by Tom. の文に使われている表現は？",
+        text: "③ This letter was written by Ken. の文に使われている表現は？",
         options: [
           { label: "A : 進行形", correct: false },
           { label: "B : 完了形", correct: false },
           { label: "C : 受動態", correct: true }
         ],
-        wrongComment: "be動詞(was) ＋ 過去分詞(eaten) は受動態（～された）を表します。",
+        wrongComment: "be動詞(was) ＋ 過去分詞(written) は受動態（～された）を表します。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "was があるので過去進行形", correct: false },
-          { label: "be動詞 ＋ 過去分詞（was eaten）の構造がある", correct: true }
+          { label: "be動詞 ＋ 過去分詞（was written）の構造がある", correct: true }
         ]
       },
       {
@@ -1473,12 +1473,12 @@ const STAGES = [
         wrongComment: "must に対する否定の返事は「～する必要がない」で答えます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "must に対する否定の返事は「～する必要がない」で答える", correct: true },
+          { label: "must に対する否定の返事は「～する必要がない」（don't have to）で答える", correct: true },
           { label: "must に対する答え方は must で答える", correct: false }
         ]
       },
       {
-        text: "⑥ 相手に提案する表現でないものは？",
+        text: "⑥ 相手に提案する表現で「ない」ものは？",
         options: [
           { label: "A : Why don’t we go skiing?", correct: false },
           { label: "B : Shall we have dinner?", correct: false },
@@ -1499,8 +1499,8 @@ const STAGES = [
         wrongComment: "【受動態の手順】①目的語を主語に(ウ) → ②時制の確認(オ) → ③be動詞の決定(イ) → ④過去分詞(エ) → ⑤by+行為者(ア)",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "文頭の単語と文末の単語を入れ替えてbe動詞＋過去分詞にする", correct: false },
-          { label: "目的語の受動態主化 → 時制・主語に応じたbe動詞決定 → 過去分詞化", correct: true }
+          { label: "文末から前へ戻るように語を並べる → 動詞をbe動詞＋過去分詞の形にする → by＋主語にする", correct: false },
+          { label: "目的語（these pictures）を主語に → 時制（took）が過去・主語が複数 → were → 過去分詞化（taken）", correct: true }
         ]
       },
       {
@@ -1549,9 +1549,9 @@ const STAGES = [
     boss: {
       text: "【BOSS BATTLE】\nHow is the weather in London? の文末に tomorrow を加えた文にするとき、正しい判断はどれか？",
       options: [
-        { label: "A : 未来 → will + 動詞の原形 → willを主語の前に出す", correct: true },
-        { label: "B : 未来 → willを使う → is を will に変える", correct: false },
-        { label: "C : 未来 → will be → 主語の前に置く", correct: false }
+        { label: "A : 未来 → will be → willを主語の前に出す → How will the weather be", correct: true },
+        { label: "B : 未来 → is を will に変える → How will the weather", correct: false },
+        { label: "C : 未来 → will be → 主語の前に置く → How will be the weather", correct: false }
       ],
       wrongComment: "tomorrow は未来を表すため will を使います。疑問文では will を主語（the weather）の前に出し、be動詞は原形の be になります。（How will the weather be in London tomorrow?）",
       logicText: "【判断基準】",
@@ -1915,10 +1915,10 @@ const STAGES = [
         ]
       },
       {
-        text: "⑤ I have some friends who (   ) in foreign countries.",
+        text: "⑤ I have a friend who (   ) in Kyoto.",
         options: [
-          { label: "A : live", correct: true },
-          { label: "B : lives", correct: false },
+          { label: "A : live", correct: false },
+          { label: "B : lives", correct: true },
           { label: "C : living", correct: false }
         ],
         wrongComment: "関係代名詞（主格）の後の動詞は、先行詞（前の名詞）と連動する",
@@ -1929,17 +1929,17 @@ const STAGES = [
         ]
       },
       {
-        text: "⑥ The book which (   ) by Ken made me happy.",
+        text: "⑥ The books which (   ) by Ken made me happy.",
         options: [
           { label: "A : written", correct: false },
-          { label: "B : was written", correct: true },
-          { label: "C : was writing", correct: false }
+          { label: "B : were written", correct: true },
+          { label: "C : are writing", correct: false }
         ],
         wrongComment: "関係代名詞（主格）の後は（助）動詞が必要。「本が書かれた」",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "関係代名詞（主格）の後は（助）動詞 → The book と by Ken で受動態", correct: true },
-          { label: "関係代名詞（which）の後は受動態にする", correct: false }
+          { label: "関係代名詞（主格）の後は（助）動詞 → The books と by Ken で受動態", correct: true },
+          { label: "関係代名詞（主格）の後には分詞を使う", correct: false }
         ]
       },
       {
@@ -1949,10 +1949,10 @@ const STAGES = [
           { label: "B : comes", correct: false },
           { label: "C : would come", correct: true }
         ],
-        wrongComment: "主節の動詞が過去形 → that節の中の助動詞も過去形",
+        wrongComment: "主節の動詞が過去形 → that節の中の助動詞も過去形（一時的な出来事）",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主節の動詞が過去形 → that節の中の助動詞も過去形", correct: true },
+          { label: "主節の動詞が過去形 → that節の中の助動詞も過去形（一時的な出来事）", correct: true },
           { label: "tomorrow があるので will を使う", correct: false }
         ]
       },
@@ -2019,11 +2019,11 @@ const STAGE12_BOSS_QUESTIONS = [
 // ----------------------------------------------------
 const EIGO_SHORI_GOKUI_QUESTIONS = [
   {
-    text: "1:　間違いの原因は［　　］を区別して修正する。",
+    text: "1:　間違いの原因を［　　］に区別して修正する。",
     options: [
-      { label: "A：単語・表現・文法事項", correct: false },
-      { label: "B：問題の種類・演習量・かかった時間", correct: false },
-      { label: "C：決まった内容・判断の手順・処理の仕方", correct: true }
+      { label: "A：単語・表現・文法", correct: false },
+      { label: "B：語形変化・語法・語順", correct: false },
+      { label: "C：知識記憶・判断習得・処理習得", correct: true }
     ]
   },
   {
@@ -2035,7 +2035,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "3:　英文を読むときはまず、［　　］のつながりを探す。",
+    text: "3:　英文を読むときはまず、［　　］の組み合わせを探す。",
     options: [
       { label: "A：人ともの", correct: false },
       { label: "B：動詞と時の言葉", correct: false },
@@ -2043,11 +2043,11 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "4:　日本語の文末で［　　］を決める。",
+    text: "4:　日本語の文末で動詞を区別し、［　　］を決め、主語がふさわしいか確かめる。",
     options: [
-      { label: "A：現在か過去か未来か", correct: false },
-      { label: "B：時制、表現、文の形（肯定・否定・疑問・命令）", correct: true },
-      { label: "C：主語と動詞、表現", correct: false }
+      { label: "A：時制", correct: false },
+      { label: "B：時制と表現", correct: true },
+      { label: "C：時制と表現と文の種類", correct: false }
     ]
   },
   {
@@ -2115,11 +2115,11 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "13:　動詞の形は、主語と［　　］を判断してから決める。",
+    text: "13:　表現は、原形・三単現・過去形・助動詞の有無・［　　］から判断して決める。",
     options: [
-      { label: "A：時制（現在、過去、未来）", correct: false },
-      { label: "B：時制＋表現（単純形・進行形・完了形・受動態）", correct: false },
-      { label: "C：時制＋表現＋文の形（肯定・否定・疑問・命令）", correct: true }
+      { label: "A：進行形", correct: false },
+      { label: "B：進行形・受動態", correct: false },
+      { label: "C：進行形・受動態・完了形", correct: true }
     ]
   },
   {
@@ -2534,8 +2534,8 @@ function renderStageSelect() {
       html += `
         <button class="stage-select-btn battle-mode-btn" ${verbUnlocked ? '' : 'disabled'} onclick="startVerbBattle()">
           <div>
-            <strong>【動詞操作判定バトル】</strong> タイムトライアル (20問)
-            <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">制限時間: 1分間 / 誤答即リスタート</div>
+            <strong>【動詞操作判定バトル】</strong> 
+            <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">タイムトライアル：60秒以内に全20問正解 / 誤答で1問目から再挑戦</div>
             ${!verbUnlocked ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件: ${verbReason}</div>` : ''}
             ${isVerbBattleCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>' : ''}
           </div>
@@ -2574,7 +2574,7 @@ function renderStageSelect() {
     <div style="margin-top:10px;">
       <button class="stage-select-btn battle-mode-btn" ${lastBossUnlocked ? '' : 'disabled'} onclick="startLastBoss()">
         <div>
-          <strong>【LAST BATTLE】ヴァーバルアーチデーモン</strong>
+          <strong>【LAST BATTLE】ヴァーバルアーチデーモン</strong>タイムトライアル (20問)
           <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">タイムトライアル：60秒以内に全20問正解 / 誤答で1問目から再挑戦</div>
           ${!gameState.gokuiCleared ? '<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：英語処理の極意書クリア</div>' : ''}
           ${gameState.gokuiCleared && getRank(gameState.exp) < 42 ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：ランク42以上（現在ランク${getRank(gameState.exp)}）</div>` : ''}

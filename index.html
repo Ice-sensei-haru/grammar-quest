@@ -937,7 +937,7 @@ const STAGES = [
           { label: "B : I am a soccer fan, but I don't play soccer.", correct: true },
           { label: "C : I am a soccer fan, but I don't play a soccer.", correct: false }
         ],
-        wrongComment: "soccer fan は数えられるので a(an) が必要です。soccer は数えられないので a は不要です。",
+        wrongComment: "soccer fan は数えられるので a が必要です。soccer は数えられないので a は不要です。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "ある適当な１つのものを表す単数形の前には a(an) は必要", correct: true },
@@ -1039,7 +1039,7 @@ const STAGES = [
         ]
       },
       {
-        text: "② (  ) the boys busy now? の(  )に入る適切な語は？",
+        text: "② (  ) you free now? の(  )に入る適切な語は？",
         options: [
           { label: "A : Are", correct: true },
           { label: "B : Do", correct: false },
@@ -1062,8 +1062,8 @@ const STAGES = [
         wrongComment: "動詞を見て疑問文の形にする。その前に疑問詞を置きます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "疑問詞の後ろには do、does、did を置く", correct: false },
-          { label: "疑問詞の後、動詞を見て主語の前に一語を置く", correct: true }
+          { label: "疑問詞は文頭に置き、その後に do を置く", correct: false },
+          { label: "動詞を見て主語の前に一語を判断し、その前に疑問詞の語句を置く", correct: true }
         ]
       },
       {
@@ -1375,7 +1375,7 @@ const STAGES = [
       type: "sort",
       questions: [
         {
-          text: "【BOSS BATTLE 1/2】\n「私は英語が役立つと思う。」の意味に単語をクリックして並べかえなさい。",
+          text: "【BOSS BATTLE 1/2】\n「私は英語が役立つと思う。」の意味になるように単語をクリックして並べかえなさい。",
           words: ["that", "useful", "is", "I", "English", "think"],
           correctAnswer: "I think that English is useful",
           wrongComment: "I think + English is... の構造を作ります。",
@@ -1386,7 +1386,7 @@ const STAGES = [
           ]
         },
         {
-          text: "【BOSS BATTLE 2/2】\n「彼は彼の息子に、新しい自転車を買ってあげた。」の意味に単語をクリックして並べかえなさい。",
+          text: "【BOSS BATTLE 2/2】\n「彼は彼の息子に、新しい自転車を買ってあげた。」の意味になるように単語をクリックして並べかえなさい。",
           words: ["son", "he", "bike", "bought", "his", "new", "a"],
           correctAnswer: "he bought his son a new bike",
           wrongComment: "主語＋動詞＋人＋ものの語順を作ります。",
@@ -1506,9 +1506,9 @@ const STAGES = [
       {
         text: "⑧ Tom has been to Kyoto two years ago. の間違いを訂正すると？",
         options: [
-          { label: "A : hasがhad", correct: false },
-          { label: "B : has beenがwent", correct: true },
-          { label: "C : been toがgone to", correct: false }
+          { label: "A : has が had", correct: false },
+          { label: "B : has been が went", correct: true },
+          { label: "C : been to が gone to", correct: false }
         ],
         wrongComment: "two years ago（過去の明確な時点）は現在完了形と一緒に使えないため、過去形 went に変更します。",
         logicText: "【判断基準】",
@@ -2019,7 +2019,7 @@ const STAGE12_BOSS_QUESTIONS = [
 // ----------------------------------------------------
 const EIGO_SHORI_GOKUI_QUESTIONS = [
   {
-    text: "1:　間違いの原因は、［　　］に区別して修正する。",
+    text: "1:　間違いの原因を［　　］に区別して修正する。",
     options: [
       { label: "A：単語・表現・文法", correct: false },
       { label: "B：語形変化・語法・語順", correct: false },
@@ -2027,7 +2027,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "2:　英語の基本の骨格は［　　］である。",
+    text: "2:　英語の基本の骨格は［　　］の順になる。",
     options: [
       { label: "A：誰が・どうする・何を・どこで・いつ", correct: true },
       { label: "B：誰が・何を・どうする・どこで・いつ", correct: false },
@@ -2043,11 +2043,11 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "4:　日本語の文末で、動詞の区別 →［　　］を決める。",
+    text: "4:　日本語の文末では、動詞の区別＋［　　］が決まる。",
     options: [
-      { label: "A：時制 → 文の種類", correct: false },
-      { label: "B：時制＋使う表現 → 文の種類", correct: true },
-      { label: "C：時制＋主語の選択 → 文の種類", correct: false }
+      { label: "A：時制＋文の種類", correct: false },
+      { label: "B：時制＋使う表現＋文の種類", correct: true },
+      { label: "C：時制＋主語の選択＋文の種類", correct: false }
     ]
   },
   {
@@ -2115,11 +2115,11 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "13:　時制と表現の組み合わせは、助動詞・［　　］の順になる。",
+    text: "13:　時制と表現の組み合わせは、助動詞　→［　　］の順になる。",
     options: [
-      { label: "A：完了形・受動態・進行形", correct: false },
-      { label: "B：進行形・完了形・受動態", correct: false },
-      { label: "C：完了形・進行形・受動態", correct: true }
+      { label: "A：完了形 → 受動態 → 進行形", correct: false },
+      { label: "B：進行形 → 完了形 → 受動態", correct: false },
+      { label: "C：完了形 → 進行形 → 受動態", correct: true }
     ]
   },
   {
@@ -2190,20 +2190,20 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     text: "22:　読解で因果関係を示す印に［　　］がある。",
     options: [
       { label: "A：because, so, but, howeverなど", correct: true },
-      { label: "B：if, for example, 前置詞など", correct: false },
-      { label: "C：助動詞, 疑問詞, that節など", correct: false }
+      { label: "B：that, for example, such asなど", correct: false },
+      { label: "C：助動詞, 疑問詞, 前置詞など", correct: false }
     ]
   },
   {
     text: "23:　読解で正誤の条件は［　　］を確認する。",
     options: [
-      { label: "A：同じ語句が使われているか", correct: false },
-      { label: "B：主張や評価の語句が同じか", correct: false },
-      { label: "C：主語、時・場所・数、肯定か否定か", correct: true }
+      { label: "A：主張や評価の語句", correct: false },
+      { label: "B：単語や構文", correct: false },
+      { label: "C：主語・場所・時・数・肯定か否定か", correct: true }
     ]
   },
   {
-    text: "24:　読解で要約するときは［　　］を見る。",
+    text: "24:　読解で要約するときは［　　］から一般化（抽象化）を図る。",
     options: [
       { label: "A：段落の中央あたり", correct: false },
       { label: "B：for exampleの後", correct: false },

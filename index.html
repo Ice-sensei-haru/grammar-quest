@@ -2051,7 +2051,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "5:　文の中心として使われる動詞の形は［　　］の３つである。",
+    text: "5:　文の中心として使われる一般動詞だけの形は［　　］の３つである。",
     options: [
       { label: "A：原形・三単現のs・過去形", correct: true },
       { label: "B：不定詞・動名詞・分詞", correct: false },
@@ -2115,11 +2115,11 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "13:　表現は、原形・三単現・過去形・助動詞の有無・［　　］から判断して決める。",
+    text: "13:　時制と表現の組み合わせは、助動詞・［　　］の順になる。",
     options: [
-      { label: "A：進行形", correct: false },
-      { label: "B：進行形・受動態", correct: false },
-      { label: "C：進行形・受動態・完了形", correct: true }
+      { label: "A：完了形・受動態・進行形", correct: false },
+      { label: "B：進行形・完了形・受動態", correct: false },
+      { label: "C：完了形・進行形・受動態", correct: true }
     ]
   },
   {
@@ -2319,11 +2319,11 @@ const LAST_BOSS_QUESTIONS = [
   { text: "③ He is (  ) Tom by everyone.", options: [{label:"A：call",correct:false},{label:"B：calls",correct:false},{label:"C：called",correct:true}], highlightText:["is","by everyone"], comment:"受動態" },
   { text: "④ I have just (  ) lunch.", options: [{label:"A：eat",correct:false},{label:"B：eating",correct:false},{label:"C：eaten",correct:true}], highlightText:["have"], comment:"現在完了" },
   { text: "⑤ She enjoyed (  ) soccer.", options: [{label:"A：plays",correct:false},{label:"B：playing",correct:true},{label:"C：to play",correct:false}], highlightText:["enjoyed"], comment:"動名詞" },
-  { text: "⑥ I don’t know how (  ) the PC.", options: [{label:"A：use",correct:false},{label:"B：using",correct:false},{label:"C：to use",correct:true}], highlightText:["how"], comment:"疑問詞＋不定詞" },
+  { text: "⑥ I don’t know how (  ) the PC.", options: [{label:"A：use",correct:false},{label:"B：using",correct:false},{label:"C：to use",correct:true}], highlightText:["know","how"], comment:"疑問詞＋不定詞" },
   { text: "⑦ I’m looking forward (  ) you.", options: [{label:"A：to seeing",correct:true},{label:"B：to see",correct:false},{label:"C：seeing",correct:false}], highlightText:["looking forward"], comment:"前置詞＋動名詞" },
   { text: "⑧ He made me (  ) the PC.", options: [{label:"A：use",correct:true},{label:"B：using",correct:false},{label:"C：to use",correct:false}], highlightText:["made"], comment:"make＋O＋原形不定詞" },
   { text: "⑨ I want something hot (  ).", options: [{label:"A：eat",correct:false},{label:"B：to eat",correct:true},{label:"C：eating",correct:false}], highlightText:["something"], comment:"不定詞の形容詞的用法" },
-  { text: "⑩ The mountain (  ) from here is Mt. Fuji.", options: [{label:"A：see",correct:false},{label:"B：seeing",correct:false},{label:"C：seen",correct:true}], highlightText:["The mountain"], comment:"過去分詞の形容詞的用法" },
+  { text: "⑩ The mountain (  ) from here is Mt. Fuji.", options: [{label:"A：see",correct:false},{label:"B：seeing",correct:false},{label:"C：seen",correct:true}], highlightText:["The mountain","is"], comment:"過去分詞の形容詞的用法" },
   { text: "⑪ The bus over there (  ) to Osaka.", options: [{label:"A：go",correct:false},{label:"B：goes",correct:true},{label:"C：going",correct:false}], highlightText:["The bus"], comment:"三単現のs" },
   { text: "⑫ What was the girl (  ) here then?", options: [{label:"A：do",correct:false},{label:"B：does",correct:false},{label:"C：doing",correct:true}], highlightText:["was"], comment:"過去進行形" },
   { text: "⑬ He told me that she (  ) a doctor.", options: [{label:"A：is",correct:false},{label:"B：was",correct:true},{label:"C：be",correct:false}], highlightText:["told","that"], comment:"時制の一致" },
@@ -2332,7 +2332,7 @@ const LAST_BOSS_QUESTIONS = [
   { text: "⑯ She asked the man (  ) the box.", options: [{label:"A：carried",correct:false},{label:"B：to carry",correct:true},{label:"C：carry",correct:false}], highlightText:["asked"], comment:"ask＋人＋不定詞" },
   { text: "⑰ When must I (  ) the room?", options: [{label:"A：clean",correct:true},{label:"B：to clean",correct:false},{label:"C：cleaned",correct:false}], highlightText:["must"], comment:"助動詞＋動詞の原形" },
   { text: "⑱ I helped Tom (  ) to the apartment.", options: [{label:"A：moved",correct:false},{label:"B：would move",correct:false},{label:"C：move",correct:true}], highlightText:["helped"], comment:"help＋O＋原形不定詞" },
-  { text: "⑲ Do you know the boy (  ) over there?", options: [{label:"A：dance",correct:false},{label:"B：dancing",correct:true},{label:"C：danced",correct:false}], highlightText:["the boy"], comment:"現在分詞の形容詞的用法" },
+  { text: "⑲ Do you know the boy (  ) over there?", options: [{label:"A：dance",correct:false},{label:"B：dancing",correct:true},{label:"C：to dance",correct:false}], highlightText:["know","the boy"], comment:"現在分詞の形容詞的用法" },
   { text: "⑳ I have the pictures that (  ) taken in Kyoto.", options: [{label:"A：is",correct:false},{label:"B：was",correct:false},{label:"C：were",correct:true}], highlightText:["the pictures"], comment:"関係代名詞（主格）で先行詞が複数" }
 ];
 
@@ -2638,7 +2638,7 @@ function startBattleTimer() {
       if (gameState.verbBattleTimeLeft <= 0) {
         stopBattleTimer();
         playSound('wrong');
-        triggerVerbBattleFail("1分経過！タイムオーバーです。");
+        triggerVerbBattleFail("60秒経過！タイムオーバーです。");
       }
     }
   }, 1000);
@@ -3304,7 +3304,7 @@ function startLastBossTimer() {
     if (gameState.lastBossTimeLeft <= 0) {
       stopLastBossTimer();
       playSound('wrong');
-      triggerLastBossFail("1分経過！タイムオーバーです。");
+      triggerLastBossFail("60秒経過！タイムオーバーです。");
     }
     saveData();
   }, 1000);

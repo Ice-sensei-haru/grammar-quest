@@ -485,7 +485,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "主語は She のときは is を使う", correct: false },
-          { label: "She = busy の構造", correct: true }
+          { label: "She（主語） = busy（状態） の構造", correct: true }
         ]
       },
       {
@@ -2197,8 +2197,8 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
   {
     text: "23:　読解で正誤の条件は［　　］を確認する。",
     options: [
-      { label: "A：同じ単語が使われているか", correct: false },
-      { label: "B：主張や評価が同じか", correct: false },
+      { label: "A：同じ語句が使われているか", correct: false },
+      { label: "B：主張や評価の語句が同じか", correct: false },
       { label: "C：主語、時・場所・数、肯定か否定か", correct: true }
     ]
   },
@@ -2314,26 +2314,31 @@ function triggerConfetti() {
 }
 
 const LAST_BOSS_QUESTIONS = [
-  { text: "① Tom’s parents (  ) tennis every Sunday.", options: [{label:"A：play",correct:true},{label:"B：plays",correct:false},{label:"C：playing",correct:false}], highlightText:["parents"], comment:"主語が複数" },
-  { text: "② He (  ) the novel last night.", options: [{label:"A：read",correct:true},{label:"B：reads",correct:false},{label:"C：reading",correct:false}], highlightText:["last night"], comment:"過去時制" },
-  { text: "③ He is (  ) Tom by everyone.", options: [{label:"A：call",correct:false},{label:"B：calls",correct:false},{label:"C：called",correct:true}], highlightText:["is","by everyone"], comment:"受動態" },
-  { text: "④ I have just (  ) lunch.", options: [{label:"A：eat",correct:false},{label:"B：eating",correct:false},{label:"C：eaten",correct:true}], highlightText:["have"], comment:"現在完了" },
-  { text: "⑤ She enjoyed (  ) soccer.", options: [{label:"A：plays",correct:false},{label:"B：playing",correct:true},{label:"C：to play",correct:false}], highlightText:["enjoyed"], comment:"動名詞" },
-  { text: "⑥ I don’t know how (  ) the PC.", options: [{label:"A：use",correct:false},{label:"B：using",correct:false},{label:"C：to use",correct:true}], highlightText:["know","how"], comment:"疑問詞＋不定詞" },
-  { text: "⑦ I’m looking forward (  ) you.", options: [{label:"A：to seeing",correct:true},{label:"B：to see",correct:false},{label:"C：seeing",correct:false}], highlightText:["looking forward"], comment:"前置詞＋動名詞" },
-  { text: "⑧ He made me (  ) the PC.", options: [{label:"A：use",correct:true},{label:"B：using",correct:false},{label:"C：to use",correct:false}], highlightText:["made"], comment:"make＋O＋原形不定詞" },
-  { text: "⑨ I want something hot (  ).", options: [{label:"A：eat",correct:false},{label:"B：to eat",correct:true},{label:"C：eating",correct:false}], highlightText:["something"], comment:"不定詞の形容詞的用法" },
-  { text: "⑩ The mountain (  ) from here is Mt. Fuji.", options: [{label:"A：see",correct:false},{label:"B：seeing",correct:false},{label:"C：seen",correct:true}], highlightText:["The mountain","is"], comment:"過去分詞の形容詞的用法" },
-  { text: "⑪ The bus over there (  ) to Osaka.", options: [{label:"A：go",correct:false},{label:"B：goes",correct:true},{label:"C：going",correct:false}], highlightText:["The bus"], comment:"三単現のs" },
-  { text: "⑫ What was the girl (  ) here then?", options: [{label:"A：do",correct:false},{label:"B：does",correct:false},{label:"C：doing",correct:true}], highlightText:["was"], comment:"過去進行形" },
-  { text: "⑬ He told me that she (  ) a doctor.", options: [{label:"A：is",correct:false},{label:"B：was",correct:true},{label:"C：be",correct:false}], highlightText:["told","that"], comment:"時制の一致" },
-  { text: "⑭ If he (  ) here tomorrow, give it to him.", options: [{label:"A：comes",correct:true},{label:"B：will come",correct:false},{label:"C：come",correct:false}], highlightText:["If he"], comment:"副詞節→未来でも現在形" },
-  { text: "⑮ They decided (  ) London.", options: [{label:"A：visit",correct:false},{label:"B：to visit",correct:true},{label:"C：visiting",correct:false}], highlightText:["decided"], comment:"不定詞" },
-  { text: "⑯ She asked the man (  ) the box.", options: [{label:"A：carried",correct:false},{label:"B：to carry",correct:true},{label:"C：carry",correct:false}], highlightText:["asked"], comment:"ask＋人＋不定詞" },
-  { text: "⑰ When must I (  ) the room?", options: [{label:"A：clean",correct:true},{label:"B：to clean",correct:false},{label:"C：cleaned",correct:false}], highlightText:["must"], comment:"助動詞＋動詞の原形" },
-  { text: "⑱ I helped Tom (  ) to the apartment.", options: [{label:"A：moved",correct:false},{label:"B：would move",correct:false},{label:"C：move",correct:true}], highlightText:["helped"], comment:"help＋O＋原形不定詞" },
-  { text: "⑲ Do you know the boy (  ) over there?", options: [{label:"A：dance",correct:false},{label:"B：dancing",correct:true},{label:"C：to dance",correct:false}], highlightText:["know","the boy"], comment:"現在分詞の形容詞的用法" },
-  { text: "⑳ I have the pictures that (  ) taken in Kyoto.", options: [{label:"A：is",correct:false},{label:"B：was",correct:false},{label:"C：were",correct:true}], highlightText:["the pictures"], comment:"関係代名詞（主格）で先行詞が複数" }
+  { text: "1 Tom’s parents (  ) tennis every Sunday.", options: [{label:"A：play",correct:true},{label:"B：plays",correct:false},{label:"C：playing",correct:false}], highlightText:["parents"], comment:"主語が複数" },
+  { text: "2 Meg (  ) breakfast every morning.", options: [{label:"A：eat",correct:false},{label:"B：eats",correct:true},{label:"C：eating",correct:false}], highlightText:["Meg","every morning"], comment:"三単現" },
+  { text: "3 He (  ) the novel last night.", options: [{label:"A：read",correct:true},{label:"B：reads",correct:false},{label:"C：reading",correct:false}], highlightText:["last night"], comment:"過去時制" },
+  { text: "4 He is (  ) Tom by everyone.", options: [{label:"A：call",correct:false},{label:"B：calls",correct:false},{label:"C：called",correct:true}], highlightText:["is","by everyone"], comment:"受動態" },
+  { text: "5 I have just (  ) lunch.", options: [{label:"A：eat",correct:false},{label:"B：eating",correct:false},{label:"C：eaten",correct:true}], highlightText:["have"], comment:"現在完了" },
+  { text: "6 When (  ) she read the book?", options: [{label:"A：did",correct:true},{label:"B：do",correct:false},{label:"C：has",correct:false}], highlightText:["When"], comment:"過去時制" },
+  { text: "7 She enjoyed (  ) soccer.", options: [{label:"A：plays",correct:false},{label:"B：playing",correct:true},{label:"C：to play",correct:false}], highlightText:["enjoyed"], comment:"動名詞" },
+  { text: "8 I don’t know how (  ) the PC.", options: [{label:"A：use",correct:false},{label:"B：using",correct:false},{label:"C：to use",correct:true}], highlightText:["know","how"], comment:"疑問詞＋不定詞" },
+  { text: "9 It is fun for me (  ) tennis.", options: [{label:"A：to play",correct:true},{label:"B：playing",correct:false},{label:"C：play",correct:false}], highlightText:["It is"], comment:"It to構文" },
+  { text: "10 I’m looking forward (  ) you.", options: [{label:"A：to seeing",correct:true},{label:"B：to see",correct:false},{label:"C：seeing",correct:false}], highlightText:["looking forward"], comment:"前置詞＋動名詞" },
+  { text: "11 He made me (  ) the PC.", options: [{label:"A：use",correct:true},{label:"B：using",correct:false},{label:"C：to use",correct:false}], highlightText:["made"], comment:"make＋O＋原形不定詞" },
+  { text: "12 I want something hot (  ).", options: [{label:"A：eat",correct:false},{label:"B：to eat",correct:true},{label:"C：eating",correct:false}], highlightText:["something"], comment:"不定詞の形容詞的用法" },
+  { text: "13 The mountain (  ) from here is Mt. Fuji.", options: [{label:"A：see",correct:false},{label:"B：seeing",correct:false},{label:"C：seen",correct:true}], highlightText:["The mountain","is"], comment:"過去分詞の形容詞的用法" },
+  { text: "14 The bus over there (  ) to Osaka.", options: [{label:"A：go",correct:false},{label:"B：goes",correct:true},{label:"C：going",correct:false}], highlightText:["The bus"], comment:"三単現のs" },
+  { text: "15 What was the girl (  ) here then?", options: [{label:"A：do",correct:false},{label:"B：does",correct:false},{label:"C：doing",correct:true}], highlightText:["was"], comment:"過去進行形" },
+  { text: "16 He told me that she (  ) a doctor.", options: [{label:"A：is",correct:false},{label:"B：was",correct:true},{label:"C：be",correct:false}], highlightText:["told","that"], comment:"時制の一致" },
+  { text: "17 If he (  ) here tomorrow, give it to him.", options: [{label:"A：comes",correct:true},{label:"B：will come",correct:false},{label:"C：come",correct:false}], highlightText:["If he"], comment:"副詞節→未来でも現在形" },
+  { text: "18 They decided (  ) London.", options: [{label:"A：visit",correct:false},{label:"B：to visit",correct:true},{label:"C：visiting",correct:false}], highlightText:["decided"], comment:"不定詞" },
+  { text: "19 She asked the man (  ) the box.", options: [{label:"A：carried",correct:false},{label:"B：to carry",correct:true},{label:"C：carry",correct:false}], highlightText:["asked"], comment:"ask＋人＋不定詞" },
+  { text: "20 When must I (  ) the room?", options: [{label:"A：clean",correct:true},{label:"B：to clean",correct:false},{label:"C：cleaned",correct:false}], highlightText:["must"], comment:"助動詞＋動詞の原形" },
+  { text: "21 I helped Tom (  ) to the apartment.", options: [{label:"A：moved",correct:false},{label:"B：would move",correct:false},{label:"C：move",correct:true}], highlightText:["helped"], comment:"help＋O＋原形不定詞" },
+  { text: "22 Do you know the boy (  ) over there?", options: [{label:"A：dance",correct:false},{label:"B：dancing",correct:true},{label:"C：to dance",correct:false}], highlightText:["know","the boy"], comment:"現在分詞の形容詞的用法" },
+  { text: "23 The book (  ) by Ken is interesting.", options: [{label:"A：written",correct:true},{label:"B：writing",correct:false},{label:"C：was written",correct:false}], highlightText:["The book","is"], comment:"過去分詞の形容詞的用法" },
+  { text: "24 I have the pictures that (  ) taken in Kyoto.", options: [{label:"A：is",correct:false},{label:"B：was",correct:false},{label:"C：were",correct:true}], highlightText:["the pictures"], comment:"関係代名詞（主格）で先行詞が複数" },
+  { text: "25 If I (  ) enough money, I could buy the car.", options: [{label:"A：had",correct:true},{label:"B：have",correct:false},{label:"C：will have",correct:false}], highlightText:["could"], comment:"仮定法過去" }
 ];
 
 const STORAGE_KEY = 'grammar_quest_save_data_v9';
@@ -2574,8 +2579,8 @@ function renderStageSelect() {
     <div style="margin-top:10px;">
       <button class="stage-select-btn battle-mode-btn" ${lastBossUnlocked ? '' : 'disabled'} onclick="startLastBoss()">
         <div>
-          <strong>【LAST BATTLE】ヴァーバルアーチデーモン</strong>タイムトライアル (20問)
-          <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">タイムトライアル：60秒以内に全20問正解 / 誤答で1問目から再挑戦</div>
+          <strong>【LAST BATTLE】ヴァーバルアーチデーモン</strong>
+          <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">タイムトライアル：60秒以内に全25問正解 / 誤答で1問目から再挑戦</div>
           ${!gameState.gokuiCleared ? '<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：英語処理の極意書クリア</div>' : ''}
           ${gameState.gokuiCleared && getRank(gameState.exp) < 42 ? `<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：ランク42以上（現在ランク${getRank(gameState.exp)}）</div>` : ''}
           ${gameState.lastBossCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>' : ''}
@@ -3332,7 +3337,7 @@ function renderLastBoss() {
     </div>
     <div class="card boss-card">
       <div class="card-header">
-        <span>🔥 LAST BOSS (Q${gameState.lastBossIndex + 1}/20)</span>
+        <span>🔥 LAST BOSS (Q${gameState.lastBossIndex + 1}/25)</span>
         <span style="font-size:0.8rem; color:#8b949e; cursor:pointer;" onclick="exitStage()">✕ 中断</span>
       </div>
       <div id="last-boss-timer" class="timer-display">⏱️ 残り時間: ${gameState.lastBossTimeLeft}秒</div>

@@ -475,25 +475,25 @@ const STAGES = [
         ]
       },
       {
-        text: "② She (  ) a singer. の(  )にあてはまる英語は？",
+        text: "② Ms. Green (  ) our English teacher. の(  )にあてはまる英語は？",
         options: [
           { label: "A : is", correct: true },
           { label: "B : does", correct: false },
           { label: "C : can", correct: false }
         ],
-        wrongComment: "She = a singer の関係があります。",
+        wrongComment: "Ms. Green = our English teacher の関係があります。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語は She のときは is を使う", correct: false },
-          { label: "She = a singer の構造", correct: true }
+          { label: "主語は１人のときは is を使う", correct: false },
+          { label: "Ms. Green = our English teacher の構造", correct: true }
         ]
       },
       {
-        text: "③ Tom likes dogs. の疑問文とその答え方は？",
+        text: "③ Tom likes dogs. を疑問文にすると？",
         options: [
-          { label: "A : Is Tom like dogs? – Yes, he is.", correct: false },
-          { label: "B : Do Tom likes dogs? – Yes, he do.", correct: false },
-          { label: "C : Does Tom like dogs? – Yes, he does.", correct: true }
+          { label: "A : Is Tom like dogs?", correct: false },
+          { label: "B : Do Tom likes dogs?", correct: false },
+          { label: "C : Does Tom like dogs?", correct: true }
         ],
         wrongComment: "一般動詞の文で主語が三人称単数のときは Does を使い、動詞は原形に戻します。",
         logicText: "【判断基準】",
@@ -517,17 +517,31 @@ const STAGES = [
         ]
       },
       {
-        text: "⑤ We can camp there in summer. の( in summer )をたずねる疑問文は？",
+        text: "⑤ Lisa can ride a horse. を疑問文にすると？",
         options: [
-          { label: "A : When can we camp there?", correct: true },
-          { label: "B : When we can camp there?", correct: false },
-          { label: "C : When do we camp there?", correct: false }
+          { label: "A : Does Lisa ride a horse?", correct: false },
+          { label: "B : Can Lisa ride a horse?", correct: true },
+          { label: "C : Is Lisa can ride a horse?", correct: false }
         ],
-        wrongComment: "助動詞canがある文の疑問文は、canを主語の前に出します。",
+        wrongComment: "助動詞（can）がある文の疑問文は、助動詞を主語の前に出します。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "疑問詞の後に can を置く", correct: false },
-          { label: "疑問詞を文頭に、can を主語の前に出す", correct: true }
+          { label: "主語が三人称単数のときは can を置く", correct: false },
+          { label: "助動詞（can）がある文の疑問文は、助動詞を主語の前に出す", correct: true }
+        ]
+      },
+      {
+        text: "⑥ Where (   ) Ken run every morning? の(  )にあてはまる英語は？",
+        options: [
+          { label: "A : is", correct: false },
+          { label: "B : do", correct: false },
+          { label: "C : does", correct: true }
+        ],
+        wrongComment: "主語が三人称単数 → 一般動詞 run → 疑問文は主語の前に does を置きます。",
+        logicText: "【判断基準】",
+        logicOptions: [
+          { label: "主語が三人称単数 → 疑問詞の後ろに is を置く", correct: false },
+          { label: "主語が三人称単数 → 一般動詞 run → 疑問文は主語の前に does を置く", correct: true }
         ]
       }
     ],
@@ -597,23 +611,23 @@ const STAGES = [
         ]
       },
       {
-        text: "④ There (  ) some food on the plate.　の(  )にあてはまる語は？",
+        text: "④ The bike under the tree (  ) mine.　の(  )にあてはまる語は？",
         options: [
           { label: "A : is", correct: true },
           { label: "B : are", correct: false },
           { label: "C : be", correct: false }
         ],
-        wrongComment: "food は数えられない名詞なので単数扱い → be動詞に is を使います。",
+        wrongComment: "主語は文頭に名詞（代名詞） → 三人称単数 → be動詞に is を使います。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "There の文には is を使う", correct: false },
-          { label: "food は数えられない名詞なので単数扱い → be動詞は is", correct: true }
+          { label: "主語 the tree は三人称単数なので is を使う", correct: false },
+          { label: "主語 The bike は三人称単数なので is を使う", correct: true }
         ]
       },
       {
         text: "⑤ (  ) usually has his or her ID card.　の(  )にあてはまる語は？",
         options: [
-          { label: "A : Some of them", correct: false },
+          { label: "A : The students", correct: false },
           { label: "B : All the students", correct: false },
           { label: "C : Every student", correct: true }
         ],
@@ -626,17 +640,17 @@ const STAGES = [
       }
     ],
     boss: {
-      text: "【BOSS BATTLE】\nThe bus (  ) to Tokyo. の(  )にあてはまる語は？",
+      text: "【BOSS BATTLE】\nThe buses (  ) to Tokyo. の(  )にあてはまる語は？",
       options: [
-        { label: "A : go", correct: false },
-        { label: "B : goes", correct: true },
+        { label: "A : go", correct: true },
+        { label: "B : goes", correct: false },
         { label: "C : going", correct: false }
       ],
-      wrongComment: "主語が三人称単数 → 動詞の形は三単現のsを使います。",
+      wrongComment: "主語が複数 → 動詞の形は原形を使います。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "主語が I や you 以外 → 一般動詞は三単現のs", correct: false },
-        { label: "主語が三人称単数 → 一般動詞は三単現のs", correct: true }
+        { label: "主語が２語以上の単語 → 一般動詞は原形を使う", correct: false },
+        { label: "主語が複数 → 一般動詞は原形を使う", correct: true }
       ]
     }
   },
@@ -1259,7 +1273,7 @@ const STAGES = [
     monsterName: "ヴォイド・ルーラー",
     questions: [
       {
-        text: "① He always does his homework before dinner. の動詞と目的語はは？",
+        text: "① He always does his homework before dinner. の動詞と目的語は？",
         options: [
           { label: "A : 動詞は always 目的語は his homewor", correct: false },
           { label: "B : 動詞は does 目的語は before dinner", correct: false },
@@ -1273,7 +1287,7 @@ const STAGES = [
         ]
       },
       {
-        text: "② She (  ) busy with her work. の(  )に入る適切な動詞は？",
+        text: "② She (  ) tired. の(  )に入る適切な動詞は？",
         options: [
           { label: "A : sees", correct: false },
           { label: "B : looks", correct: true },
@@ -1283,7 +1297,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "意味の解釈「～に見える」は look", correct: false },
-          { label: "後ろを見る → 形容詞 busy は She の状態", correct: true }
+          { label: "後ろを見る → 形容詞 tired は She の状態", correct: true }
         ]
       },
       {
@@ -1303,7 +1317,7 @@ const STAGES = [
       {
         text: "④ I went to bed early (  ) I was tired. の(  )に入る適切な接続詞は？",
         options: [
-          { label: "A : if", correct: false },
+          { label: "A : that", correct: false },
           { label: "B : so", correct: false },
           { label: "C : because", correct: true }
         ],
@@ -1873,7 +1887,7 @@ const STAGES = [
         ]
       },
       {
-        text: "② The pictures (   ) by Ken are beautiful.",
+        text: "② This is the pictures (   ) by Ken.",
         options: [
           { label: "A : draw", correct: false },
           { label: "B : drawing", correct: false },
@@ -1911,7 +1925,7 @@ const STAGES = [
         logicText: "【判断基準】",
         logicOptions: [
           { label: "前置詞の後は動名詞にする", correct: true },
-          { label: "主語が He なので三単現の s にする", correct: false }
+          { label: "主語が He なので三単現のsにする", correct: false }
         ]
       },
       {
@@ -1929,7 +1943,7 @@ const STAGES = [
         ]
       },
       {
-        text: "⑥ The books which (   ) by Ken made me happy.",
+        text: "⑥ The books which (   ) by Ken excited me.",
         options: [
           { label: "A : written", correct: false },
           { label: "B : were written", correct: true },
@@ -1971,7 +1985,7 @@ const STAGES = [
         ]
       },
       {
-        text: "⑨ When I (   ), I will call you.",
+        text: "⑨ When I (   ) there, I will call you.",
         options: [
           { label: "A : arrive", correct: true },
           { label: "B : will arrive", correct: false },
@@ -2019,11 +2033,11 @@ const STAGE12_BOSS_QUESTIONS = [
 // ----------------------------------------------------
 const EIGO_SHORI_GOKUI_QUESTIONS = [
   {
-    text: "1:　間違いの原因を［　　］に区別して修正する。",
+    text: "1:　間違いの原因は［　　］を区別して、修正する。",
     options: [
       { label: "A：単語・表現・文法", correct: false },
       { label: "B：語形変化・語法・語順", correct: false },
-      { label: "C：知識記憶・判断習得・処理習得", correct: true }
+      { label: "C：知識・判断・処理", correct: true }
     ]
   },
   {
@@ -2043,11 +2057,11 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "4:　日本語の文末で、動詞の区別＋［　　］を判断する。",
+    text: "4:　日本語の文末（述語表現）で、動詞の区別 → ［　　］ → 表現の形 → 文の種類を判断する。",
     options: [
-      { label: "A：時制＋文の種類", correct: false },
-      { label: "B：時制＋使う表現＋文の種類", correct: true },
-      { label: "C：時制＋主語の選択＋文の種類", correct: false }
+      { label: "A：場所", correct: false },
+      { label: "B：時制", correct: true },
+      { label: "C：主語", correct: false }
     ]
   },
   {
@@ -2198,12 +2212,12 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     text: "23:　読解で正誤の条件は［　　］を確認する。",
     options: [
       { label: "A：主張や評価の語句", correct: false },
-      { label: "B：単語や構文", correct: false },
+      { label: "B：一般と例、感情と行動", correct: false },
       { label: "C：主語・場所・時・数・肯定か否定か", correct: true }
     ]
   },
   {
-    text: "24:　読解で要約するときは［　　］から一般化（抽象化）を図る。",
+    text: "24:　読解で段落の要約をするときは［　　］に注目する。",
     options: [
       { label: "A：段落の中央あたり", correct: false },
       { label: "B：for exampleの後", correct: false },

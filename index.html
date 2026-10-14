@@ -438,7 +438,7 @@ const VERB_BATTLE_QUESTIONS = [
   { id: 6, text: "When was the temple (  )?", options: [{ label: "A：built", correct: true }, { label: "B：building", correct: false }], highlightText: "the temple", comment: "主語が動作を受ける側" },
   { id: 7, text: "The concert will be (  ) tomorrow.", options: [{ label: "A：hold", correct: false }, { label: "B：held", correct: true }], highlightText: "be", comment: "受動態" },
   { id: 8, text: "My sister does not (  ) cats.", options: [{ label: "A：like", correct: true }, { label: "B：likes", correct: false }], highlightText: "does", comment: "否定文は原形" },
-  { id: 9, text: "(  ) your sister busy then?", options: [{ label: "A：Did", correct: false }, { label: "B：Was", correct: true }], highlightText: "busy", comment: "一般動詞がない" },
+  { id: 9, text: "(  ) your sister tired then?", options: [{ label: "A：Did", correct: false }, { label: "B：Was", correct: true }], highlightText: "tired", comment: "一般動詞がない" },
   { id: 10, text: "(  ) she running there?", options: [{ label: "A：Does", correct: false }, { label: "B：Is", correct: true }], highlightText: "running", comment: "進行形" },
   { id: 11, text: "Whose (  ) the bags?", options: [{ label: "A：is", correct: false }, { label: "B：are", correct: true }], highlightText: "bags", comment: "主語が複数" },
   { id: 12, text: "He will (  ) here tomorrow.", options: [{ label: "A：come", correct: true }, { label: "B：comes", correct: false }], highlightText: "will", comment: "助動詞の後ろ" },
@@ -475,17 +475,17 @@ const STAGES = [
         ]
       },
       {
-        text: "② She (  ) busy now. の(  )にあてはまる英語は？",
+        text: "② She (  ) a singer. の(  )にあてはまる英語は？",
         options: [
           { label: "A : is", correct: true },
           { label: "B : does", correct: false },
           { label: "C : can", correct: false }
         ],
-        wrongComment: "She = busy の関係があります。",
+        wrongComment: "She = a singer の関係があります。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "主語は She のときは is を使う", correct: false },
-          { label: "She（主語） = busy（状態） の構造", correct: true }
+          { label: "She = a singer の構造", correct: true }
         ]
       },
       {
@@ -1226,7 +1226,7 @@ const STAGES = [
       type: "sort",
       questions: [
         {
-          text: "【BOSS BATTLE 1/2】\n「彼は日曜日に図書館へ行きます。」の意味に単語をクリックして並べかえなさい。",
+          text: "【BOSS BATTLE 1/2】\n「彼は日曜日に図書館へ行きます。」となるように英語を並べかえなさい。",
           words: ["to", "Sundays", "he", "library", "on", "goes", "the"],
           correctAnswer: "he goes to the library on Sundays",
           wrongComment: "主語 → 動詞を決め、場所や時の表現を作ります。",
@@ -1237,7 +1237,7 @@ const STAGES = [
           ]
         },
         {
-          text: "【BOSS BATTLE 2/2】\n「彼は何冊の英語の本を持っていますか。」の意味に単語をクリックして並べかえなさい。",
+          text: "【BOSS BATTLE 2/2】\n「彼は何冊の英語の本を持っていますか。」となるように英語を並べかえなさい。",
           words: ["he", "English", "many", "have", "how", "books", "does"],
           correctAnswer: "how many English books does he have",
           wrongComment: "疑問詞のまとまり＋一語＋主語の順に並べます。",
@@ -1375,7 +1375,7 @@ const STAGES = [
       type: "sort",
       questions: [
         {
-          text: "【BOSS BATTLE 1/2】\n「私は英語が役立つと思う。」の意味になるように単語をクリックして並べかえなさい。",
+          text: "【BOSS BATTLE 1/2】\n「私は英語が役立つと思う。」となるように英語を並べかえなさい。",
           words: ["that", "useful", "is", "I", "English", "think"],
           correctAnswer: "I think that English is useful",
           wrongComment: "I think + English is... の構造を作ります。",
@@ -1386,7 +1386,7 @@ const STAGES = [
           ]
         },
         {
-          text: "【BOSS BATTLE 2/2】\n「彼は彼の息子に、新しい自転車を買ってあげた。」の意味になるように単語をクリックして並べかえなさい。",
+          text: "【BOSS BATTLE 2/2】\n「彼は彼の息子に、新しい自転車を買ってあげた。」となるように英語を並べかえなさい。",
           words: ["son", "he", "bike", "bought", "his", "new", "a"],
           correctAnswer: "he bought his son a new bike",
           wrongComment: "主語＋動詞＋人＋ものの語順を作ります。",
@@ -2043,7 +2043,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "4:　日本語の文末では、動詞の区別＋［　　］が決まる。",
+    text: "4:　日本語の文末で、動詞の区別＋［　　］を判断する。",
     options: [
       { label: "A：時制＋文の種類", correct: false },
       { label: "B：時制＋使う表現＋文の種類", correct: true },

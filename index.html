@@ -2057,7 +2057,15 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "4:　日本語の文末（述語表現）で、動詞の区別 → ［　　］ → 表現の形 → 文の種類を判断する。",
+    text: "4:　表現の形には、［　　］がある。",
+    options: [
+      { label: "A：単純形・過去形・未来の文", correct: false },
+      { label: "B：単純形・過去形・未来の文・進行形・受動態", correct: false },
+      { label: "C：単純形・過去形・未来の文・進行形・受動態・完了形・助動詞を使った文", correct: true }
+    ]
+  },
+  {
+    text: "5:　日本語の文末（述語表現）で、動詞の区別 → ［　　］ → 表現の形 → 文の種類を判断する。",
     options: [
       { label: "A：場所", correct: false },
       { label: "B：時制", correct: true },
@@ -2065,7 +2073,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "5:　文の中心として使われる一般動詞だけの形は［　　］の３つである。",
+    text: "6:　文の中心として使われる一般動詞だけの形は［　　］の３つである。",
     options: [
       { label: "A：原形・三単現のs・過去形", correct: true },
       { label: "B：不定詞・動名詞・分詞", correct: false },
@@ -2073,7 +2081,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "6:　疑問文を作るとき［　　］の前にbe動詞や do・does・did・助動詞の一語を置く。",
+    text: "7:　疑問文を作るとき［　　］の前にbe動詞や do・does・did・助動詞の一語を置く。",
     options: [
       { label: "A：文", correct: false },
       { label: "B：主語", correct: true },
@@ -2081,7 +2089,15 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "7:　受動態は［　　］で表現される。",
+    text: "8:　疑問詞が主語になるときの疑問文は［　　］の語順になる。",
+    options: [
+      { label: "A：肯定文", correct: true },
+      { label: "B：命令文", correct: false },
+      { label: "C：否定文", correct: false }
+    ]
+  },
+  {
+    text: "9:　受動態は［　　］で表現される。",
     options: [
       { label: "A：be動詞＋過去分詞", correct: true },
       { label: "B：be動詞＋現在分詞", correct: false },
@@ -2089,7 +2105,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "8:　命令文は主語がない文で、［　　］を表現するときの文。",
+    text: "10:　命令文は主語がない文で、［　　］を表現するときの文。",
     options: [
       { label: "A：感情、意見、主張", correct: false },
       { label: "B：評価、提示、感想", correct: false },
@@ -2097,7 +2113,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "9:　現在完了は［　　］で表現される。",
+    text: "11:　現在完了は［　　］で表現される。",
     options: [
       { label: "A：be動詞＋過去分詞", correct: false },
       { label: "B：be動詞＋現在分詞", correct: false },
@@ -2105,7 +2121,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "10:　動詞の選択によって、［　　］が決まる。",
+    text: "12:　動詞の選択によって、［　　］が決まる。",
     options: [
       { label: "A：主語との関係", correct: false },
       { label: "B：後ろの単語とのつながり", correct: true },
@@ -2113,7 +2129,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "11:　名詞の単数形を使う時、［　　］の順に置く。",
+    text: "13:　名詞の単数形を使う時、［　　］の順に置く。",
     options: [
       { label: "A：入口の言葉（a, the, myなど）→ 形容詞 → 核の名詞", correct: true },
       { label: "B：日本語で表現される単語", correct: false },
@@ -2121,7 +2137,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "12:　進行形は［　　］で表現される。",
+    text: "14:　進行形は［　　］で表現される。",
     options: [
       { label: "A：be動詞＋過去分詞", correct: false },
       { label: "B：be動詞＋現在分詞", correct: true },
@@ -2129,15 +2145,15 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "13:　時制と表現の組み合わせは、助動詞　→［　　］の順になる。",
+    text: "15:　時制と表現の形の組み合わせは、助動詞 → 完了形 →［　　］の順になる。",
     options: [
-      { label: "A：完了形 → 受動態 → 進行形", correct: false },
-      { label: "B：進行形 → 完了形 → 受動態", correct: false },
-      { label: "C：完了形 → 進行形 → 受動態", correct: true }
+      { label: "A：進行形", correct: false },
+      { label: "B：受動態 → 進行形", correct: false },
+      { label: "C：進行形 → 受動態", correct: true }
     ]
   },
   {
-    text: "14:　文の中心でない動詞の形（不定詞・動名詞・分詞）は、［　　］で判断する。",
+    text: "16:　文の中心でない動詞の形（不定詞・動名詞・分詞）は、［　　］で判断する。",
     options: [
       { label: "A：後ろの語とのつながり", correct: false },
       { label: "B：語順", correct: false },
@@ -2145,7 +2161,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "15:　名詞を修飾する分詞は、その名詞と分詞の間で［　　］になる。",
+    text: "17:　名詞を修飾する分詞は、その名詞と分詞の間で［　　］になる。",
     options: [
       { label: "A：主語と目的語の関係", correct: false },
       { label: "B：補語と動詞の関係", correct: false },
@@ -2153,15 +2169,15 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "16:　英文を組み立てるときは、［　　］ようにする。",
+    text: "18:　英文を組み立てるときは、［　　］ようにする。",
     options: [
-      { label: "A：主語を書く → 日本語の文末から前へ順に並べる", correct: false },
-      { label: "B：SV関係を作る → 意味を作る語を組み合わせる → 英文での配置を整える", correct: true },
+      { label: "A：主語を書く → 日本語に合う単語を文末から前へ順に並べる", correct: false },
+      { label: "B：SV関係を作る → 主語のパーツを作る → 意味を作るかたまりを作る → 英文での配置を整える", correct: true },
       { label: "C：意味を解釈する → 表現に合う構文を探す → 前から単語を並べる", correct: false }
     ]
   },
   {
-    text: "17:　英問英答の答える文では、［　　］を合わす。",
+    text: "19:　英問英答の答える文では、［　　］を合わす。",
     options: [
       { label: "A：質問文の主語（代名詞）と動詞（時制・表現）の形", correct: true },
       { label: "B：本文に使われている場所・時・数", correct: false },
@@ -2169,7 +2185,15 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "18:　読解のストーリー型（体験・出来事）タイプは、［　　］に注目する。",
+    text: "20:　make / let / help ＋人の後ろは［　　］を使う。",
+    options: [
+      { label: "A：動詞の原形", correct: true },
+      { label: "B：to 動詞の原形", correct: false },
+      { label: "C：三単現のs", correct: false }
+    ]
+  },
+  {
+    text: "21:　読解のストーリー型（体験・出来事）タイプは、［　　］に注目する。",
     options: [
       { label: "A：主張・理由・結論", correct: false },
       { label: "B：目的・条件・必要情報", correct: false },
@@ -2177,7 +2201,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "19:　読解の説明文型（社会・科学・文化）タイプは、［　　］に注目する。",
+    text: "22:　読解の説明文型（社会・科学・文化）タイプは、［　　］に注目する。",
     options: [
       { label: "A：主張・理由・結論", correct: true },
       { label: "B：目的・条件・必要情報", correct: false },
@@ -2185,7 +2209,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "20:　読解の資料・実用文型（案内・広告・ポスター・メール）タイプは、［　　］に注目する。",
+    text: "23:　読解の資料・実用文型（案内・広告・ポスター・メール）タイプは、［　　］に注目する。",
     options: [
       { label: "A：主張・理由・結論", correct: false },
       { label: "B：目的・条件・必要情報", correct: true },
@@ -2193,7 +2217,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "21:　読解の因果関係は、［　　］の順で判断する。",
+    text: "24:　読解の因果関係は、［　　］の順で判断する。",
     options: [
       { label: "A：行動 → 気持ち → 出来事", correct: false },
       { label: "B：出来事 → 気持ち → 行動", correct: true },
@@ -2201,7 +2225,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },  
   {
-    text: "22:　読解で因果関係を示す印に［　　］がある。",
+    text: "25:　読解で因果関係を示す印に［　　］がある。",
     options: [
       { label: "A：because, so, but, howeverなど", correct: true },
       { label: "B：that, for example, such asなど", correct: false },
@@ -2209,7 +2233,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "23:　読解で正誤の条件は［　　］を確認する。",
+    text: "26:　読解で正誤の条件は［　　］を確認する。",
     options: [
       { label: "A：主張や評価の語句", correct: false },
       { label: "B：一般と例、感情と行動", correct: false },
@@ -2217,7 +2241,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "24:　読解で段落の要約をするときは［　　］に注目する。",
+    text: "27:　読解で段落の要約をするときは［　　］に注目する。",
     options: [
       { label: "A：段落の中央あたり", correct: false },
       { label: "B：for exampleの後", correct: false },
@@ -2225,7 +2249,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "25:　読解で情報を比較するときは［　　］に分ける。",
+    text: "28:　読解で情報を比較するときは［　　］に分ける。",
     options: [
       { label: "A：意見と事実", correct: true },
       { label: "B：現在と過去", correct: false },
@@ -2233,37 +2257,13 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "26:　判断基準を自分のものにするには、「認識した」後に［　　］。",
+    text: "29: 「判断基準を自分のものにする５段階」の順を並べかえなさい。\nア：初見の問題で根拠と処理順を再現する\nイ：時間をおいて別の問題でも使えるか確かめる\nウ：どこを見て、どの条件で、何を選ぶか明確にする\nエ：見落とし・判断条件・処理のどこが誤ったか特定し、修正する\nオ：判断基準を説明する/書き出す",
     options: [
-      { label: "A：根拠と処理順を再現する", correct: false },
-      { label: "B：誤りを判定し、修正する", correct: false },
-      { label: "C：自力で判断基準を自力で言う/書く", correct: true }
+      { label: "A：ウ → オ → ア → エ → イ", correct: true },
+      { label: "B：ウ → ア → オ → エ → イ", correct: false },
+      { label: "C：オ → ウ → ア → エ → イ", correct: false }
     ]
-  },
-  {
-    text: "27:　判断基準を自分のものにするには、「自力で取り出した」後に［　　］。",
-    options: [
-      { label: "A：根拠と処理順を再現する", correct: true },
-      { label: "B：誤りを判定し、修正する", correct: false },
-      { label: "C：時間をおいて再現する", correct: false }
-    ]
-  },
-  {
-    text: "28:　判断基準を自分のものにするには、「根拠・処理順を再現した」後に［　　］。",
-    options: [
-      { label: "A：自力で判断基準を自力で言う/書く", correct: false },
-      { label: "B：誤りを判定し、修正する", correct: true },
-      { label: "C：時間をおいて再現する", correct: false }
-    ]
-  },
-  {
-    text: "29:　判断基準を自分のものにするには、「誤りを判定し、修正した」後に［　　］。",
-    options: [
-      { label: "A：根拠と処理順を再現する", correct: false },
-      { label: "B：自力で判断基準を自力で言う/書く", correct: false },
-      { label: "C：時間をおいて再現する", correct: true }
-    ]
-  },
+  },  
   {
     text: "30:　学習にあたり大切なことは、［　　］を意識することである。",
     options: [

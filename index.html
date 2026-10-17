@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>英語処理OS RPG - Grammar Quest</title>
+  <title>英語処理OS RPG - English Build Up Training</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     :root {
@@ -407,7 +407,7 @@
 <body>
 <div id="app">
   <div class="header">
-    <div class="title">⚔ 英語処理OS RPG</div>
+    <div class="title">⚔ 英語処理OS Build Up</div>
     <div class="player-stats">
       <div style="font-size: 0.85rem;">ランク: <span id="rank-display" style="color:var(--gold-color); font-weight:bold;">1</span> (EXP: <span id="exp-display">0</span>)</div>
       <div class="exp-bar-container">
@@ -458,14 +458,14 @@ const STAGES = [
     skillName: "英文認識",
     rewardSkill: "英文認識の眼",
     monsterEmoji: "👾",
-    monsterName: "ベーシック・スライム",
+    monsterName: "センテンス・スライム",
     questions: [
       {
-        text: "① Your brothers play tennis. の主語と動詞はどれ？",
+        text: "① Our English teacher plays basketball. の主語と動詞はどれ？",
         options: [
-          { label: "A : 主語 Your 動詞 play", correct: false },
-          { label: "B : 主語 Your brothers 動詞 play", correct: true },
-          { label: "C : 主語 Your brothers 動詞 tennis", correct: false }
+          { label: "A : 主語 Our English teacher 動詞 plays", correct: true },
+          { label: "B : 主語 Our English 動詞 teacher", correct: false },
+          { label: "C : 主語 Our 動詞 English", correct: false }
         ],
         wrongComment: "主語は「だれが」にあたる名詞のまとまり全体で見ます。",
         logicText: "【判断基準】",
@@ -475,31 +475,31 @@ const STAGES = [
         ]
       },
       {
-        text: "② Ms. Green (  ) our English teacher. の(  )にあてはまる英語は？",
+        text: "② The boys (  ) members of the soccer team. の(  )にあてはまる英語は？",
         options: [
-          { label: "A : is", correct: true },
-          { label: "B : does", correct: false },
+          { label: "A : do", correct: false },
+          { label: "B : are", correct: true },
           { label: "C : can", correct: false }
         ],
-        wrongComment: "Ms. Green = our English teacher の関係があります。",
+        wrongComment: "The boys = members の関係があります。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語は１人のときは is を使う", correct: false },
-          { label: "Ms. Green = our English teacher の構造", correct: true }
+          { label: "主語に単語が２つあるときは are を使う", correct: false },
+          { label: "The boys = members の構造なのでbe動詞を使う", correct: true }
         ]
-      },
+      },      
       {
-        text: "③ Tom likes dogs. を疑問文にすると？",
+        text: "③ Your sister likes dogs. を疑問文にすると？",
         options: [
-          { label: "A : Is Tom like dogs?", correct: false },
-          { label: "B : Do Tom likes dogs?", correct: false },
-          { label: "C : Does Tom like dogs?", correct: true }
+          { label: "A : Are your sister like dogs?", correct: false },
+          { label: "B : Do your sister likes dogs?", correct: false },
+          { label: "C : Does your sister like dogs?", correct: true }
         ],
         wrongComment: "一般動詞の文で主語が三人称単数のときは Does を使い、動詞は原形に戻します。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "一般動詞の形が三単現のs → Does を使って動詞を原形に戻す", correct: true },
-          { label: "主語が１語 → Does を使って動詞を原形に戻す", correct: false }
+          { label: "動詞の種類 → 三単現のs → Does を使って動詞を原形に戻す", correct: true },
+          { label: "your → Does を使って動詞を原形に戻す", correct: false }
         ]
       },
       {
@@ -507,7 +507,7 @@ const STAGES = [
         options: [
           { label: "A : Meg wasn't play tennis.", correct: false },
           { label: "B : Meg didn't play tennis.", correct: true },
-          { label: "C : Meg doesn't played tennis.", correct: false }
+          { label: "C : Meg played not tennis.", correct: false }
         ],
         wrongComment: "一般動詞 → 過去形 → didn't を置いて原形に戻します。",
         logicText: "【判断基準】",
@@ -531,17 +531,17 @@ const STAGES = [
         ]
       },
       {
-        text: "⑥ Where (   ) Ken run every morning? の(  )にあてはまる英語は？",
+        text: "⑥ What book (   ) you read? の(  )にあてはまる英語は？",
         options: [
-          { label: "A : is", correct: false },
-          { label: "B : do", correct: false },
-          { label: "C : does", correct: true }
+          { label: "A : are", correct: false },
+          { label: "B : do", correct: true },
+          { label: "C : does", correct: false }
         ],
-        wrongComment: "主語が三人称単数 → 一般動詞 run → 疑問文は主語の前に does を置きます。",
+        wrongComment: "主語が you、一般動詞の文 → 疑問文は主語の前に do を置きます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語が三人称単数 → 疑問詞の後ろに is を置く", correct: false },
-          { label: "主語が三人称単数 → 一般動詞 run → 疑問文は主語の前に does を置く", correct: true }
+          { label: "主語が you → you の前に are を置く", correct: false },
+          { label: "主語が you → 一般動詞の文 → 疑問文は主語の前に do を置く", correct: true }
         ]
       }
     ],
@@ -700,16 +700,16 @@ const STAGES = [
         wrongComment: "主語が三人称単数 → doがdoesになります。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "主語が１語になると一般動詞の否定文には does を使う", correct: false },
-          { label: "主語が三人称単数だから一般動詞の否定文には does を使う", correct: true }
+          { label: "主語が１語になると一般動詞の否定文には doesn't を使う", correct: false },
+          { label: "主語が三人称単数だから一般動詞の否定文には doesn't を使う", correct: true }
         ]
       },
       {
-        text: "④ The man sometimes comes here. の man を men に変えると？",
+        text: "④ The child sometimes comes here. の child を children に変えると？",
         options: [
-          { label: "A : The men sometime comes here.", correct: false },
-          { label: "B : The men sometimes comes here.", correct: false },
-          { label: "C : The men sometimes come here.", correct: true }
+          { label: "A : The children sometime comes here.", correct: false },
+          { label: "B : The children sometimes comes here.", correct: false },
+          { label: "C : The children sometimes come here.", correct: true }
         ],
         wrongComment: "一般動詞で現在形 → 主語が複数 → 原形を使います。",
         logicText: "【判断基準】",
@@ -757,7 +757,7 @@ const STAGES = [
     monsterName: "ジャッジメント・クラウン",
     questions: [
       {
-        text: "① Where are they (  ) soccer now? の(  )に適する語は？",
+        text: "① They are (  ) soccer now. の(  )に適する語は？",
         options: [
           { label: "A : play", correct: false },
           { label: "B : plays", correct: false },
@@ -766,7 +766,7 @@ const STAGES = [
         wrongComment: "now とbe動詞（are）があるため、現在進行形（-ing）にします。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "文末に now があり、主語が they だから一般動詞をingの形にする", correct: false },
+          { label: "文末に now があるので一般動詞をingの形にする", correct: false },
           { label: "文末に now があり、be動詞があるので一般動詞をingの形にする", correct: true }
         ]
       },
@@ -794,7 +794,7 @@ const STAGES = [
         wrongComment: "助動詞 will → 動詞の原形 → be動詞の原形は be を使います。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "助動詞 will → 動詞の原形 → be動詞の原形で be", correct: true },
+          { label: "助動詞 will の後は動詞の原形 → be動詞の原形で be", correct: true },
           { label: "主語が三人称単数 → 未来時制 next month → be", correct: false }
         ]
       },
@@ -813,26 +813,26 @@ const STAGES = [
         ]
       },
       {
-        text: "⑤ 「トムはネコを飼っています。」を英語にすると？",
+        text: "⑤ 「トムはリサを知っています。」を英語にすると？",
         options: [
-          { label: "A : Tom having a cat.", correct: false },
-          { label: "B : Tom is having a cat.", correct: false },
-          { label: "C : Tom has a cat.", correct: true }
+          { label: "A : Tom knowing Lisa.", correct: false },
+          { label: "B : Tom is knowing Lisa.", correct: false },
+          { label: "C : Tom knows Lisa.", correct: true }
         ],
-        wrongComment: "「飼っている（状態）」は進行形にできません。",
+        wrongComment: "「知っている」という状態は進行形にできません。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "「飼っている」は状態を表し、進行形にできない", correct: true },
-          { label: "一般動詞 have は進行形にできない", correct: false }
+          { label: "「知っている」は状態を表し、進行形にできない", correct: true },
+          { label: "「～している」という表現は、動詞の原形にingをつける", correct: false }
         ]
       }
     ],
     boss: {
-      text: "【BOSS BATTLE】\nDo they cut the trees? を現在進行形の文にすると？",
+      text: "【BOSS BATTLE】\nWhy do they cut the trees? を現在進行形の文にすると？",
       options: [
-        { label: "A : Are they cut the trees?", correct: false },
-        { label: "B : Are they cutting the trees?", correct: true },
-        { label: "C : Do they cutting the trees?", correct: false }
+        { label: "A : Why are they cut the trees?", correct: false },
+        { label: "B : Why are they cutting the trees?", correct: true },
+        { label: "C : Why do they cutting the trees?", correct: false }
       ],
       wrongComment: "現在進行形の疑問文はbe動詞を主語の前に出し、一般動詞に -ing をつけます。",
       logicText: "【判断基準】",
@@ -902,7 +902,7 @@ const STAGES = [
         wrongComment: "単独の主語ではなく、後ろに名詞もありません。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "be kind to の後は必ず目的格を使う", correct: false },
+          { label: "文末に使う代名詞には目的格を使う", correct: false },
           { label: "前置詞の後ろに単独で使う形は目的格を使う", correct: true }
         ]
       },
@@ -922,17 +922,17 @@ const STAGES = [
       }
     ],
     boss: {
-      text: "【BOSS BATTLE】\nCan (  ) dog swim? の(  )に入る適切な語は？",
+      text: "【BOSS BATTLE】\nCan (  ) brother swim? の(  )に入る適切な語は？",
       options: [
         { label: "A : you", correct: false },
         { label: "B : her", correct: true },
         { label: "C : him", correct: false }
       ],
-      wrongComment: "後ろに名詞 dog があります。",
+      wrongComment: "後ろに名詞 brother があります。",
       logicText: "【判断基準】",
       logicOptions: [
         { label: "主語に使うので所有格", correct: false },
-        { label: "名詞 dog の前にあるから所有格", correct: true }
+        { label: "名詞 brother の前にあるから所有格", correct: true }
       ]
     }
   },
@@ -954,22 +954,22 @@ const STAGES = [
         wrongComment: "soccer fan は数えられるので a が必要です。soccer は数えられないので a は不要です。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "ある適当な１つのものを表す単数形の前には a(an) は必要", correct: true },
-          { label: "数えられる名詞の前には a(an) が必要", correct: false }
+          { label: "数えられる名詞の単数形には a(an) が必要。数えられない名詞には a(an)はつけない", correct: true },
+          { label: "文の最初に出てくる名詞には a(an) をつけるが、その後の名詞にはつけなくてよい", correct: false }
         ]
       },
       {
         text: "② 「あの大きな白い箱」を英語にすると？",
         options: [
           { label: "A : that big white box", correct: true },
-          { label: "B : that big white a box", correct: false },
-          { label: "C : that a big white box", correct: false }
+          { label: "B : a that big white box", correct: false },
+          { label: "C : that big white a box", correct: false }
         ],
         wrongComment: "名詞のまとまりは、入口の語（a, the, my, thatなど）→ どんな → 核の名詞の順に並べます。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "どんな（大きさ・形・古さ・色）→ a, the, my, thatなどから１つ → 核の名詞の順に並べる", correct: false },
-          { label: "a, the, my, thatなどから１つ → どんな（大きさ・形・古さ・色）→ 核の名詞の順に並べる", correct: true }
+          { label: "どんな → a(an) → 単数形の順に並べる", correct: false },
+          { label: "名詞の前に置く a(an) や the, my, this, that などは、１つしか置けない", correct: true }
         ]
       },
       {
@@ -979,11 +979,11 @@ const STAGES = [
           { label: "B : old pictures", correct: false },
           { label: "C : some old pictures", correct: true }
         ],
-        wrongComment: "名詞のまとまりは、入口の語（a, the, my, someなど）＋どんな＋核の名詞で捉えます。",
+        wrongComment: "「数＋どんな＋核の名詞」を名詞のまとまりとして認識します。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "一般動詞の後ろにある語をすべて抜き出す", correct: false },
-          { label: "名詞のまとまりは「入口の語（a, the, my, someなど）＋どんな＋核の名詞」で捉える", correct: true }
+          { label: "名詞のまとまりは「数＋どんな＋核の名詞」で捉える", correct: true }
         ]
       },
       {
@@ -1001,17 +1001,17 @@ const STAGES = [
         ]
       },
       {
-        text: "⑤ 「私は３人の彼の子どもを知っています。」を英語にすると？",
+        text: "⑤ 「私は彼の３人の子どもを知っています。」を英語にすると？",
         options: [
           { label: "A : I know three his children.", correct: false },
           { label: "B : I know his children of three.", correct: false },
           { label: "C : I know his three children.", correct: true }
         ],
-        wrongComment: "所有格（my, your, hisなど）は入口の語になります。",
+        wrongComment: "所有格（my, your, hisなど）は名詞のまとまりのはじめの語になります。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "所有格（my, your, hisなど） → 数詞 → 核の名詞の語順に置く", correct: true },
-          { label: "複数形の前には数詞を置く", correct: false }
+          { label: "日本語の語順通りに単語を並べる", correct: false }
         ]
       }
     ],
@@ -1022,10 +1022,10 @@ const STAGES = [
         { label: "B : Look at that woman with long hair.", correct: true },
         { label: "C : Look at that hair long woman.", correct: false }
       ],
-      wrongComment: "名詞を２語以上の意味のまとまりで説明するときは名詞の後ろに置きます。",
+      wrongComment: "２語以上の意味のまとまりで名詞を修飾するときは名詞の後ろに置きます。",
       logicText: "【判断基準】",
       logicOptions: [
-        { label: "名詞を２語以上の意味のまとまりで説明するときは名詞の後ろに置く", correct: true },
+        { label: "２語以上の意味のまとまりで名詞を修飾するときは名詞の後ろに置く", correct: true },
         { label: "long hairも名詞のまとまりなので、womanの前には置けない", correct: false }
       ]
     }
@@ -1338,7 +1338,7 @@ const STAGES = [
         wrongComment: "後ろにSVが2組続く → 接続詞を使います。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "後ろにSVが２組続く → 接続詞を使う", correct: true },
+          { label: "２つの文がコンマでつながっている → 接続詞を使う", correct: true },
           { label: "後ろの文に未来の表現がある → While を使う", correct: false }
         ]
       },      
@@ -1426,9 +1426,9 @@ const STAGES = [
       {
         type: "sort",
         text: "① ( soccer / they / the park / play / in / always ).\nこの英文を完成させるときの手順を正しく並べかえなさい。",
-        words: ["ア：追加の情報を組み立てる", "イ：主語と動詞の組み合わせ", "ウ：動詞の後ろの目的語", "エ：文全体を整える", "オ：肯定文・疑問文の確認"],
-        correctAnswer: "イ：主語と動詞の組み合わせ オ：肯定文・疑問文の確認 ウ：動詞の後ろの目的語 ア：追加の情報を組み立てる エ：文全体を整える",
-        wrongComment: "【正しい手順】①主語と動詞の組み合わせ(イ) → ②文の形を確認(オ) → ③動詞の後ろの目的語(ウ) → ④追加の情報(ア) → ⑤文全体を整える(エ)",
+        words: ["追加の情報を組み立てる", "主語と動詞の組み合わせ", "動詞の後ろの目的語", "文全体を整える", "肯定文・疑問文の確認"],
+        correctAnswer: "主語と動詞の組み合わせ 肯定文・疑問文の確認 動詞の後ろの目的語 追加の情報を組み立てる 文全体を整える",
+        wrongComment: "【正しい手順】①主語と動詞の組み合わせ → ②文の形を確認 → ③動詞の後ろの目的語 → ④追加の情報 → ⑤文全体を整える",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "SV構造（they play） → 肯定文 → 目的語（play soccer） → 追加の情報（in the park） → 整える（They always play soccer in the park.）", correct: true },
@@ -1508,9 +1508,9 @@ const STAGES = [
       {
         type: "sort",
         text: "⑦ Tom took these pictures. を受動態にするとき、その手順を正しく並べかえなさい。",
-        words: ["ア：by＋行為者を加える", "イ：be動詞を区別する", "ウ：目的語を主語にする", "エ：動詞を過去分詞にする", "オ：もとの文の動詞の時制確認"],
-        correctAnswer: "ウ：目的語を主語にする オ：もとの文の動詞の時制確認 イ：be動詞を区別する エ：動詞を過去分詞にする ア：by＋行為者を加える",
-        wrongComment: "【受動態の手順】①目的語を主語に(ウ) → ②時制の確認(オ) → ③be動詞の決定(イ) → ④過去分詞(エ) → ⑤by+行為者(ア)",
+        words: ["by＋行為者を加える", "be動詞を区別する", "目的語を主語にする", "動詞を過去分詞にする", "もとの文の動詞の時制確認"],
+        correctAnswer: "目的語を主語にする もとの文の動詞の時制確認 be動詞を区別する 動詞を過去分詞にする by＋行為者を加える",
+        wrongComment: "【受動態の手順】①目的語を主語に → ②時制の確認 → ③be動詞の決定 → ④過去分詞 → ⑤by+行為者",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "文末から前へ戻るように語を並べる → 動詞をbe動詞＋過去分詞の形にする → by＋主語にする", correct: false },
@@ -1712,11 +1712,11 @@ const STAGES = [
           { label: "B : to visit", correct: false },
           { label: "C : to visiting", correct: true }
         ],
-        wrongComment: "look forward to～で「～を楽しみに待つ」という表現です。",
+        wrongComment: "look forward to ～で「～を楽しみに待つ」という表現です。",
         logicText: "【判断基準】",
         logicOptions: [
           { label: "進行形に合わせてVingを使う", correct: false },
-          { label: "look forward toのtoは前置詞なので、その後ろはVing", correct: true }
+          { label: "look forward to の to は前置詞となるので、その後ろはVing", correct: true }
         ]
       },
       {
@@ -1741,7 +1741,7 @@ const STAGES = [
         wrongComment: "「何か飲むためのもの」 → 形容詞的用法 → something + 形容詞 + to drink と判断します。",
         logicText: "【判断基準】",
         logicOptions: [
-          { label: "somethingを使うときは後ろに不定詞を置く", correct: false },
+          { label: "something を使うときは後ろに不定詞を置く", correct: false },
           { label: "「何か飲むためのもの」 → 形容詞的用法 → something +形容詞 + to drink", correct: true }
         ]
       }
@@ -1756,11 +1756,11 @@ const STAGES = [
             { label: "B : to read", correct: false },
             { label: "C : reading", correct: true }
           ],
-          wrongComment: "中心の動詞ではない → finishの後ろ → Ving を使います。",
+          wrongComment: "中心の動詞ではない → finish の後ろ → Ving を使います。",
           logicText: "【判断基準】",
           logicOptions: [
             { label: "現在完了進行形の形でVingを使う", correct: false },
-            { label: "中心の動詞ではない → finishの後ろ → Ving", correct: true }
+            { label: "中心の動詞ではない → finish の後ろ → Ving", correct: true }
           ]
         },
         {
@@ -2033,15 +2033,7 @@ const STAGE12_BOSS_QUESTIONS = [
 // ----------------------------------------------------
 const EIGO_SHORI_GOKUI_QUESTIONS = [
   {
-    text: "1:　間違いの原因は［　　］を区別して、修正する。",
-    options: [
-      { label: "A：単語・表現・文法", correct: false },
-      { label: "B：語形変化・語法・語順", correct: false },
-      { label: "C：知識・判断条件・処理手順", correct: true }
-    ]
-  },
-  {
-    text: "2:　英語の基本の骨格は［　　］の順になる。",
+    text: "1:　英語の基本の骨格は［　　］の順になる。",
     options: [
       { label: "A：誰が・どうする・何を・どこで・いつ", correct: true },
       { label: "B：誰が・何を・どうする・どこで・いつ", correct: false },
@@ -2049,7 +2041,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "3:　英文を読むときはまず、［　　］の組み合わせを探す。",
+    text: "2:　英文を読むときはまず、［　　］の組み合わせを探す。",
     options: [
       { label: "A：人ともの", correct: false },
       { label: "B：動詞と時の言葉", correct: false },
@@ -2057,15 +2049,15 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "4:　表現の形には、単純形・過去形・未来の文と［　　］がある。",
+    text: "3:　助動詞は［　　］とペアで使う。",
     options: [
-      { label: "A：進行形・助動詞の文", correct: false },
-      { label: "B：進行形・完了形", correct: false },
-      { label: "C：受動態・完了形・助動詞の文", correct: true }
+      { label: "A：be動詞", correct: false },
+      { label: "B：一般動詞", correct: false },
+      { label: "C：動詞の原形", correct: true }
     ]
   },
   {
-    text: "5:　日本語の文末（述語表現）で、動詞の区別 → ［　　］ → 表現の形 → 文の種類を判断する。",
+    text: "4:　日本語の文末（述語表現）で、［　　］・動詞の種類・表現の形・文の種類を判断する。",
     options: [
       { label: "A：場所", correct: false },
       { label: "B：時制", correct: true },
@@ -2073,7 +2065,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "6:　文の中心として使われる一般動詞だけの形は［　　］の３つである。",
+    text: "5:　文の中心として使われる一般動詞だけの形は［　　］の３つである。",
     options: [
       { label: "A：原形・三単現のs・過去形", correct: true },
       { label: "B：不定詞・動名詞・分詞", correct: false },
@@ -2081,7 +2073,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "7:　疑問文を作るとき［　　］の前にbe動詞や do・does・did・助動詞の一語を置く。",
+    text: "6:　疑問文を作るとき［　　］の前にbe動詞や do・does・did・助動詞の一語を置く。",
     options: [
       { label: "A：文", correct: false },
       { label: "B：主語", correct: true },
@@ -2089,7 +2081,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "8:　疑問詞が主語になるときの疑問文は［　　］の語順になる。",
+    text: "7:　疑問詞が主語になるときの疑問文は［　　］の語順になる。",
     options: [
       { label: "A：肯定文", correct: true },
       { label: "B：命令文", correct: false },
@@ -2097,15 +2089,15 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "9:　受動態は［　　］で表現される。",
+    text: "8:　受動態は［　　］で表現される。",
     options: [
-      { label: "A：be動詞＋過去分詞", correct: true },
-      { label: "B：be動詞＋現在分詞", correct: false },
+      { label: "A：be動詞＋現在分詞", correct: false },
+      { label: "B：be動詞＋過去分詞", correct: true },
       { label: "C：have（has）＋過去分詞", correct: false }
     ]
   },
   {
-    text: "10:　命令文は主語がない文で、［　　］を表現するときの文。",
+    text: "9:　命令文は主語がない文で、［　　］を表現するときの文。",
     options: [
       { label: "A：感情、意見、主張", correct: false },
       { label: "B：評価、提示、感想", correct: false },
@@ -2113,15 +2105,15 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "11:　現在完了は［　　］で表現される。",
+    text: "10:　現在完了は［　　］で表現される。",
     options: [
-      { label: "A：be動詞＋過去分詞", correct: false },
-      { label: "B：be動詞＋現在分詞", correct: false },
+      { label: "A：be動詞＋現在分詞", correct: false },
+      { label: "B：be動詞＋過去分詞", correct: false },
       { label: "C：have（has）＋過去分詞", correct: true }
     ]
   },
   {
-    text: "12:　動詞の選択によって、［　　］が決まる。",
+    text: "11:　動詞の選択によって、［　　］が決まる。",
     options: [
       { label: "A：主語との関係", correct: false },
       { label: "B：後ろの単語とのつながり", correct: true },
@@ -2129,7 +2121,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "13:　名詞の単数形を使う時、［　　］の順に置く。",
+    text: "12:　名詞の単数形を使う時、［　　］の順に置く。",
     options: [
       { label: "A：入口の言葉（a, the, myなど）→ 形容詞 → 核の名詞", correct: true },
       { label: "B：日本語で表現される単語", correct: false },
@@ -2137,31 +2129,23 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "14:　進行形は［　　］で表現される。",
+    text: "13:　進行形は［　　］で表現される。",
     options: [
-      { label: "A：be動詞＋過去分詞", correct: false },
-      { label: "B：be動詞＋現在分詞", correct: true },
+      { label: "A：be動詞＋現在分詞", correct: true },
+      { label: "B：be動詞＋過去分詞", correct: false },
       { label: "C：have（has）＋過去分詞", correct: false }
     ]
   },
   {
-    text: "15:　時制と表現の形の組み合わせは、助動詞 → 完了形 →［　　］の順になる。",
-    options: [
-      { label: "A：進行形", correct: false },
-      { label: "B：受動態 → 進行形", correct: false },
-      { label: "C：進行形 → 受動態", correct: true }
-    ]
-  },
-  {
-    text: "16:　文の中心でない動詞の形（不定詞・動名詞・分詞）は、［　　］で判断する。",
+    text: "14:　文の中心でない動詞の形（不定詞・動名詞・分詞）は、［　　］で判断する。",
     options: [
       { label: "A：後ろの語とのつながり", correct: false },
-      { label: "B：語順", correct: false },
-      { label: "C：前の語とのつながり", correct: true }
+      { label: "B：前の語とのつながり", correct: true },
+      { label: "C：語順", correct: false }
     ]
   },
   {
-    text: "17:　名詞を修飾する分詞は、その名詞と分詞の間で［　　］になる。",
+    text: "15:　名詞を修飾する分詞は、その名詞と分詞の間で［　　］になる。",
     options: [
       { label: "A：主語と目的語の関係", correct: false },
       { label: "B：補語と動詞の関係", correct: false },
@@ -2169,7 +2153,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "18:　英文を組み立てるときは、［　　］の順で判断する。",
+    text: "16:　英文を組み立てるときは、［　　］の順で判断する。",
     options: [
       { label: "A：主語 → 動詞 → 日本語の文末から前", correct: false },
       { label: "B：SV関係 → 主語のパーツ → 意味のかたまり → 英文での配置", correct: true },
@@ -2177,15 +2161,15 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "19:　英問英答の答える文では、［　　］を合わす。",
+    text: "17:　英問英答の答える文では、［　　］を合わす。",
     options: [
-      { label: "A：質問文の主語（代名詞）と動詞（時制・表現）の形", correct: true },
+      { label: "A：質問文の主語と時制、動詞", correct: true },
       { label: "B：本文に使われている場所・時・数", correct: false },
       { label: "C：本文に使われている文の形", correct: false }
     ]
   },
   {
-    text: "20:　make / let / have ＋人の後ろは［　　］を使う。",
+    text: "18:　make / let ＋人の後ろは［　　］を使う。",
     options: [
       { label: "A：動詞の原形", correct: true },
       { label: "B：to 動詞の原形", correct: false },
@@ -2193,7 +2177,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "21:　読解のストーリー型（体験・出来事）タイプは、［　　］に注目する。",
+    text: "19:　読解のストーリー型（体験・出来事）タイプは、［　　］に注目する。",
     options: [
       { label: "A：主張・理由・結論", correct: false },
       { label: "B：目的・条件・必要情報", correct: false },
@@ -2201,7 +2185,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "22:　読解の説明文型（社会・科学・文化）タイプは、［　　］に注目する。",
+    text: "20:　読解の説明文型（社会・科学・文化）タイプは、［　　］に注目する。",
     options: [
       { label: "A：主張・理由・結論", correct: true },
       { label: "B：目的・条件・必要情報", correct: false },
@@ -2209,7 +2193,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "23:　読解の資料・実用文型（案内・広告・ポスター・メール）タイプは、［　　］に注目する。",
+    text: "21:　読解の資料・実用文型（案内・広告・ポスター・メール）タイプは、［　　］に注目する。",
     options: [
       { label: "A：主張・理由・結論", correct: false },
       { label: "B：目的・条件・必要情報", correct: true },
@@ -2217,15 +2201,7 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "24:　読解の因果関係は、［　　］の順で判断する。",
-    options: [
-      { label: "A：行動 → 気持ち → 出来事", correct: false },
-      { label: "B：出来事 → 気持ち → 行動", correct: true },
-      { label: "C：気持ち → 出来事 → 行動", correct: false }
-    ]
-  },  
-  {
-    text: "25:　読解で因果関係を示す印に［　　］がある。",
+    text: "22:　読解で因果関係を示す印に［　　］がある。",
     options: [
       { label: "A：because, so, but, howeverなど", correct: true },
       { label: "B：that, for example, such asなど", correct: false },
@@ -2233,15 +2209,15 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "26:　読解で正誤の条件は［　　］を確認する。",
+    text: "23:　読解で正誤は主語・肯定か否定か・［　　］を確認する。",
     options: [
       { label: "A：主張や評価の語句", correct: false },
       { label: "B：一般と例、感情と行動", correct: false },
-      { label: "C：主語・場所・時・数・肯定か否定か", correct: true }
+      { label: "C：状況・条件・理由", correct: true }
     ]
   },
   {
-    text: "27:　読解で段落の要約をするときは［　　］に注目する。",
+    text: "24:　読解で段落の要約をするときは［　　］に注目する。",
     options: [
       { label: "A：段落の中央あたり", correct: false },
       { label: "B：for exampleの後", correct: false },
@@ -2249,27 +2225,11 @@ const EIGO_SHORI_GOKUI_QUESTIONS = [
     ]
   },
   {
-    text: "28:　読解で情報を比較するときは［　　］に分ける。",
+    text: "25:　読解で情報を比較するときは［　　］に分ける。",
     options: [
       { label: "A：意見と事実", correct: true },
       { label: "B：現在と過去", correct: false },
       { label: "C：真実と嘘", correct: false }
-    ]
-  },
-  {
-    text: "29: 「判断基準を自分のものにする５段階」の順を並べかえなさい。\nア：判断・処理する\nイ：時間をおいて再現する\nウ：認識する\nエ：誤りを修正する\nオ：判断基準を説明する",
-    options: [
-      { label: "A：ウ → オ → ア → エ → イ", correct: true },
-      { label: "B：ウ → ア → オ → エ → イ", correct: false },
-      { label: "C：オ → ウ → ア → エ → イ", correct: false }
-    ]
-  },  
-  {
-    text: "30:　学習にあたり大切なことは、［　　］を意識することである。",
-    options: [
-      { label: "A：量と時間", correct: false },
-      { label: "B：目標と計画", correct: false },
-      { label: "C：再現できるか、適用できるか、維持できるか", correct: true }
     ]
   }
 ];
@@ -2419,6 +2379,7 @@ let gameState = {
   gokuiIndex: 0,
   gokuiCleared: false,
   gokuiUnlocked: false,
+  readingCleared: false,
   lastBossIndex: 0,
   lastBossTimeLeft: 60,
   lastBossSkillActive: false,
@@ -2448,11 +2409,8 @@ function loadSaveData() {
   if (gameState.stage12DialogActive === undefined) gameState.stage12DialogActive = false;
   if (gameState.gokuiIndex === undefined) gameState.gokuiIndex = 0;
   if (gameState.gokuiCleared === undefined) gameState.gokuiCleared = false;
-  if (gameState.gokuiUnlocked === undefined) {
-    gameState.gokuiUnlocked =
-      gameState.gokuiCleared ||
-      gameState.unlockedSkills.includes("動詞操作統合の眼");
-  }
+  if (gameState.readingCleared === undefined) gameState.readingCleared = false;
+  gameState.gokuiUnlocked = !!gameState.readingCleared || !!gameState.gokuiCleared;
   if (gameState.lastBossIndex === undefined) gameState.lastBossIndex = 0;
   if (gameState.lastBossTimeLeft === undefined) gameState.lastBossTimeLeft = 60;
   if (gameState.lastBossSkillActive === undefined) gameState.lastBossSkillActive = false;
@@ -2537,6 +2495,8 @@ function render() {
     renderLastBoss();
   } else if (gameState.currentStageId === 'endroll') {
     renderEndroll();
+  } else if (gameState.currentStageId === 'reading_stage') {
+    renderReadingStage();
   } else if (gameState.currentStageId === null) {
     renderStageSelect();
   } else {
@@ -2603,12 +2563,21 @@ function renderStageSelect() {
       `;
     }
   });  
-  // STAGE13クリア後に「英語処理の極意書」を表示
-  const gokuiUnlocked = !!gameState.gokuiUnlocked ||
-    gameState.gokuiCleared ||
-    gameState.unlockedSkills.includes("動詞操作統合の眼");
+  const readingUnlocked = gameState.unlockedSkills.includes("動詞操作統合の眼") || gameState.unlockedStage > 13 || !!gameState.readingCleared;
   html += `
     <div style="margin-top:18px; border-top:1px solid #30363d; padding-top:15px;">
+      <button class="stage-select-btn extra-stage-btn" ${readingUnlocked ? '' : 'disabled'} onclick="startReadingStage()">
+        <div><strong>【読解STAGE】</strong> 読解OS（理由問題）
+          <div style="font-size:0.75rem; color:#8b949e; margin-top:2px;">理由問題の解法 OS：着眼 → 判断 → 処理 → 類題再現</div>
+          ${!readingUnlocked ? '<div style="font-size:0.75rem; color:var(--purple-color); margin-top:2px;">🔒 開放条件：STAGE 13 クリア</div>' : ''}
+          ${gameState.readingCleared ? ' <span style="color:var(--success-color); font-size:0.8rem;">[CLEAR ★]</span>' : ''}
+        </div><div>${readingUnlocked ? '▶ 挑戦' : '🔒 鍵'}</div>
+      </button>
+    </div>
+  `;
+  const gokuiUnlocked = !!gameState.readingCleared || !!gameState.gokuiCleared;
+  html += `
+    <div style="margin-top:10px;">
       <button class="stage-select-btn extra-stage-btn"
         ${gokuiUnlocked ? '' : 'disabled'}
         onclick="startGokui()">
@@ -3201,7 +3170,7 @@ function checkAnswer(selectedIndex, isLogicStep) {
               gameState.unlockedSkills.push(stage.rewardSkill);
             }
             gameState.unlockedStage = Math.max(gameState.unlockedStage, stage.id + 1);
-            gameState.gokuiUnlocked = true;
+            gameState.gokuiUnlocked = false;
             gameState.currentStageId = null;
             gameState.currentStep = 0;
             gameState.subStep = 0;
@@ -3235,6 +3204,29 @@ function checkAnswer(selectedIndex, isLogicStep) {
 // ----------------------------------------------------
 // 「英語処理の極意書」
 // ----------------------------------------------------
+
+const READING_STAGE_HTML = "<!DOCTYPE html>\n<html lang=\"ja\" class=\"h-full bg-slate-50\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>英語読解OSマスター</title>\n    <!-- Tailwind CSS -->\n    <script src=\"https://cdn.tailwindcss.com\"><\/script>\n    <!-- Font Awesome -->\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\n    <!-- Canvas Confetti -->\n    <script src=\"https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js\"><\/script>\n    <script>\n        tailwind.config = {\n            theme: {\n                extend: {\n                    colors: {\n                        indigoCustom: {\n                            50: '#eef2ff',\n                            100: '#e0e7ff',\n                            500: '#6366f1',\n                            600: '#4f46e5',\n                            700: '#4338ca',\n                        },\n                        emeraldCustom: {\n                            500: '#10b981',\n                            600: '#059669',\n                        }\n                    },\n                    fontFamily: {\n                        sans: ['Inter', 'sans-serif'],\n                    }\n                }\n            }\n        }\n    <\/script>\n    <style>\n        .fade-in {\n            animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;\n        }\n        @keyframes fadeIn {\n            from { opacity: 0; transform: translateY(10px); }\n            to { opacity: 1; transform: translateY(0); }\n        }\n        .highlight-target {\n            background-color: #fef08a;\n            color: #854d0e;\n            font-weight: 700;\n            padding: 0.1rem 0.3rem;\n            border-radius: 0.25rem;\n            box-shadow: 0 0 0 2px #fef08a;\n        }\n        .highlight-cause {\n            background-color: #bbf7d0;\n            color: #166534;\n            font-weight: 700;\n            padding: 0.1rem 0.3rem;\n            border-radius: 0.25rem;\n            box-shadow: 0 0 0 2px #bbf7d0;\n        }\n    </style>\n</head>\n<body class=\"h-full font-sans text-slate-800 flex flex-col justify-between selection:bg-indigoCustom-500 selection:text-white\">\n    <!-- Header Navigation -->\n    <header class=\"bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm\">\n        <div class=\"max-w-4xl mx-auto px-4 py-3 flex items-center justify-between\">\n            <div class=\"flex items-center gap-3\">\n                <div class=\"w-10 h-10 rounded-xl bg-indigoCustom-600 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-indigoCustom-500/20\">\n                    <i class=\"fa-solid fa-book-open-reader\"></i>\n                </div>\n                <div>\n                    <h1 class=\"font-bold text-slate-900 text-base sm:text-lg leading-tight\">英語読解OS</h1>\n                    <p class=\"text-xs text-slate-500 font-medium\">読解理由問題の解法OS</p>\n                </div>\n            </div>\n            <div class=\"bg-indigoCustom-50 border border-indigoCustom-100 px-3 py-1.5 rounded-full text-xs font-semibold text-indigoCustom-700 flex items-center gap-2\">\n                <span class=\"w-2 h-2 rounded-full bg-indigoCustom-500 animate-pulse\"></span>\n                読解STAGE\n            </div>\n        </div>\n    </header>\n    <!-- Main Content Container -->\n    <main class=\"max-w-3xl mx-auto px-4 py-6 sm:py-8 w-full flex-grow\">\n        <!-- Progress Indicator -->\n        <div id=\"progress-container\" class=\"mb-6 hidden\">\n            <div class=\"flex justify-between items-center mb-2\">\n                <span id=\"progress-label\" class=\"text-xs font-bold text-indigoCustom-700 tracking-wider uppercase\">Step 1 / 3: 【着眼】スキャニング</span>\n                <span id=\"progress-percent\" class=\"text-xs font-semibold text-slate-500\">25%</span>\n            </div>\n            <div class=\"w-full bg-slate-200 h-2 rounded-full overflow-hidden\">\n                <div id=\"progress-bar\" class=\"bg-gradient-to-r from-indigoCustom-500 to-emeraldCustom-500 h-full rounded-full transition-all duration-500 ease-out\" style=\"width: 25%\"></div>\n            </div>\n        </div>\n        <!-- Dynamic Content Card -->\n        <div id=\"app-card\" class=\"bg-white rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/50 p-5 sm:p-8 relative overflow-hidden transition-all duration-300\">\n            <!-- App Screens are dynamically rendered here -->\n        </div>\n    </main>\n    <!-- Footer -->\n    <footer class=\"bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500\">\n        <div class=\"max-w-4xl mx-auto px-4\">\n            判断プロセストレーニング（読解編） &copy; 2026\n        </div>\n    </footer>\n    <!-- Audio Synthesizer for SFX -->\n    <script>\n        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();\n        function playSound(type) {\n            try {\n                if (audioCtx.state === 'suspended') {\n                    audioCtx.resume();\n                }\n                const osc = audioCtx.createOscillator();\n                const gain = audioCtx.createGain();\n                osc.connect(gain);\n                gain.connect(audioCtx.destination);\n                if (type === 'click') {\n                    osc.type = 'sine';\n                    osc.frequency.setValueAtTime(600, audioCtx.currentTime);\n                    gain.gain.setValueAtTime(0.05, audioCtx.currentTime);\n                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);\n                    osc.start();\n                    osc.stop(audioCtx.currentTime + 0.05);\n                } else if (type === 'correct') {\n                    osc.type = 'triangle';\n                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5\n                    osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); // E5\n                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);\n                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);\n                    osc.start();\n                    osc.stop(audioCtx.currentTime + 0.3);\n                } else if (type === 'wrong') {\n                    osc.type = 'sawtooth';\n                    osc.frequency.setValueAtTime(220, audioCtx.currentTime); // A3\n                    osc.frequency.setValueAtTime(196, audioCtx.currentTime + 0.1); // G3\n                    gain.gain.setValueAtTime(0.08, audioCtx.currentTime);\n                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);\n                    osc.start();\n                    osc.stop(audioCtx.currentTime + 0.25);\n                }\n            } catch(e) {}\n        }\n    <\/script>\n    <!-- JavaScript Application Logic -->\n    <script>\n        const state = {\n            currentScreen: 'intro', // 'intro', 'step1', 'step2', 'step3', 'summary', 'reproduction', 'clear'\n            isAnswered: false,\n            highlightState: 'none' // 'none', 'target', 'cause'\n        };\n\n        const appCard = document.getElementById('app-card');\n        const progressContainer = document.getElementById('progress-container');\n        const progressBar = document.getElementById('progress-bar');\n        const progressLabel = document.getElementById('progress-label');\n        const progressPercent = document.getElementById('progress-percent');\n\n        function getBasePassageHTML() {\n            let p = \"Ken went to the library yesterday. He wanted to read a book about Japanese history because he has a test next week. When he got there, he found that the library was closed. So, he decided to buy a book at the bookstore instead.\";\n            \n            if (state.highlightState === 'target') {\n                p = p.replace('decided to buy a book at the bookstore instead.', '<span class=\"highlight-target\">decided to buy a book at the bookstore instead.</span>');\n            } else if (state.highlightState === 'cause') {\n                p = p.replace('decided to buy a book at the bookstore instead.', '<span class=\"highlight-target\">decided to buy a book at the bookstore instead.</span>');\n                p = p.replace('the library was closed.', '<span class=\"highlight-cause\">the library was closed.</span>');\n            }\n            return p;\n        }\n\n        function updateProgress(stepText, percent) {\n            progressContainer.classList.remove('hidden');\n            progressLabel.textContent = stepText;\n            progressPercent.textContent = `${percent}%`;\n            progressBar.style.width = `${percent}%`;\n        }\n        function hideProgress() {\n            progressContainer.classList.add('hidden');\n        }\n\n        function renderScreen() {\n            appCard.classList.remove('fade-in');\n            void appCard.offsetWidth; \n            appCard.classList.add('fade-in');\n            switch (state.currentScreen) {\n                case 'intro': renderIntro(); break;\n                case 'step1': renderStep1(); break;\n                case 'step2': renderStep2(); break;\n                case 'step3': renderStep3(); break;\n                case 'summary': renderSummary(); break;\n                case 'reproduction': renderReproduction(); break;\n                case 'clear': renderClear(); break;\n            }\n        }\n\n        function renderIntro() {\n            hideProgress();\n            state.highlightState = 'none';\n            appCard.innerHTML = `\n                <div class=\"space-y-6\">\n                    <div class=\"inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-50 text-amber-800 text-xs font-semibold border border-amber-200\">\n                        <i class=\"fa-solid fa-lightbulb text-amber-600\"></i> 解説：読解（理由選択問題）\n                    </div>\n                    <h2 class=\"text-xl sm:text-2xl font-bold text-slate-900 leading-snug\">\n                        理由を問う問題は、感覚で解釈しない！<br>\n                        <span class=\"text-indigoCustom-600\">「因果関係の検索ロジック」</span>をマスターしよう\n                    </h2>\n                    <div class=\"bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-4\">\n                        <div>\n                            <span class=\"text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1\">【英文本文】</span>\n                            <p class=\"text-slate-800 font-serif leading-relaxed text-base sm:text-lg bg-white p-4 rounded-lg border border-slate-200\">\n                                ${getBasePassageHTML()}\n                            </p>\n                        </div>\n                        <div class=\"border-t border-slate-200 pt-3\">\n                            <span class=\"text-xs font-bold text-indigoCustom-600 uppercase tracking-wider block mb-1\">【設問】</span>\n                            <p class=\"text-slate-900 font-bold text-base\">\n                                Question: Why did Ken go to the bookstore?\n                            </p>\n                        </div>\n                    </div>\n                    <div class=\"bg-indigoCustom-50 border border-indigoCustom-100 rounded-xl p-4 text-sm text-slate-600 space-y-1\">\n                        <p class=\"font-bold text-indigoCustom-700 flex items-center gap-1.5\">\n                            <i class=\"fa-solid fa-circle-check\"></i> この問題の攻略手順\n                        </p>\n                        <p>読解問題で最も大切なのは<b>「設問のキーワードを本文で探す（着眼）」➔「前後の因果関係（SoやBecauseなど）を判断」➔「正解の根拠を特定（処理）」</b>の3ステップです。</p>\n                    </div>\n                    <button onclick=\"playSound('click'); nextScreen('step1');\" class=\"w-full py-4 bg-indigoCustom-600 hover:bg-indigoCustom-700 active:scale-[0.99] text-white font-bold text-lg rounded-xl shadow-lg shadow-indigoCustom-500/25 transition-all duration-200 flex items-center justify-center gap-2\">\n                        <span>判断ステップを始める</span>\n                        <i class=\"fa-solid fa-arrow-right\"></i>\n                    </button>\n                </div>\n            `;\n        }\n\n        function renderStep1() {\n            updateProgress('Step 1 / 3: 【着眼】スキャニング', 25);\n            state.isAnswered = false;\n            state.highlightState = 'none';\n            appCard.innerHTML = `\n                <div class=\"space-y-6\">\n                    <div class=\"flex items-center gap-2\">\n                        <span class=\"px-2.5 py-1 bg-indigoCustom-100 text-indigoCustom-700 text-xs font-extrabold rounded-md\">STEP 1</span>\n                        <h3 class=\"text-lg font-bold text-slate-800\">【着眼】スキャニング（該当箇所の発見）</h3>\n                    </div>\n                    <div class=\"bg-slate-50 p-4 rounded-xl border border-slate-200 text-sm\">\n                        <p class=\"text-xs font-bold text-slate-400 mb-1\">本文：</p>\n                        <p id=\"step-passage\" class=\"font-serif text-slate-800 text-base leading-relaxed\">\n                            ${getBasePassageHTML()}\n                        </p>\n                    </div>\n                    <div class=\"bg-amber-50 border border-amber-200 p-3 rounded-lg text-xs text-amber-900 font-medium\">\n                        設問：Why did Ken <b>go to the bookstore</b>?\n                    </div>\n                    <p class=\"font-bold text-slate-800 text-base\">\n                        Q1. 最初に本文から探すべきキーワードと、その該当箇所は本文のどこにありますか？\n                    </p>\n                    <div class=\"space-y-3\" id=\"options-container\">\n                        ${createOptionButton(1, 'A', '最後の文の「decided to buy a book at the bookstore」の部分', true)}\n                        ${createOptionButton(2, 'B', '2文目の「Japanese history / test next week」の部分')}\n                        ${createOptionButton(3, 'C', '1文目の「went to the library」の部分')}\n                    </div>\n                    <div id=\"feedback-area\" class=\"hidden\"></div>\n                    <button id=\"btn-next\" onclick=\"playSound('click'); nextScreen('step2');\" class=\"w-full py-3.5 bg-indigoCustom-600 text-white font-bold text-base rounded-xl hidden flex items-center justify-center gap-2 shadow-md\">\n                        <span>次へ：STEP 2【判断】因果関係の特定へ</span>\n                        <i class=\"fa-solid fa-arrow-right\"></i>\n                    </button>\n                </div>\n            `;\n        }\n\n        function renderStep2() {\n            updateProgress('Step 2 / 3: 【判断】因果関係の特定', 50);\n            state.isAnswered = false;\n            state.highlightState = 'target'; // ステップ2開始時点では結果文のみハイライト\n            appCard.innerHTML = `\n                <div class=\"space-y-6\">\n                    <div class=\"flex items-center gap-2\">\n                        <span class=\"px-2.5 py-1 bg-indigoCustom-100 text-indigoCustom-700 text-xs font-extrabold rounded-md\">STEP 2</span>\n                        <h3 class=\"text-lg font-bold text-slate-800\">【判断】結果の「前の文（原因）」に着目する</h3>\n                    </div>\n                    <div class=\"bg-slate-50 p-4 rounded-xl border border-slate-200 text-sm\">\n                        <p class=\"text-xs font-bold text-slate-400 mb-1\">本文（黄色が「結果」の文）：</p>\n                        <p id=\"step2-passage\" class=\"font-serif text-slate-800 text-base leading-relaxed\">\n                            ${getBasePassageHTML()}\n                        </p>\n                    </div>\n                    <div class=\"bg-blue-50 border border-blue-200 p-3 rounded-lg text-xs text-blue-900 font-medium\">\n                        黄色い文の冒頭にある <b>「So, ...」（だから〜）</b> に着目！「So」の前にある文が理由（原因）です。\n                    </div>\n                    <p class=\"font-bold text-slate-800 text-base\">\n                        Q2. Kenが本屋で本を買うことにした「直接の理由」となっている本文の事実はどれですか？\n                    </p>\n                    <div class=\"space-y-3\" id=\"options-container\">\n                        ${createOptionButton(1, 'A', '来週日本史のテストがあるから (has a test next week)')}\n                        ${createOptionButton(2, 'B', '図書館が閉まっていたから (the library was closed)', true)}\n                        ${createOptionButton(3, 'C', '昨日図書館に行ったから (went to the library yesterday)')}\n                    </div>\n                    <div id=\"feedback-area\" class=\"hidden\"></div>\n                    <button id=\"btn-next\" onclick=\"playSound('click'); nextScreen('step3');\" class=\"w-full py-3.5 bg-indigoCustom-600 text-white font-bold text-base rounded-xl hidden flex items-center justify-center gap-2 shadow-md\">\n                        <span>次へ：STEP 3【処理】正解の判定と消去法へ</span>\n                        <i class=\"fa-solid fa-arrow-right\"></i>\n                    </button>\n                </div>\n            `;\n        }\n\n        function renderStep3() {\n            updateProgress('Step 3 / 3: 【処理】正解の根拠と消去法', 75);\n            state.isAnswered = false;\n            state.highlightState = 'cause'; // ステップ3では原因文もハイライト済み\n            appCard.innerHTML = `\n                <div class=\"space-y-6\">\n                    <div class=\"flex items-center gap-2\">\n                        <span class=\"px-2.5 py-1 bg-indigoCustom-100 text-indigoCustom-700 text-xs font-extrabold rounded-md\">STEP 3</span>\n                        <h3 class=\"text-lg font-bold text-slate-800\">【処理】根拠の照合と誤答の排除</h3>\n                    </div>\n                    <div class=\"bg-slate-50 p-4 rounded-xl border border-slate-200 text-sm\">\n                        <p class=\"text-xs font-bold text-slate-400 mb-1\">本文（緑色が「直接の理由」）：</p>\n                        <p class=\"font-serif text-slate-800 text-base leading-relaxed\">\n                            ${getBasePassageHTML()}\n                        </p>\n                    </div>\n                    <p class=\"font-bold text-slate-800 text-base\">\n                        Q3. 次のうち、模試の選択肢「Because he wanted to read a book about Japanese history.」（日本史の本が読みたかったから）を選んではいけない理由は？\n                    </p>\n                    <div class=\"space-y-3\" id=\"options-container\">\n                        ${createOptionButton(1, 'A', '「図書館に行った理由」であり、「本屋に行った直接の理由」ではないから', true)}\n                        ${createOptionButton(2, 'B', '本文に書いていない嘘の内容だから')}\n                        ${createOptionButton(3, 'C', 'Kenは歴史のテストを受けたくないと思っているから')}\n                    </div>\n                    <div id=\"feedback-area\" class=\"hidden\"></div>\n                    <button id=\"btn-next\" onclick=\"playSound('click'); nextScreen('summary');\" class=\"w-full py-3.5 bg-indigoCustom-600 text-white font-bold text-base rounded-xl hidden flex items-center justify-center gap-2 shadow-md\">\n                        <span>解法アルゴリズムのまとめへ</span>\n                        <i class=\"fa-solid fa-arrow-right\"></i>\n                    </button>\n                </div>\n            `;\n        }\n\n        function createOptionButton(id, letter, text, isCorrect = false) {\n            return `\n                <button onclick=\"checkAnswer(${id}, ${isCorrect})\" id=\"opt-${id}\" class=\"opt-btn w-full text-left p-4 rounded-xl border-2 border-slate-200 hover:border-indigoCustom-500 hover:bg-indigoCustom-50/50 transition-all duration-150 font-medium text-slate-700 flex items-start gap-3 group\">\n                    <span class=\"w-6 h-6 rounded-full bg-slate-100 group-hover:bg-indigoCustom-500 group-hover:text-white text-slate-500 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors\">\n                        ${letter}\n                    </span>\n                    <span class=\"text-sm sm:text-base leading-relaxed\">${text}</span>\n                </button>\n            `;\n        }\n\n        function checkAnswer(selectedId, isCorrect) {\n            const selectedBtn = document.getElementById(`opt-${selectedId}`);\n            const feedbackArea = document.getElementById('feedback-area');\n            const nextBtn = document.getElementById('btn-next');\n\n            if (isCorrect) {\n                // 正解の処理（一度正解したら他のボタンもロックし、やり直し不可にする）\n                if (state.isAnswered) return;\n                state.isAnswered = true;\n\n                playSound('correct');\n                document.querySelectorAll('.opt-btn').forEach(btn => {\n                    btn.classList.add('cursor-not-allowed', 'opacity-60');\n                    btn.removeAttribute('onclick');\n                });\n\n                selectedBtn.classList.remove('border-slate-200', 'hover:border-indigoCustom-500', 'opacity-60');\n                selectedBtn.classList.add('border-emeraldCustom-500', 'bg-emerald-50', 'text-emerald-900', 'ring-2', 'ring-emeraldCustom-500/20');\n                \n                feedbackArea.className = 'p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm space-y-1 fade-in';\n                feedbackArea.innerHTML = `\n                    <div class=\"font-bold flex items-center gap-2 text-emerald-700 text-base\">\n                        <i class=\"fa-solid fa-circle-check text-emerald-500 text-xl\"></i> 正解！完璧な読み取りです。\n                    </div>\n                    <p class=\"text-xs text-emerald-600\">根拠のある読解ステップを踏めています。このロジックが再現性のカギです！</p>\n                `;\n\n                // ステップ2正解時にその場で原因箇所のハイライトを適用する\n                if (state.currentScreen === 'step2') {\n                    state.highlightState = 'cause';\n                    const p2Elem = document.getElementById('step2-passage');\n                    if (p2Elem) p2Elem.innerHTML = getBasePassageHTML();\n                }\n\n                feedbackArea.classList.remove('hidden');\n                nextBtn.classList.remove('hidden');\n                nextBtn.classList.add('fade-in');\n\n            } else {\n                // 不正解の処理：選んだボタンだけ赤くするが、state.isAnsweredはtrueにしないため他の選択肢を再選択できる\n                playSound('wrong');\n                selectedBtn.disabled = true;\n                selectedBtn.classList.add('border-rose-400', 'bg-rose-50', 'text-rose-900', 'opacity-70');\n                selectedBtn.removeAttribute('onclick');\n\n                feedbackArea.className = 'p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm space-y-1 fade-in';\n                feedbackArea.innerHTML = `\n                    <div class=\"font-bold flex items-center gap-2 text-rose-700 text-base\">\n                        <i class=\"fa-solid fa-circle-xmark text-rose-500 text-xl\"></i> 惜しい！別の選択肢を選び直してください。\n                    </div>\n                    <p class=\"text-xs text-rose-600\">問題文が求めている箇所・因果関係をもう一度確認しましょう。</p>\n                `;\n                feedbackArea.classList.remove('hidden');\n                // ※ 正解するまで nextBtn は出さない（次のステップに行かせない）\n            }\n        }\n\n        function renderSummary() {\n            updateProgress('読解解法OSの体系化', 90);\n            appCard.innerHTML = `\n                <div class=\"space-y-6\">\n                    <div class=\"text-center space-y-2\">\n                        <span class=\"px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full\">読解理由問題 解法OS</span>\n                        <h3 class=\"text-xl sm:text-2xl font-bold text-slate-900\">「Why問」を確実に仕留める解法OS</h3>\n                    </div>\n                    <div class=\"bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-6 shadow-lg space-y-4 relative overflow-hidden\">\n                        <div class=\"absolute -right-4 -bottom-4 opacity-10 text-8xl text-white\">\n                            <i class=\"fa-solid fa-magnifying-glass\"></i>\n                        </div>\n                        <div class=\"border-b border-slate-700 pb-3\">\n                            <p class=\"text-xs font-semibold text-indigoCustom-500 tracking-wider uppercase\">理由問題の方程式</p>\n                            <p class=\"text-base sm:text-lg font-mono font-bold mt-1 text-emerald-300\">\n                                設問のキーワード(結果) ➔ 本文スキャニング ➔ 直前の原因(So/Because/When)\n                            </p>\n                        </div>\n                        <div class=\"space-y-3 text-sm text-slate-300\">\n                            <div class=\"flex items-start gap-2.5\">\n                                <span class=\"bg-indigoCustom-500 text-white text-xs font-bold rounded px-2 py-0.5 mt-0.5\">1</span>\n                                <div>\n                                    <strong class=\"text-white\">【着眼】設問のスキャニング</strong><br>\n                                    Why did S V...? のVや目的語（例: bookstore）を本文から探す。\n                                </div>\n                            </div>\n                            <div class=\"flex items-start gap-2.5\">\n                                <span class=\"bg-indigoCustom-500 text-white text-xs font-bold rounded px-2 py-0.5 mt-0.5\">2</span>\n                                <div>\n                                    <strong class=\"text-white\">【判断】直接の因果関係の特定</strong><br>\n                                    「So...（だから）」の前の文、あるいは「Because...」の節が直接の「原因」になる。\n                                </div>\n                            </div>\n                            <div class=\"flex items-start gap-2.5\">\n                                <span class=\"bg-indigoCustom-500 text-white text-xs font-bold rounded px-2 py-0.5 mt-0.5\">3</span>\n                                <div>\n                                    <strong class=\"text-white\">【処理】まぎらわしい選択肢（トラップ）の排除</strong><br>\n                                    「本文には書いてあるが、別の行動の理由になっている選択肢」に騙されない！\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"bg-amber-50 border border-amber-200 rounded-xl p-4 text-amber-900 text-sm flex items-start gap-3\">\n                        <i class=\"fa-solid fa-circle-exclamation text-amber-600 text-lg mt-0.5\"></i>\n                        <div>\n                            <p class=\"font-bold\">ここからが本番！「再現テスト」</p>\n                            <p class=\"text-xs text-amber-800 mt-0.5\">別のストーリー（Emiの物語）で、全く同じ読解OSを使って正解を自力で導き出せるかテストします！</p>\n                        </div>\n                    </div>\n                    <button onclick=\"playSound('click'); nextScreen('reproduction');\" class=\"w-full py-4 bg-emeraldCustom-600 hover:bg-emeraldCustom-500 active:scale-[0.99] text-white font-bold text-lg rounded-xl shadow-lg shadow-emerald-600/25 transition-all duration-200 flex items-center justify-center gap-2\">\n                        <i class=\"fa-solid fa-pen-to-square\"></i>\n                        <span>類題テストで再現力を確認する</span>\n                    </button>\n                </div>\n            `;\n        }\n\n        function renderReproduction() {\n            updateProgress('類題再現テスト', 95);\n            appCard.innerHTML = `\n                <div class=\"space-y-6\">\n                    <div class=\"flex items-center justify-between border-b border-slate-200 pb-3\">\n                        <span class=\"px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full flex items-center gap-1\">\n                            <i class=\"fa-solid fa-fire text-amber-600\"></i> 類題チャレンジ\n                        </span>\n                        <span class=\"text-xs text-slate-500 font-medium\">ヒントなし・自力で読解OSを実行！</span>\n                    </div>\n                    <div class=\"space-y-2\">\n                        <h3 class=\"text-lg font-bold text-slate-900\">【初見問題】学んだ読解OSを使って解こう</h3>\n                        <p class=\"text-xs text-slate-500\">次の英文を読み、設問に対する最も適切な答えを選びなさい。</p>\n                    </div>\n                    <div class=\"bg-slate-900 text-white p-5 rounded-xl space-y-4 shadow-inner\">\n                        <div class=\"space-y-1\">\n                            <span class=\"text-slate-400 text-xs font-mono\">[Passage]</span>\n                            <p class=\"font-serif leading-relaxed text-base text-slate-100\">\n                                \"Emi visited the park on Sunday to sketch some flowers. However, it started to rain heavily. She ran into a nearby cafe to wait for the rain to stop. While waiting, she drank warm hot chocolate.\"\n                            </p>\n                        </div>\n                        <div class=\"border-t border-slate-700 pt-3\">\n                            <span class=\"text-teal-400 text-xs font-mono font-bold\">[Question]</span>\n                            <p class=\"font-bold text-white text-base sm:text-lg\">\n                                Question: Why did Emi enter the cafe?\n                            </p>\n                        </div>\n                    </div>\n                    <div class=\"space-y-3 pt-1\">\n                        <label class=\"block text-xs font-bold text-slate-500 uppercase tracking-wider\">選択肢を選んで判定：</label>\n                        <div class=\"space-y-2.5\" id=\"repro-options\">\n                            <button onclick=\"checkReproduction('A', false)\" class=\"repro-btn w-full text-left p-3.5 border-2 border-slate-200 rounded-xl font-medium text-slate-700 hover:border-indigoCustom-500 hover:bg-indigoCustom-50 transition-all text-sm flex items-start gap-3\">\n                                <span class=\"font-bold text-slate-400\">A)</span>\n                                <span>Because she wanted to drink hot chocolate.</span>\n                            </button>\n                            <button onclick=\"checkReproduction('B', true)\" class=\"repro-btn w-full text-left p-3.5 border-2 border-slate-200 rounded-xl font-medium text-slate-700 hover:border-indigoCustom-500 hover:bg-indigoCustom-50 transition-all text-sm flex items-start gap-3\">\n                                <span class=\"font-bold text-slate-400\">B)</span>\n                                <span>Because it started to rain heavily.</span>\n                            </button>\n                            <button onclick=\"checkReproduction('C', false)\" class=\"repro-btn w-full text-left p-3.5 border-2 border-slate-200 rounded-xl font-medium text-slate-700 hover:border-indigoCustom-500 hover:bg-indigoCustom-50 transition-all text-sm flex items-start gap-3\">\n                                <span class=\"font-bold text-slate-400\">C)</span>\n                                <span>Because she wanted to meet her friends.</span>\n                            </button>\n                            <button onclick=\"checkReproduction('D', false)\" class=\"repro-btn w-full text-left p-3.5 border-2 border-slate-200 rounded-xl font-medium text-slate-700 hover:border-indigoCustom-500 hover:bg-indigoCustom-50 transition-all text-sm flex items-start gap-3\">\n                                <span class=\"font-bold text-slate-400\">D)</span>\n                                <span>Because the park was closed.</span>\n                            </button>\n                        </div>\n                    </div>\n                    <div id=\"repro-feedback\" class=\"hidden\"></div>\n                </div>\n            `;\n        }\n\n        function checkReproduction(optionKey, isCorrect) {\n            const feedback = document.getElementById('repro-feedback');\n            const btns = document.querySelectorAll('.repro-btn');\n            \n            if (isCorrect) {\n                btns.forEach(btn => btn.disabled = true);\n                playSound('correct');\n                confetti({\n                    particleCount: 120,\n                    spread: 80,\n                    origin: { y: 0.6 }\n                });\n                feedback.className = 'p-5 bg-emerald-50 border border-emerald-200 rounded-xl text-center space-y-3 fade-in';\n                feedback.innerHTML = `\n                    <div class=\"text-emerald-700 font-extrabold text-lg flex items-center justify-center gap-2\">\n                        <i class=\"fa-solid fa-circle-check text-2xl text-emerald-500\"></i>\n                        読解OS再現成功！(正解: B)\n                    </div>\n                    <div class=\"text-xs text-emerald-800 text-left bg-white p-3 rounded-lg border border-emerald-100 space-y-1\">\n                        <p class=\"font-bold\">【解法プロセスの検証】</p>\n                        <p>1. 設問の「enter the cafe」➔ 本文の「ran into a nearby cafe」にスキャニング着眼！</p>\n                        <p>2. その原因は直前の「it started to rain heavily」➔ だからBが正解！</p>\n                        <p>※ Aの「hot chocolate」はカフェに入った後の結果なのでトラップ（誤答）です。</p>\n                    </div>\n                    <button onclick=\"playSound('click'); nextScreen('clear');\" class=\"w-full py-3 bg-emeraldCustom-600 hover:bg-emeraldCustom-500 text-white font-bold rounded-lg shadow transition-all text-sm\">\n                        ミッションクリア画面へ <i class=\"fa-solid fa-trophy ml-1\"></i>\n                    </button>\n                `;\n                feedback.classList.remove('hidden');\n            } else {\n                playSound('wrong');\n                // 不正解のときは選んだボタンだけ無効化して再選択可能にする\n                event.currentTarget.disabled = true;\n                event.currentTarget.classList.add('opacity-50', 'bg-rose-50', 'border-rose-300');\n\n                feedback.className = 'p-5 bg-rose-50 border border-rose-200 rounded-xl text-center space-y-3 fade-in';\n                feedback.innerHTML = `\n                    <div class=\"text-rose-700 font-bold text-base flex items-center justify-center gap-2\">\n                        <i class=\"fa-solid fa-circle-xmark text-xl text-rose-500\"></i>\n                        残念！別の選択肢を選び直してみましょう。\n                    </div>\n                    <p class=\"text-xs text-rose-800\">\n                        Aのhot chocolateはカフェに「入った後（While waiting）」の出来事です。カフェに入った「直接の原因」をもう一度探してみよう！\n                    </p>\n                `;\n                feedback.classList.remove('hidden');\n            }\n        }\n\n        function renderClear() {\n            updateProgress('全ミッション完了！', 100);\n            appCard.innerHTML = `\n                <div class=\"text-center py-6 space-y-6\">\n                    <div class=\"relative inline-block\">\n                        <div class=\"w-24 h-24 bg-gradient-to-tr from-amber-400 to-yellow-300 rounded-full flex items-center justify-center mx-auto shadow-xl shadow-amber-500/20 text-white text-4xl animate-bounce\">\n                            <i class=\"fa-solid fa-award\"></i>\n                        </div>\n                        <span class=\"absolute -top-2 -right-2 bg-indigoCustom-600 text-white text-xs font-bold px-2.5 py-0.5 rounded-full border-2 border-white shadow\">\n                            完全マスター\n                        </span>\n                    </div>\n                    <div class=\"space-y-2\">\n                        <h2 class=\"text-2xl font-extrabold text-slate-900\">読解OS（理由問題）クリア！</h2>\n                        <p class=\"text-sm text-slate-600 max-w-md mx-auto\">\n                            読解の理由問題（Why問）において、根拠のあるスキャニングと因果関係の判定ができるようになりました。\n                        </p>\n                    </div>\n                    <div class=\"bg-slate-50 border border-slate-200 rounded-xl p-4 text-left max-w-md mx-auto space-y-2.5 text-xs\">\n                        <div class=\"font-bold text-slate-700 border-b border-slate-200 pb-2 flex justify-between items-center\">\n                            <span>修得済み解法スキル</span>\n                            <span class=\"text-emerald-600 font-bold\"><i class=\"fa-solid fa-check\"></i> ALL CLEAR</span>\n                        </div>\n                        <div class=\"flex justify-between text-slate-600\">\n                            <span>① 【着眼】設問キーワードの発見（スキャニング）</span>\n                            <span class=\"font-bold text-emerald-600\">習得済み</span>\n                        </div>\n                        <div class=\"flex justify-between text-slate-600\">\n                            <span>② 【判断】So / Because 前後の因果関係判定</span>\n                            <span class=\"font-bold text-emerald-600\">習得済み</span>\n                        </div>\n                        <div class=\"flex justify-between text-slate-600\">\n                            <span>③ 【処理】時系列トラップ選択肢の消去</span>\n                            <span class=\"font-bold text-emerald-600\">習得済み</span>\n                        </div>\n                        <div class=\"flex justify-between text-slate-600 font-bold text-indigoCustom-700 pt-1.5 border-t border-slate-200\">\n                            <span>④ 初見問題（Emiの物語）での自力再現</span>\n                            <span class=\"text-emerald-600\">100% 成功</span>\n                        </div>\n                    </div>\n                    <div class=\"pt-2 space-y-3\">\n                        <button onclick=\"playSound('click'); nextScreen('intro');\" class=\"w-full py-3.5 bg-indigoCustom-600 hover:bg-indigoCustom-700 text-white font-bold text-base rounded-xl shadow-md transition-all flex items-center justify-center gap-2\">\n                            <i class=\"fa-solid fa-rotate-right\"></i>\n                            <span>最初から復習する</span>\n                        </button>\n                        <button onclick=\"playSound('click'); window.parent.postMessage({type:'reading-stage-return'}, '*');\" class=\"w-full py-3.5 bg-slate-700 hover:bg-slate-800 text-white font-bold text-base rounded-xl transition-all flex items-center justify-center gap-2\">\n                            <i class=\"fa-solid fa-arrow-left\"></i>\n                            <span>ステージ選択画面へ戻る</span>\n                        </button>\n                        <p class=\"text-xs text-slate-500\">読解STAGEをクリアすると「英語処理の極意書」が開放されます。</p>\n                    </div>\n                </div>\n            `;\n            if (window.parent && window.parent !== window) {\n                window.parent.postMessage({type:'reading-stage-cleared'}, '*');\n            }\n        }\n\n        function nextScreen(screenName) {\n            state.currentScreen = screenName;\n            renderScreen();\n        }\n\n        window.onload = function() {\n            renderScreen();\n        };\n    <\/script>\n</body>\n</html>";
+function startReadingStage() {
+  const unlocked = gameState.unlockedSkills.includes("動詞操作統合の眼") || gameState.unlockedStage > 13 || !!gameState.readingCleared;
+  if (!unlocked) { alert("読解STAGEの開放条件は STAGE 13 クリアです。"); return; }
+  stopBattleTimer(); stopStage12Timer(); stopLastBossTimer();
+  gameState.currentStageId = 'reading_stage'; saveData(); render(); window.scrollTo(0, 0);
+}
+function renderReadingStage() {
+  const container = document.getElementById('main-content');
+  container.innerHTML = `<div class="card" style="padding:8px;"><div class="card-header"><span>★ 読解STAGE：英語読解OS</span><button class="reset-btn" onclick="exitReadingStage()">✕ 中断</button></div><iframe id="reading-stage-frame" title="英語読解OSマスター" style="display:block;width:100%;height:1050px;border:1px solid var(--border-color);border-radius:8px;background:#f8fafc;" sandbox="allow-scripts allow-same-origin"></iframe></div>`;
+  document.getElementById('reading-stage-frame').srcdoc = READING_STAGE_HTML;
+}
+function exitReadingStage() { gameState.currentStageId = null; saveData(); render(); }
+window.addEventListener('message', function(event) {
+  const frame = document.getElementById('reading-stage-frame');
+  if (!frame || event.source !== frame.contentWindow || !event.data || typeof event.data !== 'object') return;
+  if (event.data.type === 'reading-stage-cleared' && !gameState.readingCleared) {
+    gameState.readingCleared = true; gameState.gokuiUnlocked = true; gameState.currentStageId = null;
+    saveData(); render(); alert("読解STAGE CLEAR！「英語処理の極意書」が開放されました！");
+  } else if (event.data.type === 'reading-stage-return') exitReadingStage();
+});
+
 function startGokui() {
   initAudio();
   gameState.currentStageId = 'gokui';
